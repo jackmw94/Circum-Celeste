@@ -1,0 +1,3 @@
+[submodule "Assets/UnityExtras"]
+	path = Assets/UnityExtras
+	url = https://github.com/jackmw94/UnityExtras.git
