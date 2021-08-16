@@ -8,9 +8,9 @@ namespace Code.Player
 
         public InputProvider InputProvider => _inputProvider;
         
-        private void Awake()
+        public void Initialise(InputProvider inputProvider)
         {
-            _inputProvider = InputProvider.CreateDefaultInputProviderForPlatform();
+            _inputProvider = inputProvider;
         }
 
 #if UNITY_EDITOR

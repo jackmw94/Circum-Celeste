@@ -5,5 +5,7 @@
         None,
         PlayerPickupCollected,
         OrbiterPickupCollected,
+        PlayerDied,
+        PlayerEscaped
     }
 }

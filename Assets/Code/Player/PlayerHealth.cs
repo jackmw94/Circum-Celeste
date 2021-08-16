@@ -1,43 +1,75 @@
-﻿using UnityEngine;
+﻿using System;
+using Code.Core;
+using UnityEngine;
 
 namespace Code.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
-        private int _orbiterLayer;
+        private int _maximumHealth = 5;
+        
         private int _playerHealth = 5;
 
-        private void Awake()
+        private Action _onPlayerDeath = null;
+        
+        public bool IsInvulnerable { get; set; }
+
+        public bool IsDead => _playerHealth <= 0;
+        
+        public void SetMaximumHealth(int maximumHealth)
         {
-            _orbiterLayer = LayerMask.NameToLayer("Orbiter");
+            _maximumHealth = maximumHealth;
         }
 
-        private void OnGUI()
+        public void SetOnDeathCallback(Action onPlayerDeath)
         {
-            Rect rect = new Rect(10, 10, 200, 50);
-            GUI.Box(rect, _playerHealth.ToString());
+            _onPlayerDeath = onPlayerDeath;
+        }
+
+        public void ResetHealth()
+        {
+            _playerHealth = _maximumHealth;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == _orbiterLayer)
+            if (IsDead || IsInvulnerable)
             {
-                Feedbacks.Instance.SetTriggerOrbiterHitsPlayerFeedbackActive(true);
-                _playerHealth--;
+                return;
+            }
+            
+            if (ObjectDamagesPlayer(other.gameObject))
+            {
+                Feedbacks.Instance.TriggerHealthLostFeedback();
+                HitTaken();
             }
         }
 
-        private void OnTriggerExit(Collider other)
+        private void HitTaken()
         {
-            if (other.gameObject.layer == _orbiterLayer)
+            Debug.Log("Player taken damage");
+            _playerHealth--;
+
+            if (IsDead)
             {
-                Feedbacks.Instance.SetTriggerOrbiterHitsPlayerFeedbackActive(false);
+                _onPlayerDeath?.Invoke();
             }
         }
-    }
 
-    public class Player : MonoBehaviour
-    {
+        private static bool ObjectDamagesPlayer(GameObject gameObj)
+        {
+            return gameObj.IsOrbiter() || gameObj.IsEnemy();
+        }
         
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                IsInvulnerable = !IsInvulnerable;
+                Debug.Log($"Debug setting player to {(IsInvulnerable ? "invulnerable" : "not invulnerable")}");
+            }
+        }
+#endif
     }
 }

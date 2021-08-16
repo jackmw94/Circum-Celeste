@@ -10,12 +10,14 @@ namespace Code.Level
         // arbitrary, high enough for variation
         private const int SeedMaxValue = 100;
 
-        [SerializeField] private int _maxPickupsToSpawnAtStart = 3;
+        [SerializeField] private EscapeCriteria _escapeCriteria;
+        [SerializeField] private float _escapeTimer = 25f;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private CellType[] _cells = new CellType[0];
-
-        public int MaxPickupsToSpawnAtStart => _maxPickupsToSpawnAtStart;
+        
         public int GridSize => _gridSize;
+        public EscapeCriteria EscapeCriteria => _escapeCriteria;
+        public float EscapeTimer => _escapeTimer;
         public CellType[] Cells => _cells;
         
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)

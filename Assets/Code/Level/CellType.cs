@@ -4,7 +4,16 @@
     {
         None,
         Wall,
-        PickupPoint,
-        FollowerEnemy,
+        Pickup,
+        Enemy,
+        Escape,
+        PlayerStart,
+    }
+
+    public enum EscapeCriteria
+    {
+        Timed,
+        DestroyedAll,
+        PickedUpAll
     }
 }

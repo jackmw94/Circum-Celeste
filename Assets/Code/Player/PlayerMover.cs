@@ -10,17 +10,21 @@ namespace Code.Player
         [Space(15)]
         [SerializeField] private float _speed;
 
-        private InputProvider InputProvider => _playerInput.InputProvider;
+        public bool MovementEnabled { get; set; }
         
+        private InputProvider InputProvider => _playerInput.InputProvider;
+
         private void FixedUpdate()
         {
             _rigidbody.velocity = Vector3.zero;
-            
-            Vector3 movement = InputProvider.GetMovementInput();
 
-            movement = movement.normalized;
-        
-            transform.position += movement * (Time.deltaTime * _speed);
-        } 
+            // should non-physics movement be performed in regular update
+            if (MovementEnabled)
+            {
+                Vector3 movement = InputProvider.GetMovementInput();
+                movement = movement.normalized;
+                transform.position += movement * (Time.deltaTime * _speed);
+            }
+        }
     }
 }

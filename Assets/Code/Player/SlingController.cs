@@ -11,10 +11,17 @@ namespace Code.Player
         [SerializeField] private OrbitMover _orbitMover;
 
         private float _currentIncreaseLerpValue = 0f;
+        
+        public bool SlingEnabled { get; set; }
     
         private void Update()
         {
-            bool slingInput = _playerInput.InputProvider.GetSlingInput();
+            bool slingInput = false;
+            if (SlingEnabled)
+            {
+                slingInput = _playerInput.InputProvider.GetSlingInput();
+            }
+            
             if (slingInput)
             {
                 _currentIncreaseLerpValue += Time.deltaTime / _warmUpTime;

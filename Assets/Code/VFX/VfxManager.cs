@@ -18,6 +18,7 @@ namespace Code.VFX
         }
         
         public void SpawnVfx(VfxType vfxType) => SpawnVfx(vfxType, Vector3.zero, Vector3.zero);
+        public void SpawnVfx(VfxType vfxType, Vector3 position) => SpawnVfx(vfxType, position, Vector3.zero);
 
         public void SpawnVfx(VfxType vfxType, Vector3 position, Vector3 direction)
         {

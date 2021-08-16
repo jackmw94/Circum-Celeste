@@ -8,16 +8,9 @@ namespace Code
     {
         [SerializeField] private MMFeedback _orbiterHitsPlayer;
 
-        public void SetTriggerOrbiterHitsPlayerFeedbackActive(bool active)
+        public void TriggerHealthLostFeedback()
         {
-            if (!active)
-            {
-                _orbiterHitsPlayer.Stop(Vector3.zero);
-            }
-            else
-            {
-                _orbiterHitsPlayer.Play(Vector3.zero);
-            }
+            _orbiterHitsPlayer.Play(Vector3.zero);
         }
     }
 }

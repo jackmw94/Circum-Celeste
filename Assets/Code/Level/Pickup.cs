@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Code.Core;
 using Code.VFX;
 using UnityEngine;
 
@@ -6,21 +6,10 @@ namespace Code.Level
 {
     public class Pickup : MonoBehaviour
     {
-        private const float DestroyVfxMaxFinishTime = 5f;
-        
         [SerializeField] private PickupType _pickupType;
 
-        private int _orbiterLayer;
-        private int _playerLayer;
-
-        public static Action PickupCollected = () => { };
-
-        private void Awake()
-        {
-            _orbiterLayer = LayerMask.NameToLayer($"Orbiter");
-            _playerLayer = LayerMask.NameToLayer($"Player");
-        }
-    
+        public bool IsCollected { get; private set; }
+        
         private void OnCollisionEnter(Collision other)
         {
             HandleCollision(other.gameObject);
@@ -33,20 +22,24 @@ namespace Code.Level
 
         private void HandleCollision(GameObject other)
         {
-            int otherObjectLayer = other.layer;
-            bool collectedByOrbiter = otherObjectLayer == _orbiterLayer && _pickupType.HasFlag(PickupType.OrbiterCollect);
-            bool collectedByPlayer = otherObjectLayer == _playerLayer && _pickupType.HasFlag(PickupType.PlayerCollect);
+            bool collectedByOrbiter = other.IsOrbiter() && _pickupType.HasFlag(PickupType.OrbiterCollect);
+            bool collectedByPlayer = other.IsPlayer() && _pickupType.HasFlag(PickupType.PlayerCollect);
         
             if (collectedByOrbiter || collectedByPlayer)
             {
-                PickupCollected();
-                Destroy(gameObject);
-
-                Vector3 transformPosition = transform.position;
-                Vector3 direction = transformPosition - other.transform.position;
-                VfxType vfxType = PickupTypeToVfxCollectedType(_pickupType);
-                VfxManager.Instance.SpawnVfx(vfxType, transformPosition, direction);
+                Collected(other);
             }
+        }
+
+        private void Collected(GameObject collectedBy)
+        {
+            IsCollected = true;
+            gameObject.SetActive(false);
+
+            Vector3 transformPosition = transform.position;
+            Vector3 direction = transformPosition - collectedBy.transform.position;
+            VfxType vfxType = PickupTypeToVfxCollectedType(_pickupType);
+            VfxManager.Instance.SpawnVfx(vfxType, transformPosition, direction);
         }
 
         private static VfxType PickupTypeToVfxCollectedType(PickupType pickupType)

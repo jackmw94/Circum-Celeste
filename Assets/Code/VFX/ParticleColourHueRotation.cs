@@ -9,6 +9,7 @@ namespace Code.VFX
         [SerializeField] private string _propertyName;
         [Space(15)]
         [SerializeField] private float _speed;
+        [SerializeField] private float _hdrValue;
 
         private int _propertyHash;
 
