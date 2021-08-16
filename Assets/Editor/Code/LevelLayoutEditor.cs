@@ -1,4 +1,6 @@
 using System;
+using Code.Core;
+using Code.Level;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +12,7 @@ public class LevelLayoutEditor : Editor
     private const string LevelCellEmptyTexturePath = "Assets/Editor/Textures/LevelCellEmpty.png";
     private const string LevelCellWallTexturePath = "Assets/Editor/Textures/LevelCellWall.png";
     private const string LevelCellPickupPointTexturePath = "Assets/Editor/Textures/LevelCellPickupPoint.png";
-    private const string LevelCellPlayerSpawnTexturePath = "Assets/Editor/Textures/LevelCellPlayerSpawn.png";
+    private const string LevelCellFollowerEnemySpawnTexturePath = "Assets/Editor/Textures/LevelCellFollowerEnemySpawn.png";
 
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
@@ -18,7 +20,7 @@ public class LevelLayoutEditor : Editor
     private Texture _levelCellEmptyTexture;
     private Texture _levelCellWallTexture;
     private Texture _levelCellPickupPointTexture;
-    private Texture _levelCellPlayerSpawnTexture;
+    private Texture _levelCellFollowerEnemySpawnTexture;
 
     private void OnEnable()
     {
@@ -30,7 +32,7 @@ public class LevelLayoutEditor : Editor
         _levelCellEmptyTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellEmptyTexturePath);
         _levelCellWallTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellWallTexturePath);
         _levelCellPickupPointTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellPickupPointTexturePath);
-        _levelCellPlayerSpawnTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellPlayerSpawnTexturePath);
+        _levelCellFollowerEnemySpawnTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellFollowerEnemySpawnTexturePath);
     }
     
     public override void OnInspectorGUI()
@@ -79,7 +81,7 @@ public class LevelLayoutEditor : Editor
             case CellType.None: return _levelCellEmptyTexture;
             case CellType.Wall: return _levelCellWallTexture;
             case CellType.PickupPoint: return _levelCellPickupPointTexture;
-            case CellType.PlayerSpawn: return _levelCellPlayerSpawnTexture;
+            case CellType.FollowerEnemy: return _levelCellFollowerEnemySpawnTexture;
         }
 
         throw new UnexpectedValuesException($"Could not get texture for cell type {cellType}");

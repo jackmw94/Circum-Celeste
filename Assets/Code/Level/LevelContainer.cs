@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-public class LevelContainer : MonoBehaviour
+namespace Code.Level
 {
-    [SerializeField] private LevelLayout _levelLayout;
+    public class LevelContainer : MonoBehaviour
+    {
+        [SerializeField] private LevelLayout _levelLayout;
 
-    public LevelLayout LevelLayout => _levelLayout;
+        public LevelLayout LevelLayout => _levelLayout;
+    }
 }

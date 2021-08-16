@@ -92,7 +92,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191712808662372501}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pickupType: 1
+  _destroyVfx: {fileID: 3900369487585736340, guid: 5243016145485c341b74733e8aeffceb, type: 3}
 --- !u!54 &191712808662372499
 Rigidbody:
   m_ObjectHideFlags: 0

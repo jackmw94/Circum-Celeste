@@ -1,36 +1,39 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class PidController
+namespace Code.Core
 {
-    [SerializeField] private PidProperties _pidProperties;
-    
-    private float _maxIntegralOffset;
-    
-    private float _integral;
-    private float _lastError;
-
-    public void SetMaxIntegralOffset(float maxIntegralOffset)
+    [Serializable]
+    public class PidController
     {
-        _maxIntegralOffset = maxIntegralOffset;
-    }
+        [SerializeField] private PidProperties _pidProperties;
     
-    public float GetPidDiff(float target, float current, float frameTime)
-    {
-        float proportionalError = target - current;
-        _integral += proportionalError * frameTime;
-        _integral = Mathf.Clamp(_integral, -(_pidProperties.MaxIntegral + _maxIntegralOffset), (_pidProperties.MaxIntegral + _maxIntegralOffset));
+        private float _maxIntegralOffset;
+    
+        private float _integral;
+        private float _lastError;
 
-        float derivative = (proportionalError - _lastError) / frameTime;
-        _lastError = proportionalError;
+        public void SetMaxIntegralOffset(float maxIntegralOffset)
+        {
+            _maxIntegralOffset = maxIntegralOffset;
+        }
+    
+        public float GetPidDiff(float target, float current, float frameTime)
+        {
+            float proportionalError = target - current;
+            _integral += proportionalError * frameTime;
+            _integral = Mathf.Clamp(_integral, -(_pidProperties.MaxIntegral + _maxIntegralOffset), (_pidProperties.MaxIntegral + _maxIntegralOffset));
 
-        return (proportionalError * _pidProperties.ProportionalFactor) + (_integral * _pidProperties.MaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
-    }
+            float derivative = (proportionalError - _lastError) / frameTime;
+            _lastError = proportionalError;
 
-    public void ResetPid()
-    {
-        _lastError = 0f;
-        _integral = 0f;
+            return (proportionalError * _pidProperties.ProportionalFactor) + (_integral * _pidProperties.MaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
+        }
+
+        public void ResetPid()
+        {
+            _lastError = 0f;
+            _integral = 0f;
+        }
     }
 }

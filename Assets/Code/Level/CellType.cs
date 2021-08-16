@@ -1,7 +1,10 @@
-﻿public enum CellType
+﻿namespace Code.Level
 {
-    None,
-    Wall,
-    PickupPoint,
-    PlayerSpawn
+    public enum CellType
+    {
+        None,
+        Wall,
+        PickupPoint,
+        FollowerEnemy,
+    }
 }

@@ -1,6 +1,9 @@
 ﻿using System;
 
-public class UnexpectedValuesException : Exception
+namespace Code.Core
 {
-    public UnexpectedValuesException(string message) : base(message){}
+    public class UnexpectedValuesException : Exception
+    {
+        public UnexpectedValuesException(string message) : base(message){}
+    }
 }

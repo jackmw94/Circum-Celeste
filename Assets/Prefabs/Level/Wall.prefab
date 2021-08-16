@@ -74,7 +74,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8917f9d0c38817e4684fd66f66af8858, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2420522072453697994}
   - component: {fileID: -2455718400087564366}
   m_Layer: 0
-  m_Name: Cell
+  m_Name: Wall
   m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

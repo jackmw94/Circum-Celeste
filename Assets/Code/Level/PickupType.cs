@@ -1,9 +1,12 @@
 ﻿using System;
 
-[Flags]
-public enum PickupType
+namespace Code.Level
 {
-    None,
-    OrbiterCollect,
-    PlayerCollect
+    [Flags]
+    public enum PickupType
+    {
+        None,
+        OrbiterCollect,
+        PlayerCollect
+    }
 }
