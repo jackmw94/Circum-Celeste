@@ -108,18 +108,18 @@ VisualEffect:
           serializedVersion: 2
           key0: {r: 1, g: 1, b: 1, a: 0}
           key1: {r: 111.9753, g: 91.45627, b: 34.58923, a: 1}
-          key2: {r: 3.9546602, g: 0, b: 3.002229, a: 0.8}
+          key2: {r: 15.818641, g: 0, b: 12.008916, a: 0.8}
           key3: {r: 54.462746, g: 54.462746, b: 54.462746, a: 0}
           key4: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-          key5: {r: 0, g: 0, b: 0, a: 0}
+          key5: {r: 0.5, g: 0.5, b: 0.5, a: 0}
           key6: {r: 0, g: 0, b: 0, a: 0}
           key7: {r: 0, g: 0, b: 0, a: 0}
           ctime0: 0
           ctime1: 2143
-          ctime2: 26794
+          ctime2: 6663
           ctime3: 42031
           ctime4: 65535
-          ctime5: 0
+          ctime5: 65535
           ctime6: 0
           ctime7: 0
           atime0: 0
