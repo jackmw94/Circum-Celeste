@@ -1,6 +1,5 @@
 ﻿using Code.Core;
 using UnityEngine;
-using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
