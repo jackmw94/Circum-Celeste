@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyDistortion
-  m_Shader: {fileID: -6465566751694194690, guid: 5c95d18a30d42c849b1944f017e077ec, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 36d04487a61fabe408db25e7c0b16211, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -89,13 +89,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2cdbddc493f1497683b5a43c3f256c5a: 2.84
-    - Vector1_5f2b37351c8e479c9c46a5bd8e7d5888: 12.17
+    - Vector1_2cdbddc493f1497683b5a43c3f256c5a: 2.15
+    - Vector1_5f2b37351c8e479c9c46a5bd8e7d5888: 11.06
     - Vector1_63cae4eec1a04753b8e84a7bd643c904: 0
-    - Vector1_6a9ce13b4f6547b684223b7f42e37bf9: 0.47
+    - Vector1_6a9ce13b4f6547b684223b7f42e37bf9: 1.05
     - Vector1_76a3ad33b5db4af698ce60c2b02b852d: 0
     - Vector1_81297568021b44c58ef9b7c52198f51b: 0
-    - Vector1_83a533908b4f4281a24ef51d1f4916ad: 0.001
+    - Vector1_83a533908b4f4281a24ef51d1f4916ad: 0.025
+    - Vector1_884447646c2f4f17822b7de23ffb139f: 0.6
     - Vector1_e5a161c8a60f40c2b8326467384399c5: 0
     - _AlphaClip: 0
     - _Blend: 0

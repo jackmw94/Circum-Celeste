@@ -1,25 +1,32 @@
-﻿using System.Collections;
-using Code.Player;
+﻿using System;
+using System.Collections;
+using System.Linq;
+using Code.Level.Player;
 using UnityEngine;
-using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
     public class LevelManager : MonoBehaviour
     {
+        private enum InputType
+        {
+            Keyboard,
+            Mouse,
+            Controller,
+            UI
+        }
+        
         [SerializeField] private LevelLayout _debugLevelLayout;
         [SerializeField] private LevelProgression _levelProgression;
         [Space(15)]
-        [SerializeField] private User[] _users;
+        [SerializeField] private InputType[] _playersInputs;
         [Space(15)]
         [SerializeField] private LevelGenerator _levelGenerator;
         
         private void Start()
         {
             // todo: move player code out of here:
-            Debug.Assert(_users.Length > 0,"There are no users for this level, probably not what we want..");
-            _users.ApplyFunction(p => p.Player.Initialise(5, p.InputProvider));
-            
+            Debug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             CreateLevel();
         }
 
@@ -29,32 +36,54 @@ namespace Code.Level
 #if UNITY_EDITOR
             if (_debugLevelLayout)
             {
-                GenerateDebugLevel();
+                LevelInstance debugLevelInstance = GenerateDebugLevel();
+                StartCoroutine(StartLevelOncePlayerMoved(debugLevelInstance));
                 return;
             }
 #endif
 
-            GenerateLevel(_levelProgression.LevelLayout[0]);
+            LevelLayout levelLayout = _levelProgression.LevelLayout[0];
+            LevelInstance levelInstance = GenerateLevel(levelLayout);
+            StartCoroutine(StartLevelOncePlayerMoved(levelInstance));
         }
 
         [ContextMenu(nameof(GenerateDebugLevel))]
-        private void GenerateDebugLevel()
+        private LevelInstance GenerateDebugLevel()
         {
-            GenerateLevel(_debugLevelLayout);
+            return GenerateLevel(_debugLevelLayout);
         }
-
-        private void GenerateLevel(LevelLayout levelLayout)
+        
+        private LevelInstance GenerateLevel(LevelLayout levelLayout)
         {
-            LevelInstance level = _levelGenerator.GenerateLevel(levelLayout);
-            StartCoroutine(StartLevelAfterDelay(level));
+            InputProvider[] userInputProviders = _playersInputs.Select(CreateInputProvider).ToArray();
+            LevelInstance levelInstance = _levelGenerator.GenerateLevel(userInputProviders, levelLayout);
+
+            return levelInstance;
         }
-
-        private IEnumerator StartLevelAfterDelay(LevelInstance level)
+        
+        private IEnumerator StartLevelOncePlayerMoved(LevelInstance level)
         {
-            yield return new WaitForSeconds(1f);
+            level.LevelReady();
+            yield return new WaitUntil(() => level.PlayerIsMoving);
             Debug.Log("Level started");
             level.StartLevel();
-            _users.ApplyFunction(p => p.Player.StartLevel());
+        }
+        
+        private static InputProvider CreateInputProvider(InputType inputType)
+        {
+            switch (inputType)
+            {
+                case InputType.Controller:
+                    return InputProvider.CreateInputProvider<ControllerInputProvider>();
+                case InputType.Keyboard:
+                    return InputProvider.CreateInputProvider<KeyboardInputProvider>();
+                case InputType.Mouse:
+                    return InputProvider.CreateInputProvider<MouseInputProvider>();
+                case InputType.UI:
+                    return InputProvider.CreateInputProvider<UIInputProvider>();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(inputType), inputType, "Cannot create input provider");
+            }
         }
     }
 }

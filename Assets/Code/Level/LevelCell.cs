@@ -2,14 +2,19 @@
 
 namespace Code.Level
 {
-    public class LevelCell : MonoBehaviour
+    public static class LevelCellHelper
     {
-        public void Initialise(Vector2Int cellCoordinates, float gridSize)
+        private const float RealGridDimension = 10f;
+        
+        public static void Initialise(Transform transform, Vector2Int cellCoordinates, float gridSize)
         {
-            float size = 10f / gridSize;
+            float size = RealGridDimension / gridSize;
             Transform cellTransform = transform;
             cellTransform.localScale = Vector3.one * size;
-            cellTransform.localPosition = new Vector3(cellCoordinates.x, cellCoordinates.y, 0f) * size;
+            
+            // origin is at top left so y should be negative
+            float cellY = -(cellCoordinates.y + 1);
+            cellTransform.localPosition = new Vector3(cellCoordinates.x, cellY, 0f) * size + new Vector3(size / 2f, size / 2f, 0f);
         }
     }
 }

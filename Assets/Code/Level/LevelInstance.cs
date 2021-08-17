@@ -11,6 +11,7 @@ namespace Code.Level
         private EscapeCriteria _escapeCriteria;
         private float _escapeDuration;
 
+        private List<Player.Player> _players;
         private List<Pickup> _pickups;
         private List<Enemy> _enemies;
         private List<Escape> _escapes;
@@ -21,21 +22,27 @@ namespace Code.Level
         private bool _escapeShown;
 
         private float LevelTime => Time.time - _startTime;
+        public bool PlayerIsMoving => _players.Any(p => p.IsMoving);
         
-        public void SetupLevel(LevelLayout levelLayout, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes)
+        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes)
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
 
+            _players = players;
             _pickups = pickups;
             _enemies = enemies;
             _escapes = escapes;
-
+            
             _escapes.ApplyFunction(InitialiseEscape);
-            _enemies.ApplyFunction(InitialiseEnemies);
 
             _isStarted = false;
             _escapeShown = false;
+        }
+
+        public void LevelReady()
+        {
+            _players.ApplyFunction(p => p.LevelReady());
         }
 
         public void StartLevel()
@@ -43,13 +50,17 @@ namespace Code.Level
             _isStarted = true;
             _startTime = Time.time;
 
-            _enemies.ApplyFunction(p => p.CanMove = true);
+            _players.ApplyFunction(p => p.LevelStarted());
+            _enemies.ApplyFunction(p => p.LevelStarted());
         }
 
         private void LevelCompleted()
         {
             Debug.Assert(_isStarted, "Level has been completed before it's started? What's the deal with that..?");
             Debug.Log("LEVEL COMPLETED");
+            
+            _players.ApplyFunction(p => p.LevelFinished());
+            _enemies.ApplyFunction(p => p.LevelFinished());
         }
 
         private void Update()
@@ -98,12 +109,7 @@ namespace Code.Level
             escape.gameObject.SetActive(false);
             escape.SetEscapeCallback(LevelCompleted);
         }
-
-        private void InitialiseEnemies(Enemy enemy)
-        {
-            enemy.CanMove = false;
-        }
-
+        
         private void ShowEscape()
         {
             _escapes.ApplyFunction(p => p.gameObject.SetActive(true));
