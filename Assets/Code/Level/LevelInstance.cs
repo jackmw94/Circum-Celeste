@@ -20,6 +20,7 @@ namespace Code.Level
         private float _startTime;
 
         private bool _escapeShown;
+        private Action<bool> _levelFinishedCallback = null;
 
         private float LevelTime => Time.time - _startTime;
         public bool PlayerIsMoving => _players.Any(p => p.IsMoving);
@@ -45,13 +46,36 @@ namespace Code.Level
             _players.ApplyFunction(p => p.LevelReady());
         }
 
-        public void StartLevel()
+        public void StartLevel(Action<bool> levelFinishedCallback)
         {
             _isStarted = true;
             _startTime = Time.time;
 
             _players.ApplyFunction(p => p.LevelStarted());
             _enemies.ApplyFunction(p => p.LevelStarted());
+
+            _levelFinishedCallback = levelFinishedCallback;
+        }
+
+        public Vector3 GetPlayerPosition(int playerIndex)
+        {
+            if (_players.Count >= playerIndex)
+            {
+                return _players[playerIndex].transform.position;
+            }
+            
+            throw new ArgumentOutOfRangeException(nameof(playerIndex), $"Requested index (={playerIndex}) out of range of players list (count={_players.Count})");
+
+        }
+
+        private void Update()
+        {
+            CheckEscape();
+            CheckLevelFailed();
+            
+#if UNITY_EDITOR
+            DebugUpdate();
+#endif
         }
 
         private void LevelCompleted()
@@ -61,15 +85,16 @@ namespace Code.Level
             
             _players.ApplyFunction(p => p.LevelFinished());
             _enemies.ApplyFunction(p => p.LevelFinished());
+            
+            _levelFinishedCallback?.Invoke(true);
         }
 
-        private void Update()
+        private void CheckLevelFailed()
         {
-            CheckEscape();
-            
-#if UNITY_EDITOR
-            DebugUpdate();
-#endif
+            if (_players.All(p => p.IsDead))
+            {
+                _levelFinishedCallback?.Invoke(false);
+            }
         }
 
         private void CheckEscape()
@@ -109,7 +134,7 @@ namespace Code.Level
             escape.gameObject.SetActive(false);
             escape.SetEscapeCallback(LevelCompleted);
         }
-        
+
         private void ShowEscape()
         {
             _escapes.ApplyFunction(p => p.gameObject.SetActive(true));

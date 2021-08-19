@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: VfxManifest
   m_EditorClassIdentifier: 
   _vfxValues:
-  - _vfxType: 2
-    _prefab: {fileID: 3900369487585736340, guid: 1e2012f88ce9c3845bcc761c0a41df8d, type: 3}
   - _vfxType: 1
-    _prefab: {fileID: 3900369487585736340, guid: 5243016145485c341b74733e8aeffceb, type: 3}
+    _prefab: {fileID: 3900369487585736340, guid: 1e2012f88ce9c3845bcc761c0a41df8d, type: 3}
+    _maximumDuration: 5

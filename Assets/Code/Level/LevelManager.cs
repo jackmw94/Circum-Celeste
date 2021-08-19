@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Code.Flow;
 using Code.Level.Player;
 using UnityEngine;
+using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Level
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : SingletonMonoBehaviour<LevelManager>
     {
         private enum InputType
         {
@@ -15,34 +17,48 @@ namespace Code.Level
             Controller,
             UI
         }
-        
-        [SerializeField] private LevelLayout _debugLevelLayout;
+
         [SerializeField] private LevelProgression _levelProgression;
-        [Space(15)]
+        [Space(15)] 
         [SerializeField] private InputType[] _playersInputs;
-        [Space(15)]
+        [Space(15)] 
         [SerializeField] private LevelGenerator _levelGenerator;
-        
+
+        private int _currentLevelIndex = 0;
+
+        private int NextLevelIndex => (_currentLevelIndex + 1) % _levelProgression.LevelLayout.Length;
+
+        public LevelInstance CurrentLevel { get; private set; }
+
         private void Start()
         {
-            // todo: move player code out of here:
             Debug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
+            
+            InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
+            interLevelFlow.ShowOverlayInstant = false;
+            interLevelFlow.StartAction(CreateLevel);
+        }
+
+        public string GetNextLevelName()
+        {
+            LevelLayout nextLevel = _levelProgression.LevelLayout[NextLevelIndex];
+            return nextLevel.name;
+        }
+
+        public void GenerateNextLevel()
+        {
+            _currentLevelIndex = NextLevelIndex;
+            CreateLevel();
+        }
+
+        public void ResetCurrentLevel()
+        {
             CreateLevel();
         }
 
         private void CreateLevel()
         {
-            // todo: replace this with progress / requested level
-#if UNITY_EDITOR
-            if (_debugLevelLayout)
-            {
-                LevelInstance debugLevelInstance = GenerateDebugLevel();
-                StartCoroutine(StartLevelOncePlayerMoved(debugLevelInstance));
-                return;
-            }
-#endif
-
-            LevelLayout levelLayout = _levelProgression.LevelLayout[0];
+            LevelLayout levelLayout = _levelProgression.LevelLayout[_currentLevelIndex];
             LevelInstance levelInstance = GenerateLevel(levelLayout);
             StartCoroutine(StartLevelOncePlayerMoved(levelInstance));
         }
@@ -50,9 +66,9 @@ namespace Code.Level
         [ContextMenu(nameof(GenerateDebugLevel))]
         private LevelInstance GenerateDebugLevel()
         {
-            return GenerateLevel(_debugLevelLayout);
+            return GenerateLevel(_levelProgression.LevelLayout[0]);
         }
-        
+
         private LevelInstance GenerateLevel(LevelLayout levelLayout)
         {
             InputProvider[] userInputProviders = _playersInputs.Select(CreateInputProvider).ToArray();
@@ -60,15 +76,32 @@ namespace Code.Level
 
             return levelInstance;
         }
-        
+
         private IEnumerator StartLevelOncePlayerMoved(LevelInstance level)
         {
             level.LevelReady();
             yield return new WaitUntil(() => level.PlayerIsMoving);
+
             Debug.Log("Level started");
-            level.StartLevel();
+            CurrentLevel = level;
+            level.StartLevel(OnLevelFinished);
         }
-        
+
+        private void OnLevelFinished(bool success)
+        {
+            InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
+            interLevelFlow.ShowOverlayInstant = false;
+            
+            if (success)
+            {
+                interLevelFlow.StartAction(GenerateNextLevel);
+            }
+            else
+            {
+                interLevelFlow.StartAction(ResetCurrentLevel);
+            }
+        }
+
         private static InputProvider CreateInputProvider(InputType inputType)
         {
             switch (inputType)

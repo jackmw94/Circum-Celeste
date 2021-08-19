@@ -15,6 +15,7 @@ namespace Code.Level.Player
         [SerializeField] private SlingController _sling;
 
         public bool IsMoving => _mover.IsMoving;
+        public bool IsDead => _health.IsDead;
 
         private void Awake()
         {

@@ -3,8 +3,7 @@
     public enum VfxType
     {
         None,
-        PlayerPickupCollected,
-        OrbiterPickupCollected,
+        PickupCollected,
         PlayerDied,
         PlayerEscaped
     }

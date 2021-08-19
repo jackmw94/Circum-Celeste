@@ -6,8 +6,6 @@ namespace Code.VFX
 {
     public class VfxManager : SingletonMonoBehaviour<VfxManager>
     {
-        private float MaximumVfxDuration = 5f;
-        
         [SerializeField] private VfxManifest _manifest;
         
         private readonly Dictionary<VfxType, VfxData> _vfxByType = new Dictionary<VfxType, VfxData>();

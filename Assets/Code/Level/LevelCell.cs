@@ -4,7 +4,7 @@ namespace Code.Level
 {
     public static class LevelCellHelper
     {
-        private const float RealGridDimension = 10f;
+        public const float RealGridDimension = 10f;
         
         public static void Initialise(Transform transform, Vector2Int cellCoordinates, float gridSize)
         {

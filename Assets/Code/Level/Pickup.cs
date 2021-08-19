@@ -1,4 +1,6 @@
-﻿using Code.Core;
+﻿using System;
+using System.Diagnostics;
+using Code.Core;
 using Code.VFX;
 using UnityEngine;
 
@@ -6,9 +8,23 @@ namespace Code.Level
 {
     public class Pickup : MonoBehaviour
     {
-        [SerializeField] private PickupType _pickupType;
-
+        [SerializeField] private SphereCollider _collider;
+        
         public bool IsCollected { get; private set; }
+
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            if (!_collider)
+            {
+                _collider = GetComponent<SphereCollider>();
+            }
+        }
+
+        private void Awake()
+        {
+            _collider.radius = TuningContainer.GameplayTuning.PickupColliderSize;
+        }
         
         private void OnCollisionEnter(Collision other)
         {
@@ -22,10 +38,9 @@ namespace Code.Level
 
         private void HandleCollision(GameObject other)
         {
-            bool collectedByOrbiter = other.IsOrbiter() && _pickupType.HasFlag(PickupType.OrbiterCollect);
-            bool collectedByPlayer = other.IsPlayer() && _pickupType.HasFlag(PickupType.PlayerCollect);
+            bool collectedByOrbiter = other.IsOrbiter();
         
-            if (collectedByOrbiter || collectedByPlayer)
+            if (collectedByOrbiter)
             {
                 Collected(other);
             }
@@ -38,22 +53,7 @@ namespace Code.Level
 
             Vector3 transformPosition = transform.position;
             Vector3 direction = transformPosition - collectedBy.transform.position;
-            VfxType vfxType = PickupTypeToVfxCollectedType(_pickupType);
-            VfxManager.Instance.SpawnVfx(vfxType, transformPosition, direction);
-        }
-
-        private static VfxType PickupTypeToVfxCollectedType(PickupType pickupType)
-        {
-            switch (pickupType)
-            {
-                case PickupType.OrbiterCollect:
-                    return VfxType.OrbiterPickupCollected;
-                case PickupType.PlayerCollect:
-                    return VfxType.PlayerPickupCollected;
-            }
-
-            Debug.LogError($"Could not get vfx type for pickup type {pickupType}");
-            return VfxType.None;
+            VfxManager.Instance.SpawnVfx(VfxType.PickupCollected, transformPosition, direction);
         }
     }
 }
