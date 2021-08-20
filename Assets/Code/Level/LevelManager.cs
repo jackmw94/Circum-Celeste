@@ -5,11 +5,10 @@ using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
 using UnityEngine;
-using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Level
 {
-    public class LevelManager : SingletonMonoBehaviour<LevelManager>
+    public class LevelManager : MonoBehaviour
     {
         private enum InputType
         {

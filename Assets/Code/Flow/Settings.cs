@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Code.Core;
 using Code.Level;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +40,9 @@ namespace Code.Flow
 
         private void NextLevelButtonListener()
         {
-            LevelManager.Instance.GenerateNextLevel();
+            GameContainer gameContainer = GameContainer.Instance;
+            LevelManager levelManager = gameContainer.LevelManager;
+            levelManager.GenerateNextLevel();
             SettingsButtonClicked();
         }
 

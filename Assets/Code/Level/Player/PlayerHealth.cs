@@ -8,7 +8,9 @@ namespace Code.Level.Player
         protected override void OnHitTaken()
         {
             base.OnHitTaken();
-            HealthUI.Instance.UpdateHealthBar(0, HealthFraction);
+            
+            HealthUI healthUI = GameContainer.Instance.HealthUI;
+            healthUI.UpdateHealthBar(0, HealthFraction);
         }
 
         protected override bool DoesObjectDamageUs(GameObject gameObj)

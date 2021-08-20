@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Code.Core;
 using Code.Level;
 using TMPro;
 using UnityEngine;
@@ -38,7 +39,8 @@ namespace Code.Flow
 
         private IEnumerator ShowOverlay()
         {
-            LevelManager levelManager = LevelManager.Instance;
+            GameContainer gameContainer = GameContainer.Instance;
+            LevelManager levelManager = gameContainer.LevelManager;
             LevelInstance currentLevel = levelManager.CurrentLevel;
             
             Vector3 playerPosition = Vector3.one / 2f;

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Level.Player
 { 
-    public class HealthUI : SingletonMonoBehaviour<HealthUI>
+    public class HealthUI : MonoBehaviour
     {
         public void UpdateHealthBar(int playerIndex, float fraction)
         {
