@@ -1,4 +1,5 @@
-﻿using Code.UI;
+﻿using Code.Core;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Level.Player
@@ -10,7 +11,7 @@ namespace Code.Level.Player
         protected override void Initialise()
         {
             base.Initialise();
-            _uiInputElements = UIInputElementsContainer.Instance;
+            _uiInputElements = GameContainer.Instance.UIInputElementsContainer;
         }
         
         public override Vector2 GetMovementInput()

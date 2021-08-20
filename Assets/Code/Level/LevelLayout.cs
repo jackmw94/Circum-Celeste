@@ -12,12 +12,14 @@ namespace Code.Level
 
         [SerializeField] private EscapeCriteria _escapeCriteria;
         [SerializeField] private float _escapeTimer = 25f;
+        [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private CellType[] _cells = new CellType[0];
         
         public int GridSize => _gridSize;
         public EscapeCriteria EscapeCriteria => _escapeCriteria;
         public float EscapeTimer => _escapeTimer;
+        public IntroduceElement IntroduceElement => _introduceElement;
         public CellType[] Cells => _cells;
         
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)

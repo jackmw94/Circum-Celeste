@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Core;
 using Code.Debugging;
+using Code.UI;
 using UnityEngine;
 using UnityExtras.Code.Core;
 
@@ -11,6 +13,7 @@ namespace Code.Level
     {
         private EscapeCriteria _escapeCriteria;
         private float _escapeDuration;
+        private IntroduceElement _introduceElement;
 
         private List<Player.Player> _players;
         private List<Pickup> _pickups;
@@ -30,6 +33,7 @@ namespace Code.Level
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
+            _introduceElement = levelLayout.IntroduceElement;
 
             _players = players;
             _pickups = pickups;
@@ -45,6 +49,15 @@ namespace Code.Level
         public void LevelReady()
         {
             _players.ApplyFunction(p => p.LevelReady());
+
+            // todo: put this in an area of code less tied to game logic + handle edge cases like never clicking the button
+            switch (_introduceElement)
+            {
+                case IntroduceElement.PowerButton:
+                    UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
+                    movementUi.PulseButton.StartStopPulse(true);
+                    break;
+            }
         }
 
         public void StartLevel(Action<bool> levelFinishedCallback)
@@ -54,7 +67,7 @@ namespace Code.Level
 
             _players.ApplyFunction(p => p.LevelStarted());
             _enemies.ApplyFunction(p => p.LevelStarted());
-
+            
             _levelFinishedCallback = levelFinishedCallback;
         }
 
@@ -145,6 +158,7 @@ namespace Code.Level
 
         private void ShowEscape()
         {
+            CircumDebug.Log("Showing escapes");
             _escapes.ApplyFunction(p => p.gameObject.SetActive(true));
         }
 
