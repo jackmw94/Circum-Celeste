@@ -12,12 +12,19 @@ namespace Code.Flow
         [SerializeField] private CanvasGroup _levelTextCanvasGroup;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private float _fadeDuration = 0.5f;
-        [SerializeField] private float _delay = 3f;
+        [SerializeField] private float _startDelay = 1.5f;
+        [SerializeField] private float _holdDelay = 2f;
         
         public bool ShowOverlayInstant { get; set; }
+        public bool ShowNextLevelName { get; set; }
         
         protected override IEnumerator ActionStarted()
         {
+            if (!ShowOverlayInstant)
+            {
+                yield return new WaitForSeconds(_startDelay);
+            }
+            
             // Show overlay to hide level reset
             yield return ShowOverlay();
             
@@ -25,19 +32,28 @@ namespace Code.Flow
             ActionCompleted();
 
             // Hide again after delay
-            yield return new WaitForSeconds(_delay);
+            yield return new WaitForSeconds(_holdDelay);
             yield return HideOverlay();
         }
 
         private IEnumerator ShowOverlay()
         {
-            LevelInstance currentLevel = LevelManager.Instance.CurrentLevel;
-            Vector3 playerPosition = currentLevel.GetPlayerPosition(0);
+            LevelManager levelManager = LevelManager.Instance;
+            LevelInstance currentLevel = levelManager.CurrentLevel;
+            
+            Vector3 playerPosition = Vector3.one / 2f;
+            if (currentLevel)
+            {
+                // if there is no current level then this is probably at the start of the game
+                // at this point we're calling with ShowOverlayInstant so position doesn't matter
+                playerPosition = currentLevel.GetPlayerPosition(0);
+            }
+
             _levelOverlay.ShowOverlay(playerPosition, ShowOverlayInstant);
             
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
 
-            _levelText.text = LevelManager.Instance.GetNextLevelName();
+            _levelText.text = ShowNextLevelName ? levelManager.GetNextLevelName() : levelManager.GetCurrentLevelName();
             
             _levelTextCanvasGroup.interactable = true;
             _levelTextCanvasGroup.blocksRaycasts = true;

@@ -35,13 +35,21 @@ namespace Code.Level
             Debug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
-            interLevelFlow.ShowOverlayInstant = false;
-            interLevelFlow.StartAction(CreateLevel);
+            interLevelFlow.ShowOverlayInstant = true;
+            interLevelFlow.ShowNextLevelName = false;
+            interLevelFlow.StartAction(null);
+            CreateLevel();
         }
 
         public string GetNextLevelName()
         {
             LevelLayout nextLevel = _levelProgression.LevelLayout[NextLevelIndex];
+            return nextLevel.name;
+        }
+
+        public string GetCurrentLevelName()
+        {
+            LevelLayout nextLevel = _levelProgression.LevelLayout[_currentLevelIndex];
             return nextLevel.name;
         }
 
@@ -91,6 +99,7 @@ namespace Code.Level
         {
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = false;
+            interLevelFlow.ShowNextLevelName = success;
             
             if (success)
             {

@@ -16,3 +16,9 @@ MonoBehaviour:
   - _vfxType: 1
     _prefab: {fileID: 3900369487585736340, guid: 1e2012f88ce9c3845bcc761c0a41df8d, type: 3}
     _maximumDuration: 5
+  - _vfxType: 3
+    _prefab: {fileID: 8642439409434263303, guid: b757d077f0365b14abd560f15bdbdce2, type: 3}
+    _maximumDuration: 5
+  - _vfxType: 2
+    _prefab: {fileID: 8642439409434263303, guid: 29e52b28ced9ad84eb760d284e3052d7, type: 3}
+    _maximumDuration: 5

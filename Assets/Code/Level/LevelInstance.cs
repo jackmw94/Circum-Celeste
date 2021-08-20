@@ -70,6 +70,11 @@ namespace Code.Level
 
         private void Update()
         {
+            if (!_isStarted)
+            {
+                return;
+            }
+            
             CheckEscape();
             CheckLevelFailed();
             
@@ -87,6 +92,7 @@ namespace Code.Level
             _enemies.ApplyFunction(p => p.LevelFinished());
             
             _levelFinishedCallback?.Invoke(true);
+            _isStarted = false;
         }
 
         private void CheckLevelFailed()
@@ -94,6 +100,7 @@ namespace Code.Level
             if (_players.All(p => p.IsDead))
             {
                 _levelFinishedCallback?.Invoke(false);
+                _isStarted = false;
             }
         }
 

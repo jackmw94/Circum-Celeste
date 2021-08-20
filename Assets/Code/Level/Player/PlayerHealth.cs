@@ -5,6 +5,12 @@ namespace Code.Level.Player
 {
     public class PlayerHealth : EntityHealth
     {
+        protected override void OnHitTaken()
+        {
+            base.OnHitTaken();
+            HealthUI.Instance.UpdateHealthBar(0, HealthFraction);
+        }
+
         protected override bool DoesObjectDamageUs(GameObject gameObj)
         {
 #if UNITY_EDITOR

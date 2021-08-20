@@ -18,7 +18,7 @@ namespace Code.Flow
 
         protected void ActionCompleted()
         {
-            _onComplete();
+            _onComplete?.Invoke();
         }
     }
 }

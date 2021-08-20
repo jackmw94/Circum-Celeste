@@ -7,14 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ExpandFromPoint
-  m_Shader: {fileID: -6465566751694194690, guid: 0fd294efe607a0248a8243feafafab39, type: 3}
+  m_Name: Health
+  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -76,7 +77,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Expansion: 0
+    - Expansion: 0.5
     - Vector1_44dd9a1990004966b18f98ca0b8bfc2e: 0.75
     - _AlphaClip: 0
     - _Blend: 0
@@ -97,6 +98,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _SampleGI: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -107,7 +109,7 @@ Material:
     m_Colors:
     - Color_4e4c114bfde04ccb9d2c230d146a9487: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
     - Colour: {r: 1.2596959, g: 1.2596959, b: 1.2596959, a: 1}
-    - Point: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - Point: {r: 0, g: 0.5, b: 0, a: 0}
     - Vector2_3e846536cf934fdca7ff36d3f24efcce: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

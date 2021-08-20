@@ -34,6 +34,10 @@ namespace Code.VFX
             {
                 directionalVfx.Initialise(position, direction);
             }
+            else // todo: fix this - seems weird we only assign position if it's not directional VFX, precludes prefabs that have both
+            {
+                vfxInstance.transform.position = position;
+            }
         }
 
         [ContextMenu(nameof(RegenerateVfxDictionary))]

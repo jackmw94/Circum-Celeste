@@ -50,6 +50,7 @@ namespace Code.Level.Player
             
             TurnInputBehavioursOffOn(false);
             _health.IsInvulnerable = true;
+            gameObject.SetActive(false);
         }
 
         private void PlayerDied()

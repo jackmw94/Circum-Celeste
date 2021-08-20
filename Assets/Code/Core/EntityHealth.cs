@@ -14,6 +14,7 @@ namespace Code.Core
         public bool IsInvulnerable { get; set; }
     
         public bool IsDead => _currentHealth <= 0;
+        public float HealthFraction => _currentHealth / (float)_maximumHealth;
             
         public void SetMaximumHealth(int maximumHealth)
         {
