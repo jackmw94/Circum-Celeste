@@ -30,6 +30,7 @@ namespace Code.Core
         public void ResetHealth()
         {
             _currentHealth = _maximumHealth;
+            OnHealthReset();
         }
     
         private void OnTriggerEnter(Collider other)
@@ -61,5 +62,6 @@ namespace Code.Core
         protected abstract bool DoesObjectDamageUs(GameObject gameObj);
 
         protected virtual void OnHitTaken(){}
+        protected virtual void OnHealthReset(){}
     }
 }
