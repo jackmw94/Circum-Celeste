@@ -27,16 +27,13 @@ namespace Code.VFX
             }
             
             GameObject vfxInstance = Instantiate(vfxData.Prefab);
+            vfxInstance.transform.position = position;
             Destroy(vfxInstance, vfxData.MaximumDuration);
             
             DirectionalVfx directionalVfx = vfxInstance.GetComponent<DirectionalVfx>();
             if (directionalVfx)
             {
-                directionalVfx.Initialise(position, direction);
-            }
-            else // todo: fix this - seems weird we only assign position if it's not directional VFX, precludes prefabs that have both
-            {
-                vfxInstance.transform.position = position;
+                directionalVfx.Initialise(direction);
             }
         }
 

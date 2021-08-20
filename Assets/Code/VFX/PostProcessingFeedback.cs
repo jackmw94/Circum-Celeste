@@ -23,7 +23,7 @@ namespace Code.VFX
             CircumDebug.Assert(vignetteFound, $"Could not find a vignette override on post processing ({gameObject})");
         }
 
-        public void TriggerVignetteHit()
+        public void TriggerDamageFeedback()
         {
             if (_vignetteCoroutine != null)
             {
@@ -37,7 +37,7 @@ namespace Code.VFX
             yield return Utilities.LerpOverTime(0f, 1f, _animationCurve.GetCurveDuration(), f =>
             {
                 _vignette.intensity.value = f;
-            });
+            }, _animationCurve);
         }
     }
 }
