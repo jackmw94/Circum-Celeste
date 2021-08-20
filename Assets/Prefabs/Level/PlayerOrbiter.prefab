@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc2de6a02c7419c8d9c3ae1350fe169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _integralIncrease: 2
+  _integralIncrease: 1.4
   _warmUpTime: 0.1
   _warmDownTime: 0.5
   _playerInput: {fileID: 6384775747270266374}
