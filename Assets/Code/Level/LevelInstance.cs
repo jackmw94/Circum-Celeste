@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Debugging;
 using UnityEngine;
 using UnityExtras.Code.Core;
 
@@ -85,8 +86,8 @@ namespace Code.Level
 
         private void LevelCompleted()
         {
-            Debug.Assert(_isStarted, "Level has been completed before it's started? What's the deal with that..?");
-            Debug.Log("LEVEL COMPLETED");
+            CircumDebug.Assert(_isStarted, "Level has been completed before it's started? What's the deal with that..?");
+            CircumDebug.Log("LEVEL COMPLETED");
             
             _players.ApplyFunction(p => p.LevelFinished());
             _enemies.ApplyFunction(p => p.LevelFinished());
@@ -152,7 +153,7 @@ namespace Code.Level
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("Debug showing escapes");
+                CircumDebug.Log("Debug showing escapes");
                 ShowEscape();
             }
         }

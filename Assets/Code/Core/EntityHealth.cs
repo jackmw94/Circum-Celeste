@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Debugging;
 using UnityEngine;
 
 namespace Code.Core
@@ -54,7 +55,7 @@ namespace Code.Core
             }
 
             OnHitTaken();
-            Debug.Log($"{gameObject} taken damage. Health = {_currentHealth}");
+            CircumDebug.Log($"{gameObject} taken damage. Health = {_currentHealth}");
         }
 
         protected abstract bool DoesObjectDamageUs(GameObject gameObj);

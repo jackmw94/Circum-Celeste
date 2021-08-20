@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
 using UnityEngine;
@@ -32,7 +33,7 @@ namespace Code.Level
 
         private void Start()
         {
-            Debug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
+            CircumDebug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = true;
@@ -90,7 +91,7 @@ namespace Code.Level
             level.LevelReady();
             yield return new WaitUntil(() => level.PlayerIsMoving);
 
-            Debug.Log("Level started");
+            CircumDebug.Log("Level started");
             CurrentLevel = level;
             level.StartLevel(OnLevelFinished);
         }

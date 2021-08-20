@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Code.Core;
+using Code.Debugging;
+using UnityEngine;
 
 namespace Code.Level.Player
 {
@@ -8,7 +10,7 @@ namespace Code.Level.Player
         
         protected InputProvider()
         {
-            Debug.Log($"Creating input provider of type {GetType()}");
+            CircumDebug.Log($"Creating input provider of type {GetType()}");
         }
 
         protected virtual void Initialise()
