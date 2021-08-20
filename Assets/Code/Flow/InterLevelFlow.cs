@@ -12,6 +12,7 @@ namespace Code.Flow
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private CanvasGroup _levelTextCanvasGroup;
         [SerializeField] private TextMeshProUGUI _levelText;
+        [SerializeField] private TextMeshProUGUI _tagText;
         [SerializeField] private float _fadeDuration = 0.5f;
         [SerializeField] private float _startDelay = 1.5f;
         [SerializeField] private float _holdDelay = 2f;
@@ -55,7 +56,9 @@ namespace Code.Flow
             
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
 
-            _levelText.text = ShowNextLevelName ? levelManager.GetNextLevelName() : levelManager.GetCurrentLevelName();
+            LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel() : levelManager.GetCurrentLevel();
+            _levelText.text = showLevel.name;
+            _tagText.text = showLevel.TagLine;
             
             _levelTextCanvasGroup.interactable = true;
             _levelTextCanvasGroup.blocksRaycasts = true;

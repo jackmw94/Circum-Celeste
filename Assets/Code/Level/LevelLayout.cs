@@ -12,6 +12,7 @@ namespace Code.Level
 
         [SerializeField] private EscapeCriteria _escapeCriteria;
         [SerializeField] private float _escapeTimer = 25f;
+        [SerializeField] private string _tagLine = "";
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private CellType[] _cells = new CellType[0];
@@ -19,6 +20,7 @@ namespace Code.Level
         public int GridSize => _gridSize;
         public EscapeCriteria EscapeCriteria => _escapeCriteria;
         public float EscapeTimer => _escapeTimer;
+        public string TagLine => _tagLine;
         public IntroduceElement IntroduceElement => _introduceElement;
         public CellType[] Cells => _cells;
         

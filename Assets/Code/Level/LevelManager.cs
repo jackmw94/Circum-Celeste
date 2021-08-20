@@ -41,16 +41,14 @@ namespace Code.Level
             CreateLevel();
         }
 
-        public string GetNextLevelName()
+        public LevelLayout GetNextLevel()
         {
-            LevelLayout nextLevel = _levelProgression.LevelLayout[NextLevelIndex];
-            return nextLevel.name;
+            return _levelProgression.LevelLayout[NextLevelIndex];
         }
 
-        public string GetCurrentLevelName()
+        public LevelLayout GetCurrentLevel()
         {
-            LevelLayout nextLevel = _levelProgression.LevelLayout[_currentLevelIndex];
-            return nextLevel.name;
+            return _levelProgression.LevelLayout[_currentLevelIndex];
         }
 
         public void GenerateNextLevel()
