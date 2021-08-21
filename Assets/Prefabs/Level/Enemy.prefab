@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad8988ee34940b89695d9cd4aacadfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 5424587554075494100}
   _enemyHealth: {fileID: 5002772960763061679}
   _gravitationalMover: {fileID: 6425282190872956666}
 --- !u!54 &3999758495997198373
