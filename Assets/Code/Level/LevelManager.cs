@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Code.Core;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
@@ -30,15 +31,23 @@ namespace Code.Level
 
         public LevelInstance CurrentLevel { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             CircumDebug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = true;
             interLevelFlow.ShowNextLevelName = false;
+            interLevelFlow.PreventHidingOverlay = true;
             interLevelFlow.StartAction(null);
-            CreateLevel();
+            
+            RemoteConfigHelper.RequestRefresh(success =>
+            {
+                CircumDebug.Log("Remote config request finished, showing level");
+                interLevelFlow.PreventHidingOverlay = false;
+                
+                CreateLevel();
+            });
         }
 
         public LevelLayout GetNextLevel()

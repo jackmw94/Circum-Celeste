@@ -19,6 +19,7 @@ namespace Code.Flow
         
         public bool ShowOverlayInstant { get; set; }
         public bool ShowNextLevelName { get; set; }
+        public bool PreventHidingOverlay { get; set; } = false;
         
         protected override IEnumerator ActionStarted()
         {
@@ -29,12 +30,14 @@ namespace Code.Flow
             
             // Show overlay to hide level reset
             yield return ShowOverlay();
-            
+            yield return new WaitUntil(() => !PreventHidingOverlay);
+
             // This is where the behind the scenes resetting happens
             ActionCompleted();
 
             // Hide again after delay
             yield return new WaitForSeconds(_holdDelay);
+
             yield return HideOverlay();
         }
 

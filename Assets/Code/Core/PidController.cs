@@ -13,6 +13,8 @@ namespace Code.Core
         private float _integral;
         private float _lastError;
 
+        private float TotalMaxIntegral => _pidProperties.MaxIntegral + _maxIntegralOffset;
+
         public void SetMaxIntegralOffset(float maxIntegralOffset)
         {
             _maxIntegralOffset = maxIntegralOffset;
@@ -22,12 +24,12 @@ namespace Code.Core
         {
             float proportionalError = target - current;
             _integral += proportionalError * frameTime;
-            _integral = Mathf.Clamp(_integral, -(_pidProperties.MaxIntegral + _maxIntegralOffset), (_pidProperties.MaxIntegral + _maxIntegralOffset));
+            _integral = Mathf.Clamp(_integral, -TotalMaxIntegral, TotalMaxIntegral);
 
             float derivative = (proportionalError - _lastError) / frameTime;
             _lastError = proportionalError;
 
-            return (proportionalError * _pidProperties.ProportionalFactor) + (_integral * _pidProperties.MaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
+            return (proportionalError * _pidProperties.ProportionalFactor) + (_integral * TotalMaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
         }
 
         public void ResetPid()
@@ -35,5 +37,7 @@ namespace Code.Core
             _lastError = 0f;
             _integral = 0f;
         }
+
+        public void SetPIDValues(float p, float i, float d) => _pidProperties.SetPIDValues(p, i, d);
     }
 }

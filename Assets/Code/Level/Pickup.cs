@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Code.Core;
 using Code.VFX;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace Code.Level
 
         private void Awake()
         {
-            _collider.radius = TuningContainer.GameplayTuning.PickupColliderSize;
+            _collider.radius = RemoteConfigHelper.PickupColliderSize;
         }
         
         private void OnCollisionEnter(Collision other)

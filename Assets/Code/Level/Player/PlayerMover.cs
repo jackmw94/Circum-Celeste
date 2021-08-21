@@ -1,3 +1,4 @@
+using Code.Core;
 using UnityEngine;
 
 namespace Code.Level.Player
@@ -14,19 +15,21 @@ namespace Code.Level.Player
         
         private InputProvider InputProvider => _playerInput.InputProvider;
 
-        private void Update()
+        private void Awake()
         {
+            _speed = RemoteConfigHelper.PlayerSpeed;
+        }
+        
+        private void FixedUpdate()
+        {
+            _rigidbody.velocity = Vector3.zero;
+            
             if (MovementEnabled)
             {
                 Vector3 movement = InputProvider.GetMovementInput();
                 movement = movement.normalized;
                 transform.position += movement * (Time.deltaTime * _speed);
             }
-        }
-
-        private void FixedUpdate()
-        {
-            _rigidbody.velocity = Vector3.zero;
         }
     }
 }

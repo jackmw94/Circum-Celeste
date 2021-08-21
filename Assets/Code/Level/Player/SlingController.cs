@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Core;
+using UnityEngine;
 
 namespace Code.Level.Player
 {
@@ -13,6 +14,11 @@ namespace Code.Level.Player
         private float _currentIncreaseLerpValue = 0f;
         
         public bool SlingEnabled { get; set; }
+
+        private void Awake()
+        {
+            _integralIncrease = RemoteConfigHelper.SlingIncrease;
+        }
     
         private void Update()
         {

@@ -6,6 +6,7 @@ namespace Code.Level
 {
     public class Enemy : LevelElement
     {
+        [SerializeField] private SphereCollider _collider;
         [SerializeField] private EnemyHealth _enemyHealth;
         [SerializeField] private GravitationalMover _gravitationalMover;
 
@@ -14,6 +15,7 @@ namespace Code.Level
         private void Awake()
         {
             _gravitationalMover.enabled = false;
+            _collider.radius = RemoteConfigHelper.EnemyColliderRadius;
         }
 
         public override void LevelStarted()

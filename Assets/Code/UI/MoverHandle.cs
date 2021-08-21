@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Code.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +12,8 @@ namespace Code.UI
         [SerializeField] private float _returnSpeedMultiplier = 1f;
         [SerializeField] private AnimationCurve _returnSpeed;
         [SerializeField] private bool _useSquaredMovement = true;
+        [SerializeField] private bool _useRelativeMovement = false;
+        [SerializeField] private float _relativeMovementThreshold = 0.1f;
 
         private Vector2 _movement;
         private Vector2 _dragPosition;
@@ -29,26 +32,53 @@ namespace Code.UI
         private void Start()
         {
             _centre = transform.localPosition;
+            RemoteConfigHelper.RemoteConfigUpdated += UpdateConfigurableValues;
+            
+            UpdateConfigurableValues();
         }
 
-        private void LateUpdate() 
+        private void OnDestroy()
         {
+            RemoteConfigHelper.RemoteConfigUpdated -= UpdateConfigurableValues;
+        }
+
+        private void LateUpdate()
+        {
+            Transform moverTransform = transform;
+
             if (_isDragging)
             {
                 Vector2 offset = _dragPosition - _centre;
+                bool atMaxRadius = false;
                 if (offset.magnitude > _maxRadius)
                 {
                     offset = offset.normalized * _maxRadius;
+                    atMaxRadius = true;
                 }
-                transform.localPosition = _centre + offset;
 
-                _movement = offset / _maxRadius;
+                Vector3 previousPosition = moverTransform.localPosition;
+                moverTransform.localPosition = _centre + offset;
+
+                if (_useRelativeMovement && !atMaxRadius)
+                {
+                    var frameDifference = moverTransform.localPosition - previousPosition;
+                    if (frameDifference.magnitude > _relativeMovementThreshold)
+                    {
+                        frameDifference = frameDifference.normalized;
+                    }
+
+                    _movement = frameDifference / _relativeMovementThreshold;
+                }
+                else
+                {
+                    _movement = offset / _maxRadius;
+                }
             }
             else
             {
                 _movement = Vector2.zero;
             
-                Vector3 position = transform.localPosition;
+                Vector3 position = moverTransform.localPosition;
                 Vector2 centreOffset = _centre - new Vector2(position.x, position.y);
                 float magnitude = centreOffset.magnitude;
 
@@ -62,7 +92,7 @@ namespace Code.UI
                     {
                         returnVector = returnVector.normalized * returnDistance;
                     }
-                    transform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
+                    moverTransform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
                 }
             }
         }
@@ -81,6 +111,11 @@ namespace Code.UI
         {
             Vector3 screenToWorldPoint = _camera.ScreenToWorldPoint(eventData.position);
             _dragPosition = transform.parent.InverseTransformPoint(screenToWorldPoint);
+        }
+
+        private void UpdateConfigurableValues()
+        {
+            _useRelativeMovement = RemoteConfigHelper.MoverUIRelative;
         }
     }
 }
