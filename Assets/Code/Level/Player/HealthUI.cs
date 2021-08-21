@@ -5,7 +5,8 @@ namespace Code.Level.Player
     public class HealthUI : MonoBehaviour
     {
         [SerializeField] private MeshRenderer _meshRenderer;
-        [Space(15)]
+        [Space(15)] 
+        [SerializeField] private float _lerpAmount = 0.1f;
         [SerializeField] private float _fullColourThreshold = 0.1f;
         [SerializeField] private Color _reduceColour;
         [SerializeField] private Color _increaseColour;
@@ -27,7 +28,7 @@ namespace Code.Level.Player
 
         private void Update()
         {
-            float next = Mathf.Lerp(_current, _target, 0.1f);
+            float next = Mathf.Lerp(_current, _target, _lerpAmount);
             float difference = next - _current;
             _current = next;
 

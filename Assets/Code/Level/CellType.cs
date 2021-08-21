@@ -9,11 +9,4 @@
         Escape,
         PlayerStart,
     }
-
-    public enum EscapeCriteria
-    {
-        Timed,
-        DestroyedAll,
-        PickedUpAll
-    }
 }

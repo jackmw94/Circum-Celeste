@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Debugging;
+using UnityEngine;
 using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Core
@@ -14,12 +15,19 @@ namespace Code.Core
             if (Input.GetKeyDown(KeyCode.I))
             {
                 PlayerHealthLossDisabled = !PlayerHealthLossDisabled;
+                CircumDebug.Log($"Setting player invulnerability to {BoolToOnOff(PlayerHealthLossDisabled)}");
             }
 
             if (Input.GetKeyDown(KeyCode.O))
             {
                 EnemyHealthLossDisabled = !EnemyHealthLossDisabled;
+                CircumDebug.Log($"Setting enemy invulnerability to {BoolToOnOff(EnemyHealthLossDisabled)}");
             }
+        }
+
+        private static string BoolToOnOff(bool value)
+        {
+            return value ? "on" : "off";
         }
     }
 #endif
