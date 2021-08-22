@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Code.Core;
+using Code.Debugging;
+using Unity.RemoteConfig;
 using UnityEngine;
 using UnityExtras.Code.Optional.Singletons;
 
@@ -43,6 +46,12 @@ namespace Code.Juice
         private void Awake()
         {
             RegenerateFeedbacksDictionary();
+            RemoteConfigHelper.RemoteConfigUpdated += SetFeedbacksFromRemoteConfig;
+        }
+
+        private void OnDestroy()
+        {
+            RemoteConfigHelper.RemoteConfigUpdated -= SetFeedbacksFromRemoteConfig;
         }
 
         [ContextMenu(nameof(RegenerateFeedbacksDictionary))]
@@ -71,5 +80,44 @@ namespace Code.Juice
             _screenShake.AddShake(feedbackSetting.ScreenShakeAmount);
             _timeControl.AddTimeState(feedbackSetting.TimeControlFeedback);
         }
+
+        private void SetFeedbacksFromRemoteConfig()
+        {
+            if (string.IsNullOrEmpty(RemoteConfigHelper.FeedbackProperties))
+            {
+                return;
+            }
+
+            // bit of a hack - we use a single string for feedback settings with objects separated by #
+            string[] splitSerializedFeedbackSettings = RemoteConfigHelper.FeedbackProperties.Split('#');
+            FeedbackSetting[] feedbackSettings = new FeedbackSetting[splitSerializedFeedbackSettings.Length];
+            for (int i = 0; i < feedbackSettings.Length; i++)
+            {
+                feedbackSettings[i] = JsonUtility.FromJson<FeedbackSetting>(splitSerializedFeedbackSettings[i]);
+            }
+
+            _feedbackSettings = feedbackSettings;
+            RegenerateFeedbacksDictionary();
+        }
+
+        [ContextMenu(nameof(PrintSerializedFeedbacks))]
+        private void PrintSerializedFeedbacks()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int index = 0; index < _feedbackSettings.Length; index++)
+            {
+                FeedbackSetting feedbackSetting = _feedbackSettings[index];
+                string serialized = JsonUtility.ToJson(feedbackSetting);
+                sb.Append(serialized);
+                if (index + 1 < _feedbackSettings.Length)
+                {
+                    sb.Append("#");
+                }
+            }
+            
+            CircumDebug.Log(sb.ToString());
+        }
+
     }
 }

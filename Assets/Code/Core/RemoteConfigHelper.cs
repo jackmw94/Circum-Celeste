@@ -39,6 +39,7 @@ namespace Code.Core
         public static float PlayerSpeed = DefaultPlayerSpeed;
         public static float SlingIntegralOffset = DefaultSlingIntegralOffset;
         public static float SlingProportionalOffset = DefaultSlingProportionalOffset;
+        public static string FeedbackProperties = "";
         //
         
 
@@ -87,6 +88,7 @@ namespace Code.Core
             PlayerSpeed = ConfigManager.appConfig.GetFloat(nameof(PlayerSpeed), DefaultPlayerSpeed);
             SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
             SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
+            FeedbackProperties = ConfigManager.appConfig.GetString(nameof(FeedbackProperties), "");
         }
         
         private static void AssertConfigHasProperties()
@@ -100,6 +102,7 @@ namespace Code.Core
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PlayerSpeed)),$"There is no app config property for {nameof(PlayerSpeed)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingIntegralOffset)),$"There is no app config property for {nameof(SlingIntegralOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(FeedbackProperties)),$"There is no app config property for {nameof(FeedbackProperties)}");
         }
 
         private static void SaveConfigToPlayerPrefs()
@@ -113,6 +116,7 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), PlayerSpeed);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), SlingIntegralOffset);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), SlingProportionalOffset);
+            PlayerPrefs.SetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), FeedbackProperties);
         }
 
         private static void LoadConfigFromPlayerPrefs()
@@ -126,6 +130,7 @@ namespace Code.Core
             PlayerSpeed = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), DefaultPlayerSpeed);
             SlingIntegralOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), DefaultSlingIntegralOffset);
             SlingProportionalOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), DefaultSlingIntegralOffset);
+            FeedbackProperties = PlayerPrefs.GetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), "");
         }
 
         private static string PlayerPrefsKeyFromName(string propertyName)
