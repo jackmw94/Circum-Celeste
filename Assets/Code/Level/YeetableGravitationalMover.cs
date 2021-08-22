@@ -1,4 +1,5 @@
 ﻿using Code.Core;
+using Code.Juice;
 using UnityEngine;
 
 namespace Code.Level
@@ -32,13 +33,15 @@ namespace Code.Level
 
         private void HandleCollision(GameObject other)
         {
-            if (other.IsOrbiter())
+            if (!other.IsOrbiter())
             {
+                return;
+            }
+            
             // got yeet
             Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.HitEnemy);
-                Vector3 direction = (transform.position - other.transform.position).normalized;
-                _hitVector += (Vector2)direction * _yeetScale;
-            }
+            Vector3 direction = (transform.position - other.transform.position).normalized;
+            _hitVector += (Vector2)direction * _yeetScale;
         }
     }
 }
