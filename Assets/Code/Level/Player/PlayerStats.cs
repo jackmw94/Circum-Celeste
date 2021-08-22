@@ -9,9 +9,9 @@ namespace Code.Level.Player
     {
         private const string PlayerPrefsKey = "Circum_PlayerStats";
         
-        private int _highestLevelReached = 0;
-        private int _highestNoDeathLevelReached = 0;
-        private int _highestPerfectLevelReached = 0;
+        [SerializeField] private int _highestLevelReached = 0;
+        [SerializeField] private int _highestNoDeathLevelReached = 0;
+        [SerializeField] private int _highestPerfectLevelReached = 0;
 
         public int HighestLevel => _highestLevelReached;
         public int HighestLevelNoDeaths => _highestNoDeathLevelReached;
