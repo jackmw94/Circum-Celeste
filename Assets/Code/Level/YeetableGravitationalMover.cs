@@ -34,6 +34,8 @@ namespace Code.Level
         {
             if (other.IsOrbiter())
             {
+            // got yeet
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.HitEnemy);
                 Vector3 direction = (transform.position - other.transform.position).normalized;
                 _hitVector += (Vector2)direction * _yeetScale;
             }

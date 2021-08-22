@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Code.Core;
+using Code.Juice;
 using Code.VFX;
 using UnityEngine;
 
@@ -49,6 +50,8 @@ namespace Code.Level
         {
             IsCollected = true;
             gameObject.SetActive(false);
+            
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CollectedPickup);
 
             Vector3 transformPosition = transform.position;
             Vector3 direction = transformPosition - collectedBy.transform.position;
