@@ -34,7 +34,8 @@ namespace Code.Juice
             
             Shake();
 
-            _shakeAmount -= Time.unscaledTime * _addShakeMagnitude / _calmDownTime;
+            float shakeReduction = Time.unscaledDeltaTime * _addShakeMagnitude / _calmDownTime;
+            _shakeAmount -= shakeReduction;
             _shakeAmount = Mathf.Max(_shakeAmount, 0f);
         }
 
