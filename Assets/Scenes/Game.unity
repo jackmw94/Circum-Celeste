@@ -10463,7 +10463,6 @@ MonoBehaviour:
   _pickupPrefab: {fileID: 145789428869962669, guid: c29ad3aae3da3964890aa0f95bbeef3e, type: 3}
   _followerEnemyPrefab: {fileID: 2807176686548070314, guid: 10789580cc6fb3943a5d97ac9f9ec064, type: 3}
   _escapePrefab: {fileID: 8244140385589922250, guid: 45cf6fca9ef2f38468c169eafcc4ea4f, type: 3}
-  _destructibleBlockPrefab: {fileID: 7678716605668470420, guid: bc62e657dbe4fc043a34513b05638185, type: 3}
   _cellsRoot: {fileID: 1882281939}
 --- !u!4 &2143567223
 Transform:
@@ -10495,6 +10494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9222df01aa04467f97f1dc513517af6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelProgression: {fileID: 11400000, guid: ab1a8cb0f3b3eb349b48b952624b47c8, type: 2}
+  _levelProgression: {fileID: 11400000, guid: 4a9ac6ff43b8b5d41a063c007b516a68, type: 2}
   _playersInputs: 03000000
   _levelGenerator: {fileID: 2143567222}
