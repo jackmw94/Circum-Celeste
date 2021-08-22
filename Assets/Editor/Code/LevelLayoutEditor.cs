@@ -19,6 +19,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLine;
     private SerializedProperty _introduceElement;
+    private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
 
@@ -39,6 +40,7 @@ public class LevelLayoutEditor : Editor
         
         _tagLine = serializedObject.FindProperty(nameof(_tagLine));
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
+        _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
 
         TryResizeArray();
 
@@ -57,6 +59,8 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_tagLine);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_introduceElement);
+        GUILayout.Space(15);
+        EditorGUILayout.PropertyField(_powerEnabled);
         GUILayout.Space(15);
         HandleEscapeCriteriaProperty();
         GUILayout.Space(15);

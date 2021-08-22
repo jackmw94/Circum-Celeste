@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Core;
 using Code.Debugging;
+using Code.Juice;
 using Code.UI;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -24,7 +25,7 @@ namespace Code.Level
         private float _startTime;
 
         private bool _escapeShown;
-        private Action<bool> _levelFinishedCallback = null;
+        private Action<bool, bool> _levelFinishedCallback = null;
 
         private float LevelTime => Time.time - _startTime;
         public bool PlayerIsMoving => _players.Any(p => p.IsMoving);
@@ -60,7 +61,7 @@ namespace Code.Level
             }
         }
 
-        public void StartLevel(Action<bool> levelFinishedCallback)
+        public void StartLevel(Action<bool, bool> levelFinishedCallback)
         {
             _isStarted = true;
             _startTime = Time.time;
@@ -105,7 +106,11 @@ namespace Code.Level
             _players.ApplyFunction(p => p.LevelFinished());
             _enemies.ApplyFunction(p => p.LevelFinished());
             
-            _levelFinishedCallback?.Invoke(true);
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CompletedLevel);
+
+            bool perfectLevel = _players.All(p => p.NoDamageTaken);
+            
+            _levelFinishedCallback?.Invoke(true, perfectLevel);
             _isStarted = false;
         }
 
@@ -113,7 +118,7 @@ namespace Code.Level
         {
             if (_players.All(p => p.IsDead))
             {
-                _levelFinishedCallback?.Invoke(false);
+                _levelFinishedCallback?.Invoke(false, false);
                 _isStarted = false;
             }
         }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Code.Debugging;
+using Code.Juice;
 using Code.UI;
 using Unity.RemoteConfig;
 using UnityEngine;
@@ -15,7 +17,8 @@ namespace Code.Core
         private const float DefaultOrbiterP = 0.01f;
         private const float DefaultPickupColliderSize = 0.35f;
         private const float DefaultPlayerSpeed = 5f;
-        private const float DefaultSlingIncrease = 1f;
+        private const float DefaultSlingIntegralOffset = 0.7f;
+        private const float DefaultSlingProportionalOffset = -0.2f;
         
         [Serializable]
         public struct UserAttributes { }
@@ -34,7 +37,8 @@ namespace Code.Core
         public static float OrbiterP = DefaultOrbiterP;
         public static float PickupColliderSize = DefaultPickupColliderSize;
         public static float PlayerSpeed = DefaultPlayerSpeed;
-        public static float SlingIncrease = DefaultSlingIncrease;
+        public static float SlingIntegralOffset = DefaultSlingIntegralOffset;
+        public static float SlingProportionalOffset = DefaultSlingProportionalOffset;
         //
         
 
@@ -72,14 +76,30 @@ namespace Code.Core
 
         private static void SetValuesFromRemoteConfig()
         {
-            EnemyColliderRadius = ConfigManager.appConfig.GetFloat("EnemyColliderRadius", DefaultEnemyColliderRadius);
-            MoverUIRelative = ConfigManager.appConfig.GetBool("MoverUIRelative", DefaultMoverUIRelative);
-            OrbiterD = ConfigManager.appConfig.GetFloat("OrbiterD", DefaultOrbiterD);
-            OrbiterI = ConfigManager.appConfig.GetFloat("OrbiterI", DefaultOrbiterI);
-            OrbiterP = ConfigManager.appConfig.GetFloat("OrbiterP", DefaultOrbiterP);
-            PickupColliderSize = ConfigManager.appConfig.GetFloat("PickupColliderSize", DefaultPickupColliderSize);
-            PlayerSpeed = ConfigManager.appConfig.GetFloat("PlayerSpeed", DefaultPlayerSpeed);
-            SlingIncrease = ConfigManager.appConfig.GetFloat("SlingIncrease", DefaultSlingIncrease);
+            AssertConfigHasProperties();
+            
+            EnemyColliderRadius = ConfigManager.appConfig.GetFloat(nameof(EnemyColliderRadius), DefaultEnemyColliderRadius);
+            MoverUIRelative = ConfigManager.appConfig.GetBool(nameof(MoverUIRelative), DefaultMoverUIRelative);
+            OrbiterD = ConfigManager.appConfig.GetFloat(nameof(OrbiterD), DefaultOrbiterD);
+            OrbiterI = ConfigManager.appConfig.GetFloat(nameof(OrbiterI), DefaultOrbiterI);
+            OrbiterP = ConfigManager.appConfig.GetFloat(nameof(OrbiterP), DefaultOrbiterP);
+            PickupColliderSize = ConfigManager.appConfig.GetFloat(nameof(PickupColliderSize), DefaultPickupColliderSize);
+            PlayerSpeed = ConfigManager.appConfig.GetFloat(nameof(PlayerSpeed), DefaultPlayerSpeed);
+            SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
+            SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
+        }
+        
+        private static void AssertConfigHasProperties()
+        {
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelative)),$"There is no app config property for {nameof(MoverUIRelative)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterD)),$"There is no app config property for {nameof(OrbiterD)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterI)),$"There is no app config property for {nameof(OrbiterI)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterP)),$"There is no app config property for {nameof(OrbiterP)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PickupColliderSize)),$"There is no app config property for {nameof(PickupColliderSize)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PlayerSpeed)),$"There is no app config property for {nameof(PlayerSpeed)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingIntegralOffset)),$"There is no app config property for {nameof(SlingIntegralOffset)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
         }
 
         private static void SaveConfigToPlayerPrefs()
@@ -91,7 +111,8 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), OrbiterP);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), PickupColliderSize);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), PlayerSpeed);
-            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIncrease)), SlingIncrease);
+            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), SlingIntegralOffset);
+            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), SlingProportionalOffset);
         }
 
         private static void LoadConfigFromPlayerPrefs()
@@ -103,7 +124,8 @@ namespace Code.Core
             OrbiterP = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), DefaultOrbiterP);
             PickupColliderSize = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), DefaultPickupColliderSize);
             PlayerSpeed = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), DefaultPlayerSpeed);
-            SlingIncrease = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIncrease)), DefaultSlingIncrease);
+            SlingIntegralOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), DefaultSlingIntegralOffset);
+            SlingProportionalOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), DefaultSlingIntegralOffset);
         }
 
         private static string PlayerPrefsKeyFromName(string propertyName)

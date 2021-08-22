@@ -5,19 +5,21 @@ namespace Code.Level.Player
 {
     public class SlingController : MonoBehaviour
     {
-        [SerializeField] private float _integralIncrease = 0.2f;
+        [SerializeField] private float _integralOffset = 0.7f;
+        [SerializeField] private float _proportionalOffset = -0.2f;
         [SerializeField] private float _warmUpTime = 0.1f;
         [SerializeField] private float _warmDownTime = 0.5f;
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private OrbitMover _orbitMover;
 
-        private float _currentIncreaseLerpValue = 0f;
+        private float _currentLerpValue = 0f;
         
         public bool SlingEnabled { get; set; }
 
         private void Awake()
         {
-            _integralIncrease = RemoteConfigHelper.SlingIncrease;
+            _integralOffset = RemoteConfigHelper.SlingIntegralOffset;
+            _proportionalOffset = RemoteConfigHelper.SlingProportionalOffset;
         }
     
         private void Update()
@@ -30,18 +32,19 @@ namespace Code.Level.Player
             
             if (slingInput)
             {
-                _currentIncreaseLerpValue += Time.deltaTime / _warmUpTime;
+                _currentLerpValue += Time.deltaTime / _warmUpTime;
             }
             else
             {
-                _currentIncreaseLerpValue -= Time.deltaTime / _warmDownTime;
+                _currentLerpValue -= Time.deltaTime / _warmDownTime;
             }
 
-            _currentIncreaseLerpValue = Mathf.Clamp01(_currentIncreaseLerpValue);
+            _currentLerpValue = Mathf.Clamp01(_currentLerpValue);
 
-            float currentIncrease = Mathf.Lerp(0f, _integralIncrease, _currentIncreaseLerpValue);
+            float integralOffset = Mathf.Lerp(0f, _integralOffset, _currentLerpValue);
+            float proportionalOffset = Mathf.Lerp(0f, _proportionalOffset, _currentLerpValue);
         
-            _orbitMover.SetSlingIncrease(currentIncrease);
+            _orbitMover.SetSlingOffsets(integralOffset, proportionalOffset);
         }
     }
 }

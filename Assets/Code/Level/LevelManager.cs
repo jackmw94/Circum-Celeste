@@ -11,7 +11,7 @@ namespace Code.Level
 {
     public class LevelManager : MonoBehaviour
     {
-        private enum InputType
+        public enum InputType
         {
             Keyboard,
             Mouse,
@@ -26,14 +26,21 @@ namespace Code.Level
         [SerializeField] private LevelGenerator _levelGenerator;
 
         private int _currentLevelIndex = 0;
+        
+        private RunTracker _runTracker;
+        private PlayerStats _playerStats;
 
         private int NextLevelIndex => (_currentLevelIndex + 1) % _levelProgression.LevelLayout.Length;
-
+        public InputType[] PlayersInputs => _playersInputs;
+        public PlayerStats PlayerStats => _playerStats;
+        
         public LevelInstance CurrentLevel { get; private set; }
 
         private void Awake()
         {
-            CircumDebug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
+            CircumDebug.Assert(PlayersInputs.Length > 0, "There are no users for this level, probably not what we want..");
+            
+            _playerStats = PlayerStats.Load();
             
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = true;
@@ -46,21 +53,29 @@ namespace Code.Level
                 CircumDebug.Log("Remote config request finished, showing level");
                 interLevelFlow.PreventHidingOverlay = false;
                 
-                CreateLevel();
+                GenerateFirstLevel();
             });
         }
 
-        public LevelLayout GetNextLevel()
+        public LevelLayout GetNextLevel(out int index)
         {
-            return _levelProgression.LevelLayout[NextLevelIndex];
+            index = NextLevelIndex;
+            return _levelProgression.LevelLayout[index];
         }
 
-        public LevelLayout GetCurrentLevel()
+        public LevelLayout GetCurrentLevel(out int index)
         {
-            return _levelProgression.LevelLayout[_currentLevelIndex];
+            index = _currentLevelIndex;
+            return _levelProgression.LevelLayout[index];
         }
 
-        public void GenerateNextLevel()
+        public void SkipLevel()
+        {
+            _runTracker.HasSkipped = true;
+            GenerateNextLevel();
+        }
+
+        private void GenerateNextLevel()
         {
             _currentLevelIndex = NextLevelIndex;
             CreateLevel();
@@ -68,12 +83,25 @@ namespace Code.Level
 
         public void ResetCurrentLevel()
         {
+            if (_currentLevelIndex > 0)
+            {
+                _runTracker.Deaths++;
+            }
+
+            CreateLevel();
+        }
+
+        public void GenerateFirstLevel()
+        {
+            _currentLevelIndex = 0;
+            _runTracker = new RunTracker();
             CreateLevel();
         }
 
         private void CreateLevel()
         {
             LevelLayout levelLayout = _levelProgression.LevelLayout[_currentLevelIndex];
+            
             LevelInstance levelInstance = GenerateLevel(levelLayout);
             StartCoroutine(StartLevelOncePlayerMoved(levelInstance));
         }
@@ -86,7 +114,7 @@ namespace Code.Level
 
         private LevelInstance GenerateLevel(LevelLayout levelLayout)
         {
-            InputProvider[] userInputProviders = _playersInputs.Select(CreateInputProvider).ToArray();
+            InputProvider[] userInputProviders = PlayersInputs.Select(CreateInputProvider).ToArray();
             LevelInstance levelInstance = _levelGenerator.GenerateLevel(userInputProviders, levelLayout);
 
             return levelInstance;
@@ -102,7 +130,7 @@ namespace Code.Level
             level.StartLevel(OnLevelFinished);
         }
 
-        private void OnLevelFinished(bool success)
+        private void OnLevelFinished(bool success, bool playerTookNoHits)
         {
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = false;
@@ -110,11 +138,26 @@ namespace Code.Level
             
             if (success)
             {
+                UpdateStatisticsAfterLevel(playerTookNoHits);
+                
                 interLevelFlow.StartAction(GenerateNextLevel);
             }
             else
             {
                 interLevelFlow.StartAction(ResetCurrentLevel);
+            }
+        }
+
+        private void UpdateStatisticsAfterLevel(bool playerTookNoHits)
+        {
+            _runTracker.IsPerfect &= playerTookNoHits && _runTracker.Deaths == 0;
+            if (!_runTracker.HasSkipped)
+            {
+                int userFacingLevelIndex = _currentLevelIndex + 1;
+                _playerStats.UpdateHighestLevel(userFacingLevelIndex, _runTracker.Deaths == 0, _runTracker.IsPerfect);
+                
+                LevelLayout currentLevel = _levelProgression.LevelLayout[_currentLevelIndex];
+                CircumDebug.Log($"Level {currentLevel.name} finished\nRun stats: {_runTracker}\nPlayer stats = {_playerStats}");
             }
         }
 

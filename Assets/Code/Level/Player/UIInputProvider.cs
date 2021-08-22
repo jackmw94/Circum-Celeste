@@ -21,7 +21,13 @@ namespace Code.Level.Player
 
         public override bool GetSlingInput()
         {
-            return _uiInputElements.SlingButton.IsHeld;
+            bool isHeld = _uiInputElements.SlingButton.IsHeld;
+            
+#if UNITY_EDITOR
+            isHeld |= Input.GetKey(KeyCode.Space);
+#endif
+            
+            return isHeld;
         }
     }
 }

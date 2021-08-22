@@ -8,16 +8,19 @@ namespace Code.Core
     {
         [SerializeField] private PidProperties _pidProperties;
     
+        private float _proportionalOffset;
         private float _maxIntegralOffset;
     
         private float _integral;
         private float _lastError;
 
+        private float TotalProportionalFactor => _pidProperties.ProportionalFactor + _proportionalOffset;
         private float TotalMaxIntegral => _pidProperties.MaxIntegral + _maxIntegralOffset;
 
-        public void SetMaxIntegralOffset(float maxIntegralOffset)
+        public void SetPidOffsets(float maxIntegralOffset, float proportionalOffset)
         {
             _maxIntegralOffset = maxIntegralOffset;
+            _proportionalOffset = proportionalOffset;
         }
     
         public float GetPidDiff(float target, float current, float frameTime)
@@ -29,7 +32,7 @@ namespace Code.Core
             float derivative = (proportionalError - _lastError) / frameTime;
             _lastError = proportionalError;
 
-            return (proportionalError * _pidProperties.ProportionalFactor) + (_integral * TotalMaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
+            return (proportionalError * TotalProportionalFactor) + (_integral * TotalMaxIntegral) + (derivative * _pidProperties.DerivativeFactor);
         }
 
         public void ResetPid()

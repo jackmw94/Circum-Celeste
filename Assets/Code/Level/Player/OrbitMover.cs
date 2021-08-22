@@ -7,7 +7,8 @@ namespace Code.Level.Player
     [Serializable]
     public class OrbitMover : GravitationalMover
     {
-        private float _slingIncrease;
+        private float _slingIntegralOffset;
+        private float _slingProportionalOffset;
 
         private void Awake()
         {
@@ -20,14 +21,15 @@ namespace Code.Level.Player
 
         protected override Vector3 GetMovement(Vector3 targetPosition, Transform mover, float frameTime)
         {
-            _xPidController.SetMaxIntegralOffset(_slingIncrease);
-            _yPidController.SetMaxIntegralOffset(_slingIncrease);
+            _xPidController.SetPidOffsets(_slingIntegralOffset, _slingProportionalOffset);
+            _yPidController.SetPidOffsets(_slingIntegralOffset, _slingProportionalOffset);
             return base.GetMovement(targetPosition, mover, frameTime);
         }
         
-        public void SetSlingIncrease(float slingIncrease)
+        public void SetSlingOffsets(float integralOffset, float proportionalOffset)
         {
-            _slingIncrease = slingIncrease;
+            _slingIntegralOffset = integralOffset;
+            _slingProportionalOffset = proportionalOffset;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Code.Core;
 using Code.Level;
+using Code.Level.Player;
 using TMPro;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -11,8 +12,18 @@ namespace Code.Flow
     {
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private CanvasGroup _levelTextCanvasGroup;
+        [Space(15)]
+        [SerializeField] private TextMeshProUGUI _levelNumberText;
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _tagText;
+        [Space(15)]
+        [SerializeField] private GameObject _highestLevelRoot;
+        [SerializeField] private TextMeshProUGUI _highestLevelText;
+        [SerializeField] private GameObject _highestNoDeathsRoot;
+        [SerializeField] private TextMeshProUGUI _highestNoDeathsText;
+        [SerializeField] private GameObject _highestPerfectRoot;
+        [SerializeField] private TextMeshProUGUI _highestPerfectText;
+        [Space(15)]
         [SerializeField] private float _fadeDuration = 0.5f;
         [SerializeField] private float _startDelay = 1.5f;
         [SerializeField] private float _holdDelay = 2f;
@@ -59,9 +70,21 @@ namespace Code.Flow
             
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
 
-            LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel() : levelManager.GetCurrentLevel();
+            LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel(out int levelIndex) : levelManager.GetCurrentLevel(out levelIndex);
             _levelText.text = showLevel.name;
+            _levelNumberText.text = $"{levelIndex + 1}.";
             _tagText.text = showLevel.TagLine;
+
+            PlayerStats playerStats = levelManager.PlayerStats;
+
+            _highestLevelRoot.SetActive(playerStats.HighestLevel > 0);
+            _highestLevelText.text = playerStats.HighestLevel.ToString();
+
+            _highestNoDeathsRoot.SetActive(playerStats.HighestLevelNoDeaths > 0);
+            _highestNoDeathsText.text = playerStats.HighestLevelNoDeaths.ToString();
+
+            _highestPerfectRoot.SetActive(playerStats.HighestPerfectLevel > 0);
+            _highestPerfectText.text = playerStats.HighestPerfectLevel.ToString();
             
             _levelTextCanvasGroup.interactable = true;
             _levelTextCanvasGroup.blocksRaycasts = true;

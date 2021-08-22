@@ -16,6 +16,7 @@ namespace Code.Level.Player
 
         public bool IsMoving => _mover.IsMoving;
         public bool IsDead => _health.IsDead;
+        public bool NoDamageTaken => _health.NoDamageTaken;
 
         private void Awake()
         {
@@ -25,10 +26,12 @@ namespace Code.Level.Player
             TurnInputBehavioursOffOn(false);
         }
 
-        public void Initialise(int maxHealth, InputProvider inputProvider)
+        public void Initialise(int maxHealth, InputProvider inputProvider, bool powerEnabled)
         {
             _health.SetMaximumHealth(maxHealth);
             _health.ResetHealth();
+
+            _sling.SlingEnabled = powerEnabled;
 
             _input.Initialise(inputProvider);
         }
@@ -68,7 +71,6 @@ namespace Code.Level.Player
         private void TurnInputBehavioursOffOn(bool inputIsOn)
         {
             _mover.MovementEnabled = inputIsOn;
-            _sling.SlingEnabled = inputIsOn;
         }
     }
 }

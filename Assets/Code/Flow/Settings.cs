@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using Code.Core;
+using Code.Juice;
 using Code.Level;
+using Code.Level.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +20,11 @@ namespace Code.Flow
         [Space(15)]
         [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Button _resetLevelButton;
+        [SerializeField] private Button _restartRunButton;
         [SerializeField] private Button _updateRemoteConfigButton;
+        [SerializeField] private Button _resetStatsButton;
+        [SerializeField] private Button _toggleFeedbacks;
+        [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
 
         private bool _settingsOn = false;
@@ -29,7 +35,10 @@ namespace Code.Flow
             _toggleSettingsButton.onClick.AddListener(SettingsButtonClicked);
             _nextLevelButton.onClick.AddListener(NextLevelButtonListener);
             _resetLevelButton.onClick.AddListener(ResetLevelButtonListener);
+            _restartRunButton.onClick.AddListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
+            _resetStatsButton.onClick.AddListener(ResetPlayerStats);
+            _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
 
             TurnOffInstant();
         }
@@ -39,8 +48,21 @@ namespace Code.Flow
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
             _nextLevelButton.onClick.RemoveListener(NextLevelButtonListener);
             _resetLevelButton.onClick.RemoveListener(ResetLevelButtonListener);
+            _restartRunButton.onClick.RemoveListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
+            _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
+            _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
         }
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                SkipLevel();
+            }
+        }
+#endif
 
         private void OnSettingShowing()
         {
@@ -52,13 +74,18 @@ namespace Code.Flow
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
         }
-
+        
         private void NextLevelButtonListener()
+        {
+            SkipLevel();
+            SettingsButtonClicked();
+        }
+
+        private void SkipLevel()
         {
             GameContainer gameContainer = GameContainer.Instance;
             LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.GenerateNextLevel();
-            SettingsButtonClicked();
+            levelManager.SkipLevel();
         }
 
         private void ResetLevelButtonListener()
@@ -66,6 +93,14 @@ namespace Code.Flow
             GameContainer gameContainer = GameContainer.Instance;
             LevelManager levelManager = gameContainer.LevelManager;
             levelManager.ResetCurrentLevel();
+            SettingsButtonClicked();
+        }
+
+        private void RestartRunButtonListener()
+        {
+            GameContainer gameContainer = GameContainer.Instance;
+            LevelManager levelManager = gameContainer.LevelManager;
+            levelManager.GenerateFirstLevel();
             SettingsButtonClicked();
         }
 
@@ -77,6 +112,17 @@ namespace Code.Flow
                 _updateRemoteConfigButton.interactable = true;
                 _updateRemoteConfigLabel.text = $"{UpdateRemoteConfigDefaultText} - was {(success ? "successful" : "unsuccessful")}";
             });
+        }
+
+        private void ResetPlayerStats()
+        {
+            PlayerStats.ResetSavedPlayerStats();
+        }
+
+        private void ToggleFeedbacks()
+        {
+            Feedbacks.Instance.FeedbacksActive = !Feedbacks.Instance.FeedbacksActive;
+            _toggleFeedbacksLabel.text = $"Toggle Feedbacks ({(Feedbacks.Instance.FeedbacksActive ? "on" : "off")})";
         }
 
         private void TurnSettingsOnOff(bool on)

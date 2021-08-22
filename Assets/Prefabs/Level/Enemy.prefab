@@ -111,6 +111,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _yeetScale: 0.4
   _yeetInertia: 0.96
+  _markAsYeetedForDuration: 0.5
 --- !u!1 &6871356730795427911
 GameObject:
   m_ObjectHideFlags: 0
