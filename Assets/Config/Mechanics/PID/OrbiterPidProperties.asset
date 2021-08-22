@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: OrbiterPidProperties
   m_EditorClassIdentifier: 
   _proportionalFactor: 0.01
-  _maxIntegral: 0.3
+  _maxIntegral: 0.4
   _derivativeFactor: 0
