@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cd259f4ecb486299a54a6cb2fc6c9c, type: 3}
   m_Name: LevelFlow
   m_EditorClassIdentifier: 
-  _levelLayout:
+  _tutorialLevels:
   - {fileID: 11400000, guid: 0dd43dddbaad8ed4f83a786aa7c0eb98, type: 2}
-  - {fileID: 11400000, guid: bf6460a7de1b0404bba5b139f853c4e9, type: 2}
+  - {fileID: 11400000, guid: c795ff3fcdf145046af083e51cf27854, type: 2}
+  _levelLayout:
   - {fileID: 11400000, guid: 8745820162e3c8d45aa783899958e2d7, type: 2}
   - {fileID: 11400000, guid: 426a3ae3f1ede664a9b79fffb4e236f8, type: 2}
   - {fileID: 11400000, guid: 49c7229473db2b84e86b773b6be2fd4b, type: 2}
   - {fileID: 11400000, guid: b06478f3eb99b0f4a81253817435a2f6, type: 2}
   - {fileID: 11400000, guid: a12efd94e4c44fd499d379c8e1d1f317, type: 2}
-  - {fileID: 11400000, guid: 369b65d1b7714944d8930852d903bf15, type: 2}
   - {fileID: 11400000, guid: 05fdd283414bbc144815bb3f886870ff, type: 2}
+  - {fileID: 11400000, guid: 369b65d1b7714944d8930852d903bf15, type: 2}
   - {fileID: 11400000, guid: 5e23a8f651e9e8f4cbed777dd7a59c4b, type: 2}
   - {fileID: 11400000, guid: 74ad04bee2f518547a315748631534d1, type: 2}
   - {fileID: 11400000, guid: 7b6341a46d0419947b3b1503af75b658, type: 2}
@@ -30,4 +31,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fbef1d525cd7ee42adb36671a6707d2, type: 2}
   - {fileID: 11400000, guid: 808f35871db952543be295a0139346ca, type: 2}
   - {fileID: 11400000, guid: c31fd8885c9c94e449a73d3905431bd7, type: 2}
+  - {fileID: 11400000, guid: 377c9e6035f8c5e41baf5f366ee9a4e5, type: 2}
+  - {fileID: 11400000, guid: 752d51f4a5c667e449eb72df09ab5d5e, type: 2}
   - {fileID: 11400000, guid: 9df4229a9c951724bb2be302a0ea06b2, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e4ad87d46540b39d889534a80c2bc3, type: 3}
   m_Name: Moving The Heavens
   m_EditorClassIdentifier: 
-  _escapeCriteria: 0
+  _escapeCriteria: 2
   _escapeTimer: 1
   _tagLine: 
   _orbiterEnabled: 0

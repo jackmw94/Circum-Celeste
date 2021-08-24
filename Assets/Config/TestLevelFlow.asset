@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: TestLevelFlow
   m_EditorClassIdentifier: 
   _levelLayout:
+  - {fileID: 11400000, guid: 377c9e6035f8c5e41baf5f366ee9a4e5, type: 2}
+  - {fileID: 11400000, guid: 752d51f4a5c667e449eb72df09ab5d5e, type: 2}
   - {fileID: 11400000, guid: 778d24f08f787094c8a8d51eec67342d, type: 2}
