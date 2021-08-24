@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 namespace Code.Behaviours
 {
-    public class PulseButton : MonoBehaviour
+    public class PulseColour : MonoBehaviour
     {
-        [SerializeField] private Image _image;
+        [SerializeField] private Colourable _colourable;
         [SerializeField] private Button _button;
         [Space(15)] 
         [SerializeField] private float _frequency;
-        [SerializeField] private Color _pulsedColour;
+        [SerializeField, ColorUsage(true, true)] private Color _pulsedColour;
 
         private bool _pulsing = false;
         private Color _defaultColor;
@@ -18,7 +18,7 @@ namespace Code.Behaviours
         private void Awake()
         {
             _button.onClick.AddListener(ButtonStopPulsing);
-            _defaultColor = _image.color;
+            _defaultColor = _colourable.GetColour();
         }
 
         private void OnDestroy()
@@ -36,7 +36,7 @@ namespace Code.Behaviours
             else if (!pulsing)
             {
                 // if we're turning pulsing off
-                _image.color = _defaultColor;
+                _colourable.SetColour(_defaultColor);
             }
 
             _pulsing = pulsing;
@@ -55,7 +55,7 @@ namespace Code.Behaviours
             float sinVal = Mathf.Sin(pulseTime * _frequency - Mathf.PI / 2f);
             float lerpVal = sinVal / 2f + 0.5f;
             Color colour = Color.Lerp(_defaultColor, _pulsedColour, lerpVal);
-            _image.color = colour;
+            _colourable.SetColour(colour);
         }
     }
 }
