@@ -36,19 +36,19 @@ namespace Code.Core
     
         private void OnTriggerEnter(Collider other)
         {
-            if (IsDead || IsInvulnerable)
-            {
-                return;
-            }
-                
             if (DoesObjectDamageUs(other.gameObject))
             {
                 HitTaken();
             }
         }
     
-        private void HitTaken()
+        public void HitTaken()
         {
+            if (IsDead || IsInvulnerable)
+            {
+                return;
+            }
+            
             _currentHealth--;
 
             if (IsDead)

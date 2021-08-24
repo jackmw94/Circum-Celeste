@@ -13,6 +13,7 @@ namespace Code.Level
         [SerializeField] private GameObject _pickupPrefab;
         [SerializeField] private GameObject _followerEnemyPrefab;
         [SerializeField] private GameObject _escapePrefab;
+        [SerializeField] private GameObject _hazardPrefab;
         [SerializeField] private Transform _cellsRoot;
         
         public LevelInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
@@ -26,6 +27,7 @@ namespace Code.Level
             List<GameObject> pickupObjects = GenerateCells(level, CellType.Pickup, _pickupPrefab);
             List<GameObject> followerEnemyObjects = GenerateCells(level, CellType.Enemy, _followerEnemyPrefab);
             List<GameObject> escapeObjects = GenerateCells(level, CellType.Escape, _escapePrefab);
+            List<GameObject> hazardObjects = GenerateCells(level, CellType.Hazard, _hazardPrefab);
             
             // Create and initialise players
             List<Player.Player> allPlayers = GeneratePlayers(level, playersInputs);

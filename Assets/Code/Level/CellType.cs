@@ -8,5 +8,6 @@
         Enemy,
         Escape,
         PlayerStart,
+        Hazard,
     }
 }

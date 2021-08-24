@@ -16,6 +16,7 @@ namespace Code.Core
         private const float DefaultOrbiterI = 0.3f;
         private const float DefaultOrbiterP = 0.01f;
         private const float DefaultPickupColliderSize = 0.35f;
+        private const float DefaultHazardColliderSize = 0.35f;
         private const float DefaultPlayerSpeed = 5f;
         private const float DefaultSlingIntegralOffset = 0.7f;
         private const float DefaultSlingProportionalOffset = -0.2f;
@@ -36,6 +37,7 @@ namespace Code.Core
         public static float OrbiterI = DefaultOrbiterI;
         public static float OrbiterP = DefaultOrbiterP;
         public static float PickupColliderSize = DefaultPickupColliderSize;
+        public static float HazardColliderSize = DefaultHazardColliderSize;
         public static float PlayerSpeed = DefaultPlayerSpeed;
         public static float SlingIntegralOffset = DefaultSlingIntegralOffset;
         public static float SlingProportionalOffset = DefaultSlingProportionalOffset;
@@ -85,6 +87,7 @@ namespace Code.Core
             OrbiterI = ConfigManager.appConfig.GetFloat(nameof(OrbiterI), DefaultOrbiterI);
             OrbiterP = ConfigManager.appConfig.GetFloat(nameof(OrbiterP), DefaultOrbiterP);
             PickupColliderSize = ConfigManager.appConfig.GetFloat(nameof(PickupColliderSize), DefaultPickupColliderSize);
+            HazardColliderSize = ConfigManager.appConfig.GetFloat(nameof(HazardColliderSize), DefaultHazardColliderSize);
             PlayerSpeed = ConfigManager.appConfig.GetFloat(nameof(PlayerSpeed), DefaultPlayerSpeed);
             SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
             SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
@@ -99,6 +102,7 @@ namespace Code.Core
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterI)),$"There is no app config property for {nameof(OrbiterI)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterP)),$"There is no app config property for {nameof(OrbiterP)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PickupColliderSize)),$"There is no app config property for {nameof(PickupColliderSize)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(HazardColliderSize)),$"There is no app config property for {nameof(HazardColliderSize)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PlayerSpeed)),$"There is no app config property for {nameof(PlayerSpeed)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingIntegralOffset)),$"There is no app config property for {nameof(SlingIntegralOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
@@ -113,6 +117,7 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterI)), OrbiterI);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), OrbiterP);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), PickupColliderSize);
+            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(HazardColliderSize)), HazardColliderSize);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), PlayerSpeed);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), SlingIntegralOffset);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), SlingProportionalOffset);
@@ -127,6 +132,7 @@ namespace Code.Core
             OrbiterI = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterI)), DefaultOrbiterI);
             OrbiterP = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), DefaultOrbiterP);
             PickupColliderSize = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), DefaultPickupColliderSize);
+            HazardColliderSize = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(HazardColliderSize)), DefaultHazardColliderSize);
             PlayerSpeed = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), DefaultPlayerSpeed);
             SlingIntegralOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), DefaultSlingIntegralOffset);
             SlingProportionalOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), DefaultSlingIntegralOffset);
