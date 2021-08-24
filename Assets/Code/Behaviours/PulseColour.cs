@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Code.Behaviours
 {
-    public class PulseColour : MonoBehaviour
+    public class PulseColour : MonoBehaviour, IBeginDragHandler
     {
         [SerializeField] private Colourable _colourable;
         [SerializeField] private Button _button;
@@ -43,6 +44,8 @@ namespace Code.Behaviours
         }
 
         private void ButtonStopPulsing() => StartStopPulse(false);
+
+        public void OnBeginDrag(PointerEventData eventData) => ButtonStopPulsing();
 
         private void Update()
         {
