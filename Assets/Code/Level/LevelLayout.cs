@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.Core;
+using Code.Debugging;
 using UnityEngine;
 
 namespace Code.Level
@@ -68,6 +69,13 @@ namespace Code.Level
         private void ResetLevelData()
         {
             _cells = new CellType[0];
+        }
+
+        public void Validate()
+        {
+            CircumDebug.Assert(GetCellTypeCoordinates(CellType.Escape).Count > 0, $"There are no escapes in level {name}");
+            CircumDebug.Assert(GetCellTypeCoordinates(CellType.PlayerStart).Count > 0, $"There is no player start point in level {name}");
+            CircumDebug.Assert(GetCellTypeCoordinates(CellType.PlayerStart).Count < 2, $"There are multiple player start points in level {name}");
         }
     }
 }

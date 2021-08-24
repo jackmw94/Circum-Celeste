@@ -1,9 +1,11 @@
 ﻿#if UNITY_EDITOR
 
-using Code.Level;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using UnityExtras.Code.Core;
 
 namespace Code.Debugging
 {
@@ -13,16 +15,8 @@ namespace Code.Debugging
 
         public void OnPreprocessBuild(BuildReport report)
         {
-            LevelManager levelManager = Object.FindObjectOfType<LevelManager>();
-            if (!levelManager)
-            {
-                Debug.LogWarning("There is no level manager in scene! I hope you know what you're doing");
-                return;
-            }
-
-            LevelManager.InputType[] playerInputs = levelManager.PlayersInputs;
-            Debug.Assert(playerInputs.Length == 1 && playerInputs[0] == LevelManager.InputType.UI, 
-                $"We're not building with expected player inputs! There are {playerInputs.Length}{(playerInputs.Length > 0 ? $" and the first is {playerInputs[0]}" : "")}");
+            IEnumerable<IValidateable> validateables = Object.FindObjectsOfType<MonoBehaviour>().OfType<IValidateable>();
+            validateables.ApplyFunction(v => v.Validate());
         }
     }
 }

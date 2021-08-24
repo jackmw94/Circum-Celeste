@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
@@ -8,5 +9,10 @@ namespace Code.Level
         [SerializeField] private LevelLayout[] _levelLayout;
         
         public LevelLayout[] LevelLayout => _levelLayout;
+
+        public void Validate()
+        {
+            _levelLayout.ApplyFunction(p => p.Validate());
+        }
     }
 }
