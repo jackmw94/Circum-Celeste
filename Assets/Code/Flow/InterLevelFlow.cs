@@ -31,6 +31,8 @@ namespace Code.Flow
         public bool ShowOverlayInstant { get; set; }
         public bool ShowNextLevelName { get; set; }
         public bool PreventHidingOverlay { get; set; } = false;
+
+        public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         
         protected override IEnumerator ActionStarted()
         {

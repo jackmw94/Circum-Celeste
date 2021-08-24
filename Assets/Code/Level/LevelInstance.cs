@@ -49,14 +49,23 @@ namespace Code.Level
 
         public void LevelReady()
         {
+            CircumDebug.Log("Level ready");
             _players.ApplyFunction(p => p.LevelReady());
 
+            HandleUIIntroductions();
+        }
+
+        private void HandleUIIntroductions()
+        {
             // todo: put this in an area of code less tied to game logic + handle edge cases like never clicking the button
+            UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
             switch (_introduceElement)
             {
                 case IntroduceElement.PowerButton:
-                    UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
-                    movementUi.PulseButton.StartStopPulse(true);
+                    movementUi.PulsePowerButton.StartStopPulse(true);
+                    break;
+                case IntroduceElement.MovementHandle:
+                    movementUi.PulseMoverHandle.StartStopPulse(true);
                     break;
             }
         }
@@ -164,6 +173,7 @@ namespace Code.Level
         private void ShowEscape()
         {
             CircumDebug.Log("Showing escapes");
+            _escapeShown = true;
             _escapes.ApplyFunction(p => p.gameObject.SetActive(true));
         }
 

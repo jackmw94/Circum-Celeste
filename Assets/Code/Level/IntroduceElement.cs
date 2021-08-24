@@ -3,6 +3,7 @@
     public enum IntroduceElement
     {
         None,
-        PowerButton
+        PowerButton,
+        MovementHandle,
     }
 }

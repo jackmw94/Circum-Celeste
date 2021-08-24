@@ -11,7 +11,7 @@ namespace Code.Level
 {
     public class LevelManager : MonoBehaviour, IValidateable
     {
-        public enum InputType
+        private enum InputType
         {
             Keyboard,
             Mouse,
@@ -31,14 +31,14 @@ namespace Code.Level
         private PlayerStats _playerStats;
 
         private int NextLevelIndex => (_currentLevelIndex + 1) % _levelProgression.LevelLayout.Length;
-        public InputType[] PlayersInputs => _playersInputs;
+        
         public PlayerStats PlayerStats => _playerStats;
         
         public LevelInstance CurrentLevel { get; private set; }
 
         private void Awake()
         {
-            CircumDebug.Assert(PlayersInputs.Length > 0, "There are no users for this level, probably not what we want..");
+            CircumDebug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             
             _playerStats = PlayerStats.Load();
             
@@ -114,7 +114,7 @@ namespace Code.Level
 
         private LevelInstance GenerateLevel(LevelLayout levelLayout)
         {
-            InputProvider[] userInputProviders = PlayersInputs.Select(CreateInputProvider).ToArray();
+            InputProvider[] userInputProviders = _playersInputs.Select(CreateInputProvider).ToArray();
             LevelInstance levelInstance = _levelGenerator.GenerateLevel(userInputProviders, levelLayout);
 
             return levelInstance;
@@ -122,6 +122,7 @@ namespace Code.Level
 
         private IEnumerator StartLevelOncePlayerMoved(LevelInstance level)
         {
+            yield return new WaitUntil(() => !FlowContainer.Instance.InterLevelFlow.IsOverlaid);
             level.LevelReady();
             yield return new WaitUntil(() => level.PlayerIsMoving);
 

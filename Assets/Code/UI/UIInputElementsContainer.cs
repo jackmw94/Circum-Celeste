@@ -6,11 +6,15 @@ namespace Code.UI
     public class UIInputElementsContainer : MonoBehaviour
     {
         [SerializeField] private MoverHandle _moverHandle;
-        [SerializeField] private MomentaryButton _slingButton;
-        [SerializeField] private PulseButton _pulseButton;
+        [SerializeField] private PulseColour _pulseMoverHandle;
+        
+        [SerializeField] private MomentaryButton _powerButton;
+        [SerializeField] private PulseColour _pulsePowerButton;
 
         public MoverHandle MoverHandle => _moverHandle;
-        public MomentaryButton SlingButton => _slingButton;
-        public PulseButton PulseButton => _pulseButton;
+        public PulseColour PulseMoverHandle => _pulseMoverHandle;
+        
+        public MomentaryButton PowerButton => _powerButton;
+        public PulseColour PulsePowerButton => _pulsePowerButton;
     }
 }

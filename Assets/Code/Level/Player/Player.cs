@@ -9,6 +9,7 @@ namespace Code.Level.Player
     {
         private const float InvulnerableDurationAtLevelStart = 1.5f;
 
+        [SerializeField] private GameObject _orbiter;
         [SerializeField] private PlayerHealth _health;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private PlayerMover _mover;
@@ -26,12 +27,13 @@ namespace Code.Level.Player
             TurnInputBehavioursOffOn(false);
         }
 
-        public void Initialise(int maxHealth, InputProvider inputProvider, bool powerEnabled)
+        public void Initialise(int maxHealth, InputProvider inputProvider, bool orbiterEnabled, bool powerEnabled)
         {
             _health.SetMaximumHealth(maxHealth);
             _health.ResetHealth();
 
             _sling.SlingEnabled = powerEnabled;
+            _orbiter.SetActive(orbiterEnabled);
 
             _input.Initialise(inputProvider);
         }
