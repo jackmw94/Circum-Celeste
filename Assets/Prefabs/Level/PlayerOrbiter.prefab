@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6384775745932153090}
   - component: {fileID: 6384775745932153095}
   - component: {fileID: 4761992637811591851}
+  - component: {fileID: 1961697690167233048}
   m_Layer: 7
   m_Name: Orbiter
   m_TagString: Untagged
@@ -146,6 +147,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
+--- !u!114 &1961697690167233048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775745932153144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4606b6499240b287beb481e23f0cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerHealth: {fileID: 6384775747270266375}
 --- !u!1 &6384775747002654524
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,11 +207,11 @@ GameObject:
   - component: {fileID: 6384775747270266426}
   - component: {fileID: 6384775747270266425}
   - component: {fileID: 6384775747270266424}
-  - component: {fileID: 6384775747270266431}
   - component: {fileID: 6384775747270266375}
   - component: {fileID: 6384775747270266374}
   - component: {fileID: 1647022148288233393}
   - component: {fileID: 8219585338611663803}
+  - component: {fileID: 4657203298447811017}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -291,7 +305,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6384775747270266416}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -325,24 +339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc2de6a02c7419c8d9c3ae1350fe169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _integralIncrease: 1.4
+  _integralOffset: 0.7
+  _proportionalOffset: -0.2
   _warmUpTime: 0.1
   _warmDownTime: 0.5
   _playerInput: {fileID: 6384775747270266374}
   _orbitMover: {fileID: 6384775745932153091}
---- !u!65 &6384775747270266431
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384775747270266416}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6384775747270266375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +397,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09143f38ccd945d280aaf3328c1f69a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orbiter: {fileID: 6384775745932153144}
   _health: {fileID: 6384775747270266375}
   _input: {fileID: 6384775747270266374}
   _mover: {fileID: 6384775747270266427}
   _sling: {fileID: 6384775747270266424}
+--- !u!136 &4657203298447811017
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775747270266416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.50000024
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940699}
