@@ -72,9 +72,13 @@ namespace Code.Flow
             
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
 
-            LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel(out int levelIndex) : levelManager.GetCurrentLevel(out levelIndex);
+            LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel() : levelManager.GetCurrentLevel();
             _levelText.text = showLevel.name;
-            _levelNumberText.text = $"{levelIndex + 1}.";
+            
+            int levelIndex = showLevel.LevelNumber;
+            _levelNumberText.text = $"{levelIndex}.";
+            _levelNumberText.enabled = levelIndex > 0;
+            
             _tagText.text = showLevel.TagLine;
 
             PlayerStats playerStats = levelManager.PlayerStats;

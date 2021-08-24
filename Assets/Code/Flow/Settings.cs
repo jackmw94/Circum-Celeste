@@ -78,7 +78,7 @@ namespace Code.Flow
         private void NextLevelButtonListener()
         {
             SkipLevel();
-            SettingsButtonClicked();
+            //SettingsButtonClicked();
         }
 
         private void SkipLevel()
@@ -100,7 +100,7 @@ namespace Code.Flow
         {
             GameContainer gameContainer = GameContainer.Instance;
             LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.GenerateFirstLevel();
+            levelManager.ResetRun();
             SettingsButtonClicked();
         }
 
