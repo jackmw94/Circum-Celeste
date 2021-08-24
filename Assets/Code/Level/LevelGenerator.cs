@@ -14,8 +14,11 @@ namespace Code.Level
         [SerializeField] private GameObject _followerEnemyPrefab;
         [SerializeField] private GameObject _escapePrefab;
         [SerializeField] private GameObject _hazardPrefab;
+        [Space(15)]
         [SerializeField] private Transform _cellsRoot;
-        
+        [Space(15)]
+        [SerializeField] private GameObject _exampleOrbiter;
+
         public LevelInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
         {
             // Clean up any previous level
@@ -28,6 +31,8 @@ namespace Code.Level
             List<GameObject> followerEnemyObjects = GenerateCells(level, CellType.Enemy, _followerEnemyPrefab);
             List<GameObject> escapeObjects = GenerateCells(level, CellType.Escape, _escapePrefab);
             List<GameObject> hazardObjects = GenerateCells(level, CellType.Hazard, _hazardPrefab);
+            
+            _exampleOrbiter.SetActive(level.ExampleOrbiterEnabled);
             
             // Create and initialise players
             List<Player.Player> allPlayers = GeneratePlayers(level, playersInputs);

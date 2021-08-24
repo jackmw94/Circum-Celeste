@@ -9,17 +9,19 @@ using UnityExtras.Code.Core;
 [CanEditMultipleObjects]
 public class LevelLayoutEditor : Editor
 {
-    private const string LevelCellEmptyTexturePath = "Assets/Editor/Textures/LevelCellEmpty.png";
-    private const string LevelCellWallTexturePath = "Assets/Editor/Textures/LevelCellWall.png";
-    private const string LevelCellPickupPointTexturePath = "Assets/Editor/Textures/LevelCellPickupPoint.png";
-    private const string LevelCellEnemyTexturePath = "Assets/Editor/Textures/LevelCellEnemy.png";
-    private const string LevelCellEscapeTexturePath = "Assets/Editor/Textures/LevelCellEscape.png";
-    private const string LevelCellPlayerStartTexturePath = "Assets/Editor/Textures/LevelCellPlayerStart.png";
+    private const string LevelCellEmptyTexturePath = "Assets/Editor/Textures/LevelCellEmpty.jpg";
+    private const string LevelCellWallTexturePath = "Assets/Editor/Textures/LevelCellWall.jpg";
+    private const string LevelCellPickupPointTexturePath = "Assets/Editor/Textures/LevelCellPickupPoint.jpg";
+    private const string LevelCellEnemyTexturePath = "Assets/Editor/Textures/LevelCellEnemy.jpg";
+    private const string LevelCellEscapeTexturePath = "Assets/Editor/Textures/LevelCellEscape.jpg";
+    private const string LevelCellPlayerStartTexturePath = "Assets/Editor/Textures/LevelCellPlayerStart.jpg";
+    private const string LevelCellHazardTexturePath = "Assets/Editor/Textures/LevelCellHazard.jpg";
 
     private SerializedProperty _escapeCriteria;
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLine;
     private SerializedProperty _introduceElement;
+    private SerializedProperty _exampleOrbiterEnabled;
     private SerializedProperty _orbiterEnabled;
     private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
@@ -31,7 +33,8 @@ public class LevelLayoutEditor : Editor
     private Texture _levelCellEnemyTexture;
     private Texture _levelCellEscapeTexture;
     private Texture _levelCellPlayerStartTexture;
-
+    private Texture _levelCellHazardTexture;
+    
     private void OnEnable()
     {
         _gridSize = serializedObject.FindProperty(nameof(_gridSize));
@@ -42,6 +45,7 @@ public class LevelLayoutEditor : Editor
         
         _tagLine = serializedObject.FindProperty(nameof(_tagLine));
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
+        _exampleOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleOrbiterEnabled));
         _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
         _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
@@ -53,6 +57,7 @@ public class LevelLayoutEditor : Editor
         _levelCellEnemyTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellEnemyTexturePath);
         _levelCellEscapeTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellEscapeTexturePath);
         _levelCellPlayerStartTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellPlayerStartTexturePath);
+        _levelCellHazardTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellHazardTexturePath);
     }
     
     public override void OnInspectorGUI()
@@ -62,6 +67,7 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_tagLine);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_introduceElement);
+        EditorGUILayout.PropertyField(_exampleOrbiterEnabled);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_powerEnabled);
@@ -97,6 +103,8 @@ public class LevelLayoutEditor : Editor
     {
         EditorGUILayout.BeginVertical();
         int cellIndex = 0;
+        int gridCellDimension = Mathf.FloorToInt(0.9f * EditorGUIUtility.currentViewWidth / _gridSize.intValue);
+        
         for (int y = 0; y < _gridSize.intValue; y++)
         {
             EditorGUILayout.BeginHorizontal();
@@ -106,7 +114,7 @@ public class LevelLayoutEditor : Editor
                 
                 CellType cellState = (CellType)cellProperty.intValue;
                 Texture cellTexture = GetTextureFromCellState(cellState);
-                bool toggle = GUILayout.Button(new GUIContent(cellTexture));
+                bool toggle = GUILayout.Button(new GUIContent(cellTexture), GUILayout.Width(gridCellDimension), GUILayout.Height(gridCellDimension));
 
                 if (toggle)
                 {
@@ -138,6 +146,7 @@ public class LevelLayoutEditor : Editor
             case CellType.Enemy: return _levelCellEnemyTexture;
             case CellType.Escape: return _levelCellEscapeTexture;
             case CellType.PlayerStart: return _levelCellPlayerStartTexture;
+            case CellType.Hazard: return _levelCellHazardTexture;
         }
 
         throw new UnexpectedValuesException($"Could not get texture for cell type {cellType}");
