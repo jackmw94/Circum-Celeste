@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityExtras.Code.Core;
-using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.VFX
 {
-    public class PostProcessingFeedback : SingletonMonoBehaviour<PostProcessingFeedback>
+    public class VignetteFeedback : MonoBehaviour
     {
         [SerializeField] private Volume _volume;
         [SerializeField] private AnimationCurve _animationCurve;
@@ -23,7 +22,7 @@ namespace Code.VFX
             CircumDebug.Assert(vignetteFound, $"Could not find a vignette override on post processing ({gameObject})");
         }
 
-        public void TriggerDamageFeedback()
+        public void TriggerVignette()
         {
             if (_vignetteCoroutine != null)
             {

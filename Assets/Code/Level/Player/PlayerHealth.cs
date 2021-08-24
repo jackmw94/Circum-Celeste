@@ -1,4 +1,5 @@
 ﻿using Code.Core;
+using Code.Juice;
 using Code.VFX;
 using UnityEngine;
 
@@ -14,9 +15,8 @@ namespace Code.Level.Player
             
             HealthUI healthUI = gameContainer.HealthUI;
             healthUI.UpdateHealthBar(0, HealthFraction);
-
-            PostProcessingFeedback postProcessingFeedback = gameContainer.PostProcessingFeedback;
-            postProcessingFeedback.TriggerDamageFeedback();
+            
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.PlayerDamaged);
         }
 
         protected override void OnHealthReset()

@@ -10,7 +10,7 @@ namespace Code.VFX
         
         private VisualEffect _particlesInstance;
 
-        private void Awake()
+        private void OnEnable()
         {
             GameObject particlesObj = Instantiate(_particlesPrefab, Vector3.zero, Quaternion.identity);
             _particlesInstance = particlesObj.GetComponent<VisualEffect>();
@@ -21,7 +21,7 @@ namespace Code.VFX
             _particlesInstance.SetVector3(_positionProperty, transform.position);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_particlesInstance)
             {

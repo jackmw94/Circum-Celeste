@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Code.Core;
 using Code.Debugging;
+using Code.VFX;
 using Unity.RemoteConfig;
 using UnityEngine;
 using UnityExtras.Code.Optional.Singletons;
@@ -16,7 +17,7 @@ namespace Code.Juice
             HitEnemy,
             CollectedPickup,
             CompletedLevel,
-            PlayerDamaged
+            PlayerDamaged,
         }
 
         [Serializable]
@@ -26,16 +27,19 @@ namespace Code.Juice
             [SerializeField, Range(0f, 1f)] private float _screenShakeAmount;
             [SerializeField] private float _vibrationDuration;
             [SerializeField] private TimeControl.TimeControlFeedback _timeControlFeedback;
+            [SerializeField] private bool _triggerVignette;
             
             public FeedbackType FeedbackType => _feedbackType;
             public float ScreenShakeAmount => _screenShakeAmount;
             public float VibrationDuration => _vibrationDuration;
             public TimeControl.TimeControlFeedback TimeControlFeedback => _timeControlFeedback;
+            public bool TriggerVignette => _triggerVignette;
         }
         
         [SerializeField] private Vibration _vibration;
         [SerializeField] private TimeControl _timeControl;
         [SerializeField] private ScreenShake _screenShake;
+        [SerializeField] private VignetteFeedback _vignetteFeedback;
         [Space(15)]
         [SerializeField] private FeedbackSetting[] _feedbackSettings;
 
@@ -79,6 +83,10 @@ namespace Code.Juice
             _vibration.AddVibration(feedbackSetting.VibrationDuration);
             _screenShake.AddShake(feedbackSetting.ScreenShakeAmount);
             _timeControl.AddTimeState(feedbackSetting.TimeControlFeedback);
+            if (feedbackSetting.TriggerVignette)
+            {
+                _vignetteFeedback.TriggerVignette();
+            }
         }
 
         private void SetFeedbacksFromRemoteConfig()
@@ -119,5 +127,9 @@ namespace Code.Juice
             CircumDebug.Log(sb.ToString());
         }
 
+        private void SetFeedbacksOnRemoteConfig()
+        {
+            
+        }
     }
 }

@@ -5,6 +5,7 @@
         None,
         PickupCollected,
         PlayerDied,
-        PlayerEscaped
+        PlayerEscaped,
+        HazardHit
     }
 }

@@ -41,6 +41,8 @@ namespace Code.Level
             _enemies = enemies;
             _escapes = escapes;
             
+            GameContainer.Instance.TimerUI.ResetTimer();
+
             _escapes.ApplyFunction(InitialiseEscape);
 
             _isStarted = false;
@@ -51,6 +53,9 @@ namespace Code.Level
         {
             CircumDebug.Log("Level ready");
             _players.ApplyFunction(p => p.LevelReady());
+            
+            // assuming this will always count up, therefore reset == hidden
+            GameContainer.Instance.TimerUI.ResetTimer();
 
             HandleUIIntroductions();
         }
@@ -74,6 +79,11 @@ namespace Code.Level
         {
             _isStarted = true;
             _startTime = Time.time;
+
+            if (_escapeCriteria == EscapeCriteria.Timed)
+            {
+                GameContainer.Instance.TimerUI.StartTimer(_escapeDuration);
+            }
 
             _players.ApplyFunction(p => p.LevelStarted());
             _enemies.ApplyFunction(p => p.LevelStarted());
