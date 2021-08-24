@@ -3,6 +3,7 @@ using Code.Core;
 using Code.Level;
 using UnityEditor;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 [CustomEditor(typeof(LevelLayout))]
 [CanEditMultipleObjects]
@@ -19,6 +20,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLine;
     private SerializedProperty _introduceElement;
+    private SerializedProperty _orbiterEnabled;
     private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
@@ -41,6 +43,7 @@ public class LevelLayoutEditor : Editor
         _tagLine = serializedObject.FindProperty(nameof(_tagLine));
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
         _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
+        _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
         TryResizeArray();
 
@@ -60,6 +63,7 @@ public class LevelLayoutEditor : Editor
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_introduceElement);
         GUILayout.Space(15);
+        EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_powerEnabled);
         GUILayout.Space(15);
         HandleEscapeCriteriaProperty();
@@ -106,7 +110,14 @@ public class LevelLayoutEditor : Editor
 
                 if (toggle)
                 {
-                    cellProperty.intValue = (int)GetNextCellType(cellState);
+                    if (Event.current.button == 1)
+                    {
+                        cellProperty.intValue = (int) GetOffsetCellType(cellState, -1);
+                    }
+                    else
+                    {
+                        cellProperty.intValue = (int) GetOffsetCellType(cellState);
+                    }
                 }
 
                 cellIndex++;
@@ -132,12 +143,13 @@ public class LevelLayoutEditor : Editor
         throw new UnexpectedValuesException($"Could not get texture for cell type {cellType}");
     }
 
-    private CellType GetNextCellType(CellType current)
+    private CellType GetOffsetCellType(CellType current, int offset = 1)
     {
         int currentInt = (int)current;
-        int incrementedInt = currentInt + 1;
+        int offsetInt = currentInt + offset;
         int numCellTypes = Enum.GetNames(typeof(CellType)).Length;
-        return incrementedInt >= numCellTypes ? (CellType)0 : (CellType)incrementedInt;
+
+        return (CellType)Utilities.Mod(offsetInt, numCellTypes);
     }
 
     private void TryResizeArray()
