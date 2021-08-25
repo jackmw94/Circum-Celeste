@@ -1135,7 +1135,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188961536
 MonoBehaviour:
@@ -1493,7 +1493,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243879037
 MonoBehaviour:
@@ -2209,15 +2209,15 @@ MonoBehaviour:
   _vignetteFeedback: {fileID: 318052453}
   _feedbackSettings:
   - _feedbackType: 0
-    _screenShakeAmount: 0.5
+    _screenShakeAmount: 0.4
     _vibrationDuration: 0.05
     _timeControlFeedback:
-      _enabled: 1
+      _enabled: 0
       _duration: 0.02
       _timeScale: 0.05
     _triggerVignette: 0
   - _feedbackType: 1
-    _screenShakeAmount: 0.2
+    _screenShakeAmount: 0.1
     _vibrationDuration: 0.02
     _timeControlFeedback:
       _enabled: 0
@@ -2225,7 +2225,7 @@ MonoBehaviour:
       _timeScale: 0
     _triggerVignette: 0
   - _feedbackType: 2
-    _screenShakeAmount: 0.8
+    _screenShakeAmount: 0.7
     _vibrationDuration: 0.15
     _timeControlFeedback:
       _enabled: 0
@@ -2233,7 +2233,7 @@ MonoBehaviour:
       _timeScale: 0.05
     _triggerVignette: 0
   - _feedbackType: 3
-    _screenShakeAmount: 0.2
+    _screenShakeAmount: 0.15
     _vibrationDuration: 0.05
     _timeControlFeedback:
       _enabled: 0
@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.05
+  m_fontSize: 32.2
   m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4707,7 +4707,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836695403
 MonoBehaviour:
@@ -5684,7 +5684,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052814652
 MonoBehaviour:
@@ -8410,7 +8410,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619017220
 MonoBehaviour:
@@ -8651,7 +8651,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1661955981
 MonoBehaviour:
@@ -10067,10 +10067,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 1544653646}
+  _colourPropertyName: Colour
   _lerpAmount: 0.1
   _fullColourThreshold: 0.01
-  _reduceColour: {r: 0.99607843, g: 0.42745095, b: 0.4558244, a: 1}
-  _increaseColour: {r: 0, g: 1, b: 0.45477772, a: 1}
+  _reduceColour: {r: 2, g: 0, b: 0.039531708, a: 1}
+  _increaseColour: {r: 0, g: 2, b: 0.5346165, a: 1}
 --- !u!1 &2032907701
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,16 +92,16 @@ VisualEffect:
             outWeight: 0
           - serializedVersion: 3
             time: 0.037098277
-            value: 1.812198
-            inSlope: -4.8827157
-            outSlope: -4.8827157
+            value: 1.4805284
+            inSlope: -4.432094
+            outSlope: -4.432094
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
-            outWeight: 0.03775874
+            outWeight: 0.03624304
           - serializedVersion: 3
             time: 1.0007576
-            value: 0.0940588
+            value: 0.076844096
             inSlope: -0.39889857
             outSlope: -0.39889857
             tangentMode: 0

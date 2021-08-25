@@ -5,16 +5,18 @@ namespace Code.Level.Player
     public class HealthUI : MonoBehaviour
     {
         [SerializeField] private MeshRenderer _meshRenderer;
+        [SerializeField] private string _colourPropertyName = "Colour";
         [Space(15)] 
         [SerializeField] private float _lerpAmount = 0.1f;
         [SerializeField] private float _fullColourThreshold = 0.1f;
-        [SerializeField] private Color _reduceColour;
-        [SerializeField] private Color _increaseColour;
+        [SerializeField, ColorUsage(true, true)] private Color _reduceColour;
+        [SerializeField, ColorUsage(true, true)] private Color _increaseColour;
 
         private Material _material;
         private float _target = 1f;
         private float _current = 1f;
-        private static readonly int ColourProperty = Shader.PropertyToID("_BaseColor");
+        private int? _colourPropertyId = null;
+        private int ColourPropertyId => _colourPropertyId ?? (_colourPropertyId = Shader.PropertyToID(_colourPropertyName)).Value;
 
         private void Awake()
         {
@@ -41,7 +43,7 @@ namespace Code.Level.Player
             float colourFraction = Mathf.InverseLerp(0f, _fullColourThreshold, Mathf.Abs(frameValueDifference));
             Color fullColour = frameValueDifference < 0 ? _reduceColour : _increaseColour;
             Color colour = Color.Lerp(Color.white, fullColour, colourFraction);
-            _material.SetColor(ColourProperty, colour);
+            _material.SetColor(ColourPropertyId, colour);
         }
 
         private void UpdateTransform()

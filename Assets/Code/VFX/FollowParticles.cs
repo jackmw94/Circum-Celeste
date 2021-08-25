@@ -7,6 +7,7 @@ namespace Code.VFX
     {
         [SerializeField] private GameObject _particlesPrefab;
         [SerializeField] private string _positionProperty;
+        [SerializeField] private Vector3 _offset = Vector3.back;
         
         private VisualEffect _particlesInstance;
 
@@ -18,7 +19,7 @@ namespace Code.VFX
 
         private void Update()
         {
-            _particlesInstance.SetVector3(_positionProperty, transform.position);
+            _particlesInstance.SetVector3(_positionProperty, transform.position + _offset);
         }
 
         private void OnDisable()

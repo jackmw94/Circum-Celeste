@@ -18,6 +18,8 @@ namespace Code.Level
         [SerializeField] private Transform _cellsRoot;
         [Space(15)]
         [SerializeField] private GameObject _exampleOrbiter;
+        [Space(15)]
+        [SerializeField] private float _wallZOffset = 1f;
 
         public LevelInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
         {
@@ -25,7 +27,7 @@ namespace Code.Level
             DestroyCells();
             
             // Create new level objects
-            GenerateCells(level, CellType.Wall, _wallPrefab);
+            GenerateCells(level, CellType.Wall, _wallPrefab, zOffset: _wallZOffset);
             
             List<GameObject> pickupObjects = GenerateCells(level, CellType.Pickup, _pickupPrefab);
             List<GameObject> followerEnemyObjects = GenerateCells(level, CellType.Enemy, _followerEnemyPrefab);
@@ -63,7 +65,7 @@ namespace Code.Level
             return allPlayers;
         }
     
-        private List<GameObject> GenerateCells(LevelLayout level, CellType cellType, GameObject prefab, int limit = -1)
+        private List<GameObject> GenerateCells(LevelLayout level, CellType cellType, GameObject prefab, int limit = -1, float zOffset = 0f)
         {
             List<Vector2Int> cellPositions = level.GetCellTypeCoordinates(cellType);
             
@@ -73,7 +75,7 @@ namespace Code.Level
                 GameObject cell = Instantiate(prefab, _cellsRoot);
                 cellInstances.Add(cell);
                 
-                LevelCellHelper.Initialise(cell.transform, cellPosition, level.GridSize);
+                LevelCellHelper.Initialise(cell.transform, cellPosition, level.GridSize, zOffset);
 
                 if (limit >= 0 && cellInstances.Count >= limit)
                 {
