@@ -1203,6 +1203,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188961534}
   m_CullTransparentMesh: 1
+--- !u!1 &205681403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205681405}
+  - component: {fileID: 205681404}
+  m_Layer: 0
+  m_Name: PlayerStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &205681404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205681403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb62fddebf4695964ea6efd890a847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &205681405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205681403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 418685313}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &221879278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1332,7 @@ GameObject:
   - component: {fileID: 236512401}
   - component: {fileID: 236512400}
   - component: {fileID: 236512399}
+  - component: {fileID: 236512402}
   m_Layer: 5
   m_Name: InterLevelUI
   m_TagString: Untagged
@@ -1360,6 +1404,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &236512402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236512398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504eabd6c07f4224bb0c84b8dbbda413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelOverlay: {fileID: 631007809}
+  _levelTextCanvasGroup: {fileID: 886780513}
+  _playerStatsManager: {fileID: 205681404}
+  _levelNumberText: {fileID: 311739622}
+  _levelText: {fileID: 520614887}
+  _tagText: {fileID: 1207407347}
+  _highestLevelRoot: {fileID: 1861746878}
+  _highestLevelText: {fileID: 1550188450}
+  _highestNoDeathsRoot: {fileID: 967063032}
+  _highestNoDeathsText: {fileID: 1289236806}
+  _highestPerfectRoot: {fileID: 1779734055}
+  _highestPerfectText: {fileID: 188882347}
+  _fadeDuration: 0.5
+  _startDelay: 1
+  _holdDelay: 3.5
 --- !u!1 &238002338
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,6 +2574,7 @@ Transform:
   - {fileID: 1406685957}
   - {fileID: 1964672067}
   - {fileID: 393186978}
+  - {fileID: 205681405}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2874,7 +2946,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.2
+  m_fontSize: 33.05
   m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7596,8 +7668,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1821550928}
+  m_Children: []
   m_Father: {fileID: 418685313}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7613,7 +7684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0355a437f74f15a19208911dc5c349, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interLevelFlow: {fileID: 1821550929}
+  _interLevelFlow: {fileID: 236512402}
 --- !u!1 &1411894920
 GameObject:
   m_ObjectHideFlags: 0
@@ -9094,63 +9165,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816342710}
   m_CullTransparentMesh: 1
---- !u!1 &1821550927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1821550928}
-  - component: {fileID: 1821550929}
-  m_Layer: 0
-  m_Name: InterLevelFlow
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1821550928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821550927}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1406685957}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1821550929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821550927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504eabd6c07f4224bb0c84b8dbbda413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelOverlay: {fileID: 631007809}
-  _levelTextCanvasGroup: {fileID: 886780513}
-  _levelNumberText: {fileID: 311739622}
-  _levelText: {fileID: 520614887}
-  _tagText: {fileID: 1207407347}
-  _highestLevelRoot: {fileID: 1861746878}
-  _highestLevelText: {fileID: 1550188450}
-  _highestNoDeathsRoot: {fileID: 967063032}
-  _highestNoDeathsText: {fileID: 1289236806}
-  _highestPerfectRoot: {fileID: 1779734055}
-  _highestPerfectText: {fileID: 188882347}
-  _fadeDuration: 0.5
-  _startDelay: 1
-  _holdDelay: 3.5
 --- !u!1 &1824183535
 GameObject:
   m_ObjectHideFlags: 0
@@ -10745,6 +10759,7 @@ MonoBehaviour:
   _hazardPrefab: {fileID: 145789428869962669, guid: 9eb7ab747d933c145b9b5d535ccea8d5, type: 3}
   _cellsRoot: {fileID: 1882281939}
   _exampleOrbiter: {fileID: 9172051211579343261}
+  _wallZOffset: 1
 --- !u!4 &2143567223
 Transform:
   m_ObjectHideFlags: 0
@@ -10780,6 +10795,7 @@ MonoBehaviour:
   _levelProvider: {fileID: 2143567225}
   _playersInputs: 03000000
   _levelGenerator: {fileID: 2143567222}
+  _playerStatsManager: {fileID: 205681404}
 --- !u!114 &2143567225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10837,6 +10853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
+  _offset: {x: 0, y: 0, z: -1}
 --- !u!114 &9172051211579343119
 MonoBehaviour:
   m_ObjectHideFlags: 0
