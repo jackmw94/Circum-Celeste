@@ -16,15 +16,14 @@ namespace Code.Level
         private int NumberOfLevels => _activeLevelProgression.LevelLayout.Length;
         private bool HasCompletedTutorials => _levelIndex >= _activeLevelProgression.TutorialLevelLayout.Length;
 
-        public void Initialise(bool hasCompletedTutorials, int lastLevelPlayed)
+        public void Initialise(bool hasCompletedTutorials, int restartLevel)
         {
             _activeLevelProgression = Application.isEditor ? _editorLevelProgression : _platformLevelProgression;
             _activeLevelProgression.Initialise();
             
             if (hasCompletedTutorials)
             {
-                int lastLevelIndex = lastLevelPlayed - 1;
-                _levelIndex = NumberOfTutorials + lastLevelIndex;
+                _levelIndex = NumberOfTutorials + restartLevel;
                 CircumDebug.Log($"Initialised level provider. Tutorials completed - set level index to {_levelIndex}");
             }
             else

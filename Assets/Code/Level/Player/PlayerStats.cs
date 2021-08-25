@@ -10,23 +10,17 @@ namespace Code.Level.Player
         private const string PlayerPrefsKey = "Circum_PlayerStats";
 
         [SerializeField] private bool _completedTutorials;
-        [SerializeField] private int _lastLevelPlayed = 0;
+        [SerializeField] private RunTracker _runTracker = null;
         [SerializeField] private int _highestLevelReached = 0;
         [SerializeField] private int _highestNoDeathLevelReached = 0;
         [SerializeField] private int _highestPerfectLevelReached = 0;
 
+        public RunTracker RunTracker => _runTracker;
         public bool CompletedTutorials => _completedTutorials;
-        public int LastLevelPlayed => _lastLevelPlayed;
         public int HighestLevel => _highestLevelReached;
         public int HighestLevelNoDeaths => _highestNoDeathLevelReached;
         public int HighestPerfectLevel => _highestPerfectLevelReached;
-
-        public void SetLastLevelPlayed(int level)
-        {
-            CircumDebug.Log($"Setting last level played {level} (user facing id)");
-            _lastLevelPlayed = level;
-        }
-
+        
         public void UpdateHighestLevel(int level, bool noDeaths, bool noHits)
         {
             _highestLevelReached = Mathf.Max(level, _highestLevelReached);
@@ -53,10 +47,10 @@ namespace Code.Level.Player
                 _completedTutorials |= hasCompletedTutorials;
             }
         }
-
+        
         public override string ToString()
         {
-            return $"Tutorials complete = {_completedTutorials}, highest level reached = {_highestLevelReached}, highest level with no deaths = {_highestNoDeathLevelReached}, highest level on perfect run = {_highestPerfectLevelReached}";
+            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReached}\nHighest level with no deaths = {_highestNoDeathLevelReached}\nHighest level on perfect run = {_highestPerfectLevelReached}\nLast run = {_runTracker}";
         }
 
         public static void Save(PlayerStats stats)

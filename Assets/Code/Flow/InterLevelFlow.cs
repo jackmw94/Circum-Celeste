@@ -12,6 +12,7 @@ namespace Code.Flow
     {
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private CanvasGroup _levelTextCanvasGroup;
+        [SerializeField] private PlayerStatsManager _playerStatsManager;
         [Space(15)]
         [SerializeField] private TextMeshProUGUI _levelNumberText;
         [SerializeField] private TextMeshProUGUI _levelText;
@@ -81,7 +82,7 @@ namespace Code.Flow
             
             _tagText.text = showLevel.TagLine;
 
-            PlayerStats playerStats = levelManager.PlayerStats;
+            PlayerStats playerStats = _playerStatsManager.PlayerStats;
 
             _highestLevelRoot.SetActive(playerStats.HighestLevel > 0);
             _highestLevelText.text = playerStats.HighestLevel.ToString();

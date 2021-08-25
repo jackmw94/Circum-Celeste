@@ -24,12 +24,9 @@ namespace Code.Level
         [SerializeField] private InputType[] _playersInputs;
         [Space(15)] 
         [SerializeField] private LevelGenerator _levelGenerator;
+        [SerializeField] private PlayerStatsManager _playerStatsManager;
         
-        private RunTracker _runTracker = new RunTracker();
-        private PlayerStats _playerStats;
         private Coroutine _startLevelOnceMovedCoroutine = null;
-        
-        public PlayerStats PlayerStats => _playerStats;
         
         public LevelInstance CurrentLevel { get; private set; }
 
@@ -37,8 +34,8 @@ namespace Code.Level
         {
             CircumDebug.Assert(_playersInputs.Length > 0, "There are no users for this level, probably not what we want..");
             
-            _playerStats = PlayerStats.Load();
-            _levelProvider.Initialise(_playerStats.CompletedTutorials, _playerStats.LastLevelPlayed);
+            int restartLevel = _playerStatsManager.GetRestartLevel();
+            _levelProvider.Initialise(_playerStatsManager.PlayerStats.CompletedTutorials, restartLevel);
             
             InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
             interLevelFlow.ShowOverlayInstant = true;
@@ -54,7 +51,7 @@ namespace Code.Level
                 CreateCurrentLevel();
             });
         }
-
+        
         public LevelLayout GetNextLevel()
         {
             return _levelProvider.GetNextLevel();
@@ -67,11 +64,11 @@ namespace Code.Level
 
         public void SkipLevel()
         {
-            _runTracker.HasSkipped = true;
-            GenerateNextLevel();
+            _playerStatsManager.SetSkippedLevel();
+            AdvanceLevel();
         }
 
-        private void GenerateNextLevel()
+        private void AdvanceLevel()
         {
             _levelProvider.AdvanceLevel();
             CreateCurrentLevel();
@@ -81,7 +78,7 @@ namespace Code.Level
         {
             if (!_levelProvider.GetCurrentLevel().IsFirstLevel)
             {
-                _runTracker.Deaths++;
+                _playerStatsManager.SetPlayerDied();
             }
 
             CreateCurrentLevel();
@@ -100,14 +97,10 @@ namespace Code.Level
 
             if (levelLayout.IsFirstLevel)
             {
-                _runTracker.ResetRun();
+                _playerStatsManager.ResetCurrentRun();
             }
-
-            if (!_runTracker.HasSkipped)
-            {
-                _playerStats.SetLastLevelPlayed(levelLayout.LevelNumber);
-                PlayerStats.Save(_playerStats);
-            }
+            
+            _playerStatsManager.SetLevelIndex(levelLayout.LevelNumber - 1, true);
 
             if (_startLevelOnceMovedCoroutine != null)
             {
@@ -149,32 +142,15 @@ namespace Code.Level
             
             if (success)
             {
-                UpdateStatisticsAfterLevel(playerTookNoHits);
-                
-                interLevelFlow.StartAction(GenerateNextLevel);
+                _playerStatsManager.UpdateStatisticsAfterLevel(playerTookNoHits, _levelProvider.GetCurrentLevel());
+                interLevelFlow.StartAction(AdvanceLevel);
             }
             else
             {
                 interLevelFlow.StartAction(ResetCurrentLevel);
             }
         }
-
-        private void UpdateStatisticsAfterLevel(bool playerTookNoHits)
-        {
-            _runTracker.IsPerfect &= playerTookNoHits && _runTracker.Deaths == 0;
-            if (!_runTracker.HasSkipped)
-            {
-                LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
-                int userFacingLevelIndex = currentLevel.LevelNumber;
-                
-                _playerStats.UpdateHighestLevel(userFacingLevelIndex, _runTracker.Deaths == 0, _runTracker.IsPerfect);
-                _playerStats.UpdateCompletedTutorials(currentLevel.IsTutorial);
-                PlayerStats.Save(_playerStats);
-
-                CircumDebug.Log($"Level {currentLevel.name} finished\nRun stats: {_runTracker}\nPlayer stats = {_playerStats}");
-            }
-        }
-
+        
         private static InputProvider CreateInputProvider(InputType inputType)
         {
             switch (inputType)
