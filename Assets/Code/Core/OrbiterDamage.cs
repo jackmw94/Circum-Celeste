@@ -9,6 +9,13 @@ namespace Code.Core
         
         private void OnTriggerEnter(Collider other)
         {
+#if UNITY_EDITOR
+            if (CheatsManager.Instance.PlayerHealthLossDisabled)
+            {
+                return;
+            }
+#endif
+            
             if (other.gameObject.IsHazard())
             {
                 _playerHealth.HitTaken();
