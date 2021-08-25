@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3900369487585736340}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 8867914a254c0084aa019c25ad0e80be, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 7f170b8c221446e46b5057ad4131ccd2, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -53,16 +53,31 @@ VisualEffect:
       - m_Value: 4
         m_Name: Velocity
         m_Overridden: 1
-      - m_Value: 0.785
+      - m_Value: 0.5
         m_Name: Spread
+        m_Overridden: 1
+      - m_Value: 10
+        m_Name: TurbulenceIntensity
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: TurbulenceDrag
+        m_Overridden: 1
+      - m_Value: 4
+        m_Name: TurbulenceFrequency
+        m_Overridden: 1
+      - m_Value: 0.1
+        m_Name: BounceLifetimeLoss
         m_Overridden: 1
     m_Vector2f:
       m_Array:
-      - m_Value: {x: 0, y: 0}
+      - m_Value: {x: 1, y: 0}
         m_Name: ForceDirection
         m_Overridden: 1
-      - m_Value: {x: 4, y: 8}
+      - m_Value: {x: 15, y: 20}
         m_Name: Velocity
+        m_Overridden: 1
+      - m_Value: {x: 3, y: 5}
+        m_Name: LifetimeMinMax
         m_Overridden: 1
     m_Vector3f:
       m_Array: []
@@ -71,7 +86,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 150
+        m_Name: Count
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
@@ -108,16 +126,16 @@ VisualEffect:
           serializedVersion: 2
           key0: {r: 1, g: 1, b: 1, a: 0}
           key1: {r: 149.4958, g: 0, b: 0, a: 1}
-          key2: {r: 15.818641, g: 11.599709, b: 0, a: 0.8}
-          key3: {r: 54.462746, g: 54.462746, b: 54.462746, a: 0}
+          key2: {r: 79.37452, g: 0.7611984, b: 0, a: 0.8}
+          key3: {r: 24.596079, g: 0, b: 0, a: 0}
           key4: {r: 0.5, g: 0.5, b: 0.5, a: 0}
           key5: {r: 0.5, g: 0.5, b: 0.5, a: 0}
           key6: {r: 0, g: 0, b: 0, a: 0}
           key7: {r: 0, g: 0, b: 0, a: 0}
           ctime0: 0
           ctime1: 1864
-          ctime2: 14538
-          ctime3: 42031
+          ctime2: 6943
+          ctime3: 23858
           ctime4: 65535
           ctime5: 65535
           ctime6: 0
