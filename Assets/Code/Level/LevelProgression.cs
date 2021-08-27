@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Code.Debugging;
 using UnityEngine;
 using UnityExtras.Code.Core;
 
@@ -30,6 +31,9 @@ namespace Code.Level
         public void Validate()
         {
             _levelLayout.ApplyFunction(p => p.Validate());
+            
+            int distinctIds = _levelLayout.Select(p => p.LevelId).Distinct().Count();
+            CircumDebug.Assert(distinctIds == _levelLayout.Length, $"There are duplicate level ids! It is highly likely there has been a bug:\n{_levelLayout.OrderBy(p => p.LevelId).Select(p => $"{p.name}:{p.LevelId}").JoinToString("\n")}");
         }
     }
 }

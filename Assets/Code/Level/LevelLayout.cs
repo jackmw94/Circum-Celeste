@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Code.Core;
 using Code.Debugging;
 using UnityEngine;
+using UnityExtras.Code.Core;
+using Random = UnityEngine.Random;
 
 namespace Code.Level
 {
     [CreateAssetMenu(menuName = "Create LevelLayout", fileName = "LevelLayout", order = 0)]
     public class LevelLayout : ScriptableObject
     {
-        // arbitrary, high enough for variation
-        private const int SeedMaxValue = 100;
-
+        [SerializeField] private long _levelId = 0;
         [SerializeField] private EscapeCriteria _escapeCriteria;
         [SerializeField] private float _escapeTimer = 25f;
         [SerializeField] private string _tagLine = "";
@@ -21,7 +21,8 @@ namespace Code.Level
         [SerializeField] private bool _exampleOrbiterEnabled = false;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private CellType[] _cells = new CellType[0];
-        
+
+        public long LevelId => _levelId;
         public int GridSize => _gridSize;
         public EscapeCriteria EscapeCriteria => _escapeCriteria;
         public float EscapeTimer => _escapeTimer;
@@ -34,6 +35,14 @@ namespace Code.Level
         // only runtime data, keeps level indices hidden away in level provider
         // todo: move this out of here, return an object containing LevelLayout and LevelContext instead of where we return LevelContext
         public LevelLayoutContext LevelContext { get; } = new LevelLayoutContext();
+
+        [Conditional("UNITY_EDITOR")]
+        private void Awake()
+        {
+            // for scriptable objects, awake only happens when the object is created - not when the application starts
+            CircumDebug.Assert(_levelId == 0, "Found a non-zero level id when initialising. This is only okay if we've just duplicated the asset");
+            _levelId = Utilities.RandomLong(Random.Range(int.MinValue, int.MaxValue));
+        }
 
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)
         {
