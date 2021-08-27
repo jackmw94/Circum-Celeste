@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
+  _offset: {x: 0, y: 0, z: -1}
 --- !u!114 &1961697690167233048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +213,7 @@ GameObject:
   - component: {fileID: 1647022148288233393}
   - component: {fileID: 8219585338611663803}
   - component: {fileID: 4657203298447811017}
+  - component: {fileID: 4377985295218022745}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -325,8 +327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10034ef39bb41dc8dd511950558a0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orbiter: {fileID: 0}
   _speed: 400
   _magnitude: 0.5
+  _defaultPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6384775747270266424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +406,7 @@ MonoBehaviour:
   _input: {fileID: 6384775747270266374}
   _mover: {fileID: 6384775747270266427}
   _sling: {fileID: 6384775747270266424}
+  _movementRecorder: {fileID: 4377985295218022745}
 --- !u!136 &4657203298447811017
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -416,3 +421,15 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940699}
+--- !u!114 &4377985295218022745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775747270266416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1556fe8017b144e2a54159ac18d43735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
