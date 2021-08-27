@@ -13,7 +13,11 @@ namespace Code.Flow
     public class Settings : MonoBehaviour
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
-        
+
+        [SerializeField] private LevelProvider _levelProvider;
+        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private LevelManager _levelManager;
+        [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _toggleDuration = 0.25f;
@@ -83,24 +87,21 @@ namespace Code.Flow
 
         private void SkipLevel()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.SkipLevel();
+            _playerStatsManager.SetSkippedLevel();
+            _levelProvider.AdvanceLevel();
+            _levelManager.CreateCurrentLevel();
         }
 
         private void ResetLevelButtonListener()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.ResetCurrentLevel();
+            _levelManager.ResetCurrentLevel();
             SettingsButtonClicked();
         }
 
         private void RestartRunButtonListener()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.ResetRun();
+            _levelProvider.ResetToStart();
+            _levelManager.CreateCurrentLevel();
             SettingsButtonClicked();
         }
 

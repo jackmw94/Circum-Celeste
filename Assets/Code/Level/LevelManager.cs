@@ -9,6 +9,7 @@ namespace Code.Level
 {
     public class LevelManager : MonoBehaviour
     {
+        [SerializeField] private InterLevelFlow _interLevelFlow;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private PlayerContainer _playerContainer;
         [Space(15)]
@@ -19,39 +20,7 @@ namespace Code.Level
         private bool _isReplaying = false;
         
         public LevelInstance CurrentLevel { get; private set; }
-
-        private void Awake()
-        {
-            int restartLevel = _playerStatsManager.GetRestartLevel();
-            _levelProvider.Initialise(_playerStatsManager.PlayerStats.CompletedTutorials, restartLevel);
-            
-            InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
-            interLevelFlow.ShowOverlayInstant = true;
-            interLevelFlow.ShowNextLevelName = false;
-            interLevelFlow.PreventHidingOverlay = true;
-            interLevelFlow.StartAction(null);
-
-            RemoteConfigHelper.RequestRefresh(success =>
-            {
-                CircumDebug.Log("Remote config request finished, showing level");
-                interLevelFlow.PreventHidingOverlay = false;
-                
-                CreateCurrentLevel(null);
-            });
-        }
-
-        public void SkipLevel()
-        {
-            _playerStatsManager.SetSkippedLevel();
-            AdvanceLevel();
-        }
-
-        private void AdvanceLevel()
-        {
-            _levelProvider.AdvanceLevel();
-            CreateCurrentLevel(null);
-        }
-
+        
         public void ResetCurrentLevel()
         {
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
@@ -59,19 +28,28 @@ namespace Code.Level
                 _playerStatsManager.SetPlayerDied();
             }
 
-            CreateCurrentLevel(null);
+            CreateCurrentLevel();
         }
-
-        public void ResetRun()
-        {
-            _levelProvider.ResetToStart();
-            CreateCurrentLevel(null);
-        }
-
-        private void CreateCurrentLevel(LevelRecording replay)
+        
+        public void CreateCurrentLevel(LevelRecording replay = null)
         {
             _isReplaying = replay != null;
-            
+
+            if (!_interLevelFlow.IsOverlaid)
+            {
+                _interLevelFlow.ShowHideUI(() =>
+                {
+                    CreateLevelInternal(replay);
+                });
+            }
+            else
+            {
+                CreateLevelInternal(replay);
+            }
+        }
+
+        private void CreateLevelInternal(LevelRecording replay)
+        {
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
             InputProvider[] inputProviders = _playerContainer.GetPlayerInputProviders(replay);
             LevelInstance levelInstance = GenerateLevel(levelLayout, inputProviders);
@@ -87,7 +65,7 @@ namespace Code.Level
             {
                 StopCoroutine(_startLevelOnceMovedCoroutine);
             }
-            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelOncePlayerMoved(levelInstance));
+            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelWhenReady(levelInstance));
         }
 
         private LevelInstance GenerateLevel(LevelLayout levelLayout, InputProvider[] inputProviders)
@@ -96,10 +74,13 @@ namespace Code.Level
             return levelInstance;
         }
 
-        private IEnumerator StartLevelOncePlayerMoved(LevelInstance level)
+        private IEnumerator StartLevelWhenReady(LevelInstance level)
         {
-            yield return new WaitUntil(() => !FlowContainer.Instance.InterLevelFlow.IsOverlaid);
+            _interLevelFlow.HideInterLevelUI();
+            yield return new WaitUntil(() => !_interLevelFlow.IsOverlaid);
+            
             level.LevelReady();
+            
             yield return new WaitUntil(() => level.PlayerIsMoving);
 
             CircumDebug.Log($"Level '{level.name}' has started");
@@ -107,11 +88,12 @@ namespace Code.Level
             level.StartLevel(OnLevelFinished);
         }
 
-        private void  OnLevelFinished(LevelResult levelResult)
+        private void OnLevelFinished(LevelResult levelResult)
         {
-            InterLevelFlow interLevelFlow = FlowContainer.Instance.InterLevelFlow;
-            interLevelFlow.ShowOverlayInstant = false;
-            interLevelFlow.ShowNextLevelName = levelResult.Success;
+            if (levelResult.Success)
+            {
+                _levelProvider.AdvanceLevel();
+            }
             
             if (levelResult.Success && !_isReplaying)
             {
@@ -121,30 +103,20 @@ namespace Code.Level
                     RecordingData = levelResult.LevelRecordingData
                 };
                 _playerStatsManager.UpdateStatisticsAfterLevel(_levelProvider.GetCurrentLevel(), levelResult.NoDamage, levelRecording);
-                interLevelFlow.StartAction(AdvanceLevel);
+                _interLevelFlow.ShowInterLevelUI();
             }
             else
             {
-                interLevelFlow.StartAction(ResetCurrentLevel);
+                _interLevelFlow.ShowInterLevelUI();
             }
         }
-
-        public LevelLayout GetNextLevel()
-        {
-            return _levelProvider.GetNextLevel();
-        }
-
-        public LevelLayout GetCurrentLevel()
-        {
-            return _levelProvider.GetCurrentLevel();
-        }
-
+        
         [ContextMenu(nameof(ReplayLevel))]
         public void ReplayLevel()
         {
             LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
             int levelIndex = currentLevel.LevelContext.LevelIndex;
-            LevelRecording recording = _playerStatsManager.PlayerStats.GetRecordingForLevel(levelIndex);
+            LevelRecording recording = _playerStatsManager.PlayerStats.GetRecordingForLevelAtIndex(levelIndex);
             
             CircumDebug.Assert(recording != null, $"Trying to replay level but could not find a replay for index {levelIndex}");
             CreateCurrentLevel(recording);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Debugging;
 using UnityEngine;
 
 namespace Code.Level.Player
@@ -13,6 +14,7 @@ namespace Code.Level.Player
 
         public void Initialise(List<LevelRecordFrameData> positions)
         {
+            CircumDebug.Log($"Initialised movement replayer with {positions.Count} values");
             _positions = new Queue<LevelRecordFrameData>(positions);
         }
         

@@ -16,6 +16,12 @@ namespace Code.Debugging
             PlayerStats.ResetSavedPlayerStats();
         }
         
+        [MenuItem("Circum/Set starter player stats")]
+        public static void SetStarterPlayerStats()
+        {
+            PlayerStats.SetStarterPlayerStats();
+        }
+        
         [MenuItem("Circum/Run validation")]
         public static void RunValidation()
         {
