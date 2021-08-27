@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.Debugging;
-using UnityEditor;
 using UnityEngine;
 
 namespace Code.Level
@@ -24,19 +23,6 @@ namespace Code.Level
         public override string ToString()
         {
             return $"Level={LevelIndex}, HasSkipped={HasSkipped}, IsPerfect={IsPerfect}, Deaths={Deaths}";
-        }
-
-        [MenuItem("Circum/Serialize test")]
-        public static void SerializeTest()
-        {
-            RunTracker runTracker = new RunTracker()
-            {
-                Deaths = 3,
-                HasSkipped = false,
-                IsPerfect = false
-            };
-            
-            CircumDebug.Log(JsonUtility.ToJson(runTracker));
         }
     }
 }
