@@ -47,9 +47,14 @@ namespace Code.Level.Player
             return _levelRecordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
         }
         
-        public void UpdateHighestLevel(int levelNumber, bool noDeaths, bool noHits)
+        public void UpdateHighestLevel(int levelNumber, bool noDeaths, bool noHits, bool hasSkipped)
         {
             _highestLevelReached = Mathf.Max(levelNumber, _highestLevelReached);
+
+            if (hasSkipped)
+            {
+                return;
+            }
 
             if (noDeaths)
             {

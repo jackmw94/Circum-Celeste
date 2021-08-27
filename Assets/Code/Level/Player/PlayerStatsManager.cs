@@ -55,8 +55,9 @@ namespace Code.Level.Player
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
             
             int userFacingLevelIndex = currentLevel.LevelContext.LevelNumber;
-            
-            _playerStats.UpdateHighestLevel(userFacingLevelIndex, runTracker.Deaths == 0, runTracker.IsPerfect);
+            _playerStats.UpdateHighestLevel(userFacingLevelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped);
+
+            // can still set high scores
             _playerStats.UpdateCompletedTutorials(currentLevel.LevelContext.IsTutorial);
             _playerStats.UpdateFastestRecording(levelRecording);
             
