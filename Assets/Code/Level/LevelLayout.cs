@@ -32,9 +32,8 @@ namespace Code.Level
         public bool ExampleOrbiterEnabled => _exampleOrbiterEnabled;
         
         // only runtime data, keeps level indices hidden away in level provider
-        public int LevelNumber { get; set; } = 0;
-        public bool IsFirstLevel => LevelNumber == 1;
-        public bool IsTutorial => LevelNumber == 0;
+        // todo: move this out of here, return an object containing LevelLayout and LevelContext instead of where we return LevelContext
+        public LevelLayoutContext LevelContext { get; } = new LevelLayoutContext();
 
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)
         {

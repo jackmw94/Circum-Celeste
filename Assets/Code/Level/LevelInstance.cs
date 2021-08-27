@@ -25,7 +25,7 @@ namespace Code.Level
         private float _startTime;
 
         private bool _escapeShown;
-        private Action<bool, bool> _levelFinishedCallback = null;
+        private Action<LevelResult> _levelFinishedCallback = null;
 
         private float LevelTime => Time.time - _startTime;
         public bool PlayerIsMoving => _players.Any(p => p.IsMoving);
@@ -75,7 +75,7 @@ namespace Code.Level
             }
         }
 
-        public void StartLevel(Action<bool, bool> levelFinishedCallback)
+        public void StartLevel(Action<LevelResult> levelFinishedCallback)
         {
             _isStarted = true;
             _startTime = Time.time;
@@ -128,8 +128,15 @@ namespace Code.Level
             Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CompletedLevel);
 
             bool perfectLevel = _players.All(p => p.NoDamageTaken);
-            
-            _levelFinishedCallback?.Invoke(true, perfectLevel);
+
+            LevelResult levelResult = null;
+            // if we're not recording, we're watching a replay and therefore do not want to record the results
+            if (_players[0].IsRecording)
+            {
+                levelResult = new LevelResult(true, perfectLevel, _players[0].GetLevelRecording());
+            }
+
+            _levelFinishedCallback?.Invoke(levelResult);
             _isStarted = false;
         }
 
@@ -137,7 +144,8 @@ namespace Code.Level
         {
             if (_players.All(p => p.IsDead))
             {
-                _levelFinishedCallback?.Invoke(false, false);
+                LevelResult levelResult = new LevelResult(false, false, null);
+                _levelFinishedCallback?.Invoke(levelResult);
                 _isStarted = false;
             }
         }

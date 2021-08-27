@@ -10,7 +10,7 @@ namespace Code.Level.Player
         [Space(15)]
         [SerializeField] private float _speed;
 
-        public bool IsMoving => MovementEnabled && InputProvider.GetMovementInput().magnitude > float.Epsilon;
+        public bool IsMoving => MovementEnabled && InputProvider.GetMovementInput(transform.position).magnitude > float.Epsilon;
         public bool MovementEnabled { get; set; }
         
         private InputProvider InputProvider => _playerInput.InputProvider;
@@ -19,16 +19,20 @@ namespace Code.Level.Player
         {
             _speed = RemoteConfigHelper.PlayerSpeed;
         }
-        
+
         private void FixedUpdate()
         {
             _rigidbody.velocity = Vector3.zero;
             
             if (MovementEnabled)
             {
-                Vector3 movement = InputProvider.GetMovementInput();
+                Vector3 position = transform.position;
+                
+                Vector3 movement = InputProvider.GetMovementInput(position);
                 movement = movement.normalized;
-                transform.position += movement * (Time.deltaTime * _speed);
+                position += movement * (Time.deltaTime * _speed);
+                
+                transform.position = position;
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using Code.Debugging;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Level.Player
 {
@@ -50,15 +49,16 @@ namespace Code.Level.Player
             if (save) SaveStats();
         }
         
-        public void UpdateStatisticsAfterLevel(bool playerTookNoHits, LevelLayout currentLevel)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording)
         {
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
             
-            int userFacingLevelIndex = currentLevel.LevelNumber;
+            int userFacingLevelIndex = currentLevel.LevelContext.LevelNumber;
             
             _playerStats.UpdateHighestLevel(userFacingLevelIndex, runTracker.Deaths == 0, runTracker.IsPerfect);
-            _playerStats.UpdateCompletedTutorials(currentLevel.IsTutorial);
+            _playerStats.UpdateCompletedTutorials(currentLevel.LevelContext.IsTutorial);
+            _playerStats.UpdateFastestRecording(levelRecording);
             
             PlayerStats.Save(_playerStats);
         }

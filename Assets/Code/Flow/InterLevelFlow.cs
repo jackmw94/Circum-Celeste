@@ -76,7 +76,7 @@ namespace Code.Flow
             LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel() : levelManager.GetCurrentLevel();
             _levelText.text = showLevel.name;
             
-            int levelIndex = showLevel.LevelNumber;
+            int levelIndex = showLevel.LevelContext.LevelNumber;
             _levelNumberText.text = $"{levelIndex}.";
             _levelNumberText.enabled = levelIndex > 0;
             

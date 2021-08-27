@@ -17,13 +17,13 @@ namespace Code.Level
         {
             for (int i = 0; i < _tutorialLevels.Length; i++)
             {
-                _tutorialLevels[i].LevelNumber = 0;
+                _tutorialLevels[i].LevelContext.LevelIndex = -1;
             }
 
             for (int i = 0; i < _levelLayout.Length; i++)
             {
                 // user facing level number, rather than index
-                _levelLayout[i].LevelNumber = i + 1;
+                _levelLayout[i].LevelContext.LevelIndex = i;
             }
         }
         
