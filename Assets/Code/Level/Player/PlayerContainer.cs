@@ -27,7 +27,7 @@ namespace Code.Level.Player
             if (levelRecording != null)
             {
                 MovementReplayer movementReplayer = new MovementReplayer();
-                movementReplayer.Initialise(levelRecording.RecordingData.Positions);
+                movementReplayer.Initialise(levelRecording.RecordingData.FrameData);
                 return new InputProvider[]
                 {
                     movementReplayer

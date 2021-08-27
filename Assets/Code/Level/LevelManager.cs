@@ -102,7 +102,7 @@ namespace Code.Level
             level.LevelReady();
             yield return new WaitUntil(() => level.PlayerIsMoving);
 
-            CircumDebug.Log("Level started");
+            CircumDebug.Log($"Level '{level.name}' has started");
             CurrentLevel = level;
             level.StartLevel(OnLevelFinished);
         }

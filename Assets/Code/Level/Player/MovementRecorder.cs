@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Level.Player
 {
     public class MovementRecorder : MonoBehaviour
     {
+        [SerializeField] private PlayerInput _playerInput;
+        
         private bool _isRecording = false;
         private float _duration = 0f;
         
-        private readonly List<PositionAtTime> _positions = new List<PositionAtTime>();
-        public List<PositionAtTime> Positions => _positions;
+        private readonly List<LevelRecordFrameData> _frameData = new List<LevelRecordFrameData>();
+        public List<LevelRecordFrameData> FrameData => _frameData;
         public float Duration => _duration;
 
         public void StartRecording()
         {
             _isRecording = true;
-            _positions.Clear();
+            _frameData.Clear();
             _duration = 0f;
 
         }
@@ -32,19 +33,18 @@ namespace Code.Level.Player
             {
                 return;
             }
-            _positions.Add(new PositionAtTime
+
+            bool powerButtonHeld = _playerInput.InputProvider.GetSlingInput();
+            LevelRecordFrameData frameData = new LevelRecordFrameData
             {
                 Position = transform.position,
-                Time = _duration
-            });
+                Time = _duration,
+                PowerButtonHeld = powerButtonHeld
+            };
+            
+            _frameData.Add(frameData);
+            
             _duration += Time.deltaTime;
         }
-    }
-
-    [Serializable]
-    public class PositionAtTime
-    {
-        [field: SerializeField] public Vector3 Position { get; set; }
-        [field: SerializeField] public float Time { get; set; }
     }
 }

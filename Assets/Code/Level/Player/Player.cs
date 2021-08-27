@@ -95,7 +95,7 @@ namespace Code.Level.Player
             
             return new LevelRecordingData
             {
-                Positions = _movementRecorder.Positions,
+                FrameData = _movementRecorder.FrameData,
                 LevelTime = _movementRecorder.Duration
             };
 

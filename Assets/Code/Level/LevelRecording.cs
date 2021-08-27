@@ -21,12 +21,12 @@ namespace Code.Level
     [Serializable]
     public class LevelRecordingData
     {
-        [field: SerializeField] public List<PositionAtTime> Positions;
+        [field: SerializeField] public List<LevelRecordFrameData> FrameData;
         [field: SerializeField] public float LevelTime = float.MaxValue;
 
         public override string ToString()
         {
-            return $"Level time: {LevelTime}\n{(Positions == null ? "NULL" : Positions.JoinToString("\n"))}";
+            return $"Level time: {LevelTime}\n{(FrameData == null ? "NULL" : FrameData.JoinToString("\n"))}";
         }
     }
 }

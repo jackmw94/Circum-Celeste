@@ -46,6 +46,7 @@ namespace Code.Level
 
             // Initialise level instance
             LevelInstance levelInstance = _cellsRoot.gameObject.AddComponent<LevelInstance>();
+            levelInstance.name = level.name;
             levelInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes);
 
             return levelInstance;
