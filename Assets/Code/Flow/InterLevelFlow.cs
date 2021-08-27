@@ -2,8 +2,10 @@
 using Code.Core;
 using Code.Level;
 using Code.Level.Player;
+using Code.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityExtras.Code.Core;
 
 namespace Code.Flow
@@ -12,7 +14,9 @@ namespace Code.Flow
     {
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private CanvasGroup _levelTextCanvasGroup;
+        [SerializeField] private ScrollingItemPicker _scrollingItemPicker;
         [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private Button _continueButton;
         [Space(15)]
         [SerializeField] private TextMeshProUGUI _levelNumberText;
         [SerializeField] private TextMeshProUGUI _levelText;
@@ -49,10 +53,17 @@ namespace Code.Flow
             // This is where the behind the scenes resetting happens
             ActionCompleted();
 
-            // Hide again after delay
-            yield return new WaitForSeconds(_holdDelay);
+            // Wait until button pressed
+            bool buttonPressed = false;
+            _continueButton.onClick.AddListener(() =>
+            {
+                buttonPressed = true;
+            });
+            yield return new WaitUntil(() => buttonPressed);
+            _continueButton.onClick.RemoveAllListeners();
 
-            yield return HideOverlay();
+            // Hide both UI + overlay
+            yield return HideAll();
         }
 
         private IEnumerator ShowOverlay()
@@ -70,9 +81,12 @@ namespace Code.Flow
             }
 
             _levelOverlay.ShowOverlay(playerPosition, ShowOverlayInstant);
-            
+
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
 
+            // set scroll to bottom item
+            _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
+            
             LevelLayout showLevel = ShowNextLevelName ? levelManager.GetNextLevel() : levelManager.GetCurrentLevel();
             _levelText.text = showLevel.name;
             
@@ -101,7 +115,7 @@ namespace Code.Flow
             });
         }
 
-        private IEnumerator HideOverlay()
+        private IEnumerator HideAll()
         {
             yield return Utilities.LerpOverTime(1f, 0f, _fadeDuration, f =>
             {

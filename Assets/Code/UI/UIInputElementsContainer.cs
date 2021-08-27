@@ -1,4 +1,5 @@
 ﻿using Code.Behaviours;
+using TMPro;
 using UnityEngine;
 
 namespace Code.UI
@@ -16,5 +17,10 @@ namespace Code.UI
         
         public MomentaryButton PowerButton => _powerButton;
         public PulseColour PulsePowerButton => _pulsePowerButton;
+    }
+
+    public class LevelScreen : MonoBehaviour
+    {
+        [SerializeField] private TextMeshProUGUI _levelNameText;
     }
 }
