@@ -1,29 +1,38 @@
 ﻿using Code.Debugging;
+using Code.Level.Player;
 using UnityEngine;
 using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
+    [DefaultExecutionOrder(-1)]
     public class LevelProvider : MonoBehaviour, IValidateable
     {
         [SerializeField] private LevelProgression _platformLevelProgression;
         [SerializeField] private LevelProgression _editorLevelProgression;
-
+        [Space(15)]
+        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        
+        
         private LevelProgression _activeLevelProgression;
         private int _levelIndex = 0;
 
+        private int MaximumLevelIndex => _activeLevelProgression.TutorialLevelLayout.Length + _activeLevelProgression.LevelLayout.Length - 1;
         private int NumberOfTutorials => _activeLevelProgression.TutorialLevelLayout.Length;
         private int NumberOfLevels => _activeLevelProgression.LevelLayout.Length;
         private bool HasCompletedTutorials => _levelIndex >= _activeLevelProgression.TutorialLevelLayout.Length;
 
-        public void Initialise(bool hasCompletedTutorials, int restartLevel)
+        public void Awake()
         {
+            int restartLevelIndex = _playerStatsManager.GetRestartLevelIndex();
+            bool hasCompletedTutorials = _playerStatsManager.PlayerStats.CompletedTutorials;
+            
             _activeLevelProgression = Application.isEditor ? _editorLevelProgression : _platformLevelProgression;
             _activeLevelProgression.Initialise();
             
             if (hasCompletedTutorials)
             {
-                _levelIndex = NumberOfTutorials + restartLevel;
+                _levelIndex = NumberOfTutorials + restartLevelIndex;
                 CircumDebug.Log($"Initialised level provider. Tutorials completed - set level index to {_levelIndex}");
             }
             else
@@ -37,11 +46,6 @@ namespace Code.Level
             return GetLevelAtIndex(_levelIndex);
         }
         
-        public LevelLayout GetNextLevel()
-        {
-            return GetLevelAtIndex(_levelIndex + 1);
-        }
-
         public void ResetToStart()
         {
             if (!HasCompletedTutorials)
@@ -56,6 +60,19 @@ namespace Code.Level
         public void AdvanceLevel()
         {
             _levelIndex++;
+            if (_levelIndex > MaximumLevelIndex)
+            {
+                _levelIndex = NumberOfTutorials;
+            }
+        }
+
+        public void PreviousLevel()
+        {
+            _levelIndex--;
+            if (_levelIndex < 0)
+            {
+                _levelIndex = _activeLevelProgression.TutorialLevelLayout.Length + _activeLevelProgression.LevelLayout.Length - 1;
+            }
         }
 
         private LevelLayout GetLevelAtIndex(int index)

@@ -11,45 +11,57 @@ namespace Code.Level.Player
     public class PlayerStats
     {
         private const string PlayerPrefsKey = "Circum_PlayerStats";
+        private const int StatsDataVersion = 1;
 
+        [SerializeField] private int _statsVersion;
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
         [SerializeField] private List<LevelRecording> _levelRecordings;
+        [SerializeField] private List<LevelRecording> _perfectLevelRecordings;
         
-        // these level ints are user facing numbers, not indexes. should probably clear up that distinction
-        [SerializeField] private int _highestLevelReached = 0;
-        [SerializeField] private int _highestNoDeathLevelReached = 0;
-        [SerializeField] private int _highestPerfectLevelReached = 0;
-        //
+        [SerializeField] private int _highestLevelReachedIndex = 0;
+        [SerializeField] private int _highestNoDeathLevelReachedIndex = 0;
+        [SerializeField] private int _highestPerfectLevelReachedIndex = 0;
 
         public RunTracker RunTracker => _runTracker;
         public bool CompletedTutorials => _completedTutorials;
-        public int HighestLevel => _highestLevelReached;
-        public int HighestLevelNoDeaths => _highestNoDeathLevelReached;
-        public int HighestPerfectLevel => _highestPerfectLevelReached;
+        public int HighestLevelIndex => _highestLevelReachedIndex;
+        public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
+        public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
-        public void UpdateFastestRecording(LevelRecording levelRecording)
+        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect)
         {
-            LevelRecording currentRecordingForLevel = _levelRecordings.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
+            UpdateFastestRecordingInternal(levelRecording, _levelRecordings);
+            if (perfect)
+            {
+                UpdateFastestRecordingInternal(levelRecording, _perfectLevelRecordings);
+            }
+        }
+
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, List<LevelRecording> recordingsList)
+        {
+            LevelRecording currentRecordingForLevel = recordingsList.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
+            
             if (currentRecordingForLevel == null)
             {
-                _levelRecordings.Add(levelRecording);
+                recordingsList.Add(levelRecording);
             }
             else if (currentRecordingForLevel.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
             {
-                _levelRecordings.Remove(currentRecordingForLevel);
-                _levelRecordings.Add(levelRecording);
+                recordingsList.Remove(currentRecordingForLevel);
+                recordingsList.Add(levelRecording);
             }
         }
 
-        public LevelRecording GetRecordingForLevel(int levelIndex)
+        public LevelRecording GetRecordingForLevelAtIndex(int levelIndex, bool perfect)
         {
-            return _levelRecordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
+            List<LevelRecording> recordings = perfect ? _perfectLevelRecordings : _levelRecordings;
+            return recordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
         }
         
-        public void UpdateHighestLevel(int levelNumber, bool noDeaths, bool noHits, bool hasSkipped)
+        public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
         {
-            _highestLevelReached = Mathf.Max(levelNumber, _highestLevelReached);
+            _highestLevelReachedIndex = Mathf.Max(levelIndex + 1, _highestLevelReachedIndex);
 
             if (hasSkipped)
             {
@@ -58,12 +70,12 @@ namespace Code.Level.Player
 
             if (noDeaths)
             {
-                _highestNoDeathLevelReached = Mathf.Max(levelNumber, _highestNoDeathLevelReached);
+                _highestNoDeathLevelReachedIndex = Mathf.Max(levelIndex, _highestNoDeathLevelReachedIndex);
             }
             
             if (noHits)
             {
-                _highestPerfectLevelReached = Mathf.Max(levelNumber, _highestPerfectLevelReached);
+                _highestPerfectLevelReachedIndex = Mathf.Max(levelIndex, _highestPerfectLevelReachedIndex);
             }
         }
 
@@ -81,11 +93,13 @@ namespace Code.Level.Player
         
         public override string ToString()
         {
-            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReached}\nHighest level with no deaths = {_highestNoDeathLevelReached}\nHighest level on perfect run = {_highestPerfectLevelReached}\nLast run = {_runTracker}\n{(_levelRecordings == null ? "NULL" : _levelRecordings.JoinToString("\n"))}";
+            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}\n{(_levelRecordings == null ? "NULL" : _levelRecordings.JoinToString("\n"))}";
         }
 
         public static void Save(PlayerStats stats)
         {
+            stats._statsVersion = StatsDataVersion;
+            
             string serialized = JsonUtility.ToJson(stats);
             PlayerPrefs.SetString(PlayerPrefsKey, serialized);
             PlayerPrefs.Save();
@@ -97,22 +111,51 @@ namespace Code.Level.Player
             if (!PlayerPrefs.HasKey(PlayerPrefsKey))
             {
                 CircumDebug.Log("Created new player stats since we can't find saved key");
-                return new PlayerStats()
-                {
-                    _runTracker = new RunTracker(),
-                    _levelRecordings = new List<LevelRecording>()
-                };
+                return CreateEmptyPlayerStats();
             }
             
             string serializedPlayerStats = PlayerPrefs.GetString(PlayerPrefsKey);
             PlayerStats deserializedPlayerStats = JsonUtility.FromJson<PlayerStats>(serializedPlayerStats);
             CircumDebug.Log($"Loaded player stats: {deserializedPlayerStats}");
 
-            if (deserializedPlayerStats._runTracker == null)
+            if (deserializedPlayerStats._statsVersion != StatsDataVersion)
             {
-                deserializedPlayerStats._runTracker = new RunTracker();
+                CircumDebug.Log($"Player stats were of a previous version (curr={StatsDataVersion}, loaded={deserializedPlayerStats._statsVersion}), deleted and returned empty.");
+                ResetSavedPlayerStats();
+                return CreateEmptyPlayerStats();
             }
+            
+            deserializedPlayerStats._runTracker ??= new RunTracker();
             return deserializedPlayerStats;
+        }
+
+        public static PlayerStats CreateEmptyPlayerStats()
+        {
+            return new PlayerStats
+            {
+                _runTracker = new RunTracker(),
+                _levelRecordings = new List<LevelRecording>(),
+                _perfectLevelRecordings = new List<LevelRecording>()
+            };
+        }
+        
+        public static PlayerStats CreateStarterPlayerStats()
+        {
+            return new PlayerStats
+            {
+                _completedTutorials = true,
+                _runTracker = new RunTracker(),
+                _levelRecordings = new List<LevelRecording>(),
+                _perfectLevelRecordings = new List<LevelRecording>()
+            };
+        }
+
+        /// <summary>
+        /// Starter stats are empty but have tutorials completed flag set to true
+        /// </summary>
+        public static void SetStarterPlayerStats()
+        {
+            Save(CreateStarterPlayerStats());
         }
         
         public static void ResetSavedPlayerStats()

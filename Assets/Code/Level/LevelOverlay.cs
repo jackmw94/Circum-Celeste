@@ -31,7 +31,10 @@ namespace Code.Level
         
         public void ShowOverlay(Vector2 position, bool instant = false)
         {
-            CircumDebug.Assert(!_overlayIsOn || instant, "Already showing overlay, this will snap to off before showing again");
+            if (_overlayIsOn)
+            {
+                return;
+            }
             
             float gridExtent = LevelCellHelper.RealGridDimension * 0.5f;
             Vector2 normalisedPosition = (position / gridExtent) / 2f + Vector2.one / 2f;
@@ -42,8 +45,11 @@ namespace Code.Level
 
         public void HideOverlay(bool instant = false)
         {
-            CircumDebug.Assert(_overlayIsOn || instant, "Not currently showing overlay, will snap to on before hiding");
-            
+            if (!_overlayIsOn)
+            {
+                return;
+            }
+
             _material.SetVector(Point, Vector2.one / 2f);
             TurnOnOff(false, instant);
         }

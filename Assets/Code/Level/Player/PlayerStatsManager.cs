@@ -2,6 +2,7 @@
 
 namespace Code.Level.Player
 {
+    [DefaultExecutionOrder(-1)]
     public class PlayerStatsManager : MonoBehaviour
     {
         private PlayerStats _playerStats;
@@ -13,7 +14,7 @@ namespace Code.Level.Player
             _playerStats = PlayerStats.Load();
         }
         
-        public int GetRestartLevel()
+        public int GetRestartLevelIndex()
         {
             RunTracker lastRun = _playerStats.RunTracker;
             if (lastRun == null)
@@ -54,13 +55,17 @@ namespace Code.Level.Player
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
             
-            int userFacingLevelIndex = currentLevel.LevelContext.LevelNumber;
-            _playerStats.UpdateHighestLevel(userFacingLevelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped);
-
-            // can still set high scores
-            _playerStats.UpdateCompletedTutorials(currentLevel.LevelContext.IsTutorial);
-            _playerStats.UpdateFastestRecording(levelRecording);
+            int levelIndex = currentLevel.LevelContext.LevelIndex;
+            _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped);
             
+            bool levelIsTutorial = currentLevel.LevelContext.IsTutorial;
+            _playerStats.UpdateCompletedTutorials(levelIsTutorial);
+
+            if (!levelIsTutorial)
+            {
+                _playerStats.UpdateFastestRecording(levelRecording, playerTookNoHits);
+            }
+
             PlayerStats.Save(_playerStats);
         }
 

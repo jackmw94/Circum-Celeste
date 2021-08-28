@@ -13,14 +13,16 @@ namespace Code.Flow
     public class Settings : MonoBehaviour
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
-        
+
+        [SerializeField] private LevelProvider _levelProvider;
+        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private LevelManager _levelManager;
+        [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _toggleDuration = 0.25f;
         [Space(15)]
-        [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Button _resetLevelButton;
-        [SerializeField] private Button _restartRunButton;
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
         [SerializeField] private Button _toggleFeedbacks;
@@ -33,9 +35,7 @@ namespace Code.Flow
         private void Awake()
         {
             _toggleSettingsButton.onClick.AddListener(SettingsButtonClicked);
-            _nextLevelButton.onClick.AddListener(NextLevelButtonListener);
             _resetLevelButton.onClick.AddListener(ResetLevelButtonListener);
-            _restartRunButton.onClick.AddListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
@@ -46,24 +46,12 @@ namespace Code.Flow
         private void OnDestroy()
         {
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
-            _nextLevelButton.onClick.RemoveListener(NextLevelButtonListener);
             _resetLevelButton.onClick.RemoveListener(ResetLevelButtonListener);
-            _restartRunButton.onClick.RemoveListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
         }
-
-#if UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                SkipLevel();
-            }
-        }
-#endif
-
+        
         private void OnSettingShowing()
         {
             _updateRemoteConfigLabel.text = UpdateRemoteConfigDefaultText;
@@ -83,24 +71,21 @@ namespace Code.Flow
 
         private void SkipLevel()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.SkipLevel();
+            _playerStatsManager.SetSkippedLevel();
+            _levelProvider.AdvanceLevel();
+            _levelManager.CreateCurrentLevel();
         }
 
         private void ResetLevelButtonListener()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.ResetCurrentLevel();
+            _levelManager.RestartCurrentLevel();
             SettingsButtonClicked();
         }
 
         private void RestartRunButtonListener()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            LevelManager levelManager = gameContainer.LevelManager;
-            levelManager.ResetRun();
+            _levelProvider.ResetToStart();
+            _levelManager.CreateCurrentLevel();
             SettingsButtonClicked();
         }
 

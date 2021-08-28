@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Code.Level.Player;
 using UnityEngine;
-using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
@@ -26,7 +25,7 @@ namespace Code.Level
 
         public override string ToString()
         {
-            return $"Level time: {LevelTime}\n{(FrameData == null ? "NULL" : FrameData.JoinToString("\n"))}";
+            return $"Level time: {LevelTime}. Frame count = {(FrameData == null ? "NULL" : FrameData.Count.ToString())}";
         }
     }
 }

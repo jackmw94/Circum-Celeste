@@ -82,8 +82,8 @@ namespace Code.Core
             AssertConfigHasProperties();
             
             EnemyColliderRadius = ConfigManager.appConfig.GetFloat(nameof(EnemyColliderRadius), DefaultEnemyColliderRadius);
-            MoverUIRelative = ConfigManager.appConfig.GetBool(nameof(MoverUIRelative), DefaultMoverUIRelative);
-            OrbiterD = ConfigManager.appConfig.GetFloat(nameof(OrbiterD), DefaultOrbiterD);
+            MoverUIRelative = ConfigManager.appConfig.GetBool(nameof(MoverUIRelative));
+            OrbiterD = ConfigManager.appConfig.GetFloat(nameof(OrbiterD));
             OrbiterI = ConfigManager.appConfig.GetFloat(nameof(OrbiterI), DefaultOrbiterI);
             OrbiterP = ConfigManager.appConfig.GetFloat(nameof(OrbiterP), DefaultOrbiterP);
             PickupColliderSize = ConfigManager.appConfig.GetFloat(nameof(PickupColliderSize), DefaultPickupColliderSize);
@@ -91,7 +91,7 @@ namespace Code.Core
             PlayerSpeed = ConfigManager.appConfig.GetFloat(nameof(PlayerSpeed), DefaultPlayerSpeed);
             SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
             SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
-            FeedbackProperties = ConfigManager.appConfig.GetString(nameof(FeedbackProperties), "");
+            FeedbackProperties = ConfigManager.appConfig.GetString(nameof(FeedbackProperties));
         }
         
         private static void AssertConfigHasProperties()
