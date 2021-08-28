@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Code.Debugging;
 using UnityEngine;
 
@@ -6,10 +8,11 @@ namespace Code.Core
 {
     public abstract class EntityHealth : MonoBehaviour
     {
+        private const float OnStayDamageDelay = 4f;
+        
+        private readonly Dictionary<GameObject, Coroutine> _onStayDamageAppliers = new Dictionary<GameObject, Coroutine>();
         private int _maximumHealth = 5;
-            
         private int _currentHealth = 5;
-    
         private Action _onDeath = null;
             
         public bool IsInvulnerable { get; set; }
@@ -36,21 +39,59 @@ namespace Code.Core
     
         private void OnTriggerEnter(Collider other)
         {
-            if (DoesObjectDamageUs(other.gameObject))
+            HandleObjectCollision(other.gameObject, true);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            HandleObjectCollision(other.gameObject, false);
+        }
+
+        private void HandleObjectCollision(GameObject other, bool isEntering)
+        {
+            if (!DoesObjectDamageUs(other))
+            {
+                return;
+            }
+            
+            if (isEntering)
             {
                 HitTaken();
             }
+            
+            // checking invulnerable so we don't start this before player moves
+            if (!IsInvulnerable && !_onStayDamageAppliers.ContainsKey(other))
+            {
+                _onStayDamageAppliers.Add(other, StartCoroutine(HandleOnStayDamage()));
+            }
         }
-    
-        public void HitTaken()
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (_onStayDamageAppliers.TryGetValue(other.gameObject, out Coroutine onStayDamageApplierCoroutine))
+            {
+                StopCoroutine(onStayDamageApplierCoroutine);
+                _onStayDamageAppliers.Remove(other.gameObject);
+            }
+        }
+
+        private IEnumerator HandleOnStayDamage()
+        {
+            yield return new WaitForSeconds(OnStayDamageDelay);
+            
+            // if we shuffle around without orbiting then it'll kill ya
+            HitTaken(_maximumHealth);
+        }
+        
+        public void HitTaken(int hitDamage = 1)
         {
             if (IsDead || IsInvulnerable)
             {
                 return;
             }
             
-            _currentHealth--;
-
+            _currentHealth = Mathf.Max(_currentHealth - hitDamage, 0);
+            
             if (IsDead)
             {
                 _onDeath?.Invoke();
