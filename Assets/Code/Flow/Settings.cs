@@ -22,9 +22,7 @@ namespace Code.Flow
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _toggleDuration = 0.25f;
         [Space(15)]
-        [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Button _resetLevelButton;
-        [SerializeField] private Button _restartRunButton;
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
         [SerializeField] private Button _toggleFeedbacks;
@@ -37,9 +35,7 @@ namespace Code.Flow
         private void Awake()
         {
             _toggleSettingsButton.onClick.AddListener(SettingsButtonClicked);
-            _nextLevelButton.onClick.AddListener(NextLevelButtonListener);
             _resetLevelButton.onClick.AddListener(ResetLevelButtonListener);
-            _restartRunButton.onClick.AddListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
@@ -50,24 +46,12 @@ namespace Code.Flow
         private void OnDestroy()
         {
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
-            _nextLevelButton.onClick.RemoveListener(NextLevelButtonListener);
             _resetLevelButton.onClick.RemoveListener(ResetLevelButtonListener);
-            _restartRunButton.onClick.RemoveListener(RestartRunButtonListener);
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
         }
-
-#if UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                SkipLevel();
-            }
-        }
-#endif
-
+        
         private void OnSettingShowing()
         {
             _updateRemoteConfigLabel.text = UpdateRemoteConfigDefaultText;
@@ -94,7 +78,7 @@ namespace Code.Flow
 
         private void ResetLevelButtonListener()
         {
-            _levelManager.ResetCurrentLevel();
+            _levelManager.RestartCurrentLevel();
             SettingsButtonClicked();
         }
 

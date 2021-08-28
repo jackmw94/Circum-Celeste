@@ -17,6 +17,7 @@ namespace Code.Level
         private LevelProgression _activeLevelProgression;
         private int _levelIndex = 0;
 
+        private int MaximumLevelIndex => _activeLevelProgression.TutorialLevelLayout.Length + _activeLevelProgression.LevelLayout.Length - 1;
         private int NumberOfTutorials => _activeLevelProgression.TutorialLevelLayout.Length;
         private int NumberOfLevels => _activeLevelProgression.LevelLayout.Length;
         private bool HasCompletedTutorials => _levelIndex >= _activeLevelProgression.TutorialLevelLayout.Length;
@@ -59,6 +60,19 @@ namespace Code.Level
         public void AdvanceLevel()
         {
             _levelIndex++;
+            if (_levelIndex > MaximumLevelIndex)
+            {
+                _levelIndex = NumberOfTutorials;
+            }
+        }
+
+        public void PreviousLevel()
+        {
+            _levelIndex--;
+            if (_levelIndex < 0)
+            {
+                _levelIndex = _activeLevelProgression.TutorialLevelLayout.Length + _activeLevelProgression.LevelLayout.Length - 1;
+            }
         }
 
         private LevelLayout GetLevelAtIndex(int index)

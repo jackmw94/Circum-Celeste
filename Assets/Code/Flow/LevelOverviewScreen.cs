@@ -12,6 +12,8 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
         [Space(15)]
+        [SerializeField] private GameObject _perfectIcon;
+        [Space(15)]
         [SerializeField] private Button _playButton;
 
         private Action _playLevelCallback = null;
@@ -26,7 +28,7 @@ namespace Code.Flow
             _playButton.onClick.RemoveListener(PlayButtonClicked);
         }
 
-        public void SetupLevelOverview(LevelLayout levelLayout, Action playLevelCallback)
+        public void SetupLevelOverview(LevelLayout levelLayout, bool isPerfect, Action playLevelCallback)
         {
             int levelNumber = levelLayout.LevelContext.LevelNumber;
             
@@ -36,6 +38,7 @@ namespace Code.Flow
             _levelName.text = levelLayout.name;
             _levelTag.text = levelLayout.TagLine;
 
+            _perfectIcon.SetActive(isPerfect);
             _playLevelCallback = playLevelCallback;
         }
 

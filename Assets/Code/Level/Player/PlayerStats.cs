@@ -17,6 +17,7 @@ namespace Code.Level.Player
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
         [SerializeField] private List<LevelRecording> _levelRecordings;
+        [SerializeField] private List<LevelRecording> _perfectLevelRecordings;
         
         [SerializeField] private int _highestLevelReachedIndex = 0;
         [SerializeField] private int _highestNoDeathLevelReachedIndex = 0;
@@ -28,28 +29,39 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
-        public void UpdateFastestRecording(LevelRecording levelRecording)
+        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect)
         {
-            LevelRecording currentRecordingForLevel = _levelRecordings.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
-            if (currentRecordingForLevel == null)
+            UpdateFastestRecordingInternal(levelRecording, _levelRecordings);
+            if (perfect)
             {
-                _levelRecordings.Add(levelRecording);
-            }
-            else if (currentRecordingForLevel.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
-            {
-                _levelRecordings.Remove(currentRecordingForLevel);
-                _levelRecordings.Add(levelRecording);
+                UpdateFastestRecordingInternal(levelRecording, _perfectLevelRecordings);
             }
         }
 
-        public LevelRecording GetRecordingForLevelAtIndex(int levelIndex)
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, List<LevelRecording> recordingsList)
         {
-            return _levelRecordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
+            LevelRecording currentRecordingForLevel = recordingsList.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
+            
+            if (currentRecordingForLevel == null)
+            {
+                recordingsList.Add(levelRecording);
+            }
+            else if (currentRecordingForLevel.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
+            {
+                recordingsList.Remove(currentRecordingForLevel);
+                recordingsList.Add(levelRecording);
+            }
+        }
+
+        public LevelRecording GetRecordingForLevelAtIndex(int levelIndex, bool perfect)
+        {
+            List<LevelRecording> recordings = perfect ? _perfectLevelRecordings : _levelRecordings;
+            return recordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
         }
         
         public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
         {
-            _highestLevelReachedIndex = Mathf.Max(levelIndex, _highestLevelReachedIndex);
+            _highestLevelReachedIndex = Mathf.Max(levelIndex + 1, _highestLevelReachedIndex);
 
             if (hasSkipped)
             {
@@ -119,20 +131,22 @@ namespace Code.Level.Player
 
         public static PlayerStats CreateEmptyPlayerStats()
         {
-            return new PlayerStats()
+            return new PlayerStats
             {
                 _runTracker = new RunTracker(),
-                _levelRecordings = new List<LevelRecording>()
+                _levelRecordings = new List<LevelRecording>(),
+                _perfectLevelRecordings = new List<LevelRecording>()
             };
         }
         
         public static PlayerStats CreateStarterPlayerStats()
         {
-            return new PlayerStats()
+            return new PlayerStats
             {
                 _completedTutorials = true,
                 _runTracker = new RunTracker(),
-                _levelRecordings = new List<LevelRecording>()
+                _levelRecordings = new List<LevelRecording>(),
+                _perfectLevelRecordings = new List<LevelRecording>()
             };
         }
 

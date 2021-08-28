@@ -21,7 +21,7 @@ namespace Code.Level
         
         public LevelInstance CurrentLevel { get; private set; }
         
-        public void ResetCurrentLevel()
+        public void RestartCurrentLevel()
         {
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
             {
@@ -29,6 +29,11 @@ namespace Code.Level
             }
 
             CreateCurrentLevel();
+        }
+
+        public void ClearCurrentLevel()
+        {
+            _levelGenerator.DestroyLevel();
         }
         
         public void CreateCurrentLevel(LevelRecording replay = null)
@@ -90,25 +95,22 @@ namespace Code.Level
 
         private void OnLevelFinished(LevelResult levelResult)
         {
-            if (levelResult.Success)
+            if (levelResult.Success && !_isReplaying)
             {
+                LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
+                LevelLayoutContext levelContext = currentLevel.LevelContext;
+                
+                LevelRecording levelRecording = new LevelRecording
+                {
+                    LevelIndex = levelContext.LevelIndex,
+                    RecordingData = levelResult.LevelRecordingData
+                };
+                _playerStatsManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording);
+                
                 _levelProvider.AdvanceLevel();
             }
             
-            if (levelResult.Success && !_isReplaying)
-            {
-                LevelRecording levelRecording = new LevelRecording
-                {
-                    LevelIndex = _levelProvider.GetCurrentLevel().LevelContext.LevelIndex,
-                    RecordingData = levelResult.LevelRecordingData
-                };
-                _playerStatsManager.UpdateStatisticsAfterLevel(_levelProvider.GetCurrentLevel(), levelResult.NoDamage, levelRecording);
-                _interLevelFlow.ShowInterLevelUI();
-            }
-            else
-            {
-                _interLevelFlow.ShowInterLevelUI();
-            }
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
         }
         
         [ContextMenu(nameof(ReplayLevel))]
@@ -116,7 +118,7 @@ namespace Code.Level
         {
             LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
             int levelIndex = currentLevel.LevelContext.LevelIndex;
-            LevelRecording recording = _playerStatsManager.PlayerStats.GetRecordingForLevelAtIndex(levelIndex);
+            LevelRecording recording = _playerStatsManager.PlayerStats.GetRecordingForLevelAtIndex(levelIndex, false);
             
             CircumDebug.Assert(recording != null, $"Trying to replay level but could not find a replay for index {levelIndex}");
             CreateCurrentLevel(recording);

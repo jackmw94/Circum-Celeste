@@ -24,7 +24,7 @@ namespace Code.Level
         public LevelInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
         {
             // Clean up any previous level
-            DestroyCells();
+            DestroyLevel();
             
             // Create new level objects
             GenerateCells(level, CellType.Wall, _wallPrefab, zOffset: _wallZOffset);
@@ -87,7 +87,7 @@ namespace Code.Level
             return cellInstances;
         }
 
-        private void DestroyCells()
+        public void DestroyLevel()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying)

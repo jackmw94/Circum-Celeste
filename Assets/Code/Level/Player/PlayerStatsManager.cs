@@ -63,7 +63,7 @@ namespace Code.Level.Player
 
             if (!levelIsTutorial)
             {
-                _playerStats.UpdateFastestRecording(levelRecording);
+                _playerStats.UpdateFastestRecording(levelRecording, playerTookNoHits);
             }
 
             PlayerStats.Save(_playerStats);

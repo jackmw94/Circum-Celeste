@@ -51,7 +51,7 @@ namespace Code.Level
 
         public void LevelReady()
         {
-            CircumDebug.Log("Level ready");
+            CircumDebug.Log($"Level '{name}' ready");
             _players.ApplyFunction(p => p.LevelReady());
             
             // assuming this will always count up, therefore reset == hidden
@@ -62,17 +62,10 @@ namespace Code.Level
 
         private void HandleUIIntroductions()
         {
-            // todo: put this in an area of code less tied to game logic + handle edge cases like never clicking the button
             UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
-            switch (_introduceElement)
-            {
-                case IntroduceElement.PowerButton:
-                    movementUi.PulsePowerButton.StartStopPulse(true);
-                    break;
-                case IntroduceElement.MovementHandle:
-                    movementUi.PulseMoverHandle.StartStopPulse(true);
-                    break;
-            }
+
+            movementUi.PulsePowerButton.StartStopPulse(_introduceElement == IntroduceElement.PowerButton);
+            movementUi.PulseMoverHandle.StartStopPulse(_introduceElement == IntroduceElement.MovementHandle);
         }
 
         public void StartLevel(Action<LevelResult> levelFinishedCallback)

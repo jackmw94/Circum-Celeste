@@ -15,7 +15,7 @@ namespace Code.Flow
 
         private void Start()
         {
-            _interLevelFlow.ShowInterLevelUI(true);
+            _interLevelFlow.ShowInterLevelUI(null, true);
             
             RemoteConfigHelper.RequestRefresh(success =>
             {

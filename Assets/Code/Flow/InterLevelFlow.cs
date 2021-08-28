@@ -15,21 +15,18 @@ namespace Code.Flow
         [SerializeField] private float _startDelay = 1.5f;
 
         private bool _isTransitioning = false;
-        private bool _showOverlayInstant = false;
         private Coroutine _showHideInterLevelCoroutine = null;
 
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
         
-        public void ShowInterLevelUI(bool instant = false)
+        public void ShowInterLevelUI(Action onShown = null, bool instant = false)
         {
-            _showOverlayInstant = instant;
-
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine());
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant));
         }
 
         public void HideInterLevelUI()
@@ -54,18 +51,18 @@ namespace Code.Flow
         private IEnumerator ShowHideUICoroutine(Action onShown)
         {
             _isTransitioning = true;
-            yield return ShowOverlayCoroutine();
+            yield return ShowOverlayCoroutine(false);
             onShown();
             yield return new WaitForSeconds(_showHideHoldDelay);
-            yield return HideOverlayCoroutine();
+            yield return HideOverlayCoroutine(false);
             _isTransitioning = false;
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine()
+        private IEnumerator ShowInterLevelUICoroutine(Action onShown, bool instant)
         {
             _isTransitioning = true;
-            if (!_showOverlayInstant)
+            if (!instant)
             {
                 yield return new WaitForSeconds(_startDelay);
             }
@@ -73,9 +70,11 @@ namespace Code.Flow
             _interLevelScreen.SetupInterLevelScreen();
             
             // Show overlay, hides level reset
-            yield return ShowOverlayCoroutine();
+            yield return ShowOverlayCoroutine(instant);
             
             yield return _interLevelScreen.ShowHideScreen(true);
+
+            onShown?.Invoke();
             _isTransitioning = false;
         }
 
@@ -83,11 +82,11 @@ namespace Code.Flow
         {
             _isTransitioning = true;
             yield return _interLevelScreen.ShowHideScreen(false);
-            yield return HideOverlayCoroutine();
+            yield return HideOverlayCoroutine(false);
             _isTransitioning = false;
         }
 
-        private IEnumerator ShowOverlayCoroutine()
+        private IEnumerator ShowOverlayCoroutine(bool instant)
         {
             LevelInstance currentLevel = _levelManager.CurrentLevel;
             
@@ -99,14 +98,14 @@ namespace Code.Flow
                 playerPosition = currentLevel.GetPlayerPosition(0);
             }
 
-            _levelOverlay.ShowOverlay(playerPosition, _showOverlayInstant);
+            _levelOverlay.ShowOverlay(playerPosition, instant);
 
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
         }
 
-        private IEnumerator HideOverlayCoroutine()
+        private IEnumerator HideOverlayCoroutine(bool instant)
         {
-            _levelOverlay.HideOverlay();
+            _levelOverlay.HideOverlay(instant);
             yield return new WaitUntil(() => !_levelOverlay.OverlayIsOn);
         }
     }
