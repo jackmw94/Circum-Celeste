@@ -146,13 +146,14 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.JackWalker.CircumCeleste
     Standalone: com.JackWalker.Circum
     iPhone: com.JackWalker.Circum
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 0
@@ -776,6 +777,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED
     4: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED;CIRCUM_LOGGING
+    7: CIRCUM_LOGGING
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
