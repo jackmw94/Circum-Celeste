@@ -21,17 +21,22 @@ namespace Code.Level
         
         public LevelInstance CurrentLevel { get; private set; }
         
-        public void RestartCurrentLevel()
+        public void ExitLevel()
         {
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
             {
                 _playerStatsManager.SetPlayerDied();
             }
 
-            CreateCurrentLevel();
+            if (_startLevelOnceMovedCoroutine != null)
+            {
+                StopCoroutine(_startLevelOnceMovedCoroutine);
+            }
+
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
         }
 
-        public void ClearCurrentLevel()
+        private void ClearCurrentLevel()
         {
             _levelGenerator.DestroyLevel();
         }
@@ -112,7 +117,7 @@ namespace Code.Level
             
             _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
         }
-        
+
         [ContextMenu(nameof(ReplayLevel))]
         public void ReplayLevel()
         {
