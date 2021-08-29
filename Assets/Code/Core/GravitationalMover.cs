@@ -9,19 +9,19 @@ namespace Code.Core
         [Space(15)]
         [SerializeField] protected Transform _target;
         
-        private void Update()
+        private void FixedUpdate()
         {
             if (!_target)
             {
                 return;
             }
             
-            UpdateInternal();
+            FixedUpdateInternal();
         }
 
-        protected virtual void UpdateInternal()
+        protected virtual void FixedUpdateInternal()
         {
-            Vector3 movement = GetMovement(_target.position, transform, Time.deltaTime);
+            Vector3 movement = GetMovement(_target.position, transform, Time.fixedDeltaTime);
             transform.Translate(movement, Space.World);
         }
 

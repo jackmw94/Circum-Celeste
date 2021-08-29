@@ -14,9 +14,9 @@ namespace Code.Level
         
         private Vector2 _hitVector = Vector2.zero;
 
-        protected override void UpdateInternal()
+        protected override void FixedUpdateInternal()
         {
-            base.UpdateInternal();
+            base.FixedUpdateInternal();
             transform.Translate(_hitVector);
             _hitVector *= _yeetInertia;
         }
