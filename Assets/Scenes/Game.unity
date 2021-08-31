@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playersInputs: 03000000
+  _editorPlayersInputs: 00000000
 --- !u!1 &91438158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,6 +1385,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 3
   m_AspectRatio: 1
+--- !u!1 &239214862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239214863}
+  - component: {fileID: 239214864}
+  m_Layer: 0
+  m_Name: Fastest Perfect Time
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239214863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239214862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239214864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239214862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Fastest Perfect Time
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6700\u901F\u306E\u30D1\u30FC\u30D5\u30A7\u30AF\u30C8\u30BF\u30A4\u30E0"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Schnellste perfekte Zeit
+    Object: {fileID: 0}
+  - Language: French
+    Text: Temps parfait le plus rapide
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Tempo perfetto pi\xF9 veloce"
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uAC00\uC7A5 \uBE60\uB978 \uC644\uBCBD\uD55C \uC2DC\uAC04"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6700\u5FEB\u7684\u5B8C\u7F8E\u65F6\u95F4"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Fastest Perfect Time
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0421\u0430\u043C\u043E\u0435 \u0431\u044B\u0441\u0442\u0440\u043E\u0435
+      \u0438\u0434\u0435\u0430\u043B\u044C\u043D\u043E\u0435 \u0432\u0440\u0435\u043C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "El tiempo perfecto m\xE1s r\xE1pido"
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0938\u092C\u0938\u0947 \u0924\u0947\u091C\u093C \u0938\u0939\u0940 \u0938\u092E\u092F"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Waktu Sempurna Tercepat
+    Object: {fileID: 0}
 --- !u!1 &242201937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1478,7 @@ GameObject:
   - component: {fileID: 242201938}
   - component: {fileID: 242201940}
   - component: {fileID: 242201939}
+  - component: {fileID: 242201941}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -1518,6 +1602,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 242201937}
   m_CullTransparentMesh: 1
+--- !u!114 &242201941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242201937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Fastest Perfect Time
+  FallbackText: Fastest Perfect Time
 --- !u!1 &260224279
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2143,88 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &351069184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351069185}
+  - component: {fileID: 351069186}
+  m_Layer: 0
+  m_Name: Fastest Time
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351069185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351069184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &351069186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351069184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Fastest Time
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6700\u901F\u6642\u9593"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Schnellste Zeit
+    Object: {fileID: 0}
+  - Language: French
+    Text: Temps le plus rapide
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Tempo pi\xF9 veloce"
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uAC00\uC7A5 \uBE60\uB978 \uC2DC\uAC04"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6700\u5FEB\u65F6\u95F4"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Tempo mais r\xE1pido"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0421\u0430\u043C\u043E\u0435 \u0431\u044B\u0441\u0442\u0440\u043E\u0435
+      \u0432\u0440\u0435\u043C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: El tiempo mas rapido
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0938\u092C\u0938\u0947 \u0924\u0947\u091C\u093C \u0938\u092E\u092F"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Waktu Tercepat
+    Object: {fileID: 0}
 --- !u!1 &393186977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,6 +2596,7 @@ Transform:
   - {fileID: 393186978}
   - {fileID: 205681405}
   - {fileID: 61648569}
+  - {fileID: 650063435}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2689,6 +2870,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424822304}
   m_CullTransparentMesh: 1
+--- !u!1 &461953453
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461953454}
+  - component: {fileID: 461953455}
+  m_Layer: 0
+  m_Name: Back to Menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461953454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461953453}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &461953455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461953453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Back to Menu
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u30E1\u30CB\u30E5\u30FC\u306B\u623B\u308B"
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Zur\xFCck zum Men\xFC"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Retour au menu
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Torna al menu
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uBA54\uB274\uB85C \uB3CC\uC544\uAC00\uAE30"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8FD4\u56DE\u83DC\u5355"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Voltar ao menu
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0430\u0437\u0430\u0434 \u043A \u043C\u0435\u043D\u044E"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Volver al men\xFA"
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u092E\u0948\u0928\u094D\u092F\u0942 \u092E\u0947\u0902 \u0935\u093E\u092A\u0938"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Kembali ke menu
+    Object: {fileID: 0}
 --- !u!1 &480573340
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,6 +2962,7 @@ GameObject:
   - component: {fileID: 480573341}
   - component: {fileID: 480573343}
   - component: {fileID: 480573342}
+  - component: {fileID: 480573344}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -2823,6 +3086,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480573340}
   m_CullTransparentMesh: 1
+--- !u!114 &480573344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480573340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Restart Level
+  FallbackText: Restart Level
 --- !u!1 &504279071
 GameObject:
   m_ObjectHideFlags: 0
@@ -3210,7 +3487,7 @@ GameObject:
   - component: {fileID: 545951463}
   - component: {fileID: 545951465}
   m_Layer: 5
-  m_Name: ContinueButton
+  m_Name: PlayButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3586,6 +3863,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558383725}
   m_CullTransparentMesh: 1
+--- !u!1 &558940434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 558940435}
+  - component: {fileID: 558940436}
+  m_Layer: 0
+  m_Name: Toggle Feedbacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &558940435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558940434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558940436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558940434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Toggle Feedbacks
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u30D5\u30A3\u30FC\u30C9\u30D0\u30C3\u30AF\u306E\u5207\u308A\u66FF\u3048"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Feedback umschalten
+    Object: {fileID: 0}
+  - Language: French
+    Text: Basculer les commentaires
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Attiva/disattiva feedback
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uD1A0\uAE00 \uD53C\uB4DC\uBC31"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5207\u6362\u53CD\u9988"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Alternar Feedbacks
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432\u044B"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Alternar comentarios
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u092B\u0940\u0921\u092C\u0948\u0915 \u091F\u0949\u0917\u0932 \u0915\u0930\u0947\u0902"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Alihkan Umpan Balik
+    Object: {fileID: 0}
 --- !u!1 &573811462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3931,6 +4289,88 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576629420}
   m_CullTransparentMesh: 1
+--- !u!1 &587373677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 587373678}
+  - component: {fileID: 587373679}
+  m_Layer: 0
+  m_Name: Fastest Times
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587373678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587373677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &587373679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587373677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Fastest Times
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6700\u901F\u30BF\u30A4\u30E0"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Schnellste Zeiten
+    Object: {fileID: 0}
+  - Language: French
+    Text: Temps les plus rapides
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Tempi pi\xF9 veloci"
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uAC00\uC7A5 \uBE60\uB978 \uC2DC\uAC04"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6700\u5FEB\u65F6\u95F4"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Fastest Times
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0421\u0430\u043C\u044B\u0435 \u0431\u044B\u0441\u0442\u0440\u044B\u0435
+      \u0432\u0440\u0435\u043C\u0435\u043D\u0430"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Tiempos m\xE1s r\xE1pidos"
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0938\u092C\u0938\u0947 \u0924\u0947\u091C\u093C \u0938\u092E\u092F"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Waktu Tercepat
+    Object: {fileID: 0}
 --- !u!1 &620395905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4399,6 +4839,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644602189}
   m_CullTransparentMesh: 1
+--- !u!1 &650063434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650063435}
+  - component: {fileID: 650063436}
+  m_Layer: 0
+  m_Name: LeanLocalization
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650063435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650063434}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1356718156}
+  - {fileID: 587373678}
+  - {fileID: 351069185}
+  - {fileID: 239214863}
+  - {fileID: 1374520958}
+  - {fileID: 1654777576}
+  - {fileID: 461953454}
+  - {fileID: 558940435}
+  m_Father: {fileID: 418685313}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650063436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650063434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLanguage: English
+  detectLanguage: 1
+  defaultLanguage: English
+  saveLoad: 1
+  prefabs:
+  - Root: {fileID: 765358623864573794, guid: 971ef8207f535194faf411d40b27fb77, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 971ef8207f535194faf411d40b27fb77, type: 3}
+  - Root: {fileID: 765358623864573794, guid: 72996ab11fe463149bc90e287a08077d, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 72996ab11fe463149bc90e287a08077d, type: 3}
+  - Root: {fileID: 765358623864573794, guid: 3ac841b7dad7d0a45bd0e21e9da426a1, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 3ac841b7dad7d0a45bd0e21e9da426a1, type: 3}
+  - Root: {fileID: 765358623864573794, guid: 6ce49b6a86dedf943ab7d45ec2375ae0, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 6ce49b6a86dedf943ab7d45ec2375ae0, type: 3}
+  - Root: {fileID: 765358623864573794, guid: 5cc1b5565f14d4545bac95b843540307, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 5cc1b5565f14d4545bac95b843540307, type: 3}
+  - Root: {fileID: 765358623864573794, guid: adef00e2be323654ca5fa825a2cc3c72, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: adef00e2be323654ca5fa825a2cc3c72, type: 3}
+  - Root: {fileID: 765358623864573794, guid: d723c6557bd6de145a2fad37a6fe8229, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: d723c6557bd6de145a2fad37a6fe8229, type: 3}
 --- !u!1 &681714015
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,7 +5314,7 @@ GameObject:
   - component: {fileID: 725494760}
   - component: {fileID: 725494761}
   m_Layer: 5
-  m_Name: WorldData
+  m_Name: FastestTimes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5023,7 +5540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00091504253}
+  m_AnchoredPosition: {x: 0, y: 425.00085}
   m_SizeDelta: {x: 0, y: 850}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &764429601
@@ -5176,6 +5693,7 @@ GameObject:
   - component: {fileID: 771276272}
   - component: {fileID: 771276274}
   - component: {fileID: 771276273}
+  - component: {fileID: 771276275}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5299,6 +5817,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771276271}
   m_CullTransparentMesh: 1
+--- !u!114 &771276275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771276271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Toggle Feedbacks
+  FallbackText: Toggle Feedbacks
 --- !u!1 &772230902
 GameObject:
   m_ObjectHideFlags: 0
@@ -6552,6 +7084,7 @@ GameObject:
   - component: {fileID: 856061930}
   - component: {fileID: 856061932}
   - component: {fileID: 856061931}
+  - component: {fileID: 856061933}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -6675,6 +7208,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 856061929}
   m_CullTransparentMesh: 1
+--- !u!114 &856061933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856061929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Fastest Times
+  FallbackText: Fastest Times
 --- !u!1 &886780510
 GameObject:
   m_ObjectHideFlags: 0
@@ -8311,6 +8858,7 @@ GameObject:
   - component: {fileID: 1259831785}
   - component: {fileID: 1259831787}
   - component: {fileID: 1259831786}
+  - component: {fileID: 1259831788}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -8434,6 +8982,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259831784}
   m_CullTransparentMesh: 1
+--- !u!114 &1259831788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259831784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Fastest Time
+  FallbackText: Fastest Time
 --- !u!1 &1265523505
 GameObject:
   m_ObjectHideFlags: 0
@@ -9052,6 +9614,168 @@ MonoBehaviour:
   _animatorProperty: NormalisedTime
   _scrollRect: {fileID: 704795371}
   _animator: {fileID: 1348418505}
+--- !u!1 &1356718155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356718156}
+  - component: {fileID: 1356718157}
+  m_Layer: 0
+  m_Name: Play
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1356718156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356718155}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356718157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356718155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Play
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u6F14\u594F\u3059\u308B"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Spiel
+    Object: {fileID: 0}
+  - Language: French
+    Text: Jouer
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Giocare a
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uB180\uB2E4"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u73A9"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Toque
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0418\u0433\u0440\u0430\u0442\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Jugar
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0916\u0947\u0932"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Bermain
+    Object: {fileID: 0}
+--- !u!1 &1374520957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374520958}
+  - component: {fileID: 1374520959}
+  m_Layer: 0
+  m_Name: Watch Replay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1374520958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374520957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1374520959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374520957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Watch Replay
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u30EA\u30D7\u30EC\u30A4\u3092\u898B\u308B"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Wiedergabe ansehen
+    Object: {fileID: 0}
+  - Language: French
+    Text: Regarder la rediffusion
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Guarda il replay
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uB2E4\uC2DC\uBCF4\uAE30 \uBCF4\uAE30"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u89C2\u770B\u91CD\u64AD"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Assistir ao Replay
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043E\u0432\u0442\u043E\u0440"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Ver repetici\xF3n"
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0930\u0940\u092A\u094D\u0932\u0947 \u0926\u0947\u0916\u0947\u0902"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Tonton Putar Ulang
+    Object: {fileID: 0}
 --- !u!1 &1387634046
 GameObject:
   m_ObjectHideFlags: 0
@@ -9063,6 +9787,7 @@ GameObject:
   - component: {fileID: 1387634047}
   - component: {fileID: 1387634049}
   - component: {fileID: 1387634048}
+  - component: {fileID: 1387634050}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9186,6 +9911,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387634046}
   m_CullTransparentMesh: 1
+--- !u!114 &1387634050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387634046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Back to Menu
+  FallbackText: Back to Menu
 --- !u!1 &1394359309
 GameObject:
   m_ObjectHideFlags: 0
@@ -10184,6 +10923,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636314150}
   m_CullTransparentMesh: 1
+--- !u!1 &1654777575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1654777576}
+  - component: {fileID: 1654777577}
+  m_Layer: 0
+  m_Name: Restart Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1654777576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654777575}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1654777577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654777575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Restart Level
+    Object: {fileID: 0}
+  - Language: Japanese
+    Text: "\u518D\u8D77\u52D5\u30EC\u30D9\u30EB"
+    Object: {fileID: 0}
+  - Language: German
+    Text: Level neustarten
+    Object: {fileID: 0}
+  - Language: French
+    Text: Recommencer le niveau
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Riavvia livello
+    Object: {fileID: 0}
+  - Language: Korean
+    Text: "\uC7AC\uC2DC\uC791 \uB808\uBCA8"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u91CD\u542F\u5173\u5361"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Recome\xE7ar n\xEDvel"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u0435\u0440\u0435\u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u044C
+      \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Volver a empersar el nivel
+    Object: {fileID: 0}
+  - Language: Hindi
+    Text: "\u0932\u0947\u0935\u0932 \u092B\u093F\u0930 \u0938\u0947 \u091A\u093E\u0932\u0941
+      \u0915\u0930\u0947\u0902"
+    Object: {fileID: 0}
+  - Language: Indonesian
+    Text: Mulai Ulang Tingkat
+    Object: {fileID: 0}
 --- !u!1 &1661955979
 GameObject:
   m_ObjectHideFlags: 0
@@ -10302,6 +11124,7 @@ GameObject:
   - component: {fileID: 1664226650}
   - component: {fileID: 1664226652}
   - component: {fileID: 1664226651}
+  - component: {fileID: 1664226653}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -10425,6 +11248,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664226649}
   m_CullTransparentMesh: 1
+--- !u!114 &1664226653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664226649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Play
+  FallbackText: Play
 --- !u!1 &1681444300
 GameObject:
   m_ObjectHideFlags: 0
