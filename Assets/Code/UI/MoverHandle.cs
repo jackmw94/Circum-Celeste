@@ -9,20 +9,26 @@ namespace Code.UI
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private float _maxRadius;
+        [SerializeField] private float _relativeMovementSensitivity = 0.1f;
         [SerializeField] private float _returnSpeedMultiplier = 1f;
         [SerializeField] private AnimationCurve _returnSpeed;
         [SerializeField] private bool _useSquaredMovement = true;
         [SerializeField] private bool _useRelativeMovement = false;
-        [SerializeField] private float _relativeMovementThreshold = 0.1f;
         [SerializeField] private float _deadZone = 0.1f;
 
         private Vector2 _movement;
         private Vector2 _dragPosition;
+        private Vector2 _dragDelta;
+        private int _dragDeltaFrame;
         private Vector2 _centre;
         private bool _isDragging;
 
         public Vector2 Movement => _useSquaredMovement ? SquaredMovement : _movement;
         private Vector2 SquaredMovement => _movement.normalized * Mathf.Pow(_movement.magnitude, 2f);
+        
+        // OnDrag is not called every frame between drag starting and finishing
+        // This will ensure that we only have a drag delta value when it's been set this frame
+        private Vector2 DragDelta => Time.frameCount == _dragDeltaFrame ? _dragDelta : Vector2.zero;
 
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
@@ -45,59 +51,82 @@ namespace Code.UI
 
         private void LateUpdate()
         {
-            Transform moverTransform = transform;
-
             if (_isDragging)
             {
-                Vector2 offset = _dragPosition - _centre;
-                bool atMaxRadius = false;
-                if (offset.magnitude > _maxRadius)
+                if (_useRelativeMovement)
                 {
-                    offset = offset.normalized * _maxRadius;
-                    atMaxRadius = true;
-                }
-
-                Vector3 previousPosition = moverTransform.localPosition;
-                moverTransform.localPosition = _centre + offset;
-
-                if (_useRelativeMovement && !atMaxRadius)
-                {
-                    var frameDifference = moverTransform.localPosition - previousPosition;
-                    if (frameDifference.magnitude > _relativeMovementThreshold)
-                    {
-                        frameDifference = frameDifference.normalized;
-                    }
-
-                    _movement = frameDifference / _relativeMovementThreshold;
+                    HandleRelativeDragUpdate();
                 }
                 else
                 {
-                    _movement = offset / _maxRadius;
+                    HandleDragUpdate();
                 }
             }
             else
             {
-                _movement = Vector2.zero;
-            
-                Vector3 position = moverTransform.localPosition;
-                Vector2 centreOffset = _centre - new Vector2(position.x, position.y);
-                float magnitude = centreOffset.magnitude;
-
-                if (magnitude > 0.001f)
-                {
-                    float normalisedMagnitude = magnitude / _maxRadius;
-                    float returnDistance = _returnSpeed.Evaluate(normalisedMagnitude) * _returnSpeedMultiplier;
-                    Vector2 returnVector = centreOffset;
-                
-                    if (magnitude > returnDistance)
-                    {
-                        returnVector = returnVector.normalized * returnDistance;
-                    }
-                    moverTransform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
-                }
+                HandleIdleUpdate();
             }
+        }
+
+        private void HandleDragUpdate()
+        {
+            UpdateHandlePosition();
+            
+            Vector2 offset = _dragPosition - _centre;
+            _movement = offset / _maxRadius;
             
             _movement = GetDeadZoneAdjustedMovement(_movement);
+        }
+
+        private void HandleRelativeDragUpdate()
+        {
+            UpdateHandlePosition();
+
+            Vector2 offset = DragDelta * _relativeMovementSensitivity;
+            if (offset.magnitude > 1f)
+            {
+                offset = offset.normalized;
+            }
+            _movement = offset;
+        }
+
+        private void UpdateHandlePosition()
+        {
+            Transform handleTransform = transform;
+            
+            Vector2 offset = _dragPosition - _centre;
+            if (offset.magnitude > _maxRadius)
+            {
+                offset = offset.normalized * _maxRadius;
+            }
+
+            handleTransform.localPosition = _centre + offset;
+        }
+
+        private void HandleIdleUpdate()
+        {
+            Transform moverTransform = transform;
+            _movement = Vector2.zero;
+            
+            Vector3 position = moverTransform.localPosition;
+            Vector2 centreOffset = _centre - new Vector2(position.x, position.y);
+            float magnitude = centreOffset.magnitude;
+
+            if (magnitude <= 0.001f)
+            {
+                // already at centre
+                return;
+            }
+            
+            float normalisedMagnitude = magnitude / _maxRadius;
+            float returnDistance = _returnSpeed.Evaluate(normalisedMagnitude) * _returnSpeedMultiplier;
+            Vector2 returnVector = centreOffset;
+                
+            if (magnitude > returnDistance)
+            {
+                returnVector = returnVector.normalized * returnDistance;
+            }
+            moverTransform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
         }
 
         private Vector2 GetDeadZoneAdjustedMovement(Vector2 regularMovement)
@@ -119,14 +148,20 @@ namespace Code.UI
 
         public void OnDrag(PointerEventData eventData)
         {
+            Vector2 previousDragPosition = _dragPosition;
+            
             Vector3 screenToWorldPoint = _camera.ScreenToWorldPoint(eventData.position);
             _dragPosition = transform.parent.InverseTransformPoint(screenToWorldPoint);
+            
+            _dragDelta = _dragPosition - previousDragPosition;
+            _dragDeltaFrame = Time.frameCount;
         }
 
         private void UpdateConfigurableValues()
         {
             _useRelativeMovement = RemoteConfigHelper.MoverUIRelative;
             _deadZone = RemoteConfigHelper.MoverDeadZone;
+            _relativeMovementSensitivity = RemoteConfigHelper.MoverUIRelativeMovementSensitivity;
         }
     }
 }

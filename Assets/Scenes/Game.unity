@@ -13790,6 +13790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 1887249662}
   _maxRadius: 70
+  _relativeMovementSensitivity: 1
   _returnSpeedMultiplier: 5
   _returnSpeed:
     serializedVersion: 2
