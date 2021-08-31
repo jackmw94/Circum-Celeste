@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e4ad87d46540b39d889534a80c2bc3, type: 3}
   m_Name: Supersymmetry
   m_EditorClassIdentifier: 
+  _levelId: 5461155168724106986
   _escapeCriteria: 2
   _escapeTimer: 25
-  _tagLine: 
+  _tagLineLocalisationTerm: 
   _orbiterEnabled: 1
-  _powerEnabled: 0
+  _powerEnabled: 1
   _introduceElement: 0
   _exampleOrbiterEnabled: 0
   _gridSize: 9

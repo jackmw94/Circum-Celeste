@@ -17,7 +17,7 @@ MonoBehaviour:
   _escapeTimer: 25
   _tagLineLocalisationTerm: 
   _orbiterEnabled: 1
-  _powerEnabled: 0
+  _powerEnabled: 1
   _introduceElement: 0
   _exampleOrbiterEnabled: 0
   _gridSize: 11
