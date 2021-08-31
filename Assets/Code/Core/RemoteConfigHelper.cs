@@ -20,6 +20,7 @@ namespace Code.Core
         private const float DefaultPlayerSpeed = 5f;
         private const float DefaultSlingIntegralOffset = 0.7f;
         private const float DefaultSlingProportionalOffset = -0.2f;
+        private const float DefaultMoverDeadZone = 0.2f;
         
         [Serializable]
         public struct UserAttributes { }
@@ -42,6 +43,7 @@ namespace Code.Core
         public static float SlingIntegralOffset = DefaultSlingIntegralOffset;
         public static float SlingProportionalOffset = DefaultSlingProportionalOffset;
         public static string FeedbackProperties = "";
+        public static float MoverDeadZone = DefaultMoverDeadZone;
         //
         
 
@@ -92,6 +94,7 @@ namespace Code.Core
             SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
             SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
             FeedbackProperties = ConfigManager.appConfig.GetString(nameof(FeedbackProperties));
+            MoverDeadZone = ConfigManager.appConfig.GetFloat(nameof(MoverDeadZone));
         }
         
         private static void AssertConfigHasProperties()
@@ -107,6 +110,7 @@ namespace Code.Core
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingIntegralOffset)),$"There is no app config property for {nameof(SlingIntegralOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(FeedbackProperties)),$"There is no app config property for {nameof(FeedbackProperties)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverDeadZone)),$"There is no app config property for {nameof(MoverDeadZone)}");
         }
 
         private static void SaveConfigToPlayerPrefs()
@@ -122,6 +126,7 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), SlingIntegralOffset);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), SlingProportionalOffset);
             PlayerPrefs.SetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), FeedbackProperties);
+            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(MoverDeadZone)), MoverDeadZone);
         }
 
         private static void LoadConfigFromPlayerPrefs()
@@ -137,6 +142,7 @@ namespace Code.Core
             SlingIntegralOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), DefaultSlingIntegralOffset);
             SlingProportionalOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), DefaultSlingIntegralOffset);
             FeedbackProperties = PlayerPrefs.GetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), "");
+            MoverDeadZone = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(MoverDeadZone)), DefaultMoverDeadZone);
         }
 
         private static string PlayerPrefsKeyFromName(string propertyName)

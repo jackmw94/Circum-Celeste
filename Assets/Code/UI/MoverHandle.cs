@@ -14,6 +14,7 @@ namespace Code.UI
         [SerializeField] private bool _useSquaredMovement = true;
         [SerializeField] private bool _useRelativeMovement = false;
         [SerializeField] private float _relativeMovementThreshold = 0.1f;
+        [SerializeField] private float _deadZone = 0.1f;
 
         private Vector2 _movement;
         private Vector2 _dragPosition;
@@ -95,6 +96,15 @@ namespace Code.UI
                     moverTransform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
                 }
             }
+            
+            _movement = GetDeadZoneAdjustedMovement(_movement);
+        }
+
+        private Vector2 GetDeadZoneAdjustedMovement(Vector2 regularMovement)
+        {
+            float movementMagnitude = regularMovement.magnitude;
+            float adjustedMagnitude = Mathf.InverseLerp(_deadZone, 1f, movementMagnitude);
+            return regularMovement.normalized * adjustedMagnitude;
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -116,6 +126,7 @@ namespace Code.UI
         private void UpdateConfigurableValues()
         {
             _useRelativeMovement = RemoteConfigHelper.MoverUIRelative;
+            _deadZone = RemoteConfigHelper.MoverDeadZone;
         }
     }
 }
