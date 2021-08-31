@@ -38,11 +38,12 @@ namespace Code.Level
         public LevelLayoutContext LevelContext { get; } = new LevelLayoutContext();
 
         [Conditional("UNITY_EDITOR")]
-        private void Awake()
+        private void OnValidate()
         {
-            // for scriptable objects, awake only happens when the object is created - not when the application starts
-            CircumDebug.Assert(_levelId == 0, "Found a non-zero level id when initialising. This is only okay if we've just duplicated the asset");
-            _levelId = Utilities.RandomLong(Random.Range(int.MinValue, int.MaxValue));
+            if (_levelId == 0)
+            {
+                _levelId = Utilities.RandomLong(Random.Range(int.MinValue, int.MaxValue));
+            }
         }
 
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)
