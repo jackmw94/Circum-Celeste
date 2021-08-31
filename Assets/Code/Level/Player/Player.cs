@@ -7,7 +7,7 @@ namespace Code.Level.Player
 {
     public class Player : LevelElement
     {
-        private const float InvulnerableDurationAtLevelStart = 1.5f;
+        private const float OrbiterWontDamageForDurationAtLevelStart = 1.5f;
 
         [SerializeField] private GameObject _orbiter;
         [SerializeField] private PlayerHealth _health;
@@ -50,7 +50,10 @@ namespace Code.Level.Player
         public override void LevelStarted()
         {
             base.LevelStarted();
-            StartCoroutine(SetVulnerableAfterDelay());
+
+            _health.IsInvulnerable = false;
+            _health.OrbiterCanDamage = false;
+            StartCoroutine(SetOrbiterDamageOnAfterDelay());
 
             if (IsRecording)
             {
@@ -75,10 +78,10 @@ namespace Code.Level.Player
             VfxManager.Instance.SpawnVfx(VfxType.PlayerDied, transform.position);
         }
 
-        private IEnumerator SetVulnerableAfterDelay()
+        private IEnumerator SetOrbiterDamageOnAfterDelay()
         {
-            yield return new WaitForSeconds(InvulnerableDurationAtLevelStart);
-            _health.IsInvulnerable = false;
+            yield return new WaitForSeconds(OrbiterWontDamageForDurationAtLevelStart);
+            _health.OrbiterCanDamage = true;
         }
 
         private void TurnInputBehavioursOffOn(bool inputIsOn)

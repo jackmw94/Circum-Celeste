@@ -7,6 +7,8 @@ namespace Code.Level.Player
 {
     public class PlayerHealth : EntityHealth
     {
+        public bool OrbiterCanDamage { get; set; } = true;
+        
         protected override void OnHitTaken()
         {
             base.OnHitTaken();
@@ -36,7 +38,7 @@ namespace Code.Level.Player
             }
 #endif
             
-            return gameObj.IsOrbiter() || gameObj.IsEnemy();
+            return gameObj.IsEnemy() || (OrbiterCanDamage && gameObj.IsOrbiter());
         }
     }
 }
