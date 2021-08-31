@@ -15,25 +15,25 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
-        [MenuItem("Circum/Reset saved player stats")]
+        [MenuItem("Circum/Stats/Reset saved player stats")]
         public static void ResetSavedPlayerStats()
         {
             PlayerStats.ResetSavedPlayerStats();
         }
         
-        [MenuItem("Circum/Set starter player stats")]
+        [MenuItem("Circum/Stats/Set starter player stats")]
         public static void SetStarterPlayerStats()
         {
             PlayerStats.SetStarterPlayerStats();
         }
         
-        [MenuItem("Circum/Set perfect player stats")]
+        [MenuItem("Circum/Stats/Set perfect player stats")]
         public static void SetPerfectPlayerStats()
         {
             PlayerStats.SetPerfectPlayerStats();
         }
         
-        [MenuItem("Circum/Run validation")]
+        [MenuItem("Circum/Build/Run validation")]
         public static void RunValidation()
         {
             IEnumerable<IValidateable> validateables = Object.FindObjectsOfType<MonoBehaviour>().OfType<IValidateable>();
@@ -53,15 +53,36 @@ namespace Code.Debugging
             AutoTranslateScene(false);
         }
 
+        [MenuItem("Circum/Translate/Auto translate selected")]
+        public static void AutoTranslateSelected()
+        {
+            GameObject[] selected = Selection.gameObjects;
+            LeanPhrase[] phrases = selected.Select(p => p.GetComponent<LeanPhrase>()).Where(p => p).ToArray();
+            
+            if (phrases.Length == 0)
+            {
+                Debug.LogError("Could not find a phrase ");
+                return;
+            }
+
+            LeanLanguage[] languages = GetLanguages();
+            AutoTranslatePhrases(phrases, languages, true);
+        }
+
+        private static LeanLanguage[] GetLanguages()
+        {
+            LeanLocalization localisation = Object.FindObjectOfType<LeanLocalization>();
+            return localisation.Prefabs.Select(p => (p.Root as GameObject)?.GetComponent<LeanLanguage>()).ToArray();
+        }
+
         private static void AutoTranslateScene(bool force)
         {
             LeanPhrase[] phrases = Object.FindObjectsOfType<LeanPhrase>();
-            LeanLocalization localisation = Object.FindObjectOfType<LeanLocalization>();
-            LeanLanguage[] languages = localisation.Prefabs.Select(p => (p.Root as GameObject)?.GetComponent<LeanLanguage>()).ToArray();
+            LeanLanguage[] languages = GetLanguages();
 
             AutoTranslatePhrases(phrases, languages, force);
         }
-        
+
         private static void AutoTranslatePhrases(LeanPhrase[] phrases, LeanLanguage[] languages, bool force)
         {
             string englishLanguageName = "English";
@@ -75,7 +96,10 @@ namespace Code.Debugging
                     english = phrase.AddEntry(englishLanguageName, phrase.gameObject.name);
                 }
 
-                english.Text = phrase.name;
+                if (string.IsNullOrEmpty(english.Text))
+                {
+                    english.Text = phrase.name;
+                }
 
                 string textOutput = default;
                 string languageCodeInput = "en";

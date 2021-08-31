@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Code.Core;
 using Code.Debugging;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityExtras.Code.Core;
 using Random = UnityEngine.Random;
 
@@ -14,7 +15,7 @@ namespace Code.Level
         [SerializeField] private long _levelId = 0;
         [SerializeField] private EscapeCriteria _escapeCriteria;
         [SerializeField] private float _escapeTimer = 25f;
-        [SerializeField] private string _tagLine = "";
+        [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
         [SerializeField] private bool _orbiterEnabled = true;
         [SerializeField] private bool _powerEnabled = false;
         [SerializeField] private IntroduceElement _introduceElement;
@@ -26,7 +27,7 @@ namespace Code.Level
         public int GridSize => _gridSize;
         public EscapeCriteria EscapeCriteria => _escapeCriteria;
         public float EscapeTimer => _escapeTimer;
-        public string TagLine => _tagLine;
+        public string TagLineLocalisationTerm => _tagLineLocalisationTerm;
         public bool OrbiterEnabled => _orbiterEnabled;
         public bool PowerEnabled => _powerEnabled;
         public IntroduceElement IntroduceElement => _introduceElement;

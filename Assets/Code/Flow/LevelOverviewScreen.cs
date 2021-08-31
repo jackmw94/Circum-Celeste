@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Debugging;
 using Code.Level;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Code.Flow
 {
     public class LevelOverviewScreen : MonoBehaviour
     {
+        private const string LevelDurationTokenName = "LevelDuration";
+        
         [SerializeField] private TextMeshProUGUI _levelNumber;
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
@@ -36,12 +39,24 @@ namespace Code.Flow
             _levelNumber.enabled = levelNumber > 0;
             
             _levelName.text = levelLayout.name;
-            _levelTag.text = levelLayout.TagLine;
+
+            SetTagString(levelLayout);
 
             _perfectIcon.SetActive(isPerfect);
             _playLevelCallback = playLevelCallback;
         }
 
+        private void SetTagString(LevelLayout levelLayout)
+        {
+            string escapeTimeString = Mathf.RoundToInt(levelLayout.EscapeTimer).ToString();
+            Lean.Localization.LeanLocalization.SetToken(LevelDurationTokenName, escapeTimeString);
+            
+            string tagText = Lean.Localization.LeanLocalization.GetTranslationText(levelLayout.TagLineLocalisationTerm, "");
+            CircumDebug.Assert(string.IsNullOrEmpty(levelLayout.TagLineLocalisationTerm) == string.IsNullOrEmpty(tagText), $"Error getting localisation term {levelLayout.TagLineLocalisationTerm} (localised='{tagText}')");
+            
+            _levelTag.text = tagText;
+        }
+        
         private void PlayButtonClicked()
         {
             _playLevelCallback();

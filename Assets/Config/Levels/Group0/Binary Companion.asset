@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e4ad87d46540b39d889534a80c2bc3, type: 3}
   m_Name: Binary Companion
   m_EditorClassIdentifier: 
+  _levelId: 2695128711601143431
   _escapeCriteria: 0
   _escapeTimer: 10
-  _tagLine: Orbit for 10 seconds
+  _tagLineLocalisationTerm: OrbitForTime
   _orbiterEnabled: 1
   _powerEnabled: 0
   _introduceElement: 0
