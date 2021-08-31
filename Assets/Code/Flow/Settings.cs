@@ -22,6 +22,7 @@ namespace Code.Flow
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _toggleDuration = 0.25f;
         [Space(15)]
+        [SerializeField] private Button _restartLevelButton;
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
@@ -36,6 +37,7 @@ namespace Code.Flow
         {
             _toggleSettingsButton.onClick.AddListener(SettingsButtonClicked);
             _backButton.onClick.AddListener(BackButtonListener);
+            _restartLevelButton.onClick.AddListener(RestartLevel);
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
@@ -47,6 +49,7 @@ namespace Code.Flow
         {
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
             _backButton.onClick.RemoveListener(BackButtonListener);
+            _restartLevelButton.onClick.RemoveListener(RestartLevel);
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
@@ -79,6 +82,12 @@ namespace Code.Flow
         private void BackButtonListener()
         {
             _levelManager.ExitLevel();
+            SettingsButtonClicked();
+        }
+
+        private void RestartLevel()
+        {
+            _levelManager.CreateCurrentLevel();
             SettingsButtonClicked();
         }
 
