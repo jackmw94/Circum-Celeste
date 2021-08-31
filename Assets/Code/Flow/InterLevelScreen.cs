@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using Code.UI;
@@ -109,12 +110,12 @@ namespace Code.Flow
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(EditorKeyCodeBindings.PreviousLevel))
             {
                 PreviousLevelButtonListener();
             }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(EditorKeyCodeBindings.NextLevel))
             {
                 NextLevelButtonListener();
             }

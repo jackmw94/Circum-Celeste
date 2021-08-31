@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Debugging;
+using UnityEngine;
 
 namespace Code.Level.Player
 {
@@ -16,10 +17,8 @@ namespace Code.Level.Player
 #if UNITY_EDITOR
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1)) _inputProvider = InputProvider.CreateInputProvider<KeyboardInputProvider>();
-            if (Input.GetKeyDown(KeyCode.Alpha2)) _inputProvider = InputProvider.CreateInputProvider<MouseInputProvider>();
-            if (Input.GetKeyDown(KeyCode.Alpha3)) _inputProvider = InputProvider.CreateInputProvider<ControllerInputProvider>();
-            if (Input.GetKeyDown(KeyCode.Alpha4)) _inputProvider = InputProvider.CreateInputProvider<UIInputProvider>();
+            if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToKeyboardInput)) _inputProvider = InputProvider.CreateInputProvider<KeyboardInputProvider>();
+            if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToUIInput)) _inputProvider = InputProvider.CreateInputProvider<UIInputProvider>();
         }
 #endif
     }

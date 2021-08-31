@@ -66,12 +66,6 @@ namespace Code.Flow
             TurnSettingsOnOff(_settingsOn);
         }
         
-        private void NextLevelButtonListener()
-        {
-            SkipLevel();
-            //SettingsButtonClicked();
-        }
-
         private void SkipLevel()
         {
             _playerStatsManager.SetSkippedLevel();
