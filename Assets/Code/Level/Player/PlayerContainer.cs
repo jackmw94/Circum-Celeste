@@ -16,10 +16,15 @@ namespace Code.Level.Player
         }
         
         [SerializeField] private InputType[] _playersInputs;
+        [SerializeField] private InputType[] _editorPlayersInputs;
+
+        private InputType[] _activePlayerInputs = null;
+        private InputType[] PlayerInputs => _activePlayerInputs ??= Application.isEditor ? _editorPlayersInputs : _playersInputs;
 
         private void Awake()
         {
-            CircumDebug.Assert(_playersInputs.Length > 0, "There are no players defined in player container. Probably not what we want..");
+            CircumDebug.Assert(_playersInputs.Length > 0, "There are no platform players defined in player container. Probably not what we want..");
+            CircumDebug.Assert(_editorPlayersInputs.Length > 0, "There are no editor players defined in player container. Probably not what we want..");
         }
 
         public InputProvider[] GetPlayerInputProviders(LevelRecording levelRecording)
@@ -34,7 +39,7 @@ namespace Code.Level.Player
                 };
             }
 
-            return _playersInputs.Select(CreateInputProvider).ToArray();
+            return PlayerInputs.Select(CreateInputProvider).ToArray();
         }
 
         private static InputProvider CreateInputProvider(InputType inputType)
