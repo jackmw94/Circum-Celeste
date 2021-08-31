@@ -2,12 +2,12 @@
 using System.Linq;
 using Code.Level.Player;
 using Lean.Localization;
-using Lean.Localization.Editor;
 using UnityEditor;
 using UnityExtras.Code.Core;
 
 #if UNITY_EDITOR
 using UnityEngine;
+using Lean.Localization.Editor;
 #endif
 
 namespace Code.Debugging
