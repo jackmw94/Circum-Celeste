@@ -6773,8 +6773,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _frequency: 15
-  _addShakeMagnitude: 1.5
-  _maximumShakeMagnitude: 3
+  _addShakeMagnitude: 1.3
+  _maximumShakeMagnitude: 2
   _calmDownTime: 0.6
   _debugAddShakeFactor: 1
   _debugAddShake: 0
