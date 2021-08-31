@@ -149,11 +149,33 @@ namespace Code.Level.Player
                 _perfectLevelRecordings = new List<LevelRecording>()
             };
         }
+        
+        public static PlayerStats CreatePerfectPlayerStats()
+        {
+            return new PlayerStats
+            {
+                _completedTutorials = true,
+                _highestLevelReachedIndex = int.MaxValue,
+                _highestPerfectLevelReachedIndex = int.MaxValue,
+                _highestNoDeathLevelReachedIndex = int.MaxValue,
+                _runTracker = new RunTracker(),
+                _levelRecordings = new List<LevelRecording>(),
+                _perfectLevelRecordings = new List<LevelRecording>()
+            };
+        }
 
         /// <summary>
         /// Starter stats are empty but have tutorials completed flag set to true
         /// </summary>
         public static void SetStarterPlayerStats()
+        {
+            Save(CreateStarterPlayerStats());
+        }
+        
+        /// <summary>
+        /// Perfect stats have max levels reached
+        /// </summary>
+        public static void SetPerfectPlayerStats()
         {
             Save(CreateStarterPlayerStats());
         }

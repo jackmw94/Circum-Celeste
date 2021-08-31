@@ -22,6 +22,12 @@ namespace Code.Debugging
             PlayerStats.SetStarterPlayerStats();
         }
         
+        [MenuItem("Circum/Set perfect player stats")]
+        public static void SetPerfectPlayerStats()
+        {
+            PlayerStats.SetPerfectPlayerStats();
+        }
+        
         [MenuItem("Circum/Run validation")]
         public static void RunValidation()
         {
