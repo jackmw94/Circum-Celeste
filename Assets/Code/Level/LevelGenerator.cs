@@ -43,11 +43,12 @@ namespace Code.Level
             List<Pickup> allPickups = pickupObjects.Select(p => p.GetComponentInChildren<Pickup>()).ToList();
             List<Enemy> allEnemies = followerEnemyObjects.Select(p => p.GetComponentInChildren<Enemy>()).ToList();
             List<Escape> allEscapes = escapeObjects.Select(p => p.GetComponentInChildren<Escape>()).ToList();
+            List<Hazard> allHazards = hazardObjects.Select(p => p.GetComponentInChildren<Hazard>()).ToList();
 
             // Initialise level instance
             LevelInstance levelInstance = _cellsRoot.gameObject.AddComponent<LevelInstance>();
             levelInstance.name = level.name;
-            levelInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes);
+            levelInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards);
 
             return levelInstance;
         }

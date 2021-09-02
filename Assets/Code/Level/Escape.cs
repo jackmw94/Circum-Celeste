@@ -1,11 +1,12 @@
 ﻿using System;
 using Code.Core;
+using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
 
 namespace Code.Level
 {
-    public class Escape : MonoBehaviour
+    public class Escape : Collectable
     {
         private Action _onEscapeEntered = null;
 
@@ -13,29 +14,21 @@ namespace Code.Level
         {
             _onEscapeEntered = onEscapedCallback;
         }
+
+        protected override bool CanObjectCollect(GameObject other)
+        {
+            return other.IsPlayer();
+        }
         
-        private void OnCollisionEnter(Collision other)
-        {
-            HandleCollision(other.gameObject);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            HandleCollision(other.gameObject);
-        }
-
-        private void HandleCollision(GameObject other)
-        {
-            if (other.IsPlayer())
-            {
-                EscapeEntered();
-            }
-        }
-
-        private void EscapeEntered()
+        protected override void CollectableCollected(Vector3 _)
         {
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
             _onEscapeEntered?.Invoke();
+        }
+
+        protected override bool DoesReplayCollect(LevelRecordFrameData frameReplay, int index, out Vector3 hitFrom)
+        {
+            throw new NotImplementedException();
         }
     }
 }

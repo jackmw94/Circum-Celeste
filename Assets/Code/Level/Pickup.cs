@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Level
 {
-    public class Pickup : MonoBehaviour
+    public class Pickup : Collectable
     {
         [SerializeField] private SphereCollider _collider;
         
@@ -26,29 +26,8 @@ namespace Code.Level
             _collider.radius = RemoteConfigHelper.PickupColliderSize;
         }
         
-        private void OnCollisionEnter(Collision other)
+        protected override void CollectableCollected(GameObject collectedBy)
         {
-            HandleCollision(other.gameObject);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            HandleCollision(other.gameObject);
-        }
-
-        private void HandleCollision(GameObject other)
-        {
-            bool collectedByOrbiter = other.IsOrbiter();
-        
-            if (collectedByOrbiter)
-            {
-                Collected(other);
-            }
-        }
-
-        private void Collected(GameObject collectedBy)
-        {
-            IsCollected = true;
             gameObject.SetActive(false);
             
             Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CollectedPickup);
