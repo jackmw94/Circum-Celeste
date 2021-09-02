@@ -13,6 +13,7 @@ namespace Code.Core
         private const float DefaultEnemyColliderRadius = 0.5f;
         private const bool DefaultMoverUIRelative = false;
         private const float DefaultMoverUIRelativeMovementSensitivity = 1;
+        private const float DefaultMoverUIRelativeMovementRatio = 0.5f;
         private const float DefaultOrbiterD = 0f;
         private const float DefaultOrbiterI = 0.3f;
         private const float DefaultOrbiterP = 0.01f;
@@ -36,6 +37,7 @@ namespace Code.Core
         public static float EnemyColliderRadius = DefaultEnemyColliderRadius;
         public static bool MoverUIRelative = DefaultMoverUIRelative;
         public static float MoverUIRelativeMovementSensitivity = DefaultMoverUIRelativeMovementSensitivity;
+        public static float MoverUIRelativeMovementRatio = DefaultMoverUIRelativeMovementRatio;
         public static float OrbiterD = DefaultOrbiterD;
         public static float OrbiterI = DefaultOrbiterI;
         public static float OrbiterP = DefaultOrbiterP;
@@ -88,6 +90,7 @@ namespace Code.Core
             EnemyColliderRadius = ConfigManager.appConfig.GetFloat(nameof(EnemyColliderRadius), DefaultEnemyColliderRadius);
             MoverUIRelative = ConfigManager.appConfig.GetBool(nameof(MoverUIRelative));
             MoverUIRelativeMovementSensitivity = ConfigManager.appConfig.GetFloat(nameof(MoverUIRelativeMovementSensitivity));
+            MoverUIRelativeMovementRatio = ConfigManager.appConfig.GetFloat(nameof(MoverUIRelativeMovementRatio));
             OrbiterD = ConfigManager.appConfig.GetFloat(nameof(OrbiterD));
             OrbiterI = ConfigManager.appConfig.GetFloat(nameof(OrbiterI), DefaultOrbiterI);
             OrbiterP = ConfigManager.appConfig.GetFloat(nameof(OrbiterP), DefaultOrbiterP);
@@ -105,6 +108,7 @@ namespace Code.Core
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelative)),$"There is no app config property for {nameof(MoverUIRelative)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelativeMovementSensitivity)),$"There is no app config property for {nameof(MoverUIRelativeMovementSensitivity)}");
+            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelativeMovementRatio)),$"There is no app config property for {nameof(MoverUIRelativeMovementRatio)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterD)),$"There is no app config property for {nameof(OrbiterD)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterI)),$"There is no app config property for {nameof(OrbiterI)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterP)),$"There is no app config property for {nameof(OrbiterP)}");
@@ -122,6 +126,7 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(EnemyColliderRadius)), EnemyColliderRadius);
             PlayerPrefs.SetInt(PlayerPrefsKeyFromName(nameof(MoverUIRelative)), MoverUIRelative ? 1 : 0);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(MoverUIRelativeMovementSensitivity)), MoverUIRelativeMovementSensitivity);
+            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(MoverUIRelativeMovementRatio)), MoverUIRelativeMovementRatio);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterD)), OrbiterD);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterI)), OrbiterI);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), OrbiterP);
@@ -139,6 +144,7 @@ namespace Code.Core
             EnemyColliderRadius = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(EnemyColliderRadius)), DefaultEnemyColliderRadius);
             MoverUIRelative = PlayerPrefs.GetInt(PlayerPrefsKeyFromName(nameof(MoverUIRelative)), DefaultMoverUIRelative ? 1 : 0) == 1;
             MoverUIRelativeMovementSensitivity = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(MoverUIRelativeMovementSensitivity)), DefaultMoverUIRelativeMovementSensitivity);
+            MoverUIRelativeMovementSensitivity = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(MoverUIRelativeMovementRatio)), DefaultMoverUIRelativeMovementRatio);
             OrbiterD = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterD)), DefaultOrbiterD);
             OrbiterI = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterI)), DefaultOrbiterI);
             OrbiterP = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP)), DefaultOrbiterP);

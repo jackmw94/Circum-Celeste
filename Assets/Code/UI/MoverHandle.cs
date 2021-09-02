@@ -14,6 +14,7 @@ namespace Code.UI
         [SerializeField] private AnimationCurve _returnSpeed;
         [SerializeField] private bool _useSquaredMovement = true;
         [SerializeField] private bool _useRelativeMovement = false;
+        [SerializeField] private float _relativeMovementRatio = 0f;
         [SerializeField] private float _deadZone = 0.1f;
 
         private Vector2 _movement;
@@ -53,14 +54,19 @@ namespace Code.UI
         {
             if (_isDragging)
             {
+                UpdateHandlePosition();
+                
                 if (_useRelativeMovement)
                 {
-                    HandleRelativeDragUpdate();
+                    Vector2 relativeMovement = HandleRelativeDragUpdate(DragDelta, _relativeMovementSensitivity);
+                    Vector2 regularMovement = HandleDragUpdate(_dragPosition, _centre, _maxRadius, _deadZone);
+                    _movement = _relativeMovementRatio * relativeMovement + (1f - _relativeMovementRatio) * regularMovement;
                 }
                 else
                 {
-                    HandleDragUpdate();
+                    _movement = HandleDragUpdate(_dragPosition, _centre, _maxRadius, _deadZone);
                 }
+                
             }
             else
             {
@@ -68,26 +74,23 @@ namespace Code.UI
             }
         }
 
-        private void HandleDragUpdate()
+        private static Vector2 HandleDragUpdate(Vector2 dragPosition, Vector2 centre, float maxRadius, float deadZone)
         {
-            UpdateHandlePosition();
+            Vector2 offset = dragPosition - centre;
+            Vector2 movement = offset / maxRadius;
             
-            Vector2 offset = _dragPosition - _centre;
-            _movement = offset / _maxRadius;
-            
-            _movement = GetDeadZoneAdjustedMovement(_movement);
+            movement = GetDeadZoneAdjustedMovement(movement, deadZone);
+            return movement;
         }
 
-        private void HandleRelativeDragUpdate()
+        private static Vector2 HandleRelativeDragUpdate(Vector2 dragDelta, float relativeMovementSensitivity)
         {
-            UpdateHandlePosition();
-
-            Vector2 offset = DragDelta * _relativeMovementSensitivity;
-            if (offset.magnitude > 1f)
+            Vector2 movement = dragDelta * relativeMovementSensitivity;
+            if (movement.magnitude > 1f)
             {
-                offset = offset.normalized;
+                movement = movement.normalized;
             }
-            _movement = offset;
+            return movement;
         }
 
         private void UpdateHandlePosition()
@@ -129,10 +132,10 @@ namespace Code.UI
             moverTransform.localPosition += new Vector3(returnVector.x, returnVector.y, 0f);
         }
 
-        private Vector2 GetDeadZoneAdjustedMovement(Vector2 regularMovement)
+        private static Vector2 GetDeadZoneAdjustedMovement(Vector2 regularMovement, float deadZone)
         {
             float movementMagnitude = regularMovement.magnitude;
-            float adjustedMagnitude = Mathf.InverseLerp(_deadZone, 1f, movementMagnitude);
+            float adjustedMagnitude = Mathf.InverseLerp(deadZone, 1f, movementMagnitude);
             return regularMovement.normalized * adjustedMagnitude;
         }
 
@@ -160,6 +163,7 @@ namespace Code.UI
         private void UpdateConfigurableValues()
         {
             _useRelativeMovement = RemoteConfigHelper.MoverUIRelative;
+            _relativeMovementRatio = RemoteConfigHelper.MoverUIRelativeMovementRatio;
             _deadZone = RemoteConfigHelper.MoverDeadZone;
             _relativeMovementSensitivity = RemoteConfigHelper.MoverUIRelativeMovementSensitivity;
         }

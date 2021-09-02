@@ -29,7 +29,10 @@ namespace Code.Level.Player
                 Vector3 position = transform.position;
                 
                 Vector3 movement = InputProvider.GetMovementInput(position);
-                movement = movement.normalized;
+                if (movement.magnitude > 1)
+                {
+                    movement = movement.normalized;
+                }
                 position += movement * (Time.deltaTime * _speed);
                 
                 transform.position = position;
