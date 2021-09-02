@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Level.Player
 {
-    public class PlayerMover : MonoBehaviour
+    public class PlayerMover : LevelPlayBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private PlayerInput _playerInput;

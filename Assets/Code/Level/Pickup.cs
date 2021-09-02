@@ -10,7 +10,6 @@ namespace Code.Level
     {
         [SerializeField] private SphereCollider _collider;
         
-        public bool IsCollected { get; private set; }
 
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
@@ -26,14 +25,14 @@ namespace Code.Level
             _collider.radius = RemoteConfigHelper.PickupColliderSize;
         }
         
-        protected override void CollectableCollected(GameObject collectedBy)
+        protected override void CollectableCollected(Vector3 hitFrom)
         {
             gameObject.SetActive(false);
             
             Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CollectedPickup);
 
             Vector3 transformPosition = transform.position;
-            Vector3 direction = transformPosition - collectedBy.transform.position;
+            Vector3 direction = transformPosition - hitFrom;
             VfxManager.Instance.SpawnVfx(VfxType.PickupCollected, transformPosition, direction);
         }
     }

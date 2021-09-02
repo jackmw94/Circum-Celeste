@@ -10,6 +10,7 @@ namespace Code.Level.Player
     [Serializable]
     public class PlayerStats
     {
+        private const bool CompressData = true;
         private const string PlayerPrefsKey = "Circum_PlayerStats";
         private const int StatsDataVersion = 1;
 
@@ -96,14 +97,22 @@ namespace Code.Level.Player
             return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}\n{(_levelRecordings == null ? "NULL" : _levelRecordings.JoinToString("\n"))}";
         }
 
-        public static void Save(PlayerStats stats)
+        public static string Save(PlayerStats stats)
         {
             stats._statsVersion = StatsDataVersion;
             
             string serialized = JsonUtility.ToJson(stats);
+
+            // if (CompressData)
+            // {
+            //     serialized = Com
+            // }
+            
             PlayerPrefs.SetString(PlayerPrefsKey, serialized);
             PlayerPrefs.Save();
             CircumDebug.Log($"Saved player stats: {stats}");
+
+            return serialized;
         }
         
         public static PlayerStats Load()

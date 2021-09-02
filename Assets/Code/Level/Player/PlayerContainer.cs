@@ -27,18 +27,8 @@ namespace Code.Level.Player
             CircumDebug.Assert(_editorPlayersInputs.Length > 0, "There are no editor players defined in player container. Probably not what we want..");
         }
 
-        public InputProvider[] GetPlayerInputProviders(LevelRecording levelRecording)
+        public InputProvider[] GetPlayerInputProviders()
         {
-            if (levelRecording != null)
-            {
-                MovementReplayer movementReplayer = new MovementReplayer();
-                movementReplayer.Initialise(levelRecording.RecordingData.FrameData);
-                return new InputProvider[]
-                {
-                    movementReplayer
-                };
-            }
-
             return PlayerInputs.Select(CreateInputProvider).ToArray();
         }
 

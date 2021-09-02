@@ -1,18 +1,16 @@
-﻿using System;
-using Code.Core;
-using Code.Level.Player;
+﻿using Code.Core;
 using Code.VFX;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
     public class Escape : Collectable
     {
-        private Action _onEscapeEntered = null;
-
-        public void SetEscapeCallback(Action onEscapedCallback)
+        public override void LevelSetup()
         {
-            _onEscapeEntered = onEscapedCallback;
+            base.LevelSetup();
+            gameObject.SetActiveSafe(false);
         }
 
         protected override bool CanObjectCollect(GameObject other)
@@ -23,12 +21,6 @@ namespace Code.Level
         protected override void CollectableCollected(Vector3 _)
         {
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
-            _onEscapeEntered?.Invoke();
-        }
-
-        protected override bool DoesReplayCollect(LevelRecordFrameData frameReplay, int index, out Vector3 hitFrom)
-        {
-            throw new NotImplementedException();
         }
     }
 }
