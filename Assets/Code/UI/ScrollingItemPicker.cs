@@ -59,6 +59,11 @@ namespace Code.UI
             _isScrollRectInteractedWith = false;
         }
 
+        public void SetScrollingEnabled(bool scrollingEnabled)
+        {
+            _scrollRect.enabled = scrollingEnabled;
+        }
+        
         public void SetToItemAtIndex(int index)
         {
             Selectable selectedItem = _items[index];

@@ -4,11 +4,11 @@ using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Core
 {
-#if UNITY_EDITOR
     public class CheatsManager : SingletonMonoBehaviour<CheatsManager>
     {
-        public bool PlayerHealthLossDisabled;
-        public bool EnemyHealthLossDisabled;
+#if UNITY_EDITOR
+        public bool PlayerHealthLossDisabled { get; private set; }
+        public bool EnemyHealthLossDisabled { get; private set; }
 
         private void Update()
         {
@@ -29,6 +29,6 @@ namespace Code.Core
         {
             return value ? "on" : "off";
         }
-    }
 #endif
+    }
 }

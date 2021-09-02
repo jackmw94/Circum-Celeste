@@ -78,6 +78,7 @@ namespace Code.Flow
             _levelOverviewScreen.SetupLevelOverview(levelLayout, perfectLevelRecording != null, PlayLevel);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
+            _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial);
             
             SetNextPreviousButtonsActive();
         }
