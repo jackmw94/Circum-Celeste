@@ -14,7 +14,7 @@ namespace Code.Level
 
         private void Awake()
         {
-            _gravitationalMover.enabled = false;
+            if (_gravitationalMover) _gravitationalMover.enabled = false;
             _collider.radius = RemoteConfigHelper.EnemyColliderRadius;
         }
 
@@ -24,10 +24,14 @@ namespace Code.Level
             
             Player.Player[] allPlayers = FindObjectsOfType<Player.Player>();
             Transform targetPlayer = allPlayers.GetNext(0, Random.Range(0,10)).transform;
-            
-            _gravitationalMover.SetTarget(targetPlayer);
-            _gravitationalMover.enabled = true;
-            
+
+            if (_gravitationalMover)
+            {
+                // not present when replaying
+                _gravitationalMover.SetTarget(targetPlayer);
+                _gravitationalMover.enabled = true;
+            }
+
             _enemyHealth.ResetHealth();
         }
 
@@ -35,7 +39,7 @@ namespace Code.Level
         {
             base.LevelFinished();
 
-            _gravitationalMover.enabled = false;
+            if (_gravitationalMover) _gravitationalMover.enabled = false;
         }
     }
 }

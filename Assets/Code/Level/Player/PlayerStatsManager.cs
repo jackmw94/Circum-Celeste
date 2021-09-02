@@ -69,9 +69,9 @@ namespace Code.Level.Player
             PlayerStats.Save(_playerStats);
         }
 
-        private void SaveStats()
+        public string SaveStats()
         {
-            PlayerStats.Save(_playerStats);
+            return PlayerStats.Save(_playerStats);
         }
     }
 }

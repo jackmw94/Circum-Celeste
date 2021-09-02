@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Level.Player
 {
-    public class SlingController : MonoBehaviour
+    public class SlingController : LevelPlayBehaviour
     {
         [SerializeField] private float _integralOffset = 0.7f;
         [SerializeField] private float _proportionalOffset = -0.2f;

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Code.Core;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
@@ -17,10 +16,24 @@ namespace Code.Level
         [SerializeField] private PlayerStatsManager _playerStatsManager;
         
         private Coroutine _startLevelOnceMovedCoroutine = null;
-        private bool _isReplaying = false;
         
-        public LevelInstance CurrentLevel { get; private set; }
-        
+        public LevelInstanceBase CurrentLevel { get; private set; }
+
+        public void CreateCurrentLevel(LevelRecording replay = null)
+        {
+            if (!_interLevelFlow.IsOverlaid)
+            {
+                _interLevelFlow.ShowHideUI(() =>
+                {
+                    CreateLevelInternal(replay);
+                });
+            }
+            else
+            {
+                CreateLevelInternal(replay);
+            }
+        }
+
         public void ExitLevel()
         {
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
@@ -40,29 +53,21 @@ namespace Code.Level
         {
             _levelGenerator.DestroyLevel();
         }
-        
-        public void CreateCurrentLevel(LevelRecording replay = null)
-        {
-            _isReplaying = replay != null;
-
-            if (!_interLevelFlow.IsOverlaid)
-            {
-                _interLevelFlow.ShowHideUI(() =>
-                {
-                    CreateLevelInternal(replay);
-                });
-            }
-            else
-            {
-                CreateLevelInternal(replay);
-            }
-        }
 
         private void CreateLevelInternal(LevelRecording replay)
         {
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
-            InputProvider[] inputProviders = _playerContainer.GetPlayerInputProviders(replay);
-            LevelInstance levelInstance = GenerateLevel(levelLayout, inputProviders);
+            
+            bool isReplay = replay != null;
+            if (isReplay)
+            {
+                CurrentLevel = _levelGenerator.GenerateReplay(replay.RecordingData.FrameData, levelLayout);
+            }
+            else
+            {
+                InputProvider[] inputProviders = _playerContainer.GetPlayerInputProviders();
+                CurrentLevel = _levelGenerator.GenerateLevel(inputProviders, levelLayout);
+            }
 
             if (levelLayout.LevelContext.IsFirstLevel)
             {
@@ -75,32 +80,27 @@ namespace Code.Level
             {
                 StopCoroutine(_startLevelOnceMovedCoroutine);
             }
-            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelWhenReady(levelInstance));
+            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelWhenReady());
         }
-
-        private LevelInstance GenerateLevel(LevelLayout levelLayout, InputProvider[] inputProviders)
-        {
-            LevelInstance levelInstance = _levelGenerator.GenerateLevel(inputProviders, levelLayout);
-            return levelInstance;
-        }
-
-        private IEnumerator StartLevelWhenReady(LevelInstance level)
+        
+        private IEnumerator StartLevelWhenReady()
         {
             _interLevelFlow.HideInterLevelUI();
             yield return new WaitUntil(() => !_interLevelFlow.IsOverlaid);
             
-            level.LevelReady();
+            CurrentLevel.LevelReady();
             
-            yield return new WaitUntil(() => level.PlayerIsMoving);
+            yield return new WaitUntil(() => CurrentLevel.PlayerStartedPlaying);
 
-            CircumDebug.Log($"Level '{level.name}' has started");
-            CurrentLevel = level;
-            level.StartLevel(OnLevelFinished);
+            CircumDebug.Log($"Level '{CurrentLevel.name}' has started");
+            CurrentLevel.StartLevel(OnLevelFinished);
         }
 
         private void OnLevelFinished(LevelResult levelResult)
         {
-            if (levelResult.Success && !_isReplaying)
+            bool isReplay = levelResult == null;
+            
+            if (!isReplay && levelResult.Success)
             {
                 LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
                 LevelLayoutContext levelContext = currentLevel.LevelContext;
@@ -116,24 +116,6 @@ namespace Code.Level
             }
             
             _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
-        }
-
-        [ContextMenu(nameof(ReplayLevel))]
-        public void ReplayLevel()
-        {
-            LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
-            int levelIndex = currentLevel.LevelContext.LevelIndex;
-            LevelRecording recording = _playerStatsManager.PlayerStats.GetRecordingForLevelAtIndex(levelIndex, false);
-            
-            CircumDebug.Assert(recording != null, $"Trying to replay level but could not find a replay for index {levelIndex}");
-            CreateCurrentLevel(recording);
-        }
-
-        [ContextMenu(nameof(GenerateDebugLevel))]
-        private LevelInstance GenerateDebugLevel()
-        {
-            InputProvider[] inputProviders = _playerContainer.GetPlayerInputProviders(null);
-            return GenerateLevel(_levelProvider.GetCurrentLevel(), inputProviders);
         }
     }
 }

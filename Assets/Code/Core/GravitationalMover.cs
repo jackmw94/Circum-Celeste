@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Code.Level.Player;
+using UnityEngine;
 
 namespace Code.Core
 {
-    public class GravitationalMover : MonoBehaviour
+    public class GravitationalMover : LevelPlayBehaviour
     {
         [SerializeField] protected PidController _xPidController;
         [SerializeField] protected PidController _yPidController;

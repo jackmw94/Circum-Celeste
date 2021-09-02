@@ -9,12 +9,11 @@ namespace Code.Level.Player
     {
         private const float OrbiterWontDamageForDurationAtLevelStart = 1.5f;
 
-        [SerializeField] private GameObject _orbiter;
+        [SerializeField] private Orbiter _orbiter;
         [SerializeField] private PlayerHealth _health;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private PlayerMover _mover;
         [SerializeField] private SlingController _sling;
-        [SerializeField] private MovementRecorder _movementRecorder;
 
         public bool IsRecording { get; private set; } = false;
         public bool IsMoving => _mover.IsMoving;
@@ -37,13 +36,14 @@ namespace Code.Level.Player
             _health.ResetHealth();
 
             _sling.SlingEnabled = powerEnabled;
-            _orbiter.SetActive(orbiterEnabled);
+            _orbiter.gameObject.SetActive(orbiterEnabled);
 
             _input.Initialise(inputProvider);
         }
 
-        public void LevelReady()
+        public override void LevelReady()
         {
+            base.LevelReady();
             TurnInputBehavioursOffOn(true);
         }
 
@@ -54,11 +54,6 @@ namespace Code.Level.Player
             _health.IsInvulnerable = false;
             _health.OrbiterCanDamage = false;
             StartCoroutine(SetOrbiterDamageOnAfterDelay());
-
-            if (IsRecording)
-            {
-                _movementRecorder.StartRecording();
-            }
         }
 
         public override void LevelFinished()
@@ -68,8 +63,6 @@ namespace Code.Level.Player
             TurnInputBehavioursOffOn(false);
             _health.IsInvulnerable = true;
             gameObject.SetActive(false);
-            
-            _movementRecorder.StopRecording();
         }
 
         private void PlayerDied()
@@ -87,21 +80,6 @@ namespace Code.Level.Player
         private void TurnInputBehavioursOffOn(bool inputIsOn)
         {
             _mover.MovementEnabled = inputIsOn;
-        }
-
-        public LevelRecordingData GetLevelRecording()
-        {
-            if (!IsRecording)
-            {
-                return null;
-            }
-            
-            return new LevelRecordingData
-            {
-                FrameData = _movementRecorder.FrameData,
-                LevelTime = _movementRecorder.Duration
-            };
-
         }
     }
 }

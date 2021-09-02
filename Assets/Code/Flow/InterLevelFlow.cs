@@ -88,7 +88,7 @@ namespace Code.Flow
 
         private IEnumerator ShowOverlayCoroutine(bool instant)
         {
-            LevelInstance currentLevel = _levelManager.CurrentLevel;
+            LevelInstanceBase currentLevel = _levelManager.CurrentLevel;
             
             Vector3 playerPosition = Vector3.one / 2f;
             if (currentLevel)

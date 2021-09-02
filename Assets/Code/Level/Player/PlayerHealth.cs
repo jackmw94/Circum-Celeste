@@ -1,6 +1,5 @@
 ﻿using Code.Core;
 using Code.Juice;
-using Code.VFX;
 using UnityEngine;
 
 namespace Code.Level.Player

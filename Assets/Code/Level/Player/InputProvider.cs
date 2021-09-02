@@ -1,5 +1,4 @@
-﻿using Code.Core;
-using Code.Debugging;
+﻿using Code.Debugging;
 using UnityEngine;
 
 namespace Code.Level.Player

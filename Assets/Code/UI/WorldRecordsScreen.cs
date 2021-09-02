@@ -27,6 +27,7 @@ namespace Code.UI
                 timeLabel.text = levelRecording.RecordingData.LevelTime.ToString("0.00");
                 
                 replayButton.interactable = true;
+                replayButton.onClick.RemoveAllListeners();
                 replayButton.onClick.AddListener(() =>
                 {
                     replayCallback(levelRecording);

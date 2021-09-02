@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityExtras.Code.Optional.EasingFunctions;
 
 namespace Code.Behaviours
 {
