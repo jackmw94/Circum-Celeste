@@ -7,20 +7,15 @@ namespace Code.UI
     public class UIInputElementsContainer : MonoBehaviour
     {
         [SerializeField] private MoverHandle _moverHandle;
-        [SerializeField] private PulseColour _pulseMoverHandle;
+        [SerializeField] private Introducer _introduceMoverHandle;
         
         [SerializeField] private MomentaryButton _powerButton;
-        [SerializeField] private PulseColour _pulsePowerButton;
+        [SerializeField] private Introducer _introducePowerButton;
 
         public MoverHandle MoverHandle => _moverHandle;
-        public PulseColour PulseMoverHandle => _pulseMoverHandle;
+        public Introducer IntroduceMoverHandle => _introduceMoverHandle;
         
         public MomentaryButton PowerButton => _powerButton;
-        public PulseColour PulsePowerButton => _pulsePowerButton;
-    }
-
-    public class LevelScreen : MonoBehaviour
-    {
-        [SerializeField] private TextMeshProUGUI _levelNameText;
+        public Introducer IntroducePowerButton => _introducePowerButton;
     }
 }

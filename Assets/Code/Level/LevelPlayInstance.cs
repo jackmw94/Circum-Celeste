@@ -106,8 +106,8 @@ namespace Code.Level
         {
             UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
 
-            movementUi.PulsePowerButton.StartStopPulse(_introduceElement == IntroduceElement.PowerButton);
-            movementUi.PulseMoverHandle.StartStopPulse(_introduceElement == IntroduceElement.MovementHandle);
+            movementUi.IntroducePowerButton.SetIntroducing(_introduceElement == IntroduceElement.PowerButton);
+            movementUi.IntroduceMoverHandle.SetIntroducing(_introduceElement == IntroduceElement.MovementHandle);
         }
 
         private void Update()

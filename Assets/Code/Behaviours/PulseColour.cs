@@ -1,59 +1,35 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+﻿using System;
+using UnityEngine;
 
 namespace Code.Behaviours
 {
-    public class PulseColour : MonoBehaviour, IBeginDragHandler
+    public class PulseColour : MonoBehaviour
     {
         [SerializeField] private Colourable _colourable;
-        [SerializeField] private Button _button;
         [Space(15)] 
         [SerializeField] private float _frequency;
         [SerializeField, ColorUsage(true, true)] private Color _pulsedColour;
 
-        private bool _pulsing = false;
         private Color _defaultColor;
         private float _startPulsingTime = 0f;
 
         private void Awake()
         {
-            _button.onClick.AddListener(ButtonStopPulsing);
             _defaultColor = _colourable.GetColour();
         }
 
-        private void OnDestroy()
+        private void OnEnable()
         {
-            _button.onClick.RemoveListener(ButtonStopPulsing);
+            _startPulsingTime = Time.time;
         }
 
-        public void StartStopPulse(bool pulsing)
+        private void OnDisable()
         {
-            if (!_pulsing)
-            {
-                // if we're potentially starting pulsing
-                _startPulsingTime = Time.time;
-            }
-            else if (!pulsing)
-            {
-                // if we're turning pulsing off
-                _colourable.SetColour(_defaultColor);
-            }
-
-            _pulsing = pulsing;
+            _colourable.SetColour(_defaultColor);
         }
-
-        private void ButtonStopPulsing() => StartStopPulse(false);
-
-        public void OnBeginDrag(PointerEventData eventData) => ButtonStopPulsing();
 
         private void Update()
         {
-            if (!_pulsing)
-            {
-                return;
-            }
-
             float pulseTime = Time.time - _startPulsingTime;
             float sinVal = Mathf.Sin(pulseTime * _frequency - Mathf.PI / 2f);
             float lerpVal = sinVal / 2f + 0.5f;
