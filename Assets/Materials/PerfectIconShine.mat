@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PerfectIconShine
-  m_Shader: {fileID: -6465566751694194690, guid: ae367b3a413c85a4390be164bcdc778f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5a7823adbc89dfe48bf7a12f61dd449d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -84,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - ShimmerPosition: 1.5
+    - ShimmerPosition: -0.5
     - Vector1_2faa617f2f02433ca0bc7592c5c611e6: 0.5
     - Vector1_933467b7787648048f4e568b46e63bc7: 1.7
     - _AlphaClip: 0
@@ -92,6 +92,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -110,6 +111,11 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
