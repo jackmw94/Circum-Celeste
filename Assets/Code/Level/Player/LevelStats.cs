@@ -38,7 +38,7 @@ namespace Code.Level.Player
         {
             firstEntry = false;
             
-            if (LevelRecordingExists(currentRecording))
+            if (!LevelRecordingExists(currentRecording))
             {
                 currentRecording = levelRecording;
                 firstEntry = true;
