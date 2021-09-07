@@ -10,12 +10,16 @@ namespace Code.Level
 {
     public class LevelReplayInstance : LevelInstanceBase
     {
+        // frames are recorded until the level is destroyed, we actually finish a few seconds before this
+        private const int EndLevelWithFramesRemaining = 120;
+        
         private Queue<LevelRecordFrameData> _frameReplayData;
         private List<Player.Player> _players;
         private LevelElement[] _levelElements;
         private Action<LevelResult> _levelFinishedCallback;
 
         private bool _isPlaying = false;
+        private bool _hasReturnedFinish = false;
 
         public void SetupLevel(List<LevelRecordFrameData> levelReplayFrameData, List<Player.Player> players)
         {
@@ -50,6 +54,12 @@ namespace Code.Level
             {
                 return;
             }
+
+            if (!_hasReturnedFinish && _frameReplayData.Count <= EndLevelWithFramesRemaining)
+            {
+                _levelFinishedCallback(null);
+                _hasReturnedFinish = true;
+            }
             
             if (_frameReplayData.Count == 0)
             {
@@ -80,7 +90,6 @@ namespace Code.Level
             _levelElements.ApplyFunction(p => p.LevelFinished());
             
             _isPlaying = false;
-            _levelFinishedCallback(null);
         }
 
         public override Vector3 GetPlayerPosition(int playerIndex)

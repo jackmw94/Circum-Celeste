@@ -45,7 +45,7 @@ namespace Code.Level
                 elementsActive[i] = element.gameObject.activeSelf;
             }
             
-            LevelRecordFrameData levelRecordFrameData = new LevelRecordFrameData()
+            LevelRecordFrameData levelRecordFrameData = new LevelRecordFrameData
             {
                 LevelElementPositions = elementPositions,
                 LevelElementsActive = elementsActive
