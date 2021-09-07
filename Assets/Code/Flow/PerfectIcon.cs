@@ -13,12 +13,17 @@ namespace Code.Flow
         [SerializeField] private float _shaderOffValue = -0.5f;
         [SerializeField] private float _shaderOnValue = 1.5f;
         [SerializeField] private float _animateInDelay = 1.5f;
+        [Space(15)]
+        [SerializeField] private string _fakeMaskPropertyName;
+        [SerializeField] private Transform _fakeMaskLowerYPosition;
+        [SerializeField] private Transform _fakeMaskUpperYPosition;
         
         [SerializeField, Tooltip("Duration from 0->1, if shader off and on values are -1 and 2 respectively then total animation will take 3 times as long as this value")] 
         private float _animationUnitDuration = 0.5f;
 
         private Coroutine _showHideCoroutine = null;
         private int _shaderPropertyId;
+        private int _shaderFakeMaskPropertyId;
 
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
@@ -32,6 +37,19 @@ namespace Code.Flow
         private void Awake()
         {
             _shaderPropertyId = Shader.PropertyToID(_shaderPropertyName);
+            _shaderFakeMaskPropertyId = Shader.PropertyToID(_fakeMaskPropertyName);
+            
+            UpdateFakeMaskBounds();
+        }
+        
+        [ContextMenu(nameof(UpdateFakeMaskBounds))]
+        private void UpdateFakeMaskBounds()
+        {
+            // the 'fake mask' is a workaround for shader graphs not (easily) supporting UI masking
+            // the graph itself checks that it's within the y-bounds specified by the two transforms
+            
+            Vector4 fakeMaskBounds = new Vector4(_fakeMaskLowerYPosition.position.y, _fakeMaskUpperYPosition.position.y);
+            _image.material.SetVector(_fakeMaskPropertyName, fakeMaskBounds);
         }
 
         public void ShowHidePerfectIcon(bool show, bool instant)

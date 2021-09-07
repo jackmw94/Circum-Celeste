@@ -55,7 +55,7 @@ namespace Code.Level.Player
         {
             throw new NotImplementedException("Did not anticipate deleting all player prefs in this code, this is quite a destructive operation. Comment this exception to enable");
             
-            _playerPrefsProvider.DeleteAll();
+            //_playerPrefsProvider.DeleteAll();
         }
 
         public static void ResetSaveData()
