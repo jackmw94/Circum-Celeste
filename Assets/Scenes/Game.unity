@@ -8713,7 +8713,7 @@ GameObject:
   - component: {fileID: 1106225095}
   - component: {fileID: 1106225094}
   m_Layer: 5
-  m_Name: DeleteSaveData
+  m_Name: TogglePersistentData
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9343,7 +9343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7499114dc03844548e84093d8edbe806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelProvider: {fileID: 2143567225}
   _playerStatsManager: {fileID: 205681404}
   _levelManager: {fileID: 2143567224}
   _toggleSettingsButton: {fileID: 2123685741}
@@ -9354,10 +9353,11 @@ MonoBehaviour:
   _updateRemoteConfigButton: {fileID: 1661955981}
   _resetStatsButton: {fileID: 188961536}
   _resetTutorialsButton: {fileID: 834524845}
-  _deleteSaveDataButton: {fileID: 1106225094}
   _toggleFeedbacks: {fileID: 1052814652}
-  _toggleFeedbacksLabel: {fileID: 771276273}
+  _toggleNoLoadingSaving: {fileID: 1106225094}
   _updateRemoteConfigLabel: {fileID: 558383727}
+  _toggleFeedbacksLabel: {fileID: 771276273}
+  _toggleNoLoadingSavingLabel: {fileID: 1892049473}
 --- !u!1 &1243729690
 GameObject:
   m_ObjectHideFlags: 0
@@ -13914,7 +13914,6 @@ GameObject:
   - component: {fileID: 1892049471}
   - component: {fileID: 1892049474}
   - component: {fileID: 1892049473}
-  - component: {fileID: 1892049472}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13941,20 +13940,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1892049472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1892049470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translationName: Toggle Feedbacks
-  FallbackText: Toggle Feedbacks
 --- !u!114 &1892049473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13975,7 +13960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reset save data
+  m_text: Toggle persistent data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
   m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}

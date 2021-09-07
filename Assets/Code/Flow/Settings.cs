@@ -13,8 +13,7 @@ namespace Code.Flow
     public class Settings : MonoBehaviour
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
-
-        [SerializeField] private LevelProvider _levelProvider;
+        
         [SerializeField] private PlayerStatsManager _playerStatsManager;
         [SerializeField] private LevelManager _levelManager;
         [Space(15)]
@@ -27,10 +26,11 @@ namespace Code.Flow
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
         [SerializeField] private Button _resetTutorialsButton;
-        [SerializeField] private Button _deleteSaveDataButton;
         [SerializeField] private Button _toggleFeedbacks;
-        [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
+        [SerializeField] private Button _toggleNoLoadingSaving;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
+        [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
+        [SerializeField] private TextMeshProUGUI _toggleNoLoadingSavingLabel;
 
         private bool _settingsOn = false;
         private Coroutine _turnOnOffCoroutine = null;
@@ -44,7 +44,7 @@ namespace Code.Flow
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.AddListener(ResetTutorials);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
-            _deleteSaveDataButton.onClick.AddListener(DeleteSaveData);
+            _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
 
             TurnOffInstant();
         }
@@ -58,7 +58,7 @@ namespace Code.Flow
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.RemoveListener(ResetTutorials);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
-            _deleteSaveDataButton.onClick.RemoveListener(DeleteSaveData);
+            _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
         }
         
         private void OnSettingShowing()
@@ -96,7 +96,7 @@ namespace Code.Flow
 
         private void ResetPlayerStats()
         {
-            PlayerStats.ResetSavedPlayerStats();
+            _playerStatsManager.ResetStats();
         }
 
         private void ResetTutorials()
@@ -110,9 +110,10 @@ namespace Code.Flow
             _toggleFeedbacksLabel.text = $"Toggle Feedbacks ({(Feedbacks.Instance.FeedbacksActive ? "on" : "off")})";
         }
 
-        private void DeleteSaveData()
+        private void ToggleNoLoadingSaving()
         {
-            _playerStatsManager.PlayerStats.ResetSaveData();
+            _playerStatsManager.ToggleDoNotLoadOrSave(out bool isNotLoadingSaving);
+            _toggleNoLoadingSavingLabel.text = $"Toggle persistent data ({(isNotLoadingSaving ? "saving / loading DISABLED" : "saving / loading on")})";
         }
 
         private void TurnSettingsOnOff(bool on)

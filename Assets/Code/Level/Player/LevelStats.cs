@@ -90,5 +90,13 @@ namespace Code.Level.Player
             
             CircumDebug.Log($"Saved level stats for {levelName} ({levelStats.FastestLevelRecording.RecordingData.FrameData.Count} fastest level frames)");
         }
+
+        public static void ResetStats(string levelName)
+        {
+            string key = PlayerPrefsKey(levelName);
+            
+            CircumPlayerPrefs.DeleteKey(key);
+            CircumPlayerPrefs.Save();
+        }
     }
 }

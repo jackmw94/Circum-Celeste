@@ -6,23 +6,19 @@ namespace Code.Level.Player
     [DefaultExecutionOrder(-1)]
     public class PlayerStatsManager : MonoBehaviour
     {
+        private const string NoLoadingSavingPlayerPrefsKey = "Circum_DoNotLoadData";
+        
         [SerializeField] private LevelProvider _levelProvider;
         
         private PlayerStats _playerStats;
         private Dictionary<string, LevelStats> _levelStats = new Dictionary<string, LevelStats>();
 
+        private bool DoNotLoadOrSave => CircumPlayerPrefs.HasKey(NoLoadingSavingPlayerPrefsKey) && CircumPlayerPrefs.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
         public PlayerStats PlayerStats => _playerStats;
 
         private void Awake()
         {
-            _playerStats = PlayerStats.Load();
-            foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
-            {
-                if (LevelStats.TryLoadLevelStats(levelLayout.name, out LevelStats levelStats))
-                {
-                    _levelStats.Add(levelLayout.name, levelStats);
-                }
-            }
+            LoadStats();
         }
         
         public int GetRestartLevelIndex()
@@ -108,8 +104,31 @@ namespace Code.Level.Player
             SaveStats();
         }
 
-        public void SaveStats()
+        private void LoadStats()
         {
+            if (DoNotLoadOrSave)
+            {
+                _playerStats = PlayerStats.CreateEmptyPlayerStats();
+                return;
+            }
+            
+            _playerStats = PlayerStats.Load();
+            foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
+            {
+                if (LevelStats.TryLoadLevelStats(levelLayout.name, out LevelStats levelStats))
+                {
+                    _levelStats.Add(levelLayout.name, levelStats);
+                }
+            }
+        }
+        
+        private void SaveStats()
+        {
+            if (DoNotLoadOrSave)
+            {
+                return;
+            }
+            
             PlayerStats.Save(_playerStats);
             foreach (KeyValuePair<string,LevelStats> statsForLevel in _levelStats)
             {
@@ -124,6 +143,22 @@ namespace Code.Level.Player
         {
             _playerStats.UpdateCompletedTutorials(false, true);
             SaveStats();
+        }
+
+        public void ResetStats()
+        {
+            PlayerStats.ResetSavedPlayerStats();
+            foreach (KeyValuePair<string,LevelStats> statsByLevel in _levelStats)
+            {
+                LevelStats.ResetStats(statsByLevel.Key);
+            }
+        }
+
+        public void ToggleDoNotLoadOrSave(out bool isNotLoadingSaving)
+        {
+            int toggledValue = DoNotLoadOrSave ? 0 : 1;
+            CircumPlayerPrefs.SetInt(NoLoadingSavingPlayerPrefsKey, toggledValue);
+            isNotLoadingSaving = toggledValue == 1;
         }
     }
 }

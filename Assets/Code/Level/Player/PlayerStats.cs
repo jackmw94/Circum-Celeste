@@ -57,11 +57,6 @@ namespace Code.Level.Player
                 _completedTutorials |= hasCompletedTutorials;
             }
         }
-
-        public void ResetSaveData()
-        {
-            CircumPlayerPrefs.ResetSaveData();
-        }
         
         public override string ToString()
         {
