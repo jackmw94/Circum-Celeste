@@ -7,6 +7,13 @@ namespace Code.Flow
 {
     public class InterLevelFlow : MonoBehaviour
     {
+        public enum InterLevelTransition
+        {
+            Regular,
+            Fast,
+            Instant
+        }
+        
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private LevelManager _levelManager;
@@ -20,13 +27,13 @@ namespace Code.Flow
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
         
-        public void ShowInterLevelUI(Action onShown = null, bool instant = false)
+        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition instant = InterLevelTransition.Regular, bool isFirstPerfect = false, bool showAdvanceLevelPrompt = false)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant, isFirstPerfect, showAdvanceLevelPrompt));
         }
 
         public void HideInterLevelUI()
@@ -38,39 +45,39 @@ namespace Code.Flow
             _showHideInterLevelCoroutine = StartCoroutine(HideInterLevelUICoroutine());
         }
 
-        public void ShowHideUI(Action onShown)
+        public void ShowHideUI(Action onShown, InterLevelTransition transition)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
 
-            _showHideInterLevelCoroutine = StartCoroutine(ShowHideUICoroutine(onShown));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowHideUICoroutine(onShown, transition));
         }
 
-        private IEnumerator ShowHideUICoroutine(Action onShown)
+        private IEnumerator ShowHideUICoroutine(Action onShown, InterLevelTransition transition)
         {
             _isTransitioning = true;
-            yield return ShowOverlayCoroutine(false);
+            yield return ShowOverlayCoroutine(transition);
             onShown();
-            yield return new WaitForSeconds(_showHideHoldDelay);
+            yield return new WaitForSeconds(transition == InterLevelTransition.Regular ? _showHideHoldDelay : 0f);
             yield return HideOverlayCoroutine(false);
             _isTransitioning = false;
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine(Action onShown, bool instant)
+        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, bool isFirstPerfect, bool showAdvanceLevelPrompt)
         {
             _isTransitioning = true;
-            if (!instant)
+            if (transition == InterLevelTransition.Regular)
             {
                 yield return new WaitForSeconds(_startDelay);
             }
 
-            _interLevelScreen.SetupInterLevelScreen();
+            _interLevelScreen.SetupInterLevelScreen(isFirstPerfect, showAdvanceLevelPrompt);
             
             // Show overlay, hides level reset
-            yield return ShowOverlayCoroutine(instant);
+            yield return ShowOverlayCoroutine(transition);
             
             yield return _interLevelScreen.ShowHideScreen(true);
 
@@ -86,7 +93,7 @@ namespace Code.Flow
             _isTransitioning = false;
         }
 
-        private IEnumerator ShowOverlayCoroutine(bool instant)
+        private IEnumerator ShowOverlayCoroutine(InterLevelTransition transition)
         {
             LevelInstanceBase currentLevel = _levelManager.CurrentLevel;
             
@@ -98,7 +105,7 @@ namespace Code.Flow
                 playerPosition = currentLevel.GetPlayerPosition(0);
             }
 
-            _levelOverlay.ShowOverlay(playerPosition, instant);
+            _levelOverlay.ShowOverlay(playerPosition, transition == InterLevelTransition.Instant);
 
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
         }

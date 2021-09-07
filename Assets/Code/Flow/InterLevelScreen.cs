@@ -66,7 +66,7 @@ namespace Code.Flow
             }
         }
 
-        public void SetupInterLevelScreen()
+        public void SetupInterLevelScreen(bool isFirstPerfect = false, bool showAdvanceLevelButtons = false)
         {
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
 
@@ -75,11 +75,11 @@ namespace Code.Flow
             LevelRecording perfectLevelRecording = playerStats.GetRecordingForLevelAtIndex(levelLayout.LevelContext.LevelIndex, true);
             _worldRecordsScreen.SetupRecordsScreen(levelRecording, perfectLevelRecording, ReplayLevel);
             
-            _levelOverviewScreen.SetupLevelOverview(levelLayout, perfectLevelRecording != null, PlayLevel);
+            _levelOverviewScreen.SetupLevelOverview(levelLayout, perfectLevelRecording != null, isFirstPerfect,showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
             _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial);
-            
+
             SetNextPreviousButtonsActive();
         }
 

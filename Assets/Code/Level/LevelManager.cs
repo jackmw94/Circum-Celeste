@@ -19,14 +19,14 @@ namespace Code.Level
         
         public LevelInstanceBase CurrentLevel { get; private set; }
 
-        public void CreateCurrentLevel(LevelRecording replay = null)
+        public void CreateCurrentLevel(LevelRecording replay = null, InterLevelFlow.InterLevelTransition transition = InterLevelFlow.InterLevelTransition.Regular)
         {
             if (!_interLevelFlow.IsOverlaid)
             {
                 _interLevelFlow.ShowHideUI(() =>
                 {
                     CreateLevelInternal(replay);
-                });
+                }, transition);
             }
             else
             {
@@ -99,6 +99,8 @@ namespace Code.Level
         private void OnLevelFinished(LevelResult levelResult)
         {
             bool isReplay = levelResult == null;
+            bool isFirstPerfect = false;
+            bool advanceLevelPrompt = false;
             
             if (!isReplay && levelResult.Success)
             {
@@ -110,12 +112,13 @@ namespace Code.Level
                     LevelIndex = levelContext.LevelIndex,
                     RecordingData = levelResult.LevelRecordingData
                 };
-                _playerStatsManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording);
-                
-                _levelProvider.AdvanceLevel();
+                _playerStatsManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out isFirstPerfect);
+
+                advanceLevelPrompt = true;
+                //_levelProvider.AdvanceLevel();
             }
             
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, isFirstPerfect: isFirstPerfect, showAdvanceLevelPrompt: advanceLevelPrompt);
         }
     }
 }

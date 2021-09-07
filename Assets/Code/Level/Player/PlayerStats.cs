@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Code.Debugging;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -30,22 +31,26 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
-        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect)
+        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, out bool firstPerfect)
         {
-            UpdateFastestRecordingInternal(levelRecording, _levelRecordings);
+            firstPerfect = false;
+            UpdateFastestRecordingInternal(levelRecording, _levelRecordings, out _);
+            
             if (perfect)
             {
-                UpdateFastestRecordingInternal(levelRecording, _perfectLevelRecordings);
+                UpdateFastestRecordingInternal(levelRecording, _perfectLevelRecordings, out firstPerfect);
             }
         }
 
-        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, List<LevelRecording> recordingsList)
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, List<LevelRecording> recordingsList, out bool firstEntry)
         {
             LevelRecording currentRecordingForLevel = recordingsList.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
+            firstEntry = false;
             
             if (currentRecordingForLevel == null)
             {
                 recordingsList.Add(levelRecording);
+                firstEntry = true;
             }
             else if (currentRecordingForLevel.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
             {
@@ -103,16 +108,22 @@ namespace Code.Level.Player
             
             string serialized = JsonUtility.ToJson(stats);
 
-            // if (CompressData)
-            // {
-            //     serialized = Com
-            // }
-            
-            PlayerPrefs.SetString(PlayerPrefsKey, serialized);
-            PlayerPrefs.Save();
+            CircumPlayerPrefs.SetString(PlayerPrefsKey, serialized);
+            CircumPlayerPrefs.Save();
             CircumDebug.Log($"Saved player stats: {stats}");
 
             return serialized;
+        }
+
+        private static void StartThreadedSave()
+        {
+            Thread thread1 = new Thread(ThreadedSave);
+            thread1.Start();
+        }
+
+        private static void ThreadedSave()
+        {
+            
         }
         
         public static PlayerStats Load()
@@ -123,9 +134,15 @@ namespace Code.Level.Player
                 return CreateEmptyPlayerStats();
             }
             
-            string serializedPlayerStats = PlayerPrefs.GetString(PlayerPrefsKey);
+            string serializedPlayerStats = CircumPlayerPrefs.GetString(PlayerPrefsKey);
             PlayerStats deserializedPlayerStats = JsonUtility.FromJson<PlayerStats>(serializedPlayerStats);
             CircumDebug.Log($"Loaded player stats: {deserializedPlayerStats}");
+
+            if (deserializedPlayerStats == null)
+            {
+                CircumDebug.Log("No player stats found, creating new");
+                return CreateEmptyPlayerStats();
+            }
 
             if (deserializedPlayerStats._statsVersion != StatsDataVersion)
             {
@@ -191,7 +208,7 @@ namespace Code.Level.Player
         
         public static void ResetSavedPlayerStats()
         {
-            PlayerPrefs.DeleteKey(PlayerPrefsKey);
+            CircumPlayerPrefs.DeleteKey(PlayerPrefsKey);
         }
     }
 }

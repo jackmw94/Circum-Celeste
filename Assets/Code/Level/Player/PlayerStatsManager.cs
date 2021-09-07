@@ -50,8 +50,10 @@ namespace Code.Level.Player
             if (save) SaveStats();
         }
         
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out bool isFirstPerfect)
         {
+            isFirstPerfect = false;
+            
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
             
@@ -63,7 +65,7 @@ namespace Code.Level.Player
 
             if (!levelIsTutorial)
             {
-                _playerStats.UpdateFastestRecording(levelRecording, playerTookNoHits);
+                _playerStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
             }
 
             PlayerStats.Save(_playerStats);

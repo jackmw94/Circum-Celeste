@@ -4,6 +4,7 @@ using Code.Level;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityExtras.Code.Core;
 
 namespace Code.Flow
 {
@@ -15,23 +16,30 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
         [Space(15)]
-        [SerializeField] private GameObject _perfectIcon;
+        [SerializeField] private PerfectIcon _perfectIcon;
         [Space(15)]
-        [SerializeField] private Button _playButton;
+        [SerializeField] private Button[] _playButtons;
+        [SerializeField] private Button _advanceButton;
+        [Space(15)]
+        [SerializeField] private GameObject _playButtonRoot;
+        [SerializeField] private GameObject _playAndAdvanceButtonRoot;
 
         private Action _playLevelCallback = null;
+        private Action _advanceLevelCallback = null;
 
         private void Awake()
         {
-            _playButton.onClick.AddListener(PlayButtonClicked);
+            _playButtons.ApplyFunction(p => p.onClick.AddListener(PlayButtonClicked));
+            _advanceButton.onClick.AddListener(AdvanceButtonClicked);
         }
 
         private void OnDestroy()
         {
-            _playButton.onClick.RemoveListener(PlayButtonClicked);
+            _playButtons.ApplyFunction(p => p.onClick.RemoveListener(PlayButtonClicked));
+            _advanceButton.onClick.RemoveListener(AdvanceButtonClicked);
         }
 
-        public void SetupLevelOverview(LevelLayout levelLayout, bool isPerfect, Action playLevelCallback)
+        public void SetupLevelOverview(LevelLayout levelLayout, bool isPerfect, bool isFirstPerfect, bool showAdvancePrompt, Action playLevelCallback, Action advanceLevelCallback)
         {
             int levelNumber = levelLayout.LevelContext.LevelNumber;
             
@@ -41,9 +49,15 @@ namespace Code.Flow
             _levelName.text = levelLayout.name;
 
             SetTagString(levelLayout);
+            
+            _playButtonRoot.SetActiveSafe(!showAdvancePrompt);
+            _playAndAdvanceButtonRoot.SetActiveSafe(showAdvancePrompt);
 
-            _perfectIcon.SetActive(isPerfect);
+            CircumDebug.Assert(isPerfect || !isFirstPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
+            _perfectIcon.ShowHidePerfectIcon(isPerfect, !isFirstPerfect);
+            
             _playLevelCallback = playLevelCallback;
+            _advanceLevelCallback = advanceLevelCallback;
         }
 
         private void SetTagString(LevelLayout levelLayout)
@@ -60,6 +74,11 @@ namespace Code.Flow
         private void PlayButtonClicked()
         {
             _playLevelCallback();
+        }
+
+        private void AdvanceButtonClicked()
+        {
+            _advanceLevelCallback();
         }
     }
 }
