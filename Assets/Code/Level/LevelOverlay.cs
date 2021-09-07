@@ -28,7 +28,7 @@ namespace Code.Level
             HideOverlay(true);
         }
         
-        public void ShowOverlay(Vector2 position, bool instant = false)
+        public void ShowOverlay(Vector2 position, bool instant)
         {
             if (_overlayIsOn)
             {
