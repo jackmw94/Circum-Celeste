@@ -26,6 +26,7 @@ namespace Code.Flow
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
+        [SerializeField] private Button _resetTutorialsButton;
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
@@ -40,6 +41,7 @@ namespace Code.Flow
             _restartLevelButton.onClick.AddListener(RestartLevel);
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
+            _resetTutorialsButton.onClick.AddListener(ResetTutorials);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
 
             TurnOffInstant();
@@ -52,6 +54,7 @@ namespace Code.Flow
             _restartLevelButton.onClick.RemoveListener(RestartLevel);
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
+            _resetTutorialsButton.onClick.RemoveListener(ResetTutorials);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
         }
         
@@ -66,13 +69,6 @@ namespace Code.Flow
             TurnSettingsOnOff(_settingsOn);
         }
         
-        private void SkipLevel()
-        {
-            _playerStatsManager.SetSkippedLevel();
-            _levelProvider.AdvanceLevel();
-            _levelManager.CreateCurrentLevel();
-        }
-
         private void BackButtonListener()
         {
             _levelManager.ExitLevel();
@@ -81,17 +77,10 @@ namespace Code.Flow
 
         private void RestartLevel()
         {
-            _levelManager.CreateCurrentLevel();
+            _levelManager.CreateCurrentLevel(transition: InterLevelFlow.InterLevelTransition.Fast);
             SettingsButtonClicked();
         }
-
-        private void RestartRunButtonListener()
-        {
-            _levelProvider.ResetToStart();
-            _levelManager.CreateCurrentLevel();
-            SettingsButtonClicked();
-        }
-
+        
         private void UpdateRemoteConfigButtonListener()
         {
             _updateRemoteConfigButton.interactable = false;
@@ -105,6 +94,11 @@ namespace Code.Flow
         private void ResetPlayerStats()
         {
             PlayerStats.ResetSavedPlayerStats();
+        }
+
+        private void ResetTutorials()
+        {
+            _playerStatsManager.ResetTutorials();
         }
 
         private void ToggleFeedbacks()

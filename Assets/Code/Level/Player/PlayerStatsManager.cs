@@ -75,5 +75,12 @@ namespace Code.Level.Player
         {
             return PlayerStats.Save(_playerStats);
         }
+
+        public void ResetTutorials()
+        {
+            _playerStats.UpdateCompletedTutorials(false, true);
+            SaveStats();
+
+        }
     }
 }
