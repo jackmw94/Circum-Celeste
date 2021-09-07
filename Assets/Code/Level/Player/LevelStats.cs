@@ -11,6 +11,9 @@ namespace Code.Level.Player
         [field: SerializeField] public LevelRecording FastestLevelRecording;
         [field: SerializeField] public LevelRecording FastestPerfectLevelRecording;
 
+        public bool HasFastestLevelRecording => LevelRecordingExists(FastestLevelRecording);
+        public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
+        
         private bool _isDirty = false;
         
         private static string PlayerPrefsKey(string levelName) => $"Circum_PlayerStats_{levelName}";
@@ -26,11 +29,16 @@ namespace Code.Level.Player
             }
         }
 
+        private static bool LevelRecordingExists(LevelRecording levelRecording)
+        {
+            return levelRecording != null && levelRecording.RecordingData.FrameData.Count > 0;
+        }
+
         private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, out bool firstEntry)
         {
             firstEntry = false;
             
-            if (currentRecording == null)
+            if (LevelRecordingExists(currentRecording))
             {
                 currentRecording = levelRecording;
                 firstEntry = true;

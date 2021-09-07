@@ -63,12 +63,19 @@ namespace Code.Level.Player
 
         public LevelRecording GetRecordingForLevelAtIndex(string levelName, bool perfect)
         {
-            if (_levelStats.TryGetValue(levelName, out LevelStats levelStats))
+            if (!_levelStats.TryGetValue(levelName, out LevelStats levelStats))
             {
-                return perfect ? levelStats.FastestPerfectLevelRecording : levelStats.FastestLevelRecording;
+                return null;
+            }
+            
+            // found level stats
+            
+            if (perfect)
+            {
+                return levelStats.HasFastestPerfectLevelRecording ? levelStats.FastestPerfectLevelRecording : null;
             }
 
-            return null;
+            return levelStats.HasFastestLevelRecording ? levelStats.FastestLevelRecording : null;
         }
         
         public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out bool isFirstPerfect)
