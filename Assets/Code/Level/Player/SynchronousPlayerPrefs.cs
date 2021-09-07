@@ -34,6 +34,11 @@ namespace Code.Level.Player
             PlayerPrefs.SetString(key, value);
         }
 
+        public bool HasKey(string key)
+        {
+            return PlayerPrefs.HasKey(key);
+        }
+
         public void Save()
         {
             PlayerPrefs.Save();
@@ -41,10 +46,15 @@ namespace Code.Level.Player
         
         public void DeleteKey(string key)
         {
-            throw new System.NotImplementedException();
+            PlayerPrefs.DeleteKey(key);
         }
 
         public void DeleteAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResetSaveData()
         {
             throw new System.NotImplementedException();
         }

@@ -31,6 +31,11 @@ namespace Code.Level.Player
             _playerPrefsProvider.SetFloat(key, value);
         }
 
+        public static bool HasKey(string key)
+        {
+            return _playerPrefsProvider.HasKey(key);
+        }
+
         public static void SetString(string key, string value)
         {
             _playerPrefsProvider.SetString(key, value);
@@ -51,6 +56,11 @@ namespace Code.Level.Player
             throw new NotImplementedException("Did not anticipate deleting all player prefs in this code, this is quite a destructive operation. Comment this exception to enable");
             
             _playerPrefsProvider.DeleteAll();
+        }
+
+        public static void ResetSaveData()
+        {
+            _playerPrefsProvider.ResetSaveData();
         }
     }
 }

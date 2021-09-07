@@ -1,17 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Code.Level.Player
 {
     [DefaultExecutionOrder(-1)]
     public class PlayerStatsManager : MonoBehaviour
     {
+        [SerializeField] private LevelProvider _levelProvider;
+        
         private PlayerStats _playerStats;
+        private Dictionary<string, LevelStats> _levelStats = new Dictionary<string, LevelStats>();
 
         public PlayerStats PlayerStats => _playerStats;
 
         private void Awake()
         {
             _playerStats = PlayerStats.Load();
+            foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
+            {
+                if (LevelStats.TryLoadLevelStats(levelLayout.name, out LevelStats levelStats))
+                {
+                    _levelStats.Add(levelLayout.name, levelStats);
+                }
+            }
         }
         
         public int GetRestartLevelIndex()
@@ -49,6 +60,16 @@ namespace Code.Level.Player
             _playerStats.RunTracker.LevelIndex = levelIndex;
             if (save) SaveStats();
         }
+
+        public LevelRecording GetRecordingForLevelAtIndex(string levelName, bool perfect)
+        {
+            if (_levelStats.TryGetValue(levelName, out LevelStats levelStats))
+            {
+                return perfect ? levelStats.FastestPerfectLevelRecording : levelStats.FastestLevelRecording;
+            }
+
+            return null;
+        }
         
         public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out bool isFirstPerfect)
         {
@@ -65,22 +86,37 @@ namespace Code.Level.Player
 
             if (!levelIsTutorial)
             {
-                _playerStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
+                if (_levelStats.TryGetValue(currentLevel.name, out LevelStats levelStats))
+                {
+                    levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
+                }
+                else
+                {
+                    LevelStats newStats = new LevelStats();
+                    _levelStats.Add(currentLevel.name, newStats);
+                    newStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
+                }
             }
 
-            PlayerStats.Save(_playerStats);
+            SaveStats();
         }
 
-        public string SaveStats()
+        public void SaveStats()
         {
-            return PlayerStats.Save(_playerStats);
+            PlayerStats.Save(_playerStats);
+            foreach (KeyValuePair<string,LevelStats> statsForLevel in _levelStats)
+            {
+                string levelName = statsForLevel.Key;
+                LevelStats stats = statsForLevel.Value;
+                
+                LevelStats.SaveLevelStats(levelName, stats);
+            }
         }
 
         public void ResetTutorials()
         {
             _playerStats.UpdateCompletedTutorials(false, true);
             SaveStats();
-
         }
     }
 }

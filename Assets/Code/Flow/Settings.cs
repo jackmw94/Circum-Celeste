@@ -27,6 +27,7 @@ namespace Code.Flow
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _resetStatsButton;
         [SerializeField] private Button _resetTutorialsButton;
+        [SerializeField] private Button _deleteSaveDataButton;
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
@@ -43,6 +44,7 @@ namespace Code.Flow
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.AddListener(ResetTutorials);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
+            _deleteSaveDataButton.onClick.AddListener(DeleteSaveData);
 
             TurnOffInstant();
         }
@@ -56,6 +58,7 @@ namespace Code.Flow
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.RemoveListener(ResetTutorials);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
+            _deleteSaveDataButton.onClick.RemoveListener(DeleteSaveData);
         }
         
         private void OnSettingShowing()
@@ -105,6 +108,11 @@ namespace Code.Flow
         {
             Feedbacks.Instance.FeedbacksActive = !Feedbacks.Instance.FeedbacksActive;
             _toggleFeedbacksLabel.text = $"Toggle Feedbacks ({(Feedbacks.Instance.FeedbacksActive ? "on" : "off")})";
+        }
+
+        private void DeleteSaveData()
+        {
+            _playerStatsManager.PlayerStats.ResetSaveData();
         }
 
         private void TurnSettingsOnOff(bool on)

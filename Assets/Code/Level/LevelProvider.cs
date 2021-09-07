@@ -5,7 +5,7 @@ using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
-    [DefaultExecutionOrder(-1)]
+    [DefaultExecutionOrder(-2)]
     public class LevelProvider : MonoBehaviour, IValidateable
     {
         [SerializeField] private LevelProgression _platformLevelProgression;
@@ -21,14 +21,19 @@ namespace Code.Level
         private int NumberOfTutorials => _activeLevelProgression.TutorialLevelLayout.Length;
         private int NumberOfLevels => _activeLevelProgression.LevelLayout.Length;
         private bool HasCompletedTutorials => _levelIndex >= _activeLevelProgression.TutorialLevelLayout.Length;
+        
+        public LevelProgression ActiveLevelProgression => _activeLevelProgression;
 
         public void Awake()
         {
-            int restartLevelIndex = _playerStatsManager.GetRestartLevelIndex();
-            bool hasCompletedTutorials = _playerStatsManager.PlayerStats.CompletedTutorials;
-            
             _activeLevelProgression = Application.isEditor ? _editorLevelProgression : _platformLevelProgression;
             _activeLevelProgression.Initialise();
+        }
+
+        private void Start()
+        {
+            int restartLevelIndex = _playerStatsManager.GetRestartLevelIndex();
+            bool hasCompletedTutorials = _playerStatsManager.PlayerStats.CompletedTutorials;
             
             if (hasCompletedTutorials)
             {

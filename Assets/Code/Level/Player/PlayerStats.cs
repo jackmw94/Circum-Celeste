@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+using Code.Core;
 using Code.Debugging;
 using UnityEngine;
-using UnityExtras.Code.Core;
 
 namespace Code.Level.Player
 {
     [Serializable]
     public class PlayerStats
     {
-        private const bool CompressData = true;
-        private const string PlayerPrefsKey = "Circum_PlayerStats";
-        private const int StatsDataVersion = 1;
-
+        private const string PlayerPrefsKey = "Circum_PlayerStatistics";
+        private const int StatsDataVersion = 2;
+        
         [SerializeField] private int _statsVersion;
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
-        [SerializeField] private List<LevelRecording> _levelRecordings;
-        [SerializeField] private List<LevelRecording> _perfectLevelRecordings;
         
         [SerializeField] private int _highestLevelReachedIndex = 0;
         [SerializeField] private int _highestNoDeathLevelReachedIndex = 0;
@@ -31,39 +25,6 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
-        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, out bool firstPerfect)
-        {
-            firstPerfect = false;
-            UpdateFastestRecordingInternal(levelRecording, _levelRecordings, out _);
-            
-            if (perfect)
-            {
-                UpdateFastestRecordingInternal(levelRecording, _perfectLevelRecordings, out firstPerfect);
-            }
-        }
-
-        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, List<LevelRecording> recordingsList, out bool firstEntry)
-        {
-            LevelRecording currentRecordingForLevel = recordingsList.FirstOrDefault(p => p.LevelIndex == levelRecording.LevelIndex);
-            firstEntry = false;
-            
-            if (currentRecordingForLevel == null)
-            {
-                recordingsList.Add(levelRecording);
-                firstEntry = true;
-            }
-            else if (currentRecordingForLevel.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
-            {
-                recordingsList.Remove(currentRecordingForLevel);
-                recordingsList.Add(levelRecording);
-            }
-        }
-
-        public LevelRecording GetRecordingForLevelAtIndex(int levelIndex, bool perfect)
-        {
-            List<LevelRecording> recordings = perfect ? _perfectLevelRecordings : _levelRecordings;
-            return recordings.FirstOrDefault(p => p.LevelIndex == levelIndex);
-        }
         
         public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
         {
@@ -96,34 +57,27 @@ namespace Code.Level.Player
                 _completedTutorials |= hasCompletedTutorials;
             }
         }
+
+        public void ResetSaveData()
+        {
+            CircumPlayerPrefs.ResetSaveData();
+        }
         
         public override string ToString()
         {
-            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}\n{(_levelRecordings == null ? "NULL" : _levelRecordings.JoinToString("\n"))}";
+            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}";
         }
 
-        public static string Save(PlayerStats stats)
+        public static void Save(PlayerStats stats)
         {
             stats._statsVersion = StatsDataVersion;
             
             string serialized = JsonUtility.ToJson(stats);
+            string compressed = serialized.Compress();
 
-            CircumPlayerPrefs.SetString(PlayerPrefsKey, serialized);
+            CircumPlayerPrefs.SetString(PlayerPrefsKey, compressed);
             CircumPlayerPrefs.Save();
             CircumDebug.Log($"Saved player stats: {stats}");
-
-            return serialized;
-        }
-
-        private static void StartThreadedSave()
-        {
-            Thread thread1 = new Thread(ThreadedSave);
-            thread1.Start();
-        }
-
-        private static void ThreadedSave()
-        {
-            
         }
         
         public static PlayerStats Load()
@@ -135,6 +89,17 @@ namespace Code.Level.Player
             }
             
             string serializedPlayerStats = CircumPlayerPrefs.GetString(PlayerPrefsKey);
+
+            if (!string.IsNullOrEmpty(serializedPlayerStats))
+            {
+                string firstChar = serializedPlayerStats.Substring(0, 1);
+                string lastChar = serializedPlayerStats.Substring(serializedPlayerStats.Length - 1, 1);
+                if (!firstChar.Equals("{") || !lastChar.Equals("}"))
+                {
+                    serializedPlayerStats = serializedPlayerStats.Decompress();
+                }
+            }
+            
             PlayerStats deserializedPlayerStats = JsonUtility.FromJson<PlayerStats>(serializedPlayerStats);
             CircumDebug.Log($"Loaded player stats: {deserializedPlayerStats}");
 
@@ -159,9 +124,7 @@ namespace Code.Level.Player
         {
             return new PlayerStats
             {
-                _runTracker = new RunTracker(),
-                _levelRecordings = new List<LevelRecording>(),
-                _perfectLevelRecordings = new List<LevelRecording>()
+                _runTracker = new RunTracker()
             };
         }
         
@@ -170,9 +133,7 @@ namespace Code.Level.Player
             return new PlayerStats
             {
                 _completedTutorials = true,
-                _runTracker = new RunTracker(),
-                _levelRecordings = new List<LevelRecording>(),
-                _perfectLevelRecordings = new List<LevelRecording>()
+                _runTracker = new RunTracker()
             };
         }
         
@@ -184,9 +145,7 @@ namespace Code.Level.Player
                 _highestLevelReachedIndex = int.MaxValue,
                 _highestPerfectLevelReachedIndex = int.MaxValue,
                 _highestNoDeathLevelReachedIndex = int.MaxValue,
-                _runTracker = new RunTracker(),
-                _levelRecordings = new List<LevelRecording>(),
-                _perfectLevelRecordings = new List<LevelRecording>()
+                _runTracker = new RunTracker()
             };
         }
 

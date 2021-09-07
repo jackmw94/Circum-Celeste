@@ -8,8 +8,10 @@
         void SetInt(string key, int value);
         void SetFloat(string key, float value);
         void SetString(string key, string value);
+        bool HasKey(string key);
         void Save();
         void DeleteKey(string key);
         void DeleteAll();
+        void ResetSaveData();
     }
 }

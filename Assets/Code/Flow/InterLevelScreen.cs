@@ -69,10 +69,11 @@ namespace Code.Flow
         public void SetupInterLevelScreen(bool isFirstPerfect = false, bool showAdvanceLevelButtons = false)
         {
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
-
-            PlayerStats playerStats = _playerStatsManager.PlayerStats;
-            LevelRecording levelRecording = playerStats.GetRecordingForLevelAtIndex(levelLayout.LevelContext.LevelIndex, false);
-            LevelRecording perfectLevelRecording = playerStats.GetRecordingForLevelAtIndex(levelLayout.LevelContext.LevelIndex, true);
+            string levelName = levelLayout.name;
+            
+            LevelRecording levelRecording = _playerStatsManager.GetRecordingForLevelAtIndex(levelName, false);
+            LevelRecording perfectLevelRecording = _playerStatsManager.GetRecordingForLevelAtIndex(levelName, true);
+            
             _worldRecordsScreen.SetupRecordsScreen(levelRecording, perfectLevelRecording, ReplayLevel);
             
             _levelOverviewScreen.SetupLevelOverview(levelLayout, perfectLevelRecording != null, isFirstPerfect,showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
+using Code.Debugging;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -58,6 +59,11 @@ namespace Code.Level.Player
             thread.Start((key, value));
         }
 
+        public bool HasKey(string key)
+        {
+            return _playerPrefsDictionary.ContainsKey(key);
+        }
+
         private void SetStringInternal(object o)
         {
             (string key, string value) = ((string, string)) o;
@@ -80,18 +86,27 @@ namespace Code.Level.Player
 
         private void Load()
         {
-            if (!Directory.Exists(SavesDirectory))
+            bool directoryExists = Directory.Exists(SavesDirectory);
+            CircumDebug.Log($"Conc player prefs directory ({SavesDirectory}) exists ? {directoryExists}");
+            if (!directoryExists)
             {
                 Directory.CreateDirectory(SavesDirectory);
             }
 
-            if (!File.Exists(SavesFile))
+            bool fileExists = File.Exists(SavesFile);
+            CircumDebug.Log($"Conc player prefs save file ({SavesFile}) exists ? {fileExists}");
+            if (!fileExists)
             {
                 File.Create(SavesFile);
             }
             else
             {
-                _playerPrefsDictionary = JsonConvert.DeserializeObject<ConcurrentDictionary<string, object>>(File.ReadAllText(SavesFile));
+                string readAllText = File.ReadAllText(SavesFile);
+                CircumDebug.Log($"Read all text : {readAllText}\n---");
+                if (!string.IsNullOrEmpty(readAllText))
+                {
+                    _playerPrefsDictionary = JsonConvert.DeserializeObject<ConcurrentDictionary<string, object>>(readAllText);
+                }
             }
         }
 
@@ -109,6 +124,11 @@ namespace Code.Level.Player
             {
                 _playerPrefsDictionary.Clear();
             }
+        }
+
+        public void ResetSaveData()
+        {
+            File.Delete(SavesFile);
         }
     }
 }
