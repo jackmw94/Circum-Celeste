@@ -3,7 +3,7 @@ using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
-    public class TimerUI : MonoBehaviour
+    public class CountdownTimerUI : MonoBehaviour
     {
         private float _duration;
         private float _startTime;

@@ -33,19 +33,22 @@ namespace Code.Level
             CircumDebug.Log($"Initialised replay with {levelReplayFrameData.Count} values for elements:\n{_levelElements.JoinToString("\n")}");
         }
 
-        public override void LevelReady()
+        protected override void OnLevelReady()
         {
+            GameContainer gameContainer = GameContainer.Instance;
+            CircumOptions circumOptions = PersistentDataManager.Instance.Options;
+            gameContainer.LevelTimeUI.ShowHideTimer(circumOptions.ShowLevelTimer);
+            
             _players.ApplyFunction(p => p.LevelReady());
             _levelElements.ApplyFunction(p => p.LevelReady());
         }
 
-        public override void StartLevel(Action<LevelResult> levelFinishedCallback)
+        protected override void OnStartLevel()
         {
             _players.ApplyFunction(p => p.LevelStarted());
             _levelElements.ApplyFunction(p => p.LevelStarted());
             
             _isPlaying = true;
-            _levelFinishedCallback = levelFinishedCallback;
         }
 
         private void Update()

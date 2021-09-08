@@ -8,14 +8,13 @@ namespace Code.Level.Player
     [Serializable]
     public class LevelStats
     {
-        [field: SerializeField] public LevelRecording FastestLevelRecording;
-        [field: SerializeField] public LevelRecording FastestPerfectLevelRecording;
+        public LevelRecording FastestLevelRecording;
+        public LevelRecording FastestPerfectLevelRecording;
 
-        public bool HasFastestLevelRecording => LevelRecordingExists(FastestLevelRecording);
-        public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
-        
         private bool _isDirty = false;
         
+        public bool HasFastestLevelRecording => LevelRecordingExists(FastestLevelRecording);
+        public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
         private static string PlayerPrefsKey(string levelName) => $"Circum_PlayerStats_{levelName}";
         
         public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, out bool firstPerfect)

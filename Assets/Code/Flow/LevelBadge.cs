@@ -6,7 +6,7 @@ using UnityExtras.Code.Core;
 
 namespace Code.Flow
 {
-    public class PerfectIcon : MonoBehaviour
+    public class LevelBadge : MonoBehaviour
     {
         [SerializeField] private Image _image;
         [SerializeField] private string _shaderPropertyName = "ShimmerPosition";
@@ -52,7 +52,7 @@ namespace Code.Flow
             _image.material.SetVector(_fakeMaskPropertyName, fakeMaskBounds);
         }
 
-        public void ShowHidePerfectIcon(bool show, bool instant)
+        public void ShowHideBadge(bool show, bool instant)
         {
             if (_showHideCoroutine != null)
             {

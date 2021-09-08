@@ -13,7 +13,7 @@ namespace Code.Level
         [SerializeField] private PlayerContainer _playerContainer;
         [Space(15)]
         [SerializeField] private LevelGenerator _levelGenerator;
-        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private PersistentDataManager _playerStatsManager;
         
         private Coroutine _startLevelOnceMovedCoroutine = null;
         

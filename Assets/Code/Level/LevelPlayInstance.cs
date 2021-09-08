@@ -4,6 +4,7 @@ using System.Linq;
 using Code.Core;
 using Code.Debugging;
 using Code.Juice;
+using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -21,15 +22,12 @@ namespace Code.Level
         private List<Enemy> _enemies;
         private List<Escape> _escapes;
         private List<Hazard> _hazards;
-
-        private bool _isStarted;
+        
         private float _startTime;
 
         private LevelRecorder _levelRecorder;
 
         private bool _escapeShown;
-        private Action<LevelResult> _levelFinishedCallback = null;
-
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
         
@@ -45,41 +43,40 @@ namespace Code.Level
             _escapes = escapes;
             _hazards = hazards;
             
-            GameContainer.Instance.TimerUI.ResetTimer();
+            GameContainer.Instance.CountdownTimerUI.ResetTimer();
             
-            _isStarted = false;
             _escapeShown = false;
             
             ApplyLevelElementFunction(p => p.LevelSetup());
         }
 
-        public override void LevelReady()
+        protected override void OnLevelReady()
         {
             CircumDebug.Log($"Level '{name}' ready");
 
             ApplyLevelElementFunction(p => p.LevelReady());
 
             // assuming this will always count up, therefore reset == hidden
-            GameContainer.Instance.TimerUI.ResetTimer();
+            GameContainer gameContainer = GameContainer.Instance;
+            gameContainer.CountdownTimerUI.ResetTimer();
+            
+            gameContainer.LevelTimeUI.ShowHideTimer(PersistentDataManager.Instance.Options.ShowLevelTimer);
 
             HandleUIIntroductions();
         }
 
-        public override void StartLevel(Action<LevelResult> levelFinishedCallback)
+        protected override void OnStartLevel()
         {
-            _isStarted = true;
             _startTime = Time.time;
 
             if (_escapeCriteria == EscapeCriteria.Timed)
             {
-                GameContainer.Instance.TimerUI.StartTimer(_escapeDuration);
+                GameContainer.Instance.CountdownTimerUI.StartTimer(_escapeDuration);
             }
 
             ApplyLevelElementFunction(p => p.LevelStarted());
 
             _levelRecorder = gameObject.AddComponent<LevelRecorder>();
-            
-            _levelFinishedCallback = levelFinishedCallback;
         }
 
         public override Vector3 GetPlayerPosition(int playerIndex)
@@ -112,7 +109,7 @@ namespace Code.Level
 
         private void Update()
         {
-            if (!_isStarted)
+            if (!IsStarted)
             {
                 return;
             }
@@ -138,8 +135,8 @@ namespace Code.Level
 
         private void LevelCompleted()
         {
-            CircumDebug.Assert(_isStarted, "Level has been completed before it's started? What's the deal with that..?");
-            CircumDebug.Log("LEVEL COMPLETED");
+            CircumDebug.Assert(IsStarted, "Level has been completed before it's started? What's the deal with that..?");
+            CircumDebug.Log($"-*- LEVEL {name} COMPLETED! -*-");
             
             ApplyLevelElementFunction(p => p.LevelFinished());
             
@@ -153,8 +150,7 @@ namespace Code.Level
                 LevelTime = _levelRecorder.LevelTime 
             });
 
-            _levelFinishedCallback?.Invoke(levelResult);
-            _isStarted = false;
+            LevelFinished(levelResult);
         }
 
         private void CheckLevelSuccess()
@@ -177,8 +173,7 @@ namespace Code.Level
             }
             
             LevelResult levelResult = new LevelResult(false, false, null);
-            _levelFinishedCallback?.Invoke(levelResult);
-            _isStarted = false;
+            LevelFinished(levelResult);
             return true;
 
         }

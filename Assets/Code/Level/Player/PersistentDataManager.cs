@@ -1,24 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Level.Player
 {
     [DefaultExecutionOrder(-1)]
-    public class PlayerStatsManager : MonoBehaviour
+    public class PersistentDataManager : SingletonMonoBehaviour<PersistentDataManager>
     {
         private const string NoLoadingSavingPlayerPrefsKey = "Circum_DoNotLoadData";
         
         [SerializeField] private LevelProvider _levelProvider;
-        
+
+        private bool _doNotLoadOrSave;
+        private CircumOptions _circumOptions;
         private PlayerStats _playerStats;
         private Dictionary<string, LevelStats> _levelStats = new Dictionary<string, LevelStats>();
 
-        private bool DoNotLoadOrSave => CircumPlayerPrefs.HasKey(NoLoadingSavingPlayerPrefsKey) && CircumPlayerPrefs.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
+        public bool DoNotLoadOrSave => _doNotLoadOrSave;
         public PlayerStats PlayerStats => _playerStats;
+        public CircumOptions Options => _circumOptions;
 
         private void Awake()
         {
-            LoadStats();
+            _doNotLoadOrSave = GetDoNotLoadOrSave();
+            LoadPersistentData();
         }
         
         public int GetRestartLevelIndex()
@@ -36,6 +41,11 @@ namespace Code.Level.Player
         {
             _playerStats.RunTracker.HasSkipped = true;
             if (save) SaveStats();
+        }
+
+        public void SetShowHideLevelTimer(bool showLevelTimer)
+        {
+            _circumOptions.ShowLevelTimer = showLevelTimer;
         }
 
         public void ResetCurrentRun(bool save = false)
@@ -104,9 +114,9 @@ namespace Code.Level.Player
             SaveStats();
         }
 
-        private void LoadStats()
+        private void LoadPersistentData()
         {
-            if (DoNotLoadOrSave)
+            if (_doNotLoadOrSave)
             {
                 _playerStats = PlayerStats.CreateEmptyPlayerStats();
                 return;
@@ -120,11 +130,13 @@ namespace Code.Level.Player
                     _levelStats.Add(levelLayout.name, levelStats);
                 }
             }
+
+            _circumOptions = CircumOptions.Load();
         }
         
         private void SaveStats()
         {
-            if (DoNotLoadOrSave)
+            if (_doNotLoadOrSave)
             {
                 return;
             }
@@ -154,11 +166,16 @@ namespace Code.Level.Player
             }
         }
 
-        public void ToggleDoNotLoadOrSave(out bool isNotLoadingSaving)
+        public void SetDoNotLoadOrSave(bool doNotLoadOrSave)
         {
-            int toggledValue = DoNotLoadOrSave ? 0 : 1;
+            _doNotLoadOrSave = doNotLoadOrSave;
+            int toggledValue = _doNotLoadOrSave ? 1 : 0;
             CircumPlayerPrefs.SetInt(NoLoadingSavingPlayerPrefsKey, toggledValue);
-            isNotLoadingSaving = toggledValue == 1;
+        }
+
+        private bool GetDoNotLoadOrSave()
+        {
+            return CircumPlayerPrefs.HasKey(NoLoadingSavingPlayerPrefsKey) && CircumPlayerPrefs.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
         }
     }
 }

@@ -8,10 +8,8 @@ namespace Code.Level.Player
     [Serializable]
     public class PlayerStats
     {
-        private const string PlayerPrefsKey = "Circum_PlayerStatistics";
-        private const int StatsDataVersion = 2;
+        private const string StatsPlayerPrefsKey = "Circum_PlayerStatistics";
         
-        [SerializeField] private int _statsVersion;
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
         
@@ -25,7 +23,6 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
-        
         public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
         {
             _highestLevelReachedIndex = Mathf.Max(levelIndex + 1, _highestLevelReachedIndex);
@@ -65,25 +62,23 @@ namespace Code.Level.Player
 
         public static void Save(PlayerStats stats)
         {
-            stats._statsVersion = StatsDataVersion;
-            
             string serialized = JsonUtility.ToJson(stats);
             string compressed = serialized.Compress();
 
-            CircumPlayerPrefs.SetString(PlayerPrefsKey, compressed);
+            CircumPlayerPrefs.SetString(StatsPlayerPrefsKey, compressed);
             CircumPlayerPrefs.Save();
             CircumDebug.Log($"Saved player stats: {stats}");
         }
         
         public static PlayerStats Load()
         {
-            if (!PlayerPrefs.HasKey(PlayerPrefsKey))
+            if (!PlayerPrefs.HasKey(StatsPlayerPrefsKey))
             {
                 CircumDebug.Log("Created new player stats since we can't find saved key");
                 return CreateEmptyPlayerStats();
             }
             
-            string serializedPlayerStats = CircumPlayerPrefs.GetString(PlayerPrefsKey);
+            string serializedPlayerStats = CircumPlayerPrefs.GetString(StatsPlayerPrefsKey);
 
             if (!string.IsNullOrEmpty(serializedPlayerStats))
             {
@@ -101,13 +96,6 @@ namespace Code.Level.Player
             if (deserializedPlayerStats == null)
             {
                 CircumDebug.Log("No player stats found, creating new");
-                return CreateEmptyPlayerStats();
-            }
-
-            if (deserializedPlayerStats._statsVersion != StatsDataVersion)
-            {
-                CircumDebug.Log($"Player stats were of a previous version (curr={StatsDataVersion}, loaded={deserializedPlayerStats._statsVersion}), deleted and returned empty.");
-                ResetSavedPlayerStats();
                 return CreateEmptyPlayerStats();
             }
             
@@ -162,7 +150,7 @@ namespace Code.Level.Player
         
         public static void ResetSavedPlayerStats()
         {
-            CircumPlayerPrefs.DeleteKey(PlayerPrefsKey);
+            CircumPlayerPrefs.DeleteKey(StatsPlayerPrefsKey);
         }
     }
 }

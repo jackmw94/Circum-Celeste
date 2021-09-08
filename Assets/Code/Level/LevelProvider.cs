@@ -11,7 +11,7 @@ namespace Code.Level
         [SerializeField] private LevelProgression _platformLevelProgression;
         [SerializeField] private LevelProgression _editorLevelProgression;
         [Space(15)]
-        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private PersistentDataManager _playerStatsManager;
         
         
         private LevelProgression _activeLevelProgression;

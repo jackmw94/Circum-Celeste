@@ -14,7 +14,7 @@ namespace Code.Flow
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
         
-        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private PersistentDataManager _playerStatsManager;
         [SerializeField] private LevelManager _levelManager;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
@@ -24,13 +24,15 @@ namespace Code.Flow
         [SerializeField] private Button _restartLevelButton;
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _updateRemoteConfigButton;
-        [SerializeField] private Button _resetStatsButton;
         [SerializeField] private Button _resetTutorialsButton;
         [SerializeField] private Button _toggleFeedbacks;
+        [SerializeField] private Button _toggleShowLevelTimer;
         [SerializeField] private Button _toggleNoLoadingSaving;
+        [SerializeField] private Button _resetStatsButton;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleNoLoadingSavingLabel;
+        [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
 
         private bool _settingsOn = false;
         private Coroutine _turnOnOffCoroutine = null;
@@ -44,6 +46,7 @@ namespace Code.Flow
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.AddListener(ResetTutorials);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
+            _toggleShowLevelTimer.onClick.AddListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
 
             TurnOffInstant();
@@ -58,12 +61,17 @@ namespace Code.Flow
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _resetTutorialsButton.onClick.RemoveListener(ResetTutorials);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
+            _toggleShowLevelTimer.onClick.RemoveListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
         }
         
         private void OnSettingShowing()
         {
             _updateRemoteConfigLabel.text = UpdateRemoteConfigDefaultText;
+            
+            UpdateFeedbacksLabel();
+            UpdateNoLoadingSavingLabel();
+            UpdateShowLevelTimerLabel();
         }
 
         private void SettingsButtonClicked()
@@ -71,7 +79,19 @@ namespace Code.Flow
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
         }
-        
+
+        private void ToggleShowLevelTimer()
+        {
+            _playerStatsManager.Options.ShowLevelTimer = !_playerStatsManager.Options.ShowLevelTimer;
+            UpdateShowLevelTimerLabel();
+            
+        }
+
+        private void UpdateShowLevelTimerLabel()
+        {
+            _toggleShowLevelTimerLabel.text = $"{(_playerStatsManager.Options.ShowLevelTimer ? "Hide" : "Show")} level timer";
+        }
+
         private void BackButtonListener()
         {
             _levelManager.ExitLevel();
@@ -107,13 +127,22 @@ namespace Code.Flow
         private void ToggleFeedbacks()
         {
             Feedbacks.Instance.FeedbacksActive = !Feedbacks.Instance.FeedbacksActive;
-            _toggleFeedbacksLabel.text = $"Toggle Feedbacks ({(Feedbacks.Instance.FeedbacksActive ? "on" : "off")})";
+            UpdateFeedbacksLabel();
+        }
+
+        private void UpdateFeedbacksLabel()
+        {
+            _toggleFeedbacksLabel.text = $"Turn Feedbacks {(Feedbacks.Instance.FeedbacksActive ? "On" : "Off")}";
         }
 
         private void ToggleNoLoadingSaving()
         {
-            _playerStatsManager.ToggleDoNotLoadOrSave(out bool isNotLoadingSaving);
-            _toggleNoLoadingSavingLabel.text = $"Toggle persistent data ({(isNotLoadingSaving ? "saving / loading DISABLED" : "saving / loading on")})";
+            _playerStatsManager.SetDoNotLoadOrSave(!_playerStatsManager.DoNotLoadOrSave);
+        }
+
+        private void UpdateNoLoadingSavingLabel()
+        {
+            _toggleNoLoadingSavingLabel.text = $"Toggle persistent data ({(_playerStatsManager.DoNotLoadOrSave ? "saving / loading DISABLED" : "saving / loading on")})";
         }
 
         private void TurnSettingsOnOff(bool on)

@@ -6,7 +6,7 @@ namespace Code.Flow
 {
     public class RunOverviewScreen : MonoBehaviour
     {
-        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private PersistentDataManager _playerStatsManager;
         [Space(15)]
         [SerializeField] private GameObject _highestLevelRoot;
         [SerializeField] private GameObject _highestNoDeathsRoot;

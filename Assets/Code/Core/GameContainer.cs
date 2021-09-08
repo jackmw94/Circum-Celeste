@@ -2,6 +2,7 @@
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Core
@@ -9,11 +10,13 @@ namespace Code.Core
     public class GameContainer : SingletonMonoBehaviour<GameContainer>
     {
         [SerializeField] private HealthUI _healthUI;
-        [SerializeField] private TimerUI _timerUI;
+        [FormerlySerializedAs("_timerUI")] [SerializeField] private CountdownTimerUI _countdownTimerUI;
         [SerializeField] private UIInputElementsContainer _uiInputElementsContainer;
+        [SerializeField] private LevelTimeUI _levelTimeUI;
         
         public HealthUI HealthUI => _healthUI;
-        public TimerUI TimerUI => _timerUI;
+        public CountdownTimerUI CountdownTimerUI => _countdownTimerUI;
         public UIInputElementsContainer UIInputElementsContainer => _uiInputElementsContainer;
+        public LevelTimeUI LevelTimeUI => _levelTimeUI;
     }
 }

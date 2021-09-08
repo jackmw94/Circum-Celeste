@@ -1,5 +1,4 @@
 ﻿using Code.Behaviours;
-using TMPro;
 using UnityEngine;
 
 namespace Code.UI

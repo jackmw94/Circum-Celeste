@@ -23,7 +23,7 @@ namespace Code.Flow
         [SerializeField] private WorldRecordsScreen _worldRecordsScreen;
         [SerializeField] private RunOverviewScreen _runOverviewScreen;
         [Space(15)]
-        [SerializeField] private PlayerStatsManager _playerStatsManager;
+        [SerializeField] private PersistentDataManager _playerStatsManager;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
 

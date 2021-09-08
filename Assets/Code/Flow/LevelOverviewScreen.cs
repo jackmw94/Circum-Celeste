@@ -3,6 +3,7 @@ using Code.Debugging;
 using Code.Level;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
 
@@ -15,8 +16,9 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _levelNumber;
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
+        [FormerlySerializedAs("_perfectIcon")]
         [Space(15)]
-        [SerializeField] private PerfectIcon _perfectIcon;
+        [SerializeField] private LevelBadge _levelBadge;
         [Space(15)]
         [SerializeField] private Button[] _playButtons;
         [SerializeField] private Button _advanceButton;
@@ -54,7 +56,7 @@ namespace Code.Flow
             _playAndAdvanceButtonRoot.SetActiveSafe(showAdvancePrompt);
 
             CircumDebug.Assert(isPerfect || !isFirstPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-            _perfectIcon.ShowHidePerfectIcon(isPerfect, !isFirstPerfect);
+            _levelBadge.ShowHideBadge(isPerfect, !isFirstPerfect);
             
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;
