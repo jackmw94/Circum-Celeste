@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Juice
@@ -6,8 +7,9 @@ namespace Code.Juice
     /// Screen shake assumes object doesn't move - it sets the origin position on awake then keeps it there when updating
     /// Must work on unscaled time to not get affected by the time control feedback system
     /// </summary>
-    public class ScreenShake : MonoBehaviour
+    public class ScreenShaker : MonoBehaviour
     {
+        [SerializeField] private Transform[] _shakeObjects;
         [SerializeField] private float _frequency = 1f;
         [SerializeField] private float _addShakeMagnitude = 0.01f;
         [SerializeField] private float _maximumShakeMagnitude = 0.03f;
@@ -16,12 +18,12 @@ namespace Code.Juice
         [SerializeField] private float _debugAddShakeFactor = 1f;
         [SerializeField] private bool _debugAddShake;
 
-        private Vector3 _defaultPosition = Vector3.zero;
+        private Vector3[] _defaultPositions;
         private float _shakeAmount = 0f;
 
         private void Awake()
         {
-            _defaultPosition = transform.localPosition;
+            _defaultPositions = _shakeObjects.Select(p => p.localPosition).ToArray();
         }
 
         private void Update()
@@ -46,8 +48,14 @@ namespace Code.Juice
             
             float shakeX = perlinX * _shakeAmount;
             float shakeY = perlinNoiseY * _shakeAmount;
-
-            transform.localPosition = _defaultPosition + new Vector3(shakeX, shakeY, 0f);
+            Vector3 shakeOffset = new Vector3(shakeX, shakeY, 0f);
+            
+            for (int i = 0; i < _shakeObjects.Length; i++)
+            {
+                Transform shakeObject = _shakeObjects[i];
+                Vector3 defaultPosition = _defaultPositions[i];
+                shakeObject.localPosition = defaultPosition + shakeOffset;
+            }
         }
 
         public void AddShake(float factor)

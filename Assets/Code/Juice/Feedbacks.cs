@@ -37,7 +37,7 @@ namespace Code.Juice
         
         [SerializeField] private Vibration _vibration;
         [SerializeField] private TimeControl _timeControl;
-        [SerializeField] private ScreenShake _screenShake;
+        [SerializeField] private ScreenShaker _screenShake;
         [SerializeField] private VignetteFeedback _vignetteFeedback;
         [Space(15)]
         [SerializeField] private FeedbackSetting[] _feedbackSettings;
