@@ -84,9 +84,9 @@ namespace Code.Level.Player
             return levelStats.HasFastestLevelRecording ? levelStats.FastestLevelRecording : null;
         }
         
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out bool isFirstPerfect)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out BadgeData newBadgeData)
         {
-            isFirstPerfect = false;
+            newBadgeData = new BadgeData();
             
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
@@ -101,13 +101,13 @@ namespace Code.Level.Player
             {
                 if (_levelStats.TryGetValue(currentLevel.name, out LevelStats levelStats))
                 {
-                    levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
+                    levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData);
                 }
                 else
                 {
                     LevelStats newStats = new LevelStats();
                     _levelStats.Add(currentLevel.name, newStats);
-                    newStats.UpdateFastestRecording(levelRecording, playerTookNoHits, out isFirstPerfect);
+                    newStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData);
                 }
             }
 
@@ -160,10 +160,11 @@ namespace Code.Level.Player
         public void ResetStats()
         {
             PlayerStats.ResetSavedPlayerStats();
-            foreach (KeyValuePair<string,LevelStats> statsByLevel in _levelStats)
+            foreach (LevelLayout levels in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                LevelStats.ResetStats(statsByLevel.Key);
+                LevelStats.ResetStats(levels.name);
             }
+            CircumOptions.ResetOptions();
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)

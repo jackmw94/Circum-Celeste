@@ -21,16 +21,18 @@ namespace Code.Level
 
         private void OnDestroy()
         {
-            _levelTimeUI.ShowHideTimer(false);
+            _levelTimeUI.StartStopTimer(false);
+            _levelTimeUI.GameplayShowHideTime(false);
         }
 
         public void LevelReady()
         {
-            _levelTimeUI.ShowHideTimer(PlayerOptions.ShowLevelTimer);
+            _levelTimeUI.ResetTimer();
+            _levelTimeUI.GameplayShowHideTime(PlayerOptions.ShowLevelTimer);
             OnLevelReady();
         }
 
-        public virtual void StartLevel(Action<LevelResult> levelFinishedCallback)
+        public void StartLevel(Action<LevelResult> levelFinishedCallback)
         {
             IsStarted = true;
             _levelFinishedCallback = levelFinishedCallback;

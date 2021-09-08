@@ -13,7 +13,6 @@ namespace Code.Level
         [SerializeField] private PlayerContainer _playerContainer;
         [Space(15)]
         [SerializeField] private LevelGenerator _levelGenerator;
-        [SerializeField] private PersistentDataManager _playerStatsManager;
         
         private Coroutine _startLevelOnceMovedCoroutine = null;
         
@@ -38,7 +37,7 @@ namespace Code.Level
         {
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
             {
-                _playerStatsManager.SetPlayerDied();
+                PersistentDataManager.Instance.SetPlayerDied();
             }
 
             if (_startLevelOnceMovedCoroutine != null)
@@ -71,10 +70,10 @@ namespace Code.Level
 
             if (levelLayout.LevelContext.IsFirstLevel)
             {
-                _playerStatsManager.ResetCurrentRun();
+                PersistentDataManager.Instance.ResetCurrentRun();
             }
             
-            _playerStatsManager.SetLevelIndex(levelLayout.LevelContext.LevelIndex, true);
+            PersistentDataManager.Instance.SetLevelIndex(levelLayout.LevelContext.LevelIndex, true);
 
             if (_startLevelOnceMovedCoroutine != null)
             {
@@ -99,7 +98,7 @@ namespace Code.Level
         private void OnLevelFinished(LevelResult levelResult)
         {
             bool isReplay = levelResult == null;
-            bool isFirstPerfect = false;
+            BadgeData newBadgeData = new BadgeData();
             bool advanceLevelPrompt = false;
             
             if (!isReplay && levelResult.Success)
@@ -112,13 +111,13 @@ namespace Code.Level
                     LevelIndex = levelContext.LevelIndex,
                     RecordingData = levelResult.LevelRecordingData
                 };
-                _playerStatsManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out isFirstPerfect);
+                PersistentDataManager.Instance.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData);
 
                 advanceLevelPrompt = true;
                 //_levelProvider.AdvanceLevel();
             }
             
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, isFirstPerfect: isFirstPerfect, showAdvanceLevelPrompt: advanceLevelPrompt);
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, showAdvanceLevelPrompt: advanceLevelPrompt);
         }
     }
 }

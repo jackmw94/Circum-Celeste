@@ -26,6 +26,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
+    private SerializedProperty _goldTime;
 
     private Texture _levelCellEmptyTexture;
     private Texture _levelCellWallTexture;
@@ -39,6 +40,7 @@ public class LevelLayoutEditor : Editor
     {
         _gridSize = serializedObject.FindProperty(nameof(_gridSize));
         _cells = serializedObject.FindProperty(nameof(_cells));
+        _goldTime = serializedObject.FindProperty(nameof(_goldTime));
         
         _escapeCriteria = serializedObject.FindProperty(nameof(_escapeCriteria));
         _escapeTimer = serializedObject.FindProperty(nameof(_escapeTimer));
@@ -72,6 +74,7 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_powerEnabled);
         GUILayout.Space(15);
+        EditorGUILayout.PropertyField(_goldTime);
         HandleEscapeCriteriaProperty();
         GUILayout.Space(15);
         HandleGridSizeProperty();

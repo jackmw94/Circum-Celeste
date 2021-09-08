@@ -35,10 +35,6 @@ namespace Code.Level
 
         protected override void OnLevelReady()
         {
-            GameContainer gameContainer = GameContainer.Instance;
-            CircumOptions circumOptions = PersistentDataManager.Instance.Options;
-            gameContainer.LevelTimeUI.ShowHideTimer(circumOptions.ShowLevelTimer);
-            
             _players.ApplyFunction(p => p.LevelReady());
             _levelElements.ApplyFunction(p => p.LevelReady());
         }

@@ -21,6 +21,7 @@ namespace Code.Level
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private bool _exampleOrbiterEnabled = false;
         [SerializeField] private int _gridSize = 10;
+        [SerializeField] private float _goldTime = 2f;
         [SerializeField] private CellType[] _cells = new CellType[0];
 
         public long LevelId => _levelId;
@@ -32,7 +33,8 @@ namespace Code.Level
         public bool PowerEnabled => _powerEnabled;
         public IntroduceElement IntroduceElement => _introduceElement;
         public bool ExampleOrbiterEnabled => _exampleOrbiterEnabled;
-        
+        public float GoldTime => _goldTime;
+
         // only runtime data, keeps level indices hidden away in level provider
         // todo: move this out of here, return an object containing LevelLayout and LevelContext instead of where we return LevelContext
         public LevelLayoutContext LevelContext { get; } = new LevelLayoutContext();

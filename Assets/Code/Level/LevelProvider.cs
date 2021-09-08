@@ -10,8 +10,6 @@ namespace Code.Level
     {
         [SerializeField] private LevelProgression _platformLevelProgression;
         [SerializeField] private LevelProgression _editorLevelProgression;
-        [Space(15)]
-        [SerializeField] private PersistentDataManager _playerStatsManager;
         
         
         private LevelProgression _activeLevelProgression;
@@ -22,18 +20,21 @@ namespace Code.Level
         private int NumberOfLevels => _activeLevelProgression.LevelLayout.Length;
         private bool HasCompletedTutorials => _levelIndex >= _activeLevelProgression.TutorialLevelLayout.Length;
         
-        public LevelProgression ActiveLevelProgression => _activeLevelProgression;
+        public LevelProgression ActiveLevelProgression =>
+            _activeLevelProgression
+                ? _activeLevelProgression
+                : _activeLevelProgression = Application.isEditor ? _editorLevelProgression : _platformLevelProgression;
 
         public void Awake()
         {
-            _activeLevelProgression = Application.isEditor ? _editorLevelProgression : _platformLevelProgression;
-            _activeLevelProgression.Initialise();
+            ActiveLevelProgression.Initialise();
         }
 
         private void Start()
         {
-            int restartLevelIndex = _playerStatsManager.GetRestartLevelIndex();
-            bool hasCompletedTutorials = _playerStatsManager.PlayerStats.CompletedTutorials;
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            int restartLevelIndex = persistentDataManager.GetRestartLevelIndex();
+            bool hasCompletedTutorials = persistentDataManager.PlayerStats.CompletedTutorials;
             
             if (hasCompletedTutorials)
             {

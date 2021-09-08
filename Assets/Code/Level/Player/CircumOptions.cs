@@ -31,5 +31,10 @@ namespace Code.Level.Player
             
             return deserializedOptions;
         }
+
+        public static void ResetOptions()
+        {
+            CircumPlayerPrefs.DeleteKey(CircumOptionsPlayerPrefsKey);
+        }
     }
 }

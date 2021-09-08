@@ -11,6 +11,11 @@ namespace Code.Level
         [field: SerializeField] public int LevelIndex;
         [field: SerializeField] public LevelRecordingData RecordingData;
 
+        public bool HasBeatenGoldTime(float goldTime)
+        {
+            return RecordingData.LevelTime <= goldTime;
+        }
+
         public override string ToString()
         {
             return $"---\nLevel index {LevelIndex}\n{(RecordingData == null ? "NULL" : RecordingData.ToString())}\n---";

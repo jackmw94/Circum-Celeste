@@ -15,19 +15,19 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
-        [MenuItem("Circum/Stats/Reset saved player stats")]
+        [MenuItem("Circum/Persistent data/Reset saved data")]
         public static void ResetSavedPlayerStats()
         {
-            PlayerStats.ResetSavedPlayerStats();
+            Object.FindObjectOfType<PersistentDataManager>().ResetStats();
         }
         
-        [MenuItem("Circum/Stats/Set starter player stats")]
+        [MenuItem("Circum/Persistent data/Set starter player stats")]
         public static void SetStarterPlayerStats()
         {
             PlayerStats.SetStarterPlayerStats();
         }
         
-        [MenuItem("Circum/Stats/Set perfect player stats")]
+        [MenuItem("Circum/Persistent data/Set perfect player stats")]
         public static void SetPerfectPlayerStats()
         {
             PlayerStats.SetPerfectPlayerStats();

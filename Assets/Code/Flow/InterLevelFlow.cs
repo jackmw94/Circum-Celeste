@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Code.Level;
+using Code.Level.Player;
 using UnityEngine;
 
 namespace Code.Flow
@@ -27,13 +28,13 @@ namespace Code.Flow
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
         
-        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition instant = InterLevelTransition.Regular, bool isFirstPerfect = false, bool showAdvanceLevelPrompt = false)
+        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition instant = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelPrompt = false)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant, isFirstPerfect, showAdvanceLevelPrompt));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant, newBadgeData, showAdvanceLevelPrompt));
         }
 
         public void HideInterLevelUI()
@@ -66,7 +67,7 @@ namespace Code.Flow
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, bool isFirstPerfect, bool showAdvanceLevelPrompt)
+        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, bool showAdvanceLevelPrompt)
         {
             _isTransitioning = true;
             if (transition == InterLevelTransition.Regular)
@@ -74,7 +75,7 @@ namespace Code.Flow
                 yield return new WaitForSeconds(_startDelay);
             }
 
-            _interLevelScreen.SetupInterLevelScreen(isFirstPerfect, showAdvanceLevelPrompt);
+            _interLevelScreen.SetupInterLevelScreen(newBadgeData, showAdvanceLevelPrompt);
             
             // Show overlay, hides level reset
             yield return ShowOverlayCoroutine(transition);

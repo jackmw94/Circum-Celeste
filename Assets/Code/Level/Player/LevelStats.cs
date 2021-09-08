@@ -17,15 +17,21 @@ namespace Code.Level.Player
         public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
         private static string PlayerPrefsKey(string levelName) => $"Circum_PlayerStats_{levelName}";
         
-        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, out bool firstPerfect)
+        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, float goldTime, out BadgeData newBadgeData)
         {
-            firstPerfect = false;
-            UpdateFastestRecordingInternal(levelRecording, ref FastestLevelRecording, out _);
-            
-            if (perfect)
+            newBadgeData = new BadgeData();
+
+            UpdateFastestRecordingInternal(levelRecording, ref FastestLevelRecording, goldTime, out _, out bool firstGold);
+            newBadgeData.HasGoldTime = firstGold;
+
+            if (!perfect)
             {
-                UpdateFastestRecordingInternal(levelRecording, ref FastestPerfectLevelRecording, out firstPerfect);
+                return;
             }
+            
+            UpdateFastestRecordingInternal(levelRecording, ref FastestPerfectLevelRecording, goldTime, out bool firstPerfect, out bool firstPerfectGold);
+            newBadgeData.IsPerfect = firstPerfect;
+            newBadgeData.HasPerfectGoldTime = firstPerfectGold;
         }
 
         private static bool LevelRecordingExists(LevelRecording levelRecording)
@@ -33,20 +39,25 @@ namespace Code.Level.Player
             return levelRecording != null && levelRecording.RecordingData.FrameData.Count > 0;
         }
 
-        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, out bool firstEntry)
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, float goldTime, out bool firstEntry, out bool firstGold)
         {
             firstEntry = false;
+            firstGold = false;
             
             if (!LevelRecordingExists(currentRecording))
             {
                 currentRecording = levelRecording;
                 firstEntry = true;
+                firstGold = levelRecording.RecordingData.LevelTime <= goldTime;
                 _isDirty = true;
             }
             else if (currentRecording.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
             {
+                bool hadBeatGold = currentRecording.HasBeatenGoldTime(goldTime);
+                bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
                 currentRecording = levelRecording;
                 _isDirty = true;
+                firstGold = !hadBeatGold && hasNowBeatGold;
             }
         }
         

@@ -60,8 +60,6 @@ namespace Code.Level
             GameContainer gameContainer = GameContainer.Instance;
             gameContainer.CountdownTimerUI.ResetTimer();
             
-            gameContainer.LevelTimeUI.ShowHideTimer(PersistentDataManager.Instance.Options.ShowLevelTimer);
-
             HandleUIIntroductions();
         }
 

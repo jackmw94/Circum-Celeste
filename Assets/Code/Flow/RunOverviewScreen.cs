@@ -6,8 +6,6 @@ namespace Code.Flow
 {
     public class RunOverviewScreen : MonoBehaviour
     {
-        [SerializeField] private PersistentDataManager _playerStatsManager;
-        [Space(15)]
         [SerializeField] private GameObject _highestLevelRoot;
         [SerializeField] private GameObject _highestNoDeathsRoot;
         [SerializeField] private GameObject _highestPerfectRoot;
@@ -18,7 +16,7 @@ namespace Code.Flow
         
         public void SetupRunOverviewScreen()
         {
-            PlayerStats playerStats = _playerStatsManager.PlayerStats;
+            PlayerStats playerStats = PersistentDataManager.Instance.PlayerStats;
 
             _highestLevelRoot.SetActive(playerStats.HighestLevelIndex >= 0);
             _highestLevelText.text = (playerStats.HighestLevelIndex + 1).ToString();
