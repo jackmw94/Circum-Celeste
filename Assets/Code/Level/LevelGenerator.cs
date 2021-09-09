@@ -51,7 +51,7 @@ namespace Code.Level
             return levelPlayInstance;
         }
 
-        public LevelReplayInstance GenerateReplay(List<LevelRecordFrameData> replay, LevelLayout level)
+        public LevelReplayInstance GenerateReplay(LevelRecordingData levelRecordingData, LevelLayout level)
         {
             CreateLevelObjects(level);
             
@@ -65,7 +65,7 @@ namespace Code.Level
             // Initialise level replay
             LevelReplayInstance levelReplay = _cellsRoot.gameObject.AddComponent<LevelReplayInstance>();
             levelReplay.name = level.name;
-            levelReplay.SetupLevel(replay, allPlayers);
+            levelReplay.SetupLevel(levelRecordingData, allPlayers);
 
             return levelReplay;
         }

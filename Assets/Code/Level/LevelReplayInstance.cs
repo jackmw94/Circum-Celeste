@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Code.Core;
 using Code.Debugging;
 using Code.Level.Player;
@@ -11,26 +10,27 @@ namespace Code.Level
     public class LevelReplayInstance : LevelInstanceBase
     {
         // frames are recorded until the level is destroyed, we actually finish a few seconds before this
-        private const int EndLevelWithFramesRemaining = 120;
+        private const int EndLevelWithFramesRemaining = 0;
         
         private Queue<LevelRecordFrameData> _frameReplayData;
         private List<Player.Player> _players;
         private LevelElement[] _levelElements;
-        private Action<LevelResult> _levelFinishedCallback;
 
         private bool _isPlaying = false;
         private bool _hasReturnedFinish = false;
+        private float _replayTime = 0f;
 
-        public void SetupLevel(List<LevelRecordFrameData> levelReplayFrameData, List<Player.Player> players)
+        public void SetupLevel(LevelRecordingData levelRecordingData, List<Player.Player> players)
         {
-            _frameReplayData = new Queue<LevelRecordFrameData>(levelReplayFrameData);
+            _frameReplayData = new Queue<LevelRecordFrameData>(levelRecordingData.FrameData);
             _players = players;
+            _replayTime = levelRecordingData.LevelTime;
             _levelElements = GetComponentsInChildren<LevelElement>();
 
             _players.ApplyFunction(p => p.LevelSetup());
             _levelElements.ApplyFunction(p => p.LevelSetup());
             
-            CircumDebug.Log($"Initialised replay with {levelReplayFrameData.Count} values for elements:\n{_levelElements.JoinToString("\n")}");
+            CircumDebug.Log($"Initialised replay with {_frameReplayData.Count} values for elements:\n{_levelElements.JoinToString("\n")}");
         }
 
         protected override void OnLevelReady()
@@ -54,21 +54,32 @@ namespace Code.Level
                 return;
             }
 
-            if (!_hasReturnedFinish && _frameReplayData.Count <= EndLevelWithFramesRemaining)
+            if (!_hasReturnedFinish && (_frameReplayData.Count <= EndLevelWithFramesRemaining || _frameReplayData.Count == 0))
             {
-                _levelFinishedCallback(null);
-                _hasReturnedFinish = true;
+                FinishReplay();
             }
+        }
+
+        private void FinishReplay()
+        {
+            ReplayFinished();
             
-            if (_frameReplayData.Count == 0)
+            LevelRecordingData levelRecordingData = new LevelRecordingData
             {
-                LevelFinished();
-            }
+                FrameData = null,
+                LevelTime = _replayTime
+            };
+            LevelResult result = new LevelResult(false, false, levelRecordingData, true);
+            LevelResult levelResult = result;
+            
+            LevelFinished(levelResult);
+            
+            _hasReturnedFinish = true;
         }
 
         private void FixedUpdate()
         {
-            if (!_isPlaying)
+            if (!_isPlaying || _frameReplayData.Count == 0)
             {
                 return;
             }
@@ -83,7 +94,7 @@ namespace Code.Level
             }
         }
 
-        private void LevelFinished()
+        private void ReplayFinished()
         {
             _players.ApplyFunction(p => p.LevelFinished());
             _levelElements.ApplyFunction(p => p.LevelFinished());

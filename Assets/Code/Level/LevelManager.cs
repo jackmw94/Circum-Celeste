@@ -60,7 +60,7 @@ namespace Code.Level
             bool isReplay = replay != null;
             if (isReplay)
             {
-                CurrentLevel = _levelGenerator.GenerateReplay(replay.RecordingData.FrameData, levelLayout);
+                CurrentLevel = _levelGenerator.GenerateReplay(replay.RecordingData, levelLayout);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Code.Level
 
         private void OnLevelFinished(LevelResult levelResult)
         {
-            bool isReplay = levelResult == null;
+            bool isReplay = levelResult.WasReplay;
             BadgeData newBadgeData = new BadgeData();
             bool advanceLevelPrompt = false;
             
