@@ -119,6 +119,7 @@ namespace Code.Level.Player
             if (_doNotLoadOrSave)
             {
                 _playerStats = PlayerStats.CreateEmptyPlayerStats();
+                _circumOptions = new CircumOptions();
                 return;
             }
             
