@@ -44,8 +44,14 @@ namespace Code.Level
         {
             if (_levelId == 0)
             {
-                _levelId = Utilities.RandomLong(Random.Range(int.MinValue, int.MaxValue));
+                RegenerateLevelId();
             }
+        }
+
+        [ContextMenu(nameof(RegenerateLevelId))]
+        private void RegenerateLevelId()
+        {
+            _levelId = Utilities.RandomLong(Random.Range(int.MinValue, int.MaxValue));
         }
 
         public List<Vector2Int> GetCellTypeCoordinates(CellType cellType)

@@ -73,7 +73,6 @@ namespace Code.Flow
                 _fastTimeIcon.ShowHideBadge(currentBadgeData.HasGoldTime, !newBadgeData.HasGoldTime);
             }
             
-
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;
         }
