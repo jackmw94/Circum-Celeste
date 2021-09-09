@@ -134,6 +134,7 @@ namespace Code.Flow
         {
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
             persistentDataManager.SetDoNotLoadOrSave(!persistentDataManager.DoNotLoadOrSave);
+            UpdateNoLoadingSavingLabel();
         }
 
         private void UpdateNoLoadingSavingLabel()
