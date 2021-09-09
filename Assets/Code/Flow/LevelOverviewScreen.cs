@@ -62,9 +62,18 @@ namespace Code.Flow
             CircumDebug.Assert(currentBadgeData.HasPerfectGoldTime || !newBadgeData.HasPerfectGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
 
             _perfectIcon.ShowHideBadge(currentBadgeData.IsPerfect, !newBadgeData.IsPerfect);
-            _fastTimeIcon.ShowHideBadge(currentBadgeData.HasGoldTime, !newBadgeData.HasGoldTime);
             _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime);
             
+            if (currentBadgeData.HasPerfectGoldTime)
+            {
+                _fastTimeIcon.ShowHideBadge(false, true);
+            }
+            else
+            {
+                _fastTimeIcon.ShowHideBadge(currentBadgeData.HasGoldTime, !newBadgeData.HasGoldTime);
+            }
+            
+
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;
         }
