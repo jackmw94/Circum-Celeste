@@ -23,6 +23,8 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
 
+        public bool IsNextLevelUnlocked(int currentLevelIndex) => currentLevelIndex < _highestLevelReachedIndex;
+
         public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
         {
             _highestLevelReachedIndex = Mathf.Max(levelIndex + 1, _highestLevelReachedIndex);

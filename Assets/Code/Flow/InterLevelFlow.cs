@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using UnityEngine;
@@ -8,25 +9,55 @@ namespace Code.Flow
 {
     public class InterLevelFlow : MonoBehaviour
     {
+        private const float SwipeThreshold = 0.8f;
+        
         public enum InterLevelTransition
         {
             Regular,
             Fast,
             Instant
         }
-        
+
+        [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelOverlay _levelOverlay;
         [SerializeField] private LevelManager _levelManager;
         [Space(15)]
         [SerializeField] private float _showHideHoldDelay = 0.25f;
         [SerializeField] private float _startDelay = 1.5f;
-
+        
         private bool _isTransitioning = false;
         private Coroutine _showHideInterLevelCoroutine = null;
 
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
+
+        private void Update()
+        {
+            if (IsOverlaid && !_isTransitioning)
+            {
+                CircumGestures.SwipeDirection swipeDirection = CircumGestures.GetSwipeDirection();
+                switch (swipeDirection)
+                {
+                    case CircumGestures.SwipeDirection.None:
+                        break;
+                    case CircumGestures.SwipeDirection.Right:
+                        if (_levelProvider.CanChangeToPreviousLevel())
+                        {
+                            _levelProvider.PreviousLevel();
+                            _interLevelScreen.SetupInterLevelScreen();
+                        }
+                        break;
+                    case CircumGestures.SwipeDirection.Left:
+                        if (_levelProvider.CanChangeToNextLevel())
+                        {
+                            _levelProvider.AdvanceLevel();
+                            _interLevelScreen.SetupInterLevelScreen();
+                        }
+                        break;
+                }
+            }
+        }
         
         public void ShowInterLevelUI(Action onShown = null, InterLevelTransition instant = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelPrompt = false)
         {
