@@ -7,6 +7,8 @@ namespace Code.Level
 {
     public class Escape : Collectable
     {
+        [SerializeField] private SwitchVfxProperty _switchVfxProperty;
+        
         public override void LevelSetup()
         {
             base.LevelSetup();
@@ -20,6 +22,7 @@ namespace Code.Level
         
         protected override void CollectableCollected(Vector3 _)
         {
+            _switchVfxProperty.SetOnOff(true);
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
         }
     }
