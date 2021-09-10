@@ -16838,7 +16838,7 @@ MonoBehaviour:
   _hazardPrefab: {fileID: 145789428869962669, guid: 9eb7ab747d933c145b9b5d535ccea8d5, type: 3}
   _cellsRoot: {fileID: 1882281939}
   _exampleOrbiter: {fileID: 9172051211579343261}
-  _wallZOffset: 1
+  _wallZOffset: 0.5
 --- !u!4 &2143567223
 Transform:
   m_ObjectHideFlags: 0
