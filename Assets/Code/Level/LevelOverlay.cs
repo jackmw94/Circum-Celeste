@@ -7,7 +7,8 @@ namespace Code.Level
     public class LevelOverlay : MonoBehaviour
     {
         private const float OverlayOnExpansionValue = 1.5f;
-        
+
+        [SerializeField] private Collider _collider;
         [SerializeField] private Renderer _renderer;
         [SerializeField] private AnimationCurve _turnOnCurve;
         [SerializeField] private AnimationCurve _turnOffCurve;
@@ -59,6 +60,7 @@ namespace Code.Level
             {
                 SetExpansionAmount(on ? 1f : 0f);
                 _overlayIsOn = on;
+                _collider.enabled = on;
                 return;
             }
             
@@ -71,9 +73,13 @@ namespace Code.Level
 
         private IEnumerator TurnOnOffCoroutine(bool on)
         {
+            _collider.enabled = true;
+            
             AnimationCurve curve = on ? _turnOnCurve : _turnOffCurve;
             yield return Utilities.LerpOverTime(0f, 1f, curve.GetCurveDuration(), SetExpansionAmount, curve);
             _overlayIsOn = on;
+            
+            if (!on) _collider.enabled = false;
         }
 
         /// <summary>
