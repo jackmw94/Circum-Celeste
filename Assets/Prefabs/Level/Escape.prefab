@@ -501,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: MoveToCentreForceScale
-  _onValue: -0.015
+  _onValue: -0.025
   _offValue: 0.01
   _currentlyOnOff: 0
 --- !u!114 &7664196066216315736
