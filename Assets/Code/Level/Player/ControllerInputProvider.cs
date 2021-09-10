@@ -4,7 +4,7 @@ namespace Code.Level.Player
 {
     public class ControllerInputProvider : InputProvider
     {
-        public override Vector2 GetMovementInput(Vector3 _)
+        public override Vector2 GetMovementInput()
         {
             float xAxis = Input.GetAxis("Horizontal");
             float yAxis = Input.GetAxis("Vertical");

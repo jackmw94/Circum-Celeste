@@ -6,7 +6,7 @@ namespace Code.Level.Player
     {
         protected override bool CursorLocked => true;
         
-        public override Vector2 GetMovementInput(Vector3 _)
+        public override Vector2 GetMovementInput()
         {
             float xAxis = Input.GetAxis("Mouse X");
             float yAxis = Input.GetAxis("Mouse Y");

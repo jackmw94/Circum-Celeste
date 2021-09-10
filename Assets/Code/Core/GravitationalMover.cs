@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Core
 {
-    public class GravitationalMover : LevelPlayBehaviour
+    public class GravitationalMover : Mover
     {
         [SerializeField] protected PidController _xPidController;
         [SerializeField] protected PidController _yPidController;
@@ -22,13 +22,17 @@ namespace Code.Core
 
         protected virtual void FixedUpdateInternal()
         {
-            Vector3 movement = GetMovement(_target.position, transform, Time.fixedDeltaTime);
+            Vector3 movement = GetMovement(_target.position, transform.position, Time.fixedDeltaTime);
             transform.Translate(movement, Space.World);
         }
 
-        protected virtual Vector3 GetMovement(Vector3 targetPosition, Transform mover, float frameTime)
+        protected virtual Vector3 GetMovement(Vector3 targetPosition, Vector3 currentPosition, float frameTime)
         {
-            return GetPidDiff(targetPosition, mover.position, frameTime);
+            // by increasing the scale of the positions then we can mimic the same movement of the orbiter at different scales
+            targetPosition /= MovementSizeScaler;
+            currentPosition /= MovementSizeScaler;
+            
+            return GetPidDiff(targetPosition, currentPosition, frameTime);
         }
 
         private Vector3 GetPidDiff(Vector3 target, Vector3 current, float frameTime)

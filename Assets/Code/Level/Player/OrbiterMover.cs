@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Code.Level.Player
 {
     [Serializable]
-    public class OrbitMover : GravitationalMover
+    public class OrbiterMover : GravitationalMover
     {
         private float _slingIntegralOffset;
         private float _slingProportionalOffset;
@@ -19,11 +19,11 @@ namespace Code.Level.Player
             _yPidController.SetPIDValues(p, i, d);
         }
 
-        protected override Vector3 GetMovement(Vector3 targetPosition, Transform mover, float frameTime)
+        protected override Vector3 GetMovement(Vector3 targetPosition, Vector3 currentPosition, float frameTime)
         {
             _xPidController.SetPidOffsets(_slingIntegralOffset, _slingProportionalOffset);
             _yPidController.SetPidOffsets(_slingIntegralOffset, _slingProportionalOffset);
-            return base.GetMovement(targetPosition, mover, frameTime);
+            return base.GetMovement(targetPosition, currentPosition, frameTime);
         }
         
         public void SetSlingOffsets(float integralOffset, float proportionalOffset)

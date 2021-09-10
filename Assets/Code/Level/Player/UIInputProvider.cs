@@ -14,7 +14,7 @@ namespace Code.Level.Player
             _uiInputElements = GameContainer.Instance.UIInputElementsContainer;
         }
         
-        public override Vector2 GetMovementInput(Vector3 _)
+        public override Vector2 GetMovementInput()
         {
             return _uiInputElements.MoverHandle.Movement;
         }

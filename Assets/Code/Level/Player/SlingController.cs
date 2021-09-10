@@ -10,7 +10,7 @@ namespace Code.Level.Player
         [SerializeField] private float _warmUpTime = 0.1f;
         [SerializeField] private float _warmDownTime = 0.5f;
         [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private OrbitMover _orbitMover;
+        [SerializeField] private OrbiterMover _orbitMover;
 
         private float _currentLerpValue = 0f;
         
