@@ -4,7 +4,7 @@ namespace Code.Level.Player
 {
     public class KeyboardInputProvider : InputProvider
     {
-        public override Vector2 GetMovementInput(Vector3 _)
+        public override Vector2 GetMovementInput()
         {
             Vector2 movement = Vector2.zero;
         

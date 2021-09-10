@@ -30,7 +30,7 @@ namespace Code.Level
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
         
-        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards)
+        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards, float speedScale)
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
@@ -41,6 +41,8 @@ namespace Code.Level
             _enemies = enemies;
             _escapes = escapes;
             _hazards = hazards;
+
+            GetComponentsInChildren<Mover>().ApplyFunction(p => p.SetMovementScale(speedScale));
             
             GameContainer.Instance.CountdownTimerUI.ResetTimer();
             
