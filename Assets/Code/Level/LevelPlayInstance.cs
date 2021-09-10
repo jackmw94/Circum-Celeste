@@ -171,7 +171,11 @@ namespace Code.Level
                 return false;
             }
             
-            LevelResult levelResult = new LevelResult(false, false, null);
+            LevelResult levelResult = new LevelResult(false, false, new LevelRecordingData()
+            {
+                FrameData = null,
+                LevelTime = _levelRecorder.LevelTime
+            });
             LevelFinished(levelResult);
             return true;
 
