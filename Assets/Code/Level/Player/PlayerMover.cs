@@ -3,14 +3,14 @@ using UnityEngine;
 
 namespace Code.Level.Player
 {
-    public class PlayerMover : Mover
+    public class PlayerMover : LevelPlayBehaviour
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private PlayerInput _playerInput;
         [Space(15)]
         [SerializeField] private float _speed;
 
-        public bool IsMoving => MovementEnabled && InputProvider.GetMovementInput().magnitude > float.Epsilon;
+        public bool IsMoving => MovementEnabled && InputProvider.GetMovementInput(transform.position).magnitude > float.Epsilon;
         public bool MovementEnabled { get; set; }
         
         private InputProvider InputProvider => _playerInput.InputProvider;
@@ -23,20 +23,20 @@ namespace Code.Level.Player
         private void FixedUpdate()
         {
             _rigidbody.velocity = Vector3.zero;
-
-            if (!MovementEnabled)
-            {
-                return;
-            }
             
-            Vector3 movement = InputProvider.GetMovementInput();
-            if (movement.magnitude > 1)
+            if (MovementEnabled)
             {
-                movement = movement.normalized;
+                Vector3 position = transform.position;
+                
+                Vector3 movement = InputProvider.GetMovementInput(position);
+                if (movement.magnitude > 1)
+                {
+                    movement = movement.normalized;
+                }
+                position += movement * (Time.deltaTime * _speed);
+                
+                transform.position = position;
             }
-
-            float movementScale = Time.deltaTime * _speed * MovementSizeScaler;
-            transform.Translate(movement * movementScale, Space.World);
         }
     }
 }

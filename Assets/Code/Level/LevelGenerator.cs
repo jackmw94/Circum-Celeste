@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Debugging;
 using Code.Level.Player;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -9,10 +8,6 @@ namespace Code.Level
 {
     public class LevelGenerator : MonoBehaviour
     {
-        // when we tune for a grid size of 9, we know when we have an 13x13 level then we
-        // can reduce speeds by multiplying by 9/13 to get speeds adjusted for objects' size
-        private const int TuningRelativeToGridSize = 9;
-
         private class LevelObjects
         {
             public List<GameObject> PickupObjects { get; set; }
@@ -32,7 +27,7 @@ namespace Code.Level
         [Space(15)]
         [SerializeField] private GameObject _exampleOrbiter;
         [Space(15)]
-        [SerializeField] private float _wallZOffset = 0.2f;
+        [SerializeField] private float _wallZOffset = 1f;
 
         public LevelPlayInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
         {
@@ -47,16 +42,11 @@ namespace Code.Level
             List<Enemy> allEnemies = levelObjects.FollowerEnemyObjects.Select(p => p.GetComponentInChildren<Enemy>()).ToList();
             List<Escape> allEscapes = levelObjects.EscapeObjects.Select(p => p.GetComponentInChildren<Escape>()).ToList();
             List<Hazard> allHazards = levelObjects.HazardObjects.Select(p => p.GetComponentInChildren<Hazard>()).ToList();
-            
-            // Calculate size-adjusted speed scale
-            int levelGridSize = level.GridSize;
-            float speedFactor = TuningRelativeToGridSize / (float)levelGridSize;
-            CircumDebug.Log($"Setting moving components to have a speed factor of {speedFactor}");
 
             // Initialise level instance
             LevelPlayInstance levelPlayInstance = _cellsRoot.gameObject.AddComponent<LevelPlayInstance>();
             levelPlayInstance.name = level.name;
-            levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor);
+            levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards);
 
             return levelPlayInstance;
         }

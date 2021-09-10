@@ -17,7 +17,7 @@ namespace Code.Level.Player
             Cursor.lockState = CursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
         }
     
-        public abstract Vector2 GetMovementInput();
+        public abstract Vector2 GetMovementInput(Vector3 currentPosition);
 
         public abstract bool GetSlingInput();
 

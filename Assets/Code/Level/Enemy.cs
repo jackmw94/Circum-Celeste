@@ -17,7 +17,7 @@ namespace Code.Level
             if (_gravitationalMover) _gravitationalMover.enabled = false;
             _collider.radius = RemoteConfigHelper.EnemyColliderRadius;
         }
-        
+
         public override void LevelStarted()
         {
             base.LevelStarted();
