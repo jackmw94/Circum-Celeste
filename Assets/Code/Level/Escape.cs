@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using Code.Core;
+﻿using Code.Core;
 using Code.VFX;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -9,15 +7,11 @@ namespace Code.Level
 {
     public class Escape : Collectable
     {
-        [SerializeField] private SwitchVfxProperty[] _switchVfxProperties;
-
-        [Conditional("UNITY_EDITOR")]
-        private void OnValidate()
-        {
-            if (_switchVfxProperties.Length == 0)
-            {
-                _switchVfxProperties = GetComponentsInChildren<SwitchVfxProperty>();
-            }
+        private ISwitchable[] _switchVfxProperties;
+        
+        private void Awake()
+        { 
+            _switchVfxProperties = GetComponentsInChildren<ISwitchable>();
         }
 
         public override void LevelSetup()
