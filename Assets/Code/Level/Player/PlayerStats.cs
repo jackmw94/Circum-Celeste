@@ -147,7 +147,7 @@ namespace Code.Level.Player
         /// </summary>
         public static void SetPerfectPlayerStats()
         {
-            Save(CreateStarterPlayerStats());
+            Save(CreatePerfectPlayerStats());
         }
         
         public static void ResetSavedPlayerStats()
