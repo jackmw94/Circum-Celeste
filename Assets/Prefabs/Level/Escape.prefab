@@ -239,7 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a0d1fd0d3cf459cb133ccc22d681ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _switchVfxProperty: {fileID: 5394663573040490368}
+  _switchVfxProperties:
+  - {fileID: 5394663573040490368}
+  - {fileID: 3014441727765712452}
+  - {fileID: 1183883983257364440}
 --- !u!135 &7258373518819133325
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -266,6 +269,7 @@ GameObject:
   - component: {fileID: 7404443290608503491}
   - component: {fileID: 5394663573040490368}
   - component: {fileID: 3014441727765712452}
+  - component: {fileID: 1183883983257364440}
   m_Layer: 0
   m_Name: WhiteTwirlys
   m_TagString: Untagged
@@ -304,7 +308,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.1
+      - m_Value: 0.01
         m_Name: MoveToCentreForceScale
         m_Overridden: 1
       - m_Value: 1
@@ -462,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: MoveToCentreForceScale
-  _onValue: 0.1
+  _onValue: -0.015
   _offValue: 0.01
   _currentlyOnOff: 0
 --- !u!114 &3014441727765712452
@@ -477,8 +481,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8249e0ad7fd4bc99fef3b2f096a287b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 0}
-  _propertyName: 
+  _visualEffect: {fileID: 7629357855742634476}
+  _propertyName: SpawnRate
+  _onValue: 50
+  _offValue: 150
+  _currentlyOnOff: 0
+--- !u!114 &1183883983257364440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325260007342393034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8249e0ad7fd4bc99fef3b2f096a287b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visualEffect: {fileID: 7629357855742634476}
+  _propertyName: TwistForceScale
   _onValue: 0
-  _offValue: 0
+  _offValue: 0.012
   _currentlyOnOff: 0

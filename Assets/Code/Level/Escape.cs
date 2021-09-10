@@ -1,4 +1,6 @@
-﻿using Code.Core;
+﻿using System;
+using System.Diagnostics;
+using Code.Core;
 using Code.VFX;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -7,8 +9,17 @@ namespace Code.Level
 {
     public class Escape : Collectable
     {
-        [SerializeField] private SwitchVfxProperty _switchVfxProperty;
-        
+        [SerializeField] private SwitchVfxProperty[] _switchVfxProperties;
+
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            if (_switchVfxProperties.Length == 0)
+            {
+                _switchVfxProperties = GetComponentsInChildren<SwitchVfxProperty>();
+            }
+        }
+
         public override void LevelSetup()
         {
             base.LevelSetup();
@@ -22,8 +33,14 @@ namespace Code.Level
         
         protected override void CollectableCollected(Vector3 _)
         {
-            _switchVfxProperty.SetOnOff(true);
+            SetSwitchVfxPropertiesOn();
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
         }
+
+        [ContextMenu(nameof(SetSwitchVfxPropertiesOn))]
+        private void SetSwitchVfxPropertiesOn() => _switchVfxProperties.ApplyFunction(p => p.SetOnOff(true));
+        
+        [ContextMenu(nameof(SetSwitchVfxPropertiesOff))]
+        private void SetSwitchVfxPropertiesOff() => _switchVfxProperties.ApplyFunction(p => p.SetOnOff(false));
     }
 }
