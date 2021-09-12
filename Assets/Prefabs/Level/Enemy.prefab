@@ -111,7 +111,6 @@ MonoBehaviour:
   _target: {fileID: 0}
   _yeetScale: 0.4
   _yeetInertia: 0.96
-  _markAsYeetedForDuration: 0.5
 --- !u!1 &6871356730795427911
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6871356730795427911}
   m_LocalRotation: {x: -0.008726465, y: -0, z: -0, w: 0.999962}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children: []
   m_Father: {fileID: 1656935268646063113}

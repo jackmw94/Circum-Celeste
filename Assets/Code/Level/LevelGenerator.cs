@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Core;
 using Code.Debugging;
 using Code.Level.Player;
 using UnityEngine;
@@ -33,6 +34,12 @@ namespace Code.Level
         [SerializeField] private GameObject _exampleOrbiter;
         [Space(15)]
         [SerializeField] private float _wallZOffset = 0.2f;
+        [SerializeField] private float _levelSizeSpeedAdjustmentFactor = 0.5f;
+
+        private void Awake()
+        {
+            _levelSizeSpeedAdjustmentFactor = RemoteConfigHelper.LevelSizeSpeedAdjustmentFactor;
+        }
 
         public LevelPlayInstance GenerateLevel(InputProvider[] playersInputs, LevelLayout level)
         {
@@ -51,6 +58,7 @@ namespace Code.Level
             // Calculate size-adjusted speed scale
             int levelGridSize = level.GridSize;
             float speedFactor = TuningRelativeToGridSize / (float)levelGridSize;
+            speedFactor = Mathf.Lerp(1f, speedFactor, _levelSizeSpeedAdjustmentFactor);
             CircumDebug.Log($"Setting moving components to have a speed factor of {speedFactor}");
 
             // Initialise level instance
