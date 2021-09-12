@@ -8,7 +8,7 @@ namespace Code.Core
 {
     public abstract class EntityHealth : MonoBehaviour
     {
-        private const float OnStayDamageDelay = 4f;
+        private const float OnStayDamageDelay = 2.25f;
         
         private readonly Dictionary<GameObject, Coroutine> _onStayDamageAppliers = new Dictionary<GameObject, Coroutine>();
         private int _maximumHealth = 5;
