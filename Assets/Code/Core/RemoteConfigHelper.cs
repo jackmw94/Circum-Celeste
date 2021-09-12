@@ -74,7 +74,6 @@ namespace Code.Core
             else
             {
                 CircumDebug.LogError($"Could not update game config : {configResponse.status.ToString()}");
-                Popup.Instance.EnqueueMessage("Could not update game configuration");
                 LoadConfigFromPlayerPrefs();
             }
 

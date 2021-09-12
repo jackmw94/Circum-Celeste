@@ -9,8 +9,6 @@ namespace Code.Flow
 {
     public class InterLevelFlow : MonoBehaviour
     {
-        private const float SwipeThreshold = 0.8f;
-        
         public enum InterLevelTransition
         {
             Regular,
@@ -31,6 +29,11 @@ namespace Code.Flow
 
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
+
+        private void Start()
+        {
+            ShowInterLevelUI(transition: InterLevelTransition.Instant);
+        }
 
         private void Update()
         {
@@ -59,13 +62,13 @@ namespace Code.Flow
             }
         }
         
-        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition instant = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelPrompt = false)
+        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelPrompt = false)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, instant, newBadgeData, showAdvanceLevelPrompt));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, showAdvanceLevelPrompt));
         }
 
         public void HideInterLevelUI()

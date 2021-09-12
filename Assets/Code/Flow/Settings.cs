@@ -5,6 +5,7 @@ using Code.Level;
 using Code.Level.Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
 
@@ -17,6 +18,7 @@ namespace Code.Flow
         [SerializeField] private LevelManager _levelManager;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
+        [SerializeField] private CanvasGroup _buttonCanvasGroup;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _toggleDuration = 0.25f;
         [Space(15)]
@@ -27,6 +29,7 @@ namespace Code.Flow
         [SerializeField] private Button _toggleShowLevelTimer;
         [SerializeField] private Button _toggleNoLoadingSaving;
         [SerializeField] private Button _resetStatsButton;
+        [SerializeField] private Button _resetSplashScreens;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleNoLoadingSavingLabel;
@@ -47,8 +50,20 @@ namespace Code.Flow
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
             _toggleShowLevelTimer.onClick.AddListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
+            _resetSplashScreens.onClick.AddListener(ResetSplashScreens);
 
             TurnOffInstant();
+        }
+
+        private IEnumerator Start()
+        {
+            _buttonCanvasGroup.alpha = 0f;
+            _buttonCanvasGroup.blocksRaycasts = false;
+            
+            yield return new WaitUntil(() => SceneManager.sceneCount == 1);
+            
+            _buttonCanvasGroup.blocksRaycasts = true;
+            yield return Utilities.LerpOverTime(0f, 1f, 0.5f, f => _buttonCanvasGroup.alpha = f);
         }
 
         private void OnDestroy()
@@ -61,6 +76,7 @@ namespace Code.Flow
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
             _toggleShowLevelTimer.onClick.RemoveListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
+            _resetSplashScreens.onClick.RemoveListener(ResetSplashScreens);
         }
         
         private void OnSettingShowing()
@@ -76,6 +92,12 @@ namespace Code.Flow
         {
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
+        }
+
+        private void ResetSplashScreens()
+        {
+            CircumPlayerPrefs.DeleteKey(SplashScreen.UserHasSeenCircumLogoPlayerPrefsKey);
+            CircumPlayerPrefs.Save();
         }
 
         private void ToggleShowLevelTimer()
@@ -127,7 +149,7 @@ namespace Code.Flow
 
         private void UpdateFeedbacksLabel()
         {
-            _toggleFeedbacksLabel.text = $"Turn Feedbacks {(Feedbacks.Instance.FeedbacksActive ? "On" : "Off")}";
+            _toggleFeedbacksLabel.text = $"Turn Feedbacks {(Feedbacks.Instance.FeedbacksActive ? "Off" : "On")}";
         }
 
         private void ToggleNoLoadingSaving()

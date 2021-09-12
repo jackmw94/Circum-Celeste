@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityExtras.Code.Core;
 
 #if UNITY_EDITOR
+using Code.Flow;
 using UnityEngine;
 using Lean.Localization.Editor;
 #endif
@@ -15,6 +16,18 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
+        [MenuItem("Circum/Splash screen/Reset seen")]
+        public static void ResetSplashScreenLogosSeen()
+        {
+            PlayerPrefs.DeleteKey(SplashScreen.UserHasSeenCircumLogoPlayerPrefsKey);
+        }
+
+        [MenuItem("Circum/Splash screen/Set seen")]
+        public static void SetSplashScreenLogosSeen()
+        {
+            PlayerPrefs.SetInt(SplashScreen.UserHasSeenCircumLogoPlayerPrefsKey, 1);
+        }
+        
         [MenuItem("Circum/Persistent data/Reset saved data")]
         public static void ResetSavedPlayerStats()
         {

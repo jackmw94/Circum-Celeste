@@ -38,7 +38,7 @@ namespace Code.Juice
         [SerializeField] private Vibration _vibration;
         [SerializeField] private TimeControl _timeControl;
         [SerializeField] private ScreenShaker _screenShake;
-        [SerializeField] private VignetteFeedback _vignetteFeedback;
+        [SerializeField] private AnimateVignette _vignetteFeedback;
         [Space(15)]
         [SerializeField] private FeedbackSetting[] _feedbackSettings;
 
@@ -84,7 +84,7 @@ namespace Code.Juice
             _timeControl.AddTimeState(feedbackSetting.TimeControlFeedback);
             if (feedbackSetting.TriggerVignette)
             {
-                _vignetteFeedback.TriggerVignette();
+                _vignetteFeedback.TriggerAnimation();
             }
         }
 

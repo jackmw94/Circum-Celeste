@@ -1,32 +1,45 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 
-[ExecuteAlways]
-public class AspectRatioToScreenSize : MonoBehaviour
+namespace Code.UI
 {
-    [SerializeField] private Camera _camera;
-    [Space(15)]
-    [SerializeField] private float _minAspectRatio;
-    [SerializeField] private float _minScreenSize;
-    [SerializeField] private float _maxAspectRatio;
-    [SerializeField] private float _maxScreenSize;
-    
-    private void Awake()
+    [ExecuteAlways]
+    public class AspectRatioToScreenSize : MonoBehaviour
     {
-        UpdateScreenSize();
-    }
+        [SerializeField] private Camera _camera;
+        [Space(15)]
+        [SerializeField] private float _minAspectRatio;
+        [SerializeField] private float _minScreenSize;
+        [SerializeField] private float _maxAspectRatio;
+        [SerializeField] private float _maxScreenSize;
 
-    private void UpdateScreenSize()
-    {
-        float aspectRatio = Screen.height / (float)Screen.width;
-        float lerpVal = Mathf.InverseLerp(_minAspectRatio, _maxAspectRatio, aspectRatio);
-        float screenSize = Mathf.Lerp(_minScreenSize, _maxScreenSize, lerpVal);
-        _camera.orthographicSize = screenSize;
-    }
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            if (!_camera)
+            {
+                _camera = GetComponent<Camera>();
+            }
+        }
+
+        private void Awake()
+        {
+            UpdateScreenSize();
+        }
+
+        private void UpdateScreenSize()
+        {
+            float aspectRatio = Screen.height / (float)Screen.width;
+            float lerpVal = Mathf.InverseLerp(_minAspectRatio, _maxAspectRatio, aspectRatio);
+            float screenSize = Mathf.Lerp(_minScreenSize, _maxScreenSize, lerpVal);
+            _camera.orthographicSize = screenSize;
+        }
     
 #if UNITY_EDITOR
-    private void Update()
-    {
-        UpdateScreenSize();
-    }
+        private void Update()
+        {
+            UpdateScreenSize();
+        }
 #endif
+    }
 }
