@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using Code.Core;
+using Code.Debugging;
 using Code.VFX;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Level.Player
 {
@@ -80,6 +82,12 @@ namespace Code.Level.Player
         private void TurnInputBehavioursOffOn(bool inputIsOn)
         {
             _mover.MovementEnabled = inputIsOn;
+        }
+
+        public void SetOrbiterSpeedConfiguration(Vector3 pidValues)
+        {
+            CircumDebug.Log($"Pid values for orbiter : {pidValues.ToPreciseString()}");
+            _orbiter.SetPidValues(pidValues);
         }
     }
 }

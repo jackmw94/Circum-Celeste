@@ -10,14 +10,7 @@ namespace Code.Level.Player
         private float _slingIntegralOffset;
         private float _slingProportionalOffset;
 
-        private void Awake()
-        {
-            float p = RemoteConfigHelper.OrbiterP;
-            float i = RemoteConfigHelper.OrbiterI;
-            float d = RemoteConfigHelper.OrbiterD;
-            _xPidController.SetPIDValues(p, i, d);
-            _yPidController.SetPIDValues(p, i, d);
-        }
+        protected override float MovementSizeScaler => 1f;
 
         protected override Vector3 GetMovement(Vector3 targetPosition, Vector3 currentPosition, float frameTime)
         {
@@ -30,6 +23,12 @@ namespace Code.Level.Player
         {
             _slingIntegralOffset = integralOffset;
             _slingProportionalOffset = proportionalOffset;
+        }
+
+        public void SetPidValues(Vector3 pidValues)
+        {
+            _xPidController.SetPIDValues(pidValues.x, pidValues.y, pidValues.z);
+            _yPidController.SetPIDValues(pidValues.x, pidValues.y, pidValues.z);
         }
     }
 }

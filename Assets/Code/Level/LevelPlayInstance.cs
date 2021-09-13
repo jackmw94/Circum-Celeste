@@ -30,7 +30,7 @@ namespace Code.Level
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
         
-        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards, float speedScale)
+        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards, float speedScale, int gridSize)
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
@@ -42,6 +42,8 @@ namespace Code.Level
             _escapes = escapes;
             _hazards = hazards;
 
+            CircumDebug.Log($"Grid size = {gridSize}");
+            _players.ApplyFunction(p => p.SetOrbiterSpeedConfiguration(RemoteConfigHelper.GetOrbiterPidValuesFromGridSize(gridSize)));
             GetComponentsInChildren<Mover>().ApplyFunction(p => p.SetMovementScale(speedScale));
             
             GameContainer.Instance.CountdownTimerUI.ResetTimer();
