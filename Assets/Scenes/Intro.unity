@@ -1106,9 +1106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jonkWongleLogoAnimator: {fileID: 1598240606}
-  _startJonkWonglerLogoDelay: 0.75
-  _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.6
-  _showGameAtNormalisedTimeInCircumLogo: 0.8
+  _startJonkWonglerLogoDelay: 1
+  _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.575
+  _showGameAtNormalisedTimeInCircumLogo: 0.775
   _circumLogo: {fileID: 1224541407}
   _hideSplashScreen: {fileID: 1829242024}
 --- !u!1 &2006326440
@@ -1166,7 +1166,7 @@ Camera:
   far clip plane: 2000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.314009
+  orthographic size: 12.322666
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
