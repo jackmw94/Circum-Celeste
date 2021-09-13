@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508211951509275659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8244140385589922252}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7208122664927968265}
   _propertyName: MoveToCentreForceScale
-  _onValue: -0.015
+  _onValue: -0.02
   _offValue: 0.02
   _currentlyOnOff: 0
 --- !u!1 &8244140385589922250
@@ -317,7 +317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8325260007342393034}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.05}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 8244140385589922252}
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: MoveToCentreForceScale
-  _onValue: -0.025
+  _onValue: -0.04
   _offValue: 0.01
   _currentlyOnOff: 0
 --- !u!114 &7664196066216315736
