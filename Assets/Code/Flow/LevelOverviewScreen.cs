@@ -60,16 +60,16 @@ namespace Code.Flow
             CircumDebug.Assert(currentBadgeData.IsPerfect || !newBadgeData.IsPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
             CircumDebug.Assert(currentBadgeData.HasGoldTime || !newBadgeData.HasGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
             CircumDebug.Assert(currentBadgeData.HasPerfectGoldTime || !newBadgeData.HasPerfectGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-
-            _perfectIcon.ShowHideBadge(currentBadgeData.IsPerfect, !newBadgeData.IsPerfect);
-            _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime);
             
+            _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime);
             if (currentBadgeData.HasPerfectGoldTime)
             {
+                _perfectIcon.ShowHideBadge(false, true);
                 _fastTimeIcon.ShowHideBadge(false, true);
             }
             else
             {
+                _perfectIcon.ShowHideBadge(currentBadgeData.IsPerfect, !newBadgeData.IsPerfect);
                 _fastTimeIcon.ShowHideBadge(currentBadgeData.HasGoldTime, !newBadgeData.HasGoldTime);
             }
             
