@@ -209,6 +209,7 @@ namespace Code.Core
             return gridSize switch
             {
                 9 => OrbiterPidValues9x9,
+                10 => Vector3.Lerp(OrbiterPidValues9x9, OrbiterPidValues11x11, 0.5f),
                 11 => OrbiterPidValues11x11,
                 13 => OrbiterPidValues13x13,
                 _ => throw new ArgumentOutOfRangeException($"Could not find orbiter value for grid size {gridSize}")
