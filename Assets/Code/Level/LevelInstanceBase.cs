@@ -17,6 +17,7 @@ namespace Code.Level
         private void Awake()
         {
             _levelTimeUI = GameContainer.Instance.LevelTimeUI;
+            _levelTimeUI.SettingsShowHideTime(PlayerOptions.ShowLevelTimer);
         }
 
         private void OnDestroy()
@@ -28,7 +29,7 @@ namespace Code.Level
         public void LevelReady()
         {
             _levelTimeUI.ResetTimer();
-            _levelTimeUI.GameplayShowHideTime(PlayerOptions.ShowLevelTimer);
+            _levelTimeUI.GameplayShowHideTime(true);
             OnLevelReady();
         }
 
