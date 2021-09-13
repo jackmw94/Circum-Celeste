@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ViolentSpaceWires_URP
+  m_Shader: {fileID: 4800000, guid: 5df81975368fb93478923d39fe8c5c79, type: 3}
+  m_ShaderKeywords: _LINEARWORKFLOW_ON _PERPARTICLEORIENTATION_ON _USE_DECAY_ON
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Color:
+        m_Texture: {fileID: 2800000, guid: 2c478e2324207ae409cbbc4c84e4866e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorTex:
+        m_Texture: {fileID: 2800000, guid: 2c478e2324207ae409cbbc4c84e4866e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LensEffect:
+        m_Texture: {fileID: 2800000, guid: e81928259d439cc4fb4766a381de3530, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Shape:
+        m_Texture: {fileID: 2800000, guid: de642a354f157cb4595acc09a63b00a1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Shape1:
+        m_Texture: {fileID: 2800000, guid: c01c827190a55df4b8eadc153af41f07, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Size:
+        m_Texture: {fileID: 2800000, guid: 0d8904a83411cd74eb510afe8090b70c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Skin:
+        m_Texture: {fileID: 2800000, guid: 9fe045bef356c0241bd28850811f233e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StarTexture:
+        m_Texture: {fileID: 2800000, guid: 31730f4a4a1d34949829250af1f336b4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Twinkle_Ramp:
+        m_Texture: {fileID: 2800000, guid: 07a20e3e728745b4490c782ded18d499, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Atennuation_Exponent: 0.8
+    - _Atennuation_Strength: 13
+    - _Attenuation_Exponent: 0.8
+    - _Attenuation_Strength: 1
+    - _BumpScale: 1
+    - _Color_Multiplier: 1.67
+    - _Color_Saturation: 1
+    - _Cutoff: 0.5
+    - _Decay_Exponent: 0.17
+    - _Decay_Strength: 13.69
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _FadeZone_Exponent: 1
+    - _FadeZone_MaxDist: 1
+    - _FadeZone_MinDist: 0
+    - _Glossiness: 0.5
+    - _LensEffect_Distance: 1
+    - _LensEffect_DistanceExponent: 3
+    - _LinearWorkflow: 1
+    - _Metallic: 0
+    - _Minimum_Screen_Size: 0
+    - _Minimumscreensize: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _PerParticleOrientation: 1
+    - _Percentage: 1
+    - _ProceduralShape_IterExp: 2
+    - _ProceduralShape_Iterations: 10
+    - _ProceduralShape_OutExp: 1
+    - _Size_Multiplier: 5.5
+    - _SrcBlend: 1
+    - _Twinkle_Speed: 1
+    - _Twinkle_Strength: 1
+    - _UVSec: 0
+    - _Use_Atennuation: 0
+    - _Use_Attenuation: 0
+    - _Use_Camera_Position: 0
+    - _Use_Decay: 1
+    - _Use_FadeZone: 0
+    - _Use_LensEffect: 0
+    - _Use_ProceduralShape: 0
+    - _Use_Twinkle: 0
+    - _VariationShift: 0
+    - _Variation_Shift: 326.55
+    - _ZWrite: 1
+    m_Colors:
+    - _Camera_Position: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.28676468, g: 0.49827582, b: 1, a: 1}
+    - _Color_Gamma: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FadeZone_Position: {r: 0, g: 0, b: 0, a: 0}
