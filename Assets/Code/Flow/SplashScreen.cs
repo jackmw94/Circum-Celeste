@@ -72,7 +72,6 @@ namespace Code.Flow
             CircumDebug.Log("Wait for game scene to be loaded COMPLETE");
 
             CircumPlayerPrefs.SetInt(UserHasSeenCircumLogoPlayerPrefsKey, 1);
-            CircumPlayerPrefs.Save();
             HideSplash();
         }
 

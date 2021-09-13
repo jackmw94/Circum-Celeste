@@ -97,7 +97,6 @@ namespace Code.Flow
         private void ResetSplashScreens()
         {
             CircumPlayerPrefs.DeleteKey(SplashScreen.UserHasSeenCircumLogoPlayerPrefsKey);
-            CircumPlayerPrefs.Save();
         }
 
         private void ToggleShowLevelTimer()
@@ -107,6 +106,7 @@ namespace Code.Flow
             UpdateShowLevelTimerLabel();
             
             GameContainer.Instance.LevelTimeUI.SettingsShowHideTime(circumOptions.ShowLevelTimer);
+            CircumOptions.Save(circumOptions);
         }
 
         private void UpdateShowLevelTimerLabel()

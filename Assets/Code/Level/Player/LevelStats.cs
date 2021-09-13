@@ -94,7 +94,6 @@ namespace Code.Level.Player
             string key = PlayerPrefsKey(levelName);
             
             CircumPlayerPrefs.SetString(key, compressed);
-            CircumPlayerPrefs.Save();
 
             levelStats._isDirty = false;
             
@@ -106,7 +105,6 @@ namespace Code.Level.Player
             string key = PlayerPrefsKey(levelName);
             
             CircumPlayerPrefs.DeleteKey(key);
-            CircumPlayerPrefs.Save();
         }
     }
 }

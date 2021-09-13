@@ -32,6 +32,15 @@ namespace Code.Level.Player
             return deserializedOptions;
         }
 
+        public static void Save(CircumOptions circumOptions)
+        {
+            string serializedCircumOptions = JsonUtility.ToJson(circumOptions);
+            
+            CircumPlayerPrefs.SetString(CircumOptionsPlayerPrefsKey, serializedCircumOptions);
+            
+            CircumDebug.Log($"Saved circum options : {serializedCircumOptions}");
+        }
+
         public static void ResetOptions()
         {
             CircumPlayerPrefs.DeleteKey(CircumOptionsPlayerPrefsKey);

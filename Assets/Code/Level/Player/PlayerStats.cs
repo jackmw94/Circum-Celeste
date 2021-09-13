@@ -68,7 +68,6 @@ namespace Code.Level.Player
             string compressed = serialized.Compress();
 
             CircumPlayerPrefs.SetString(StatsPlayerPrefsKey, compressed);
-            CircumPlayerPrefs.Save();
             CircumDebug.Log($"Saved player stats: {stats}");
         }
         

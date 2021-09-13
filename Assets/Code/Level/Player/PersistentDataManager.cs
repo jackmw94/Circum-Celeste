@@ -150,6 +150,8 @@ namespace Code.Level.Player
                 
                 LevelStats.SaveLevelStats(levelName, stats);
             }
+
+            CircumOptions.Save(_circumOptions);
         }
 
         public void ResetTutorials()
