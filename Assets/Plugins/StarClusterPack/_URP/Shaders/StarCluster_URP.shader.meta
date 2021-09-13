@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5df81975368fb93478923d39fe8c5c79
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Size: {fileID: 2800000, guid: b21874636eac8bc4faaf118956986edb, type: 3}
+  - _Shape: {fileID: 2800000, guid: 30aee12e943d2ee4bab272fdf1d0b897, type: 3}
+  - _Twinkle_Ramp: {fileID: 2800000, guid: 07a20e3e728745b4490c782ded18d499, type: 3}
+  - _ColorTex: {fileID: 2800000, guid: 9fe045bef356c0241bd28850811f233e, type: 3}
+  - _LensEffect: {fileID: 2800000, guid: e81928259d439cc4fb4766a381de3530, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

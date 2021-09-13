@@ -1,0 +1,135 @@
+fileFormatVersion: 2
+guid: e86659fe286c28640aca11fbdd96f05d
+timeCreated: 1539115218
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: selection
+    100002: //RootNode
+    100004: StarsPart_3
+    100006: StarsPart_33
+    100008: StarsPart_39
+    100010: StarsPart_46
+    100012: StarsPart_51
+    100014: StarsPart_64
+    100016: StarsPart_73
+    100018: StarsPart_80
+    400000: selection
+    400002: //RootNode
+    400004: StarsPart_3
+    400006: StarsPart_33
+    400008: StarsPart_39
+    400010: StarsPart_46
+    400012: StarsPart_51
+    400014: StarsPart_64
+    400016: StarsPart_73
+    400018: StarsPart_80
+    2100000: default_material
+    2300000: selection
+    2300002: StarsPart_3
+    2300004: StarsPart_33
+    2300006: StarsPart_39
+    2300008: StarsPart_46
+    2300010: StarsPart_51
+    2300012: StarsPart_64
+    2300014: StarsPart_73
+    2300016: StarsPart_80
+    3300000: selection
+    3300002: StarsPart_3
+    3300004: StarsPart_33
+    3300006: StarsPart_39
+    3300008: StarsPart_46
+    3300010: StarsPart_51
+    3300012: StarsPart_64
+    3300014: StarsPart_73
+    3300016: StarsPart_80
+    4300000: StarsPart_3
+    4300002: StarsPart_33
+    4300004: StarsPart_39
+    4300006: StarsPart_46
+    4300008: StarsPart_51
+    4300010: StarsPart_64
+    4300012: StarsPart_73
+    4300014: StarsPart_80
+    4300016: selection
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

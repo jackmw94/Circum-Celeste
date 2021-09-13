@@ -1,0 +1,240 @@
+fileFormatVersion: 2
+guid: 4c3768e6af04aac4d902fba398045c3f
+timeCreated: 1539115186
+licenseType: Store
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: selection
+    100002: //RootNode
+    100004: StarsPart_0
+    100006: StarsPart_1
+    100008: StarsPart_12
+    100010: StarsPart_17
+    100012: StarsPart_19
+    100014: StarsPart_30
+    100016: StarsPart_32
+    100018: StarsPart_33
+    100020: StarsPart_36
+    100022: StarsPart_37
+    100024: StarsPart_38
+    100026: StarsPart_40
+    100028: StarsPart_42
+    100030: StarsPart_50
+    100032: StarsPart_52
+    100034: StarsPart_53
+    100036: StarsPart_56
+    100038: StarsPart_58
+    100040: StarsPart_59
+    100042: StarsPart_6
+    100044: StarsPart_67
+    100046: StarsPart_71
+    100048: StarsPart_82
+    100050: StarsPart_84
+    100052: StarsPart_86
+    100054: StarsPart_88
+    100056: StarsPart_95
+    100058: StarsPart_96
+    100060: StarsPart_97
+    400000: selection
+    400002: //RootNode
+    400004: StarsPart_0
+    400006: StarsPart_1
+    400008: StarsPart_12
+    400010: StarsPart_17
+    400012: StarsPart_19
+    400014: StarsPart_30
+    400016: StarsPart_32
+    400018: StarsPart_33
+    400020: StarsPart_36
+    400022: StarsPart_37
+    400024: StarsPart_38
+    400026: StarsPart_40
+    400028: StarsPart_42
+    400030: StarsPart_50
+    400032: StarsPart_52
+    400034: StarsPart_53
+    400036: StarsPart_56
+    400038: StarsPart_58
+    400040: StarsPart_59
+    400042: StarsPart_6
+    400044: StarsPart_67
+    400046: StarsPart_71
+    400048: StarsPart_82
+    400050: StarsPart_84
+    400052: StarsPart_86
+    400054: StarsPart_88
+    400056: StarsPart_95
+    400058: StarsPart_96
+    400060: StarsPart_97
+    2100000: default_material
+    2300000: selection
+    2300002: StarsPart_0
+    2300004: StarsPart_1
+    2300006: StarsPart_12
+    2300008: StarsPart_17
+    2300010: StarsPart_19
+    2300012: StarsPart_30
+    2300014: StarsPart_32
+    2300016: StarsPart_33
+    2300018: StarsPart_36
+    2300020: StarsPart_37
+    2300022: StarsPart_38
+    2300024: StarsPart_40
+    2300026: StarsPart_42
+    2300028: StarsPart_50
+    2300030: StarsPart_52
+    2300032: StarsPart_53
+    2300034: StarsPart_56
+    2300036: StarsPart_58
+    2300038: StarsPart_59
+    2300040: StarsPart_6
+    2300042: StarsPart_67
+    2300044: StarsPart_71
+    2300046: StarsPart_82
+    2300048: StarsPart_84
+    2300050: StarsPart_86
+    2300052: StarsPart_88
+    2300054: StarsPart_95
+    2300056: StarsPart_96
+    2300058: StarsPart_97
+    3300000: selection
+    3300002: StarsPart_0
+    3300004: StarsPart_1
+    3300006: StarsPart_12
+    3300008: StarsPart_17
+    3300010: StarsPart_19
+    3300012: StarsPart_30
+    3300014: StarsPart_32
+    3300016: StarsPart_33
+    3300018: StarsPart_36
+    3300020: StarsPart_37
+    3300022: StarsPart_38
+    3300024: StarsPart_40
+    3300026: StarsPart_42
+    3300028: StarsPart_50
+    3300030: StarsPart_52
+    3300032: StarsPart_53
+    3300034: StarsPart_56
+    3300036: StarsPart_58
+    3300038: StarsPart_59
+    3300040: StarsPart_6
+    3300042: StarsPart_67
+    3300044: StarsPart_71
+    3300046: StarsPart_82
+    3300048: StarsPart_84
+    3300050: StarsPart_86
+    3300052: StarsPart_88
+    3300054: StarsPart_95
+    3300056: StarsPart_96
+    3300058: StarsPart_97
+    4300000: StarsPart_0
+    4300002: StarsPart_1
+    4300004: StarsPart_6
+    4300006: StarsPart_12
+    4300008: StarsPart_17
+    4300010: StarsPart_19
+    4300012: StarsPart_30
+    4300014: StarsPart_32
+    4300016: StarsPart_33
+    4300018: StarsPart_36
+    4300020: StarsPart_37
+    4300022: StarsPart_38
+    4300024: StarsPart_40
+    4300026: StarsPart_42
+    4300028: StarsPart_50
+    4300030: StarsPart_52
+    4300032: StarsPart_53
+    4300034: StarsPart_56
+    4300036: StarsPart_58
+    4300038: StarsPart_59
+    4300040: StarsPart_67
+    4300042: StarsPart_71
+    4300044: StarsPart_82
+    4300046: StarsPart_84
+    4300048: StarsPart_86
+    4300050: StarsPart_88
+    4300052: StarsPart_95
+    4300054: StarsPart_96
+    4300056: StarsPart_97
+    4300058: selection
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 0
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
