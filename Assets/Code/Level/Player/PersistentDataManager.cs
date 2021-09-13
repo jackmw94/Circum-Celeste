@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Code.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Level.Player
@@ -24,6 +26,14 @@ namespace Code.Level.Player
         {
             _doNotLoadOrSave = GetDoNotLoadOrSave();
             LoadPersistentData();
+
+#if UNITY_EDITOR
+            if (SceneManager.sceneCount == 1)
+            {
+                // we started editor in game scene
+                RemoteConfigHelper.RequestRefresh();
+            }
+#endif
         }
         
         public int GetRestartLevelIndex()
