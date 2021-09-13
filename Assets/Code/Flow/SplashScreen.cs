@@ -36,7 +36,7 @@ namespace Code.Flow
                 _remoteConfigReturned = true;
             });
 
-            StartCoroutine(PlayJonkWongleLogo(PlayerHasSeenFullLogos));
+            StartCoroutine(PlayJonkWongleLogo(!PlayerHasSeenFullLogos));
             
             SceneManager.LoadSceneAsync(GameSceneIndex, LoadSceneMode.Additive).completed += operation =>
             {
@@ -47,9 +47,7 @@ namespace Code.Flow
         private IEnumerator Start()
         {
             _circumLogo.Play();
-            CircumDebug.Log("Playing circum logo for warm up");
             yield return new WaitForSeconds(0.5f);
-            CircumDebug.Log("Stopping circum logo for warm up");
             _circumLogo.Stop();
         }
 
@@ -67,9 +65,7 @@ namespace Code.Flow
                 Popup.Instance.EnqueueMessage("Could not update game configuration!");
             }
 
-            CircumDebug.Log("Waiting until game scene loaded");
             yield return new WaitUntil(() => _loadedGameScene);
-            CircumDebug.Log("Wait for game scene to be loaded COMPLETE");
 
             CircumPlayerPrefs.SetInt(UserHasSeenCircumLogoPlayerPrefsKey, 1);
             HideSplash();
@@ -77,10 +73,8 @@ namespace Code.Flow
 
         private void HideSplash()
         {
-            CircumDebug.Log("Triggering split animation");
             _hideSplashScreen.TriggerAnimation(() =>
             {
-                CircumDebug.Log("Unloading splash screen");
                 SceneManager.UnloadSceneAsync(IntroSceneIndex);
             });
         }
@@ -128,8 +122,6 @@ namespace Code.Flow
                 previousFrameTime = _circumLogo.time;
                 return false;
             });
-            
-            CircumDebug.Log("Circum logo finished");
         }
     }
 }
