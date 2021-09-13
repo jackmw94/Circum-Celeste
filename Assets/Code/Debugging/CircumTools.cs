@@ -33,7 +33,7 @@ namespace Code.Debugging
         {
             Object.FindObjectOfType<PersistentDataManager>().ResetStats();
         }
-        
+
         [MenuItem("Circum/Persistent data/Set starter player stats")]
         public static void SetStarterPlayerStats()
         {

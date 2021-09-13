@@ -64,7 +64,7 @@ namespace Code.Level
             // Initialise level instance
             LevelPlayInstance levelPlayInstance = _cellsRoot.gameObject.AddComponent<LevelPlayInstance>();
             levelPlayInstance.name = level.name;
-            levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor);
+            levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
 
             return levelPlayInstance;
         }
@@ -102,6 +102,8 @@ namespace Code.Level
             List<GameObject> hazardObjects = GenerateCells(level, CellType.Hazard, _hazardPrefab);
             
             _exampleOrbiter.SetActive(level.ExampleOrbiterEnabled);
+            GameContainer.Instance.HealthUI.SetExpandedSize(level.ExampleOrbiterEnabled);
+            GameContainer.Instance.CountdownTimerUI.SetExpandedSize(level.ExampleOrbiterEnabled);
 
             return new LevelObjects
             {

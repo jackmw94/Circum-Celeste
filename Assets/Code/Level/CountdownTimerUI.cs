@@ -5,6 +5,9 @@ namespace Code.Level
 {
     public class CountdownTimerUI : MonoBehaviour
     {
+        [SerializeField] private float _defaultSize = 0.15f;
+        [SerializeField] private float _expandedSize = 0.3f;
+        
         private float _duration;
         private float _startTime;
         private bool _running = false;
@@ -45,6 +48,13 @@ namespace Code.Level
             {
                 _running = false;
             }
+        }
+        
+        public void SetExpandedSize(bool isExpanded)
+        {
+            float verticalSize = isExpanded ? _expandedSize : _defaultSize;
+            Vector3 localScale = transform.localScale;
+            transform.localScale = localScale.ModifyVectorElement(1, verticalSize);
         }
 
         private void SetTimerProgress(float progress)
