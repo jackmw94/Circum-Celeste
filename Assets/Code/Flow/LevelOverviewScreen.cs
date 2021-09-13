@@ -21,6 +21,11 @@ namespace Code.Flow
         [SerializeField] private LevelBadge _perfectIcon;
         [SerializeField] private LevelBadge _fastTimeIcon;
         [SerializeField] private LevelBadge _fastPerfectTimeIcon;
+        [Space(15)] 
+        [SerializeField] private Color _regularNewFastestTimeLabelColour;
+        [SerializeField] private Color _perfectNewFastestTimeLabelColour;
+        [SerializeField] private GameObject _newFastestTimeRoot;
+        [SerializeField] private TextMeshProUGUI _newFastestTimeLabel;
         [Space(15)]
         [SerializeField] private Button[] _playButtons;
         [SerializeField] private Button _advanceButton;
@@ -43,7 +48,7 @@ namespace Code.Flow
             _advanceButton.onClick.RemoveListener(AdvanceButtonClicked);
         }
 
-        public void SetupLevelOverview(LevelLayout levelLayout, BadgeData currentBadgeData, BadgeData newBadgeData, bool showAdvancePrompt, Action playLevelCallback, Action advanceLevelCallback)
+        public void SetupLevelOverview(LevelLayout levelLayout, BadgeData currentBadgeData, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool showAdvancePrompt, Action playLevelCallback, Action advanceLevelCallback)
         {
             int levelNumber = levelLayout.LevelContext.LevelNumber;
             
@@ -56,6 +61,14 @@ namespace Code.Flow
             
             _playButtonRoot.SetActiveSafe(!showAdvancePrompt);
             _playAndAdvanceButtonRoot.SetActiveSafe(showAdvancePrompt);
+
+            bool hasNewFastestTime = newFastestTimeInfo != null;
+            _newFastestTimeRoot.SetActive(hasNewFastestTime);
+            if (hasNewFastestTime)
+            {
+                _newFastestTimeLabel.text = $"{newFastestTimeInfo.Time:0.00}";
+                _newFastestTimeLabel.color = newFastestTimeInfo.IsPerfect ? _perfectNewFastestTimeLabelColour : _regularNewFastestTimeLabelColour;
+            }
 
             CircumDebug.Assert(currentBadgeData.IsPerfect || !newBadgeData.IsPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
             CircumDebug.Assert(currentBadgeData.HasGoldTime || !newBadgeData.HasGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");

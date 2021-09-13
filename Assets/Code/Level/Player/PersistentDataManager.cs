@@ -94,9 +94,10 @@ namespace Code.Level.Player
             return levelStats.HasFastestLevelRecording ? levelStats.FastestLevelRecording : null;
         }
         
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out BadgeData newBadgeData)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo)
         {
             newBadgeData = new BadgeData();
+            newFastestTimeInfo = null;
             
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
@@ -109,15 +110,21 @@ namespace Code.Level.Player
 
             if (!levelIsTutorial)
             {
-                if (_levelStats.TryGetValue(currentLevel.name, out LevelStats levelStats))
+                if (!_levelStats.TryGetValue(currentLevel.name, out LevelStats levelStats))
                 {
-                    levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData);
+                    levelStats = new LevelStats();
+                    _levelStats.Add(currentLevel.name, levelStats);
                 }
-                else
+                
+                levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData, out bool replacedExistingFastestTime, out bool replacedPerfectTime);
+
+                if (replacedExistingFastestTime)
                 {
-                    LevelStats newStats = new LevelStats();
-                    _levelStats.Add(currentLevel.name, newStats);
-                    newStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData);
+                    newFastestTimeInfo = new NewFastestTimeInfo()
+                    {
+                        Time = levelRecording.RecordingData.LevelTime,
+                        IsPerfect = replacedPerfectTime
+                    };
                 }
             }
 

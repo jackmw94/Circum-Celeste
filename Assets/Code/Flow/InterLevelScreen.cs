@@ -71,7 +71,7 @@ namespace Code.Flow
             }
         }
 
-        public void SetupInterLevelScreen(BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelButtons = false)
+        public void SetupInterLevelScreen(BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool showAdvanceLevelButtons = false)
         {
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
             string levelName = levelLayout.name;
@@ -81,7 +81,7 @@ namespace Code.Flow
             LevelRecording levelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName, false);
             LevelRecording perfectLevelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName, true);
             
-            BadgeData currentBadgeData = new BadgeData()
+            BadgeData currentBadgeData = new BadgeData
             {
                 IsPerfect = perfectLevelRecording != null,
                 HasGoldTime = levelRecording?.HasBeatenGoldTime(goldTime) ?? false,
@@ -90,7 +90,7 @@ namespace Code.Flow
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, levelRecording, perfectLevelRecording, ReplayLevel);
             
-            _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData,showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);
+            _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData, newFastestTimeInfo, showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
             _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial);

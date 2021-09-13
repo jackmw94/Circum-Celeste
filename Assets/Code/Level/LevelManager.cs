@@ -99,6 +99,7 @@ namespace Code.Level
         {
             bool isReplay = levelResult.WasReplay;
             BadgeData newBadgeData = new BadgeData();
+            NewFastestTimeInfo newFastestTimeInfo = null;
             bool advanceLevelPrompt = false;
             
             if (!isReplay && levelResult.Success)
@@ -111,13 +112,13 @@ namespace Code.Level
                     LevelIndex = levelContext.LevelIndex,
                     RecordingData = levelResult.LevelRecordingData
                 };
-                PersistentDataManager.Instance.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData);
+                PersistentDataManager.Instance.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
                 advanceLevelPrompt = true;
                 //_levelProvider.AdvanceLevel();
             }
             
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, showAdvanceLevelPrompt: advanceLevelPrompt);
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, newFastestTimeInfo: newFastestTimeInfo, showAdvanceLevelPrompt: advanceLevelPrompt);
         }
     }
 }

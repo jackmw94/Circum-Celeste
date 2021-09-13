@@ -62,13 +62,13 @@ namespace Code.Flow
             }
         }
         
-        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), bool showAdvanceLevelPrompt = false)
+        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool showAdvanceLevelPrompt = false)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, showAdvanceLevelPrompt));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, newFastestTimeInfo, showAdvanceLevelPrompt));
         }
 
         public void HideInterLevelUI()
@@ -101,7 +101,7 @@ namespace Code.Flow
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, bool showAdvanceLevelPrompt)
+        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool showAdvanceLevelPrompt)
         {
             _isTransitioning = true;
             if (transition == InterLevelTransition.Regular)
@@ -109,7 +109,7 @@ namespace Code.Flow
                 yield return new WaitForSeconds(_startDelay);
             }
 
-            _interLevelScreen.SetupInterLevelScreen(newBadgeData, showAdvanceLevelPrompt);
+            _interLevelScreen.SetupInterLevelScreen(newBadgeData, newFastestTimeInfo, showAdvanceLevelPrompt);
             
             // Show overlay, hides level reset
             yield return ShowOverlayCoroutine(transition);

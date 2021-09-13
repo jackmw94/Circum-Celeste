@@ -17,11 +17,12 @@ namespace Code.Level.Player
         public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
         private static string PlayerPrefsKey(string levelName) => $"Circum_PlayerStats_{levelName}";
         
-        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, float goldTime, out BadgeData newBadgeData)
+        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, float goldTime, out BadgeData newBadgeData, out bool replacedExistingFastestTime, out bool replacedPerfectTime)
         {
             newBadgeData = new BadgeData();
+            replacedPerfectTime = false;
 
-            UpdateFastestRecordingInternal(levelRecording, ref FastestLevelRecording, goldTime, out _, out bool firstGold);
+            UpdateFastestRecordingInternal(levelRecording, ref FastestLevelRecording, goldTime, out _, out bool firstGold, out replacedExistingFastestTime);
             newBadgeData.HasGoldTime = firstGold;
 
             if (!perfect)
@@ -29,7 +30,12 @@ namespace Code.Level.Player
                 return;
             }
             
-            UpdateFastestRecordingInternal(levelRecording, ref FastestPerfectLevelRecording, goldTime, out bool firstPerfect, out bool firstPerfectGold);
+            UpdateFastestRecordingInternal(levelRecording, ref FastestPerfectLevelRecording, goldTime, out bool firstPerfect, out bool firstPerfectGold, out replacedPerfectTime);
+
+            // this messing around with replaced time flags solves the awkward case where the user beats a previous imperfect time with a faster (first) perfect time
+            // naively the perfect value would overwrite the regular value and since the perfect time was first it wouldn't overwrite despite being an replacement of the existing regular time
+            replacedExistingFastestTime |= replacedPerfectTime;
+            
             newBadgeData.IsPerfect = firstPerfect;
             newBadgeData.HasPerfectGoldTime = firstPerfectGold;
         }
@@ -39,10 +45,11 @@ namespace Code.Level.Player
             return levelRecording != null && levelRecording.RecordingData.FrameData.Count > 0;
         }
 
-        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, float goldTime, out bool firstEntry, out bool firstGold)
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, float goldTime, out bool firstEntry, out bool firstGold, out bool replacedExistingFastestTime)
         {
             firstEntry = false;
             firstGold = false;
+            replacedExistingFastestTime = false;
             
             if (!LevelRecordingExists(currentRecording))
             {
@@ -56,8 +63,9 @@ namespace Code.Level.Player
                 bool hadBeatGold = currentRecording.HasBeatenGoldTime(goldTime);
                 bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
                 currentRecording = levelRecording;
-                _isDirty = true;
                 firstGold = !hadBeatGold && hasNowBeatGold;
+                replacedExistingFastestTime = true;
+                _isDirty = true;
             }
         }
         
