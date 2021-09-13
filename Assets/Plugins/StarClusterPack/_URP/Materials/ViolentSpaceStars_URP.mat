@@ -10,7 +10,7 @@ Material:
   m_Name: ViolentSpaceStars_URP
   m_Shader: {fileID: 4800000, guid: 5df81975368fb93478923d39fe8c5c79, type: 3}
   m_ShaderKeywords: _LINEARWORKFLOW_ON _PERPARTICLEORIENTATION_ON _USE_DECAY_ON
-  m_LightmapFlags: 5
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -96,12 +96,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _Atennuation_Exponent: 0.8
     - _Atennuation_Strength: 13
     - _Attenuation_Exponent: 0.8
     - _Attenuation_Strength: 1
     - _BumpScale: 1
-    - _Color_Multiplier: 0.47
+    - _Color_Multiplier: 0.25
     - _Color_Saturation: 0.17
     - _Cutoff: 0.5
     - _Decay_Exponent: 0.3
@@ -149,3 +150,4 @@ Material:
     - _Color_Tint: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeZone_Position: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

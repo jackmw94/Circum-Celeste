@@ -10,7 +10,8 @@ Material:
   m_Name: Neuronal_URP
   m_Shader: {fileID: 4800000, guid: 5df81975368fb93478923d39fe8c5c79, type: 3}
   m_ShaderKeywords: _LINEARCOLORSPACE_ON _LINEARWORKFLOW_ON _PERPARTICLEORIENTATION_ON
-  m_LightmapFlags: 5
+    _USE_PROCEDURALSHAPE_ON
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -30,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorTex:
-        m_Texture: {fileID: 2800000, guid: 525fc960fb8629b4ca5577531d977550, type: 3}
+        m_Texture: {fileID: 2800000, guid: eeb311c3a9eafc24b95947066bec2c41, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -98,11 +99,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AlphaCutoff: 0.5
     - _Attenuation_Exponent: 0.8
     - _Attenuation_Strength: 1
     - _BumpScale: 1
-    - _Color_Multiplier: 0.5
-    - _Color_Saturation: 1
+    - _Color_Multiplier: 0.12
+    - _Color_Saturation: 0.3
     - _Cutoff: 0.5
     - _Decay_Exponent: 0.8
     - _Decay_Strength: 1
@@ -128,7 +130,7 @@ Material:
     - _ProceduralShape_Iterations: 10
     - _ProceduralShape_OutExp: 1
     - _Shape_Exponent: 1.6
-    - _Size_Multiplier: 0.63
+    - _Size_Multiplier: 0.4
     - _SrcBlend: 1
     - _Twinkle_Speed: 1
     - _Twinkle_Strength: 1
@@ -138,7 +140,7 @@ Material:
     - _Use_Decay: 0
     - _Use_FadeZone: 0
     - _Use_LensEffect: 0
-    - _Use_ProceduralShape: 0
+    - _Use_ProceduralShape: 1
     - _Use_Twinkle: 0
     - _VariationShift: 0
     - _Variation_Shift: 326.55
@@ -147,6 +149,7 @@ Material:
     - _Camera_Position: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.28676468, g: 0.49827582, b: 1, a: 1}
     - _Color_Gamma: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_Tint: {r: 1, g: 0.031372547, b: 0.21661685, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FadeZone_Position: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
