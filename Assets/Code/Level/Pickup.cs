@@ -9,6 +9,7 @@ namespace Code.Level
     public class Pickup : Collectable
     {
         [SerializeField] private SphereCollider _collider;
+        [SerializeField] private Transform _visualsTransform;
         
 
         [Conditional("UNITY_EDITOR")]
@@ -23,6 +24,7 @@ namespace Code.Level
         private void Awake()
         {
             _collider.radius = RemoteConfigHelper.PickupColliderSize;
+            _visualsTransform.Rotate(Vector3.forward, Random.Range(0f, 360f));
         }
         
         protected override void CollectableCollected(Vector3 hitFrom)

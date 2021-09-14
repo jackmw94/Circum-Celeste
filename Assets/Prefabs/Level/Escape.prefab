@@ -54,7 +54,7 @@ VisualEffect:
       - m_Value: 0.02
         m_Name: MoveToCentreForceScale
         m_Overridden: 1
-      - m_Value: 0.9
+      - m_Value: 0.7
         m_Name: SpawnCircleRadius
         m_Overridden: 1
       - m_Value: 0
@@ -76,7 +76,7 @@ VisualEffect:
       m_Array: []
     m_Int:
       m_Array:
-      - m_Value: 75
+      - m_Value: 30
         m_Name: SpawnRate
         m_Overridden: 1
     m_Matrix4x4f:
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7208122664927968265}
   _propertyName: MoveToCentreForceScale
-  _onValue: -0.02
+  _onValue: -0.005
   _offValue: 0.02
   _currentlyOnOff: 0
 --- !u!1 &8244140385589922250
@@ -357,7 +357,7 @@ VisualEffect:
       - m_Value: {x: 1, y: 1.8}
         m_Name: MinMaxLifetime
         m_Overridden: 1
-      - m_Value: {x: 0.005, y: 0.01}
+      - m_Value: {x: 0.003, y: 0.012}
         m_Name: TwistForceScaleMinMax
         m_Overridden: 1
     m_Vector3f:
@@ -501,7 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: MoveToCentreForceScale
-  _onValue: -0.04
+  _onValue: -0.045
   _offValue: 0.01
   _currentlyOnOff: 0
 --- !u!114 &7664196066216315736

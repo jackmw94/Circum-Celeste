@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 2067903628102976979}
+  _visualsTransform: {fileID: 1908279843002181283}
 --- !u!135 &2067903628102976979
 SphereCollider:
   m_ObjectHideFlags: 0
