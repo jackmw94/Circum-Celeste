@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Code.Behaviours;
 using UnityEngine;
+using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.VFX
@@ -13,7 +14,7 @@ namespace Code.VFX
         [SerializeField] private float _extent = 10f;
 
         private readonly HashSet<GameObject> _spaceTimeObjects = new HashSet<GameObject>();
-        private static Vector3 BeyondBoundsPosition = Vector3.one * 100f;
+        private static Vector3 BeyondBoundsPosition = -Vector3.one * 100f;
         private static readonly Dictionary<int, int> _counterToShaderProperty = new Dictionary<int, int>()
         {
             {1, Shader.PropertyToID("Position1")},
@@ -49,8 +50,13 @@ namespace Code.VFX
         {
             for (int i = 1; i <= 8; i++)
             {
-                HandleObject(BeyondBoundsPosition, i);
+                Clear(i);
             }
+        }
+
+        private void Clear(int positionNumber)
+        {
+            HandleObject(BeyondBoundsPosition, positionNumber, false);
         }
 
         public void RegisterObject(GameObject obj)
@@ -62,7 +68,7 @@ namespace Code.VFX
         {
             int removePositionNumber = _spaceTimeObjects.Count;
             _spaceTimeObjects.Remove(obj);
-            HandleObject(BeyondBoundsPosition, removePositionNumber);
+            Clear(removePositionNumber);
         }
         
         private void Update()
@@ -75,11 +81,17 @@ namespace Code.VFX
             }
         }
 
-        private void HandleObject(Vector3 worldPosition, int count)
+        private void HandleObject(Vector3 worldPosition, int count, bool clamp = true)
         {
-            float normalisedX = Mathf.InverseLerp(-_extent,  _extent, worldPosition.x);
-            float normalisedY = Mathf.InverseLerp(-_extent, _extent, worldPosition.y);
-            _materialProvider.GetMaterial().SetVector(_counterToShaderProperty[count], new Vector4(normalisedX, normalisedY));
+            float normalisedX = InverseLerp(-_extent,  _extent, worldPosition.x, clamp);
+            float normalisedY = InverseLerp(-_extent, _extent, worldPosition.y, clamp);
+            Material material = _materialProvider.GetMaterial();
+            material.SetVector(_counterToShaderProperty[count], new Vector4(normalisedX, normalisedY));
+        }
+
+        private float InverseLerp(float a, float b, float value, bool clamp)
+        {
+            return clamp ? Mathf.InverseLerp(a, b, value) : Utilities.UnclampedInverseLerp(a, b, value);
         }
     }
 }
