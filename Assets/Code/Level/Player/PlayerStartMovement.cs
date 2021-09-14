@@ -16,7 +16,7 @@ namespace Code.Level.Player
         {
             _angle = 0f;
             transform.position = GetPositionFromAngle(_angle);
-            _orbiter.position = GetPositionFromAngle(_angle + 180f);
+            if (_orbiter) _orbiter.position = GetPositionFromAngle(_angle + 180f);
         }
 
         private void Update()
