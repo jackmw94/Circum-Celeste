@@ -4,12 +4,12 @@ namespace Code.VFX
 {
     public class SpaceTimeObject : MonoBehaviour
     {
-        private void Awake()
+        private void OnEnable()
         {
             SpaceTimeHandler.Instance.RegisterObject(gameObject);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             SpaceTimeHandler.Instance.UnregisterObject(gameObject);
         }

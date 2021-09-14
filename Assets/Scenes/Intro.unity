@@ -286,7 +286,7 @@ MonoBehaviour:
   isGlobal: 1
   priority: 1
   blendDistance: 0
-  weight: 0
+  weight: 1
   sharedProfile: {fileID: 11400000, guid: 628ce9c4774f2f84599c4b7f0bd24eff, type: 2}
 --- !u!4 &521994804
 Transform:
@@ -751,7 +751,7 @@ RectTransform:
   m_GameObject: {fileID: 1598240601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.012314009, y: 0.012314009, z: 0.012314009}
+  m_LocalScale: {x: 0.012322666, y: 0.012322666, z: 0.012322666}
   m_Children:
   - {fileID: 78262275}
   - {fileID: 521994804}
@@ -920,7 +920,7 @@ RectTransform:
   m_GameObject: {fileID: 1714812357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -12}
-  m_LocalScale: {x: 0.012314009, y: 0.012314009, z: 0.012314009}
+  m_LocalScale: {x: 0.012322666, y: 0.012322666, z: 0.012322666}
   m_Children:
   - {fileID: 1224541408}
   - {fileID: 1829242021}
@@ -1106,7 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jonkWongleLogoAnimator: {fileID: 1598240606}
-  _startJonkWonglerLogoDelay: 1
+  _startJonkWonglerLogoDelay: 1.5
   _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.575
   _showGameAtNormalisedTimeInCircumLogo: 0.775
   _circumLogo: {fileID: 1224541407}

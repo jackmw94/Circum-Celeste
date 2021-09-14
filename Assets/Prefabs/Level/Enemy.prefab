@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5002772960763061679}
   - component: {fileID: 6425282190872956666}
   - component: {fileID: 8126561826270359424}
+  - component: {fileID: 4001573545444029010}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ad8988ee34940b89695d9cd4aacadfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 4001573545444029010}
+  _levelFinishedAnimationTrigger: Dissipate
   _collider: {fileID: 5424587554075494100}
   _enemyHealth: {fileID: 5002772960763061679}
   _gravitationalMover: {fileID: 6425282190872956666}
@@ -124,6 +127,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e0044a9d114e8eb3f0d61d003ff050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4001573545444029010
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807176686548070314}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e9529bc1008a2cb47825f5a1e165dfdf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6871356730795427911
 GameObject:
   m_ObjectHideFlags: 0

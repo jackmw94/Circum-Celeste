@@ -6,6 +6,9 @@ namespace Code.Level
 {
     public class Enemy : LevelElement
     {
+        [SerializeField] private Animator _animator;
+        [SerializeField] private string _levelFinishedAnimationTrigger = "Dissipate";
+        [Space(15)]
         [SerializeField] private SphereCollider _collider;
         [SerializeField] private EnemyHealth _enemyHealth;
         [SerializeField] private GravitationalMover _gravitationalMover;
@@ -38,8 +41,10 @@ namespace Code.Level
         public override void LevelFinished()
         {
             base.LevelFinished();
+            
+            _animator.SetTrigger(_levelFinishedAnimationTrigger);
 
-            if (_gravitationalMover) _gravitationalMover.enabled = false;
+            //if (_gravitationalMover) _gravitationalMover.enabled = false;
         }
     }
 }
