@@ -7,6 +7,7 @@ namespace Code.VFX
 {
     public abstract class SwitchVfxPropertyBase<T> : MonoBehaviour, ISwitchable
     {
+        [SerializeField] private bool _switchActive = true;
         [SerializeField] private VisualEffect _visualEffect;
         [SerializeField] private string _propertyName;
         [SerializeField] private T _onValue;
@@ -32,6 +33,11 @@ namespace Code.VFX
 
         public void SetOnOff(bool on)
         {
+            if (!_switchActive)
+            {
+                return;
+            }
+            
             _currentlyOnOff = on;
             T value = _currentlyOnOff ? _onValue : _offValue;
             ApplyValue(_visualEffect, _propertyId, value);

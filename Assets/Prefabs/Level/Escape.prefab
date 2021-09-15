@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2819562845712099487}
   - component: {fileID: 7208122664927968265}
   - component: {fileID: 3727885549583601951}
-  - component: {fileID: 7525345232191479611}
-  - component: {fileID: 2810471256129272418}
   m_Layer: 0
   m_Name: BackgroundParticles
   m_TagString: Untagged
@@ -76,7 +74,7 @@ VisualEffect:
       m_Array: []
     m_Int:
       m_Array:
-      - m_Value: 30
+      - m_Value: 50
         m_Name: SpawnRate
         m_Overridden: 1
     m_Matrix4x4f:
@@ -122,8 +120,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 0, g: 0, b: 0, a: 0}
-          key1: {r: 0.02, g: 0.02, b: 0.02, a: 1}
+          key0: {r: 0.04, g: 0.04, b: 0.04, a: 0}
+          key1: {r: 0, g: 0, b: 0, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -131,7 +129,7 @@ VisualEffect:
           key6: {r: 0, g: 0, b: 0, a: 0}
           key7: {r: 0, g: 0, b: 0, a: 0}
           ctime0: 11743
-          ctime1: 65535
+          ctime1: 57175
           ctime2: 0
           ctime3: 0
           ctime4: 0
@@ -139,8 +137,8 @@ VisualEffect:
           ctime6: 0
           ctime7: 0
           atime0: 0
-          atime1: 3681
-          atime2: 61462
+          atime1: 2609
+          atime2: 62674
           atime3: 65535
           atime4: 0
           atime5: 0
@@ -195,40 +193,6 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7525345232191479611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6508211951509275659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d90734e0c87845b7afc4ea41e9b27386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 7208122664927968265}
-  _propertyName: SpawnRate
-  _onValue: 0
-  _offValue: 75
-  _currentlyOnOff: 0
---- !u!114 &2810471256129272418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6508211951509275659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c1c94cfa0b5914eb3bb1907e0e3090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 7208122664927968265}
-  _propertyName: MoveToCentreForceScale
-  _onValue: -0.005
-  _offValue: 0.02
-  _currentlyOnOff: 0
 --- !u!1 &8244140385589922250
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,9 +263,8 @@ GameObject:
   - component: {fileID: 7577054463837262584}
   - component: {fileID: 7629357855742634476}
   - component: {fileID: 7404443290608503491}
-  - component: {fileID: 1470629447377959067}
-  - component: {fileID: 7664196066216315736}
   - component: {fileID: 7042884835591985812}
+  - component: {fileID: 7498274209403956904}
   m_Layer: 0
   m_Name: WhiteTwirlys
   m_TagString: Untagged
@@ -340,7 +303,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.01
+      - m_Value: 0.035
         m_Name: MoveToCentreForceScale
         m_Overridden: 1
       - m_Value: 1
@@ -357,7 +320,7 @@ VisualEffect:
       - m_Value: {x: 1, y: 1.8}
         m_Name: MinMaxLifetime
         m_Overridden: 1
-      - m_Value: {x: 0.003, y: 0.012}
+      - m_Value: {x: 0.02, y: 0.04}
         m_Name: TwistForceScaleMinMax
         m_Overridden: 1
     m_Vector3f:
@@ -487,40 +450,6 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &1470629447377959067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8325260007342393034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c1c94cfa0b5914eb3bb1907e0e3090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 7629357855742634476}
-  _propertyName: MoveToCentreForceScale
-  _onValue: -0.045
-  _offValue: 0.01
-  _currentlyOnOff: 0
---- !u!114 &7664196066216315736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8325260007342393034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d90734e0c87845b7afc4ea41e9b27386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _visualEffect: {fileID: 7629357855742634476}
-  _propertyName: SpawnRate
-  _onValue: 0
-  _offValue: 150
-  _currentlyOnOff: 0
 --- !u!114 &7042884835591985812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,8 +462,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184f2f294ea74741bf3cac8bcaa97a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _switchActive: 1
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: TwistForceScaleMinMax
   _onValue: {x: 0, y: 0}
-  _offValue: {x: 0.005, y: 0.01}
+  _offValue: {x: 0.02, y: 0.04}
+  _currentlyOnOff: 0
+--- !u!114 &7498274209403956904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325260007342393034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c1c94cfa0b5914eb3bb1907e0e3090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _switchActive: 1
+  _visualEffect: {fileID: 7629357855742634476}
+  _propertyName: MoveToCentreForceScale
+  _onValue: 0
+  _offValue: 0.035
   _currentlyOnOff: 0
