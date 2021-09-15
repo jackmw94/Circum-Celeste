@@ -3,6 +3,7 @@ using Code.Core;
 using Code.Juice;
 using Code.Level;
 using Code.Level.Player;
+using Code.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,8 @@ namespace Code.Flow
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
         
+        [SerializeField] private InterLevelScreen _interLevelScreen;
+        [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
@@ -28,7 +31,7 @@ namespace Code.Flow
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private Button _toggleShowLevelTimer;
         [SerializeField] private Button _toggleNoLoadingSaving;
-        [SerializeField] private Button _resetStatsButton;
+        [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
         [SerializeField] private Button _resetSplashScreens;
         [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
@@ -82,6 +85,8 @@ namespace Code.Flow
         private void OnSettingShowing()
         {
             _updateRemoteConfigLabel.text = UpdateRemoteConfigDefaultText;
+            
+            _resetStatsButton.Reset();
             
             UpdateFeedbacksLabel();
             UpdateNoLoadingSavingLabel();
@@ -139,6 +144,8 @@ namespace Code.Flow
         private void ResetPlayerStats()
         {
             PersistentDataManager.Instance.ResetStats();
+            _levelProvider.ResetToStart(true);
+            _interLevelScreen.SetupInterLevelScreen();
         }
         
         private void ToggleFeedbacks()

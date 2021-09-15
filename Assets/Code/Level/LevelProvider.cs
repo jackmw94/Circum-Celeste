@@ -50,9 +50,9 @@ namespace Code.Level
             }
         }
 
-        public void ResetToStart()
+        public void ResetToStart(bool forceStartAtTutorials = false)
         {
-            if (!HasCompletedTutorials)
+            if (!HasCompletedTutorials || forceStartAtTutorials)
             {
                 _internalLevelIndex = 0;
                 return;

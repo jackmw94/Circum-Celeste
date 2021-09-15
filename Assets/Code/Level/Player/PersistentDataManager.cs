@@ -180,11 +180,16 @@ namespace Code.Level.Player
         public void ResetStats()
         {
             PlayerStats.ResetSavedPlayerStats();
+            _playerStats = PlayerStats.CreateEmptyPlayerStats();
+            
             foreach (LevelLayout levels in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
                 LevelStats.ResetStats(levels.name);
             }
+            _levelStats.Clear();
+            
             CircumOptions.ResetOptions();
+            _circumOptions = new CircumOptions();
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)

@@ -45,7 +45,7 @@ namespace Code.Level
                 StopCoroutine(_startLevelOnceMovedCoroutine);
             }
 
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel);
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, InterLevelFlow.InterLevelTransition.Fast);
         }
 
         private void ClearCurrentLevel()

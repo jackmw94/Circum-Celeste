@@ -81,11 +81,7 @@ namespace Code.Level
             
             if (!on) _collider.enabled = false;
         }
-
-        /// <summary>
-        /// Sets 
-        /// </summary>
-        /// <param name="value"></param>
+        
         private void SetExpansionAmount(float value)
         {
             _material.SetFloat(Expansion, value * OverlayOnExpansionValue);
