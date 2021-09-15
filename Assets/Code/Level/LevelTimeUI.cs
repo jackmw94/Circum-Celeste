@@ -74,6 +74,12 @@ namespace Code.Level
         
         private void ShowHideTimeInternal(bool show)
         {
+            if (!gameObject.activeInHierarchy)
+            {
+                _canvasGroup.alpha = show ? 1f : 0f;
+                return;
+            }
+            
             if (_showHideTimerCoroutine != null)
             {
                 StopCoroutine(_showHideTimerCoroutine);
