@@ -303,7 +303,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.035
+      - m_Value: 0.01
         m_Name: MoveToCentreForceScale
         m_Overridden: 1
       - m_Value: 1
@@ -320,7 +320,7 @@ VisualEffect:
       - m_Value: {x: 1, y: 1.8}
         m_Name: MinMaxLifetime
         m_Overridden: 1
-      - m_Value: {x: 0.02, y: 0.04}
+      - m_Value: {x: 0.005, y: 0.015}
         m_Name: TwistForceScaleMinMax
         m_Overridden: 1
     m_Vector3f:
@@ -466,7 +466,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: TwistForceScaleMinMax
   _onValue: {x: 0, y: 0}
-  _offValue: {x: 0.02, y: 0.04}
+  _offValue: {x: 0.005, y: 0.015}
   _currentlyOnOff: 0
 --- !u!114 &7498274209403956904
 MonoBehaviour:
@@ -483,6 +483,6 @@ MonoBehaviour:
   _switchActive: 1
   _visualEffect: {fileID: 7629357855742634476}
   _propertyName: MoveToCentreForceScale
-  _onValue: 0
-  _offValue: 0.035
+  _onValue: 0.001
+  _offValue: 0.01
   _currentlyOnOff: 0
