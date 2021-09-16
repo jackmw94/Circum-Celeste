@@ -1,42 +1,37 @@
 ﻿using System.Collections;
 using Code.Behaviours;
 using Code.Core;
-using Code.Debugging;
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Video;
 
 namespace Code.Flow
 {
     public class SplashScreen : MonoBehaviour
     {
-        public const string UserHasSeenCircumLogoPlayerPrefsKey = "Circum_PlayerSeenFullLogos";
         private const int IntroSceneIndex = 0;
         private const int GameSceneIndex = 1;
         
         [SerializeField] private Animation _jonkWongleLogoAnimator;
         [SerializeField] private float _startJonkWonglerLogoDelay = 0.75f;
         [SerializeField] private float _playCircumLogoAtNormalisedTimeInJonkWonglerLogo = 0.65f;
-        [SerializeField] private float _showGameAtNormalisedTimeInCircumLogo = 0.9f;
-        [SerializeField] private VideoPlayer _circumLogo;
-        [SerializeField] private AnimateImageShaderProperty _hideSplashScreen;
+        [SerializeField] private float _holdSplashScreenDuration = 1.25f;
+        [SerializeField] private AnimateMeshShaderProperty _showSplashScreen;
+        [SerializeField] private AnimateMeshShaderProperty _hideSplashScreen;
+        [SerializeField] private AnimateMeshShaderProperty _hideCircumLogo;
 
         private bool _remoteConfigReturned = false;
         private bool _loadedGameScene = false;
 
-        private bool PlayerHasSeenFullLogos => CircumPlayerPrefs.HasKey(UserHasSeenCircumLogoPlayerPrefsKey);
-
         private void Awake()
         {
-            _circumLogo.frame = 0;
             RemoteConfigHelper.RequestRefresh(success =>
             {
                 _remoteConfigReturned = true;
             });
 
-            StartCoroutine(PlayJonkWongleLogo(!PlayerHasSeenFullLogos));
+            StartCoroutine(PlayJonkWongleLogo());
             
             SceneManager.LoadSceneAsync(GameSceneIndex, LoadSceneMode.Additive).completed += operation =>
             {
@@ -44,18 +39,11 @@ namespace Code.Flow
             };
         }
 
-        private IEnumerator Start()
-        {
-            _circumLogo.Play();
-            yield return new WaitForSeconds(0.5f);
-            _circumLogo.Stop();
-        }
-
-        private IEnumerator PlayJonkWongleLogo(bool showCircumLogoToo)
+        private IEnumerator PlayJonkWongleLogo()
         {
             yield return new WaitForSeconds(_startJonkWonglerLogoDelay);
             _jonkWongleLogoAnimator.Play();
-            yield return showCircumLogoToo ? HandlePlayBothLogos() : HandleJustPlayJonkWongleLogo();
+            yield return HandlePlayBothLogos();
         }
 
         private IEnumerator CompleteSplashScreen()
@@ -67,29 +55,30 @@ namespace Code.Flow
 
             yield return new WaitUntil(() => _loadedGameScene);
 
-            CircumPlayerPrefs.SetInt(UserHasSeenCircumLogoPlayerPrefsKey, 1);
             HideSplash();
         }
 
         private void HideSplash()
         {
+            _hideCircumLogo.TriggerAnimation();
             _hideSplashScreen.TriggerAnimation(() =>
             {
                 SceneManager.UnloadSceneAsync(IntroSceneIndex);
             });
         }
 
-        private IEnumerator HandleJustPlayJonkWongleLogo()
-        {
-            yield return WaitUntilJonkWongleLogoFinished(false);
-            yield return CompleteSplashScreen();
-        }
-
         private IEnumerator HandlePlayBothLogos()
         {
             yield return WaitUntilJonkWongleLogoFinished(true);
-            _circumLogo.Play();
-            yield return WaitUntilCircumLogoFinished(false);
+
+            bool showSplashComplete = false;
+            _showSplashScreen.TriggerAnimation(() =>
+            {
+                showSplashComplete = true;
+            });
+            yield return new WaitUntil(() => showSplashComplete);
+            yield return new WaitForSeconds(_holdSplashScreenDuration);
+
             yield return CompleteSplashScreen();
         }
 
@@ -105,21 +94,6 @@ namespace Code.Flow
                 if (previousFrameNormalisedTime > animationState.normalizedTime) return true;
 
                 previousFrameNormalisedTime = animationState.normalizedTime;
-                return false;
-            });
-        }
-        
-        private IEnumerator WaitUntilCircumLogoFinished(bool atReducedTime)
-        {
-            double requiredTime = (atReducedTime ? _showGameAtNormalisedTimeInCircumLogo : 0.99f) * _circumLogo.clip.length;
-            double previousFrameTime = _circumLogo.time;
-            
-            yield return new WaitUntil(() =>
-            {
-                if (_circumLogo.time >= requiredTime) return true;
-                if (previousFrameTime > _circumLogo.time) return true;
-
-                previousFrameTime = _circumLogo.time;
                 return false;
             });
         }

@@ -4,6 +4,7 @@ using Code.Level;
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
 
@@ -108,13 +109,14 @@ namespace Code.Flow
             _levelManager.CreateCurrentLevel(levelRecording);
         }
 
-        public IEnumerator ShowHideScreen(bool show)
+        public IEnumerator ShowHideScreen(bool show, InterLevelFlow.InterLevelTransition transition)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.interactable = false;
             
             float targetAlpha = show ? 1f : 0f;
-            yield return Utilities.LerpOverTime(_canvasGroup.alpha, targetAlpha, _showHideDuration, f =>
+            float duration = transition == InterLevelFlow.InterLevelTransition.Instant ? 0f : _showHideDuration;
+            yield return Utilities.LerpOverTime(_canvasGroup.alpha, targetAlpha, duration, f =>
             {
                 _canvasGroup.alpha = f;
             });

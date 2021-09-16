@@ -12,6 +12,7 @@ namespace Code.VFX
     {
         [SerializeField] private Volume _volume;
         [SerializeField] private AnimationCurve _animationCurve;
+        [SerializeField] private float _duration = 1f;
 
         private T _volumeComponent;
         private Coroutine _triggerAnimationCoroutine = null;
@@ -42,7 +43,7 @@ namespace Code.VFX
 
         private IEnumerator AnimatePostProcessingCoroutine()
         {
-            yield return Utilities.LerpOverTime(0f, 1f, _animationCurve.GetCurveDuration(), f =>
+            yield return Utilities.LerpOverTime(0f, 1f, _duration, f =>
             {
                 f = _animationCurve.Evaluate(f);
                 SetValue(_volumeComponent, f);

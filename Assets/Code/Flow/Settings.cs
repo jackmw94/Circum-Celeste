@@ -59,7 +59,6 @@ namespace Code.Flow
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.AddListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
-            _resetSplashScreens.onClick.AddListener(ResetSplashScreens);
 
             TurnOffInstant();
         }
@@ -85,7 +84,6 @@ namespace Code.Flow
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.RemoveListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
-            _resetSplashScreens.onClick.RemoveListener(ResetSplashScreens);
         }
         
         private void OnSettingShowing()
@@ -104,12 +102,7 @@ namespace Code.Flow
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
         }
-
-        private void ResetSplashScreens()
-        {
-            CircumPlayerPrefs.DeleteKey(SplashScreen.UserHasSeenCircumLogoPlayerPrefsKey);
-        }
-
+        
         private void ToggleShowLevelTimer()
         {
             CircumOptions circumOptions = CircumOptions;

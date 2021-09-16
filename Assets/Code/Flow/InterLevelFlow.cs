@@ -4,6 +4,7 @@ using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Code.Flow
 {
@@ -71,13 +72,13 @@ namespace Code.Flow
             _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, newFastestTimeInfo, showAdvanceLevelPrompt));
         }
 
-        public void HideInterLevelUI()
+        public void HideInterLevelUI(InterLevelTransition transition = InterLevelTransition.Regular)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             } 
-            _showHideInterLevelCoroutine = StartCoroutine(HideInterLevelUICoroutine());
+            _showHideInterLevelCoroutine = StartCoroutine(HideInterLevelUICoroutine(transition));
         }
 
         public void ShowHideUI(Action onShown, InterLevelTransition transition)
@@ -114,16 +115,16 @@ namespace Code.Flow
             // Show overlay, hides level reset
             yield return ShowOverlayCoroutine(transition);
             
-            yield return _interLevelScreen.ShowHideScreen(true);
+            yield return _interLevelScreen.ShowHideScreen(true, transition);
 
             onShown?.Invoke();
             _isTransitioning = false;
         }
 
-        private IEnumerator HideInterLevelUICoroutine()
+        private IEnumerator HideInterLevelUICoroutine(InterLevelTransition transition)
         {
             _isTransitioning = true;
-            yield return _interLevelScreen.ShowHideScreen(false);
+            yield return _interLevelScreen.ShowHideScreen(false, transition);
             yield return HideOverlayCoroutine(false);
             _isTransitioning = false;
         }
