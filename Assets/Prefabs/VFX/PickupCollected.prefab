@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3900369487585736339}
   - component: {fileID: 2776349223875437733}
   m_Layer: 0
-  m_Name: OrbiterPickupCollected
+  m_Name: PickupCollected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ VisualEffect:
           m_Curve:
           - serializedVersion: 3
             time: 0.19924927
-            value: 0.19893265
+            value: 0.11591828
             inSlope: -0.025108516
             outSlope: -0.025108516
             tangentMode: 0
@@ -159,6 +159,7 @@ VFXRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -192,5 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _visualEffect: {fileID: 3900369487585736338}
-  _startPositionPropertyName: StartPosition
   _forceDirectionPropertyName: ForceDirection
