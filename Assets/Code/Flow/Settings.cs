@@ -4,6 +4,7 @@ using Code.Juice;
 using Code.Level;
 using Code.Level.Player;
 using Code.UI;
+using Lean.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,7 +30,7 @@ namespace Code.Flow
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _toggleFeedbacks;
-        [SerializeField] private Button _toggleShowLevelTimer;
+        [SerializeField] private Button _toggleShowLevelTime;
         [SerializeField] private Button _toggleNoLoadingSaving;
         [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
         [SerializeField] private Button _resetSplashScreens;
@@ -37,6 +38,11 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleNoLoadingSavingLabel;
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
+        [Space(15)]
+        [SerializeField, LeanTranslationName] private string _showLevelTimeLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _hideLevelTimeLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _turnFeedbacksOnLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _turnFeedbacksOffLocalisationTerm;
 
         private bool _settingsOn = false;
         private Coroutine _turnOnOffCoroutine = null;
@@ -51,7 +57,7 @@ namespace Code.Flow
             _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
-            _toggleShowLevelTimer.onClick.AddListener(ToggleShowLevelTimer);
+            _toggleShowLevelTime.onClick.AddListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
             _resetSplashScreens.onClick.AddListener(ResetSplashScreens);
 
@@ -77,7 +83,7 @@ namespace Code.Flow
             _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
-            _toggleShowLevelTimer.onClick.RemoveListener(ToggleShowLevelTimer);
+            _toggleShowLevelTime.onClick.RemoveListener(ToggleShowLevelTimer);
             _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
             _resetSplashScreens.onClick.RemoveListener(ResetSplashScreens);
         }
@@ -116,7 +122,9 @@ namespace Code.Flow
 
         private void UpdateShowLevelTimerLabel()
         {
-            _toggleShowLevelTimerLabel.text = $"{(CircumOptions.ShowLevelTimer ? "Hide" : "Show")} level timer";
+            string localisationTerm = CircumOptions.ShowLevelTimer ? _hideLevelTimeLocalisationTerm : _showLevelTimeLocalisationTerm;
+            string labelText = LeanLocalization.GetTranslationText(localisationTerm);
+            _toggleShowLevelTimerLabel.text = labelText;
         }
 
         private void BackButtonListener()
@@ -156,7 +164,9 @@ namespace Code.Flow
 
         private void UpdateFeedbacksLabel()
         {
-            _toggleFeedbacksLabel.text = $"Turn Feedbacks {(Feedbacks.Instance.FeedbacksActive ? "Off" : "On")}";
+            string localisationTerm = Feedbacks.Instance.FeedbacksActive ? _turnFeedbacksOffLocalisationTerm : _turnFeedbacksOnLocalisationTerm;
+            string labelText = LeanLocalization.GetTranslationText(localisationTerm);
+            _toggleFeedbacksLabel.text = labelText;
         }
 
         private void ToggleNoLoadingSaving()
