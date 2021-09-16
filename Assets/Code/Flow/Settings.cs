@@ -20,6 +20,7 @@ namespace Code.Flow
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
+        [SerializeField] private CircumTips _circumTips;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
         [SerializeField] private CanvasGroup _buttonCanvasGroup;
@@ -28,15 +29,11 @@ namespace Code.Flow
         [Space(15)]
         [SerializeField] private Button _restartLevelButton;
         [SerializeField] private Button _backButton;
-        [SerializeField] private Button _updateRemoteConfigButton;
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private Button _toggleShowLevelTime;
-        [SerializeField] private Button _toggleNoLoadingSaving;
+        [SerializeField] private Button _tipsButton;
         [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
-        [SerializeField] private Button _resetSplashScreens;
-        [SerializeField] private TextMeshProUGUI _updateRemoteConfigLabel;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
-        [SerializeField] private TextMeshProUGUI _toggleNoLoadingSavingLabel;
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
         [Space(15)]
         [SerializeField, LeanTranslationName] private string _showLevelTimeLocalisationTerm;
@@ -54,11 +51,10 @@ namespace Code.Flow
             _toggleSettingsButton.onClick.AddListener(SettingsButtonClicked);
             _backButton.onClick.AddListener(BackButtonListener);
             _restartLevelButton.onClick.AddListener(RestartLevel);
-            _updateRemoteConfigButton.onClick.AddListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.AddListener(ToggleShowLevelTimer);
-            _toggleNoLoadingSaving.onClick.AddListener(ToggleNoLoadingSaving);
+            _tipsButton.onClick.AddListener(ShowTips);
 
             TurnOffInstant();
         }
@@ -79,21 +75,17 @@ namespace Code.Flow
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
             _backButton.onClick.RemoveListener(BackButtonListener);
             _restartLevelButton.onClick.RemoveListener(RestartLevel);
-            _updateRemoteConfigButton.onClick.RemoveListener(UpdateRemoteConfigButtonListener);
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.RemoveListener(ToggleShowLevelTimer);
-            _toggleNoLoadingSaving.onClick.RemoveListener(ToggleNoLoadingSaving);
+            _tipsButton.onClick.RemoveListener(ShowTips);
         }
-        
+
         private void OnSettingShowing()
         {
-            _updateRemoteConfigLabel.text = UpdateRemoteConfigDefaultText;
-            
             _resetStatsButton.Reset();
             
             UpdateFeedbacksLabel();
-            UpdateNoLoadingSavingLabel();
             UpdateShowLevelTimerLabel();
         }
 
@@ -102,7 +94,7 @@ namespace Code.Flow
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
         }
-        
+
         private void ToggleShowLevelTimer()
         {
             CircumOptions circumOptions = CircumOptions;
@@ -111,6 +103,11 @@ namespace Code.Flow
             
             GameContainer.Instance.LevelTimeUI.SettingsShowHideTime(circumOptions.ShowLevelTimer);
             CircumOptions.Save(circumOptions);
+        }
+
+        private void ShowTips()
+        {
+            _circumTips.ShowHideTipsScreen(true);
         }
 
         private void UpdateShowLevelTimerLabel()
@@ -132,16 +129,6 @@ namespace Code.Flow
             SettingsButtonClicked();
         }
         
-        private void UpdateRemoteConfigButtonListener()
-        {
-            _updateRemoteConfigButton.interactable = false;
-            RemoteConfigHelper.RequestRefresh(success =>
-            {
-                _updateRemoteConfigButton.interactable = true;
-                _updateRemoteConfigLabel.text = $"{UpdateRemoteConfigDefaultText} - was {(success ? "successful" : "unsuccessful")}";
-            });
-        }
-
         private void ResetPlayerStats()
         {
             PersistentDataManager.Instance.ResetStats();
@@ -161,19 +148,7 @@ namespace Code.Flow
             string labelText = LeanLocalization.GetTranslationText(localisationTerm);
             _toggleFeedbacksLabel.text = labelText;
         }
-
-        private void ToggleNoLoadingSaving()
-        {
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            persistentDataManager.SetDoNotLoadOrSave(!persistentDataManager.DoNotLoadOrSave);
-            UpdateNoLoadingSavingLabel();
-        }
-
-        private void UpdateNoLoadingSavingLabel()
-        {
-            _toggleNoLoadingSavingLabel.text = $"Toggle persistent data ({(PersistentDataManager.Instance.DoNotLoadOrSave ? "saving / loading DISABLED" : "saving / loading on")})";
-        }
-
+        
         private void TurnSettingsOnOff(bool on)
         {
             if (on)

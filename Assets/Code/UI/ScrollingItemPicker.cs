@@ -1,8 +1,10 @@
+using System.Diagnostics;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 namespace Code.UI
 {
@@ -12,6 +14,7 @@ namespace Code.UI
         [SerializeField] protected ScrollRect _scrollRect;
         [SerializeField] protected RectTransform _root;
         [Space(15)]
+        [SerializeField] private bool _isVerticalScroll = true;
         [SerializeField] private Transform _selector;
         [SerializeField] private float _magnetismFactor = 0.05f;
         [Space(15)]
@@ -27,6 +30,15 @@ namespace Code.UI
         public int NumberOfItems => _items.Length;
         public int CurrentlySelectedIndex => _currentlySelectedIndex;
         public Selectable CurrentlySelected => _items[_currentlySelectedIndex];
+
+        [Conditional("UNITY_EDITOR")]
+        private void OnValidate()
+        {
+            if (!_scrollRect)
+            {
+                _scrollRect = GetComponent<ScrollRect>();
+            }
+        }
 
         private void Awake()
         {
@@ -79,14 +91,15 @@ namespace Code.UI
 
         private void DetermineSelectedItem()
         {
-            float selectorYPosition = _selector.position.y;
+            float selectorPosition = GetOneDimensionalPosition(_selector);
             float minimumDistanceFromSelector = float.MaxValue;
             _currentlySelectedIndex = -1;
 
             for (int i = 0; i < _root.childCount; i++)
             {
                 Transform childTransform = _root.GetChild(i);
-                float itemDistance = Mathf.Abs(childTransform.position.y - selectorYPosition);
+                float childPosition = GetOneDimensionalPosition(childTransform);
+                float itemDistance = Mathf.Abs(childPosition - selectorPosition);
                 if (itemDistance < minimumDistanceFromSelector)
                 {
                     minimumDistanceFromSelector = itemDistance;
@@ -115,16 +128,32 @@ namespace Code.UI
 
         private void HandleMagnetism()
         {
-            if (_isScrollRectInteractedWith || _root.sizeDelta.y < float.Epsilon)
+            Vector2 rootSizeDelta = _root.sizeDelta;
+            float rootSizeAxis = _isVerticalScroll ? rootSizeDelta.y : rootSizeDelta.x;
+            if (_isScrollRectInteractedWith || rootSizeAxis < float.Epsilon)
             {
                 return;
             }
 
             Transform selectedItemTransform = _root.GetChild(_currentlySelectedIndex);
-            float distanceToSelector = _selector.transform.position.y - selectedItemTransform.position.y;
-            float fractionalDistance = distanceToSelector / _root.sizeDelta.y;
+            float distanceToSelector = GetOneDimensionalPosition(_selector) - GetOneDimensionalPosition(selectedItemTransform);
+            float fractionalDistance = distanceToSelector / rootSizeAxis;
             float moveDistance = _magnetismFactor * fractionalDistance;
-            _scrollRect.verticalNormalizedPosition -= moveDistance;
+
+            if (_isVerticalScroll)
+            {
+                _scrollRect.verticalNormalizedPosition -= moveDistance;
+            }
+            else
+            {
+                _scrollRect.horizontalNormalizedPosition -= moveDistance;
+            }
+        }
+
+        private float GetOneDimensionalPosition(Transform objectTransform)
+        {
+            Vector3 position = objectTransform.position;
+            return _isVerticalScroll ? position.y : position.x;
         }
 
         [ContextMenu(nameof(NameObjectsFromLabels))]
