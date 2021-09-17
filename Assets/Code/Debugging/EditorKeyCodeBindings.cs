@@ -13,6 +13,7 @@ namespace Code.Debugging
         public static KeyCode SwitchToKeyboardInput => KeyCode.K;
         public static KeyCode SwitchToMouseInput => KeyCode.M;
         public static KeyCode SwitchToUIInput => KeyCode.U;
+        public static KeyCode PlayerInvulnerable => KeyCode.I;
 #endif
     }
 }

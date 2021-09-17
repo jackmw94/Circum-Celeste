@@ -8,20 +8,13 @@ namespace Code.Core
     {
 #if UNITY_EDITOR
         public bool PlayerHealthLossDisabled { get; private set; }
-        public bool EnemyHealthLossDisabled { get; private set; }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(EditorKeyCodeBindings.PlayerInvulnerable))
             {
                 PlayerHealthLossDisabled = !PlayerHealthLossDisabled;
                 CircumDebug.Log($"Setting player invulnerability to {BoolToOnOff(PlayerHealthLossDisabled)}");
-            }
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                EnemyHealthLossDisabled = !EnemyHealthLossDisabled;
-                CircumDebug.Log($"Setting enemy invulnerability to {BoolToOnOff(EnemyHealthLossDisabled)}");
             }
         }
 
