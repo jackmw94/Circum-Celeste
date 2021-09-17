@@ -31,7 +31,8 @@ namespace Code.Level
         [Space(15)]
         [SerializeField] private Transform _cellsRoot;
         [Space(15)]
-        [SerializeField] private GameObject _exampleOrbiter;
+        [SerializeField] private GameObject _rotatingOrbiter;
+        [SerializeField] private GameObject _movingOrbiter;
         [Space(15)]
         [SerializeField] private float _wallZOffset = 0.2f;
         [SerializeField] private float _levelSizeSpeedAdjustmentFactor = 0.5f;
@@ -100,10 +101,12 @@ namespace Code.Level
             List<GameObject> followerEnemyObjects = GenerateCells(level, CellType.Enemy, _followerEnemyPrefab);
             List<GameObject> escapeObjects = GenerateCells(level, CellType.Escape, _escapePrefab);
             List<GameObject> hazardObjects = GenerateCells(level, CellType.Hazard, _hazardPrefab);
-            
-            _exampleOrbiter.SetActive(level.ExampleOrbiterEnabled);
-            GameContainer.Instance.HealthUI.SetExpandedSize(level.ExampleOrbiterEnabled);
-            GameContainer.Instance.CountdownTimerUI.SetExpandedSize(level.ExampleOrbiterEnabled);
+
+            bool hasTutorial = level.ExampleMovingOrbiterEnabled || level.ExampleRotatingOrbiterEnabled;
+            _rotatingOrbiter.SetActive(level.ExampleRotatingOrbiterEnabled);
+            _movingOrbiter.SetActive(level.ExampleMovingOrbiterEnabled);
+            GameContainer.Instance.HealthUI.SetExpandedSize(hasTutorial);
+            GameContainer.Instance.CountdownTimerUI.SetExpandedSize(hasTutorial);
 
             return new LevelObjects
             {

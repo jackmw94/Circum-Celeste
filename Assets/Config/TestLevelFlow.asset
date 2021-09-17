@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cd259f4ecb486299a54a6cb2fc6c9c, type: 3}
   m_Name: TestLevelFlow
   m_EditorClassIdentifier: 
+  _tutorialLevels: []
   _levelLayout:
-  - {fileID: 11400000, guid: 377c9e6035f8c5e41baf5f366ee9a4e5, type: 2}
-  - {fileID: 11400000, guid: 752d51f4a5c667e449eb72df09ab5d5e, type: 2}
-  - {fileID: 11400000, guid: 778d24f08f787094c8a8d51eec67342d, type: 2}
+  - {fileID: 11400000, guid: 36cfbe4066662134b9c34dfd3a949c19, type: 2}

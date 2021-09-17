@@ -19,7 +19,8 @@ namespace Code.Level
         [SerializeField] private bool _orbiterEnabled = true;
         [SerializeField] private bool _powerEnabled = false;
         [SerializeField] private IntroduceElement _introduceElement;
-        [SerializeField] private bool _exampleOrbiterEnabled = false;
+        [SerializeField] private bool _exampleRotatingOrbiterEnabled = false;
+        [SerializeField] private bool _exampleMovingOrbiterEnabled = false;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private float _goldTime = 2f;
         [SerializeField] private CellType[] _cells = new CellType[0];
@@ -32,7 +33,8 @@ namespace Code.Level
         public bool OrbiterEnabled => _orbiterEnabled;
         public bool PowerEnabled => _powerEnabled;
         public IntroduceElement IntroduceElement => _introduceElement;
-        public bool ExampleOrbiterEnabled => _exampleOrbiterEnabled;
+        public bool ExampleRotatingOrbiterEnabled => _exampleRotatingOrbiterEnabled;
+        public bool ExampleMovingOrbiterEnabled => _exampleMovingOrbiterEnabled;
         public float GoldTime => _goldTime;
 
         // only runtime data, keeps level indices hidden away in level provider

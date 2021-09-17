@@ -15,6 +15,7 @@ MonoBehaviour:
   _tutorialLevels:
   - {fileID: 11400000, guid: 0dd43dddbaad8ed4f83a786aa7c0eb98, type: 2}
   - {fileID: 11400000, guid: c795ff3fcdf145046af083e51cf27854, type: 2}
+  - {fileID: 11400000, guid: 36cfbe4066662134b9c34dfd3a949c19, type: 2}
   _levelLayout:
   - {fileID: 11400000, guid: 8745820162e3c8d45aa783899958e2d7, type: 2}
   - {fileID: 11400000, guid: 426a3ae3f1ede664a9b79fffb4e236f8, type: 2}

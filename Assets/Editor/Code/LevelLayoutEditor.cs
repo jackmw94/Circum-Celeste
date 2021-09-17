@@ -21,7 +21,8 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLineLocalisationTerm;
     private SerializedProperty _introduceElement;
-    private SerializedProperty _exampleOrbiterEnabled;
+    private SerializedProperty _exampleRotatingOrbiterEnabled;
+    private SerializedProperty _exampleMovingOrbiterEnabled;
     private SerializedProperty _orbiterEnabled;
     private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
@@ -47,7 +48,8 @@ public class LevelLayoutEditor : Editor
         
         _tagLineLocalisationTerm = serializedObject.FindProperty(nameof(_tagLineLocalisationTerm));
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
-        _exampleOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleOrbiterEnabled));
+        _exampleRotatingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleRotatingOrbiterEnabled));
+        _exampleMovingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleMovingOrbiterEnabled));
         _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
         _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
@@ -69,7 +71,8 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_tagLineLocalisationTerm);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_introduceElement);
-        EditorGUILayout.PropertyField(_exampleOrbiterEnabled);
+        EditorGUILayout.PropertyField(_exampleRotatingOrbiterEnabled);
+        EditorGUILayout.PropertyField(_exampleMovingOrbiterEnabled);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_powerEnabled);
