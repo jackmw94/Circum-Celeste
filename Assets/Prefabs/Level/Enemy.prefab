@@ -157,6 +157,8 @@ GameObject:
   - component: {fileID: 6871356730795427907}
   - component: {fileID: 6871356730795427906}
   - component: {fileID: 6871356730795427909}
+  - component: {fileID: 2612825208014008866}
+  - component: {fileID: 8646666011048993339}
   m_Layer: 8
   m_Name: DistortionElement
   m_TagString: Untagged
@@ -227,3 +229,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2612825208014008866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6871356730795427911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05491fb4e067427b84829d4bcc7dc3e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materialProvider: {fileID: 8646666011048993339}
+  _materialPropertyName: RandomSeed
+  _minValue: -10000
+  _maxValue: 10000
+--- !u!114 &8646666011048993339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6871356730795427911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78dfa1d39304fd08265643fdd4c2a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 6871356730795427909}
