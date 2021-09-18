@@ -8,8 +8,7 @@ namespace Code.UI
         [SerializeField] private RectTransform _content;
         [Space(15)]
         [SerializeField] private bool _isVertical = true;
-        [SerializeField] private int _screenCount = 2;
-        
+
         private void Start()
         {
             ResetSize();
@@ -18,9 +17,13 @@ namespace Code.UI
         [ContextMenu(nameof(ResetSize))]
         private void ResetSize()
         {
+            int screenCount = _content.childCount;
             Vector2 viewportSizeDelta = _viewport.rect.size;
-            Vector2 contentSize = _isVertical ? viewportSizeDelta.y * _screenCount * Vector2.up : viewportSizeDelta.x * _screenCount * Vector2.right; 
-            _content.sizeDelta = contentSize;
+            
+            float contentSizeMagnitude = (_isVertical ? viewportSizeDelta.y : viewportSizeDelta.x) * screenCount;
+            RectTransform.Axis axis = _isVertical ? RectTransform.Axis.Vertical : RectTransform.Axis.Horizontal;
+            
+            _content.SetSizeWithCurrentAnchors(axis, contentSizeMagnitude);
         }
     }
 }

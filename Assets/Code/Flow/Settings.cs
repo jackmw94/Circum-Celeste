@@ -20,7 +20,8 @@ namespace Code.Flow
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
-        [SerializeField] private CircumTips _circumTips;
+        [SerializeField] private CircumTips _gameTips;
+        [SerializeField] private CircumTips _howToPlay;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
         [SerializeField] private CanvasGroup _buttonCanvasGroup;
@@ -31,7 +32,8 @@ namespace Code.Flow
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private Button _toggleShowLevelTime;
-        [SerializeField] private Button _tipsButton;
+        [SerializeField] private Button _gameTipsButton;
+        [SerializeField] private Button _howToPlayButton;
         [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
@@ -54,7 +56,8 @@ namespace Code.Flow
             _resetStatsButton.onClick.AddListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.AddListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.AddListener(ToggleShowLevelTimer);
-            _tipsButton.onClick.AddListener(ShowTips);
+            _gameTipsButton.onClick.AddListener(ShowTips);
+            _howToPlayButton.onClick.AddListener(ShowHowToPlay);
 
             TurnOffInstant();
         }
@@ -78,7 +81,8 @@ namespace Code.Flow
             _resetStatsButton.onClick.RemoveListener(ResetPlayerStats);
             _toggleFeedbacks.onClick.RemoveListener(ToggleFeedbacks);
             _toggleShowLevelTime.onClick.RemoveListener(ToggleShowLevelTimer);
-            _tipsButton.onClick.RemoveListener(ShowTips);
+            _gameTipsButton.onClick.RemoveListener(ShowTips);
+            _howToPlayButton.onClick.RemoveListener(ShowHowToPlay);
         }
 
         private void OnSettingShowing()
@@ -107,7 +111,12 @@ namespace Code.Flow
 
         private void ShowTips()
         {
-            _circumTips.ShowHideTipsScreen(true);
+            _gameTips.ShowHideTipsScreen(true);
+        }
+        
+        private void ShowHowToPlay()
+        {
+            _howToPlay.ShowHideTipsScreen(true);
         }
 
         private void UpdateShowLevelTimerLabel()

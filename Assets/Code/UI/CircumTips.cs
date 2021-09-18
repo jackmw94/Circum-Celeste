@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Code.Behaviours;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,7 @@ namespace Code.UI
 
         private IEnumerator ShowInternal()
         {
+            gameObject.SetActiveSafe(true);
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
             _backgroundImage.raycastTarget = true;
@@ -58,6 +60,7 @@ namespace Code.UI
             _backgroundImage.raycastTarget = false;
             yield return Utilities.LerpOverTime(_canvasGroup.alpha, 0f, 0.5f, f => _canvasGroup.alpha = f);
             yield return RunAnimateImageShaderProperty(_hideTipsBackground);
+            gameObject.SetActiveSafe(false);
         }
 
         private void BackButtonListener()
