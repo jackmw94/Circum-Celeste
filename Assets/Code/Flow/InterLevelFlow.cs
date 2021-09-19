@@ -31,6 +31,8 @@ namespace Code.Flow
         public bool IsOverlaid => _levelOverlay.OverlayIsOn;
         public bool IsTransitioning => _isTransitioning;
 
+        private bool SwipeToChangeLevelAvailable => IsOverlaid && !_isTransitioning && !Settings.Instance.SettingsAreShowing;
+
         private void Start()
         {
             ShowInterLevelUI(transition: InterLevelTransition.Instant);
@@ -38,28 +40,30 @@ namespace Code.Flow
 
         private void Update()
         {
-            if (IsOverlaid && !_isTransitioning)
+            if (!SwipeToChangeLevelAvailable)
             {
-                CircumGestures.SwipeDirection swipeDirection = CircumGestures.GetSwipeDirection();
-                switch (swipeDirection)
-                {
-                    case CircumGestures.SwipeDirection.None:
-                        break;
-                    case CircumGestures.SwipeDirection.Right:
-                        if (_levelProvider.CanChangeToPreviousLevel())
-                        {
-                            _levelProvider.PreviousLevel();
-                            _interLevelScreen.SetupInterLevelScreen();
-                        }
-                        break;
-                    case CircumGestures.SwipeDirection.Left:
-                        if (_levelProvider.CanChangeToNextLevel())
-                        {
-                            _levelProvider.AdvanceLevel();
-                            _interLevelScreen.SetupInterLevelScreen();
-                        }
-                        break;
-                }
+                return;
+            }
+            
+            CircumGestures.SwipeDirection swipeDirection = CircumGestures.GetSwipeDirection();
+            switch (swipeDirection)
+            {
+                case CircumGestures.SwipeDirection.None:
+                    break;
+                case CircumGestures.SwipeDirection.Right:
+                    if (_levelProvider.CanChangeToPreviousLevel())
+                    {
+                        _levelProvider.PreviousLevel();
+                        _interLevelScreen.SetupInterLevelScreen();
+                    }
+                    break;
+                case CircumGestures.SwipeDirection.Left:
+                    if (_levelProvider.CanChangeToNextLevel())
+                    {
+                        _levelProvider.AdvanceLevel();
+                        _interLevelScreen.SetupInterLevelScreen();
+                    }
+                    break;
             }
         }
         
@@ -131,7 +135,7 @@ namespace Code.Flow
 
         private IEnumerator ShowOverlayCoroutine(InterLevelTransition transition)
         {
-            LevelInstanceBase currentLevel = _levelManager.CurrentLevel;
+            LevelInstanceBase currentLevel = _levelManager.CurrentLevelInstance;
             
             Vector3 playerPosition = Vector3.one / 2f;
             if (currentLevel)

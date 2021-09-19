@@ -10,10 +10,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
+using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Flow
 {
-    public class Settings : MonoBehaviour
+    public class Settings : SingletonMonoBehaviour<Settings>
     {
         private const string UpdateRemoteConfigDefaultText = "Update game configuration";
         
@@ -47,6 +48,7 @@ namespace Code.Flow
         private Coroutine _turnOnOffCoroutine = null;
 
         private CircumOptions CircumOptions => PersistentDataManager.Instance.Options;
+        public bool SettingsAreShowing => _settingsOn;
 
         private void Awake()
         {

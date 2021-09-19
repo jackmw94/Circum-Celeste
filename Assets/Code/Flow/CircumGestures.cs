@@ -52,7 +52,6 @@ namespace Code.Flow
         {
             Vector2 swipeDirection = finger.SwipeScaledDelta;
             float swipeValue = Vector2.Dot(swipeDirection.normalized, direction.normalized);
-            CircumDebug.Log($"Testing swipe direction {direction} => swipe value of {swipeValue}");
             return swipeValue > SwipeDirectionThreshold;
         }
     }
