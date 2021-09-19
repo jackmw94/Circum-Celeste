@@ -18,6 +18,7 @@ namespace Code.Level.Player
         private void Update()
         {
             if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToKeyboardInput)) _inputProvider = InputProvider.CreateInputProvider<KeyboardInputProvider>();
+            if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToControllerInput)) _inputProvider = InputProvider.CreateInputProvider<ControllerInputProvider>();
             if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToMouseInput)) _inputProvider = InputProvider.CreateInputProvider<MouseInputProvider>();
             if (Input.GetKeyDown(EditorKeyCodeBindings.SwitchToUIInput)) _inputProvider = InputProvider.CreateInputProvider<UIInputProvider>();
         }

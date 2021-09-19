@@ -32,7 +32,7 @@ namespace Code.Level
         [SerializeField] private Transform _cellsRoot;
         [Space(15)]
         [SerializeField] private GameObject _rotatingOrbiter;
-        [SerializeField] private GameObject _movingOrbiter;
+        [SerializeField] private ExampleMovingPlayer _movingOrbiter;
         [Space(15)]
         [SerializeField] private float _wallZOffset = 0.2f;
         [SerializeField] private float _levelSizeSpeedAdjustmentFactor = 0.5f;
@@ -104,7 +104,7 @@ namespace Code.Level
 
             bool hasTutorial = level.ExampleMovingOrbiterEnabled || level.ExampleRotatingOrbiterEnabled;
             _rotatingOrbiter.SetActive(level.ExampleRotatingOrbiterEnabled);
-            _movingOrbiter.SetActive(level.ExampleMovingOrbiterEnabled);
+            _movingOrbiter.EnableExampleMovingPlayer(level.ExampleMovingOrbiterEnabled);
             GameContainer.Instance.HealthUI.SetExpandedSize(hasTutorial);
             GameContainer.Instance.CountdownTimerUI.SetExpandedSize(hasTutorial);
 

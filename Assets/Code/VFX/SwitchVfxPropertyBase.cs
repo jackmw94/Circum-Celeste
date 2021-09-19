@@ -14,7 +14,9 @@ namespace Code.VFX
         [SerializeField] private T _offValue;
         [SerializeField] private bool _currentlyOnOff;
 
-        private int _propertyId;
+        private int? _propertyId;
+
+        private int PropertyId => _propertyId ?? (_propertyId = Shader.PropertyToID(_propertyName)).Value;
 
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
@@ -40,7 +42,7 @@ namespace Code.VFX
             
             _currentlyOnOff = on;
             T value = _currentlyOnOff ? _onValue : _offValue;
-            ApplyValue(_visualEffect, _propertyId, value);
+            ApplyValue(_visualEffect, PropertyId, value);
         }
 
         protected abstract void ApplyValue(VisualEffect vfx, int propertyId, T value);

@@ -11,6 +11,7 @@ namespace Code.Debugging
         public static KeyCode NextLevel => KeyCode.RightArrow;
         public static KeyCode PreviousLevel => KeyCode.LeftArrow;
         public static KeyCode SwitchToKeyboardInput => KeyCode.K;
+        public static KeyCode SwitchToControllerInput => KeyCode.C;
         public static KeyCode SwitchToMouseInput => KeyCode.M;
         public static KeyCode SwitchToUIInput => KeyCode.U;
         public static KeyCode PlayerInvulnerable => KeyCode.I;

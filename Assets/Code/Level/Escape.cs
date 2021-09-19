@@ -7,13 +7,13 @@ namespace Code.Level
 {
     public class Escape : Collectable
     {
-        private ISwitchable[] _switchVfxProperties;
-        
-        private void Awake()
-        { 
-            _switchVfxProperties = GetComponentsInChildren<ISwitchable>();
-        }
+        private ISwitchable[] _switchVfxProperties = null;
 
+        private ISwitchable[] SwitchVfxProperties
+        {
+            get { return _switchVfxProperties ??= GetComponentsInChildren<ISwitchable>(); }
+        }
+        
         public override void LevelSetup()
         {
             base.LevelSetup();
@@ -31,10 +31,15 @@ namespace Code.Level
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
         }
 
+        public void Reset()
+        {
+            SetSwitchVfxPropertiesOff();
+        }
+
         [ContextMenu(nameof(SetSwitchVfxPropertiesOn))]
-        private void SetSwitchVfxPropertiesOn() => _switchVfxProperties.ApplyFunction(p => p.SetOnOff(true));
+        private void SetSwitchVfxPropertiesOn() => SwitchVfxProperties.ApplyFunction(p => p.SetOnOff(true));
         
         [ContextMenu(nameof(SetSwitchVfxPropertiesOff))]
-        private void SetSwitchVfxPropertiesOff() => _switchVfxProperties.ApplyFunction(p => p.SetOnOff(false));
+        private void SetSwitchVfxPropertiesOff() => SwitchVfxProperties.ApplyFunction(p => p.SetOnOff(false));
     }
 }

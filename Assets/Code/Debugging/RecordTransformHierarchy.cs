@@ -1,5 +1,8 @@
-﻿using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor.Animations;
+#endif
 
 namespace Code.Debugging
 {
@@ -7,6 +10,7 @@ namespace Code.Debugging
     {
         [SerializeField] private AnimationClip _clip;
 
+#if UNITY_EDITOR
         private GameObjectRecorder _recorder;
 
         private void Awake()
@@ -28,7 +32,7 @@ namespace Code.Debugging
             }
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (!_clip)
             {
@@ -37,5 +41,6 @@ namespace Code.Debugging
             
             _recorder.TakeSnapshot(Time.deltaTime);
         }
+#endif
     }
 }
