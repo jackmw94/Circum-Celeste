@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace Code.Behaviours
 {
-    public class AnimateImageShaderProperty : AnimateShaderPropertyBase
+    public class AnimateGraphicShaderProperty : AnimateShaderPropertyBase
     {
-        [SerializeField] private Image _image;
+        [SerializeField] private Graphic _image;
         
         protected override Material GetMaterial()
         {

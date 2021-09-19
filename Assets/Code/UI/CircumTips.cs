@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Code.Behaviours;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,10 +8,10 @@ namespace Code.UI
 {
     public class CircumTips : MonoBehaviour
     {
-        [SerializeField] private AnimateImageShaderProperty _showTipsBackground;
-        [SerializeField] private AnimateImageShaderProperty _hideTipsBackground;
+        [SerializeField] private AnimateGraphicShaderProperty _showTipsBackground;
+        [SerializeField] private AnimateGraphicShaderProperty _hideTipsBackground;
         [SerializeField] private CanvasGroup _canvasGroup;
-        [SerializeField] private Image _backgroundImage;
+        [SerializeField] private Graphic _backgroundImage;
         [Space(15)]
         [SerializeField] private Button _backButton;
         
@@ -39,12 +38,17 @@ namespace Code.UI
             {
                 StopCoroutine(_showHideCoroutine);
             }
+
+            if (show)
+            {
+                gameObject.SetActiveSafe(true);
+            }
+
             _showHideCoroutine = StartCoroutine(show ? ShowInternal() : HideInternal());
         }
 
         private IEnumerator ShowInternal()
         {
-            gameObject.SetActiveSafe(true);
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
             _backgroundImage.raycastTarget = true;
@@ -56,10 +60,10 @@ namespace Code.UI
         private IEnumerator HideInternal()
         {
             _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
-            _backgroundImage.raycastTarget = false;
             yield return Utilities.LerpOverTime(_canvasGroup.alpha, 0f, 0.5f, f => _canvasGroup.alpha = f);
             yield return RunAnimateImageShaderProperty(_hideTipsBackground);
+            _backgroundImage.raycastTarget = false;
+            _canvasGroup.blocksRaycasts = false;
             gameObject.SetActiveSafe(false);
         }
 
@@ -68,7 +72,7 @@ namespace Code.UI
             ShowHideTipsScreen(false);
         }
 
-        private static IEnumerator RunAnimateImageShaderProperty(AnimateImageShaderProperty animateImageShaderProperty)
+        private static IEnumerator RunAnimateImageShaderProperty(AnimateGraphicShaderProperty animateImageShaderProperty)
         {
             bool animationCompleted = false;
             animateImageShaderProperty.TriggerAnimation(() =>
