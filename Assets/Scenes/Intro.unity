@@ -170,22 +170,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.61769515
-      value: 0.511359
-      inSlope: -2.325298
-      outSlope: -2.325298
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.0695086
-    - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.2938719
+      outSlope: -3.2938719
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.034090996
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -670,22 +661,13 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.61769515
-      value: 0.511359
-      inSlope: -2.325298
-      outSlope: -2.325298
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.0695086
-    - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.2938719
+      outSlope: -3.2938719
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.034090996
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1265,7 +1247,7 @@ Camera:
   far clip plane: 2000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.322666
+  orthographic size: 11
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2

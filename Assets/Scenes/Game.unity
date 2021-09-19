@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 39833913}
   - component: {fileID: 39833915}
   - component: {fileID: 39833914}
+  - component: {fileID: 39833916}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -351,7 +352,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 5
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &39833915
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -360,6 +361,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39833912}
   m_CullTransparentMesh: 1
+--- !u!114 &39833916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39833912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68f7d540fbfa754e91fff56d9bd2af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blendMode: 0
+  intensity: 1
+  gradientType: 0
+  linearColor1: {r: 0.015686274, g: 0.9087344, b: 1, a: 1}
+  linearColor2: {r: 0, g: 0.5303569, b: 1, a: 1}
+  cornerColorUpperLeft: {r: 1, g: 0, b: 0, a: 1}
+  cornerColorUpperRight: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  cornerColorLowerRight: {r: 0, g: 1, b: 0, a: 1}
+  cornerColorLowerLeft: {r: 0, g: 0, b: 1, a: 1}
+  linearGradient:
+    serializedVersion: 2
+    key0: {r: 0.5137255, g: 0.227451, b: 0.7058824, a: 1}
+    key1: {r: 0.9921569, g: 0.1137255, b: 0.1137255, a: 1}
+    key2: {r: 0.9882353, g: 0.6901961, b: 0.2705882, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  angle: 0
 --- !u!1 &58077302
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +875,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.15
+  m_fontSize: 45
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1085,7 +1137,7 @@ MonoBehaviour:
   _root: {fileID: 944461877}
   _isVerticalScroll: 0
   _selector: {fileID: 317522574}
-  _magnetismFactor: 0.04
+  _magnetismFactor: 6
   _turnOnDuration: 0
   _turnOffDuration: 0
   _unselectedColour: {r: 0, g: 0, b: 0, a: 0}
@@ -1313,8 +1365,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188961536
 MonoBehaviour:
@@ -1409,6 +1461,8 @@ GameObject:
   m_Component:
   - component: {fileID: 191144895}
   - component: {fileID: 191144897}
+  - component: {fileID: 191144896}
+  - component: {fileID: 191144898}
   m_Layer: 5
   m_Name: HowToPlay
   m_TagString: Untagged
@@ -1437,6 +1491,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!223 &191144896
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191144894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
 --- !u!114 &191144897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,6 +1529,23 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1518018021}
   _backgroundImage: {fileID: 1984476862}
   _backButton: {fileID: 495104342}
+--- !u!114 &191144898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191144894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &205681403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,6 +1675,31 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Strike the black holes with your orbiter to keep them from hitting you
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Schlage mit deinem Orbiter auf die schwarzen L\xF6cher, damit sie dich
+      nicht treffen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Frappez les trous noirs avec votre orbiteur pour les emp\xEAcher de vous
+      frapper"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Colpisci i buchi neri con il tuo orbiter per evitare che ti colpiscano
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Ataque os buracos negros com seu orbitador para evitar que eles atinjam
+      voc\xEA"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0423\u0434\u0430\u0440\u044C\u0442\u0435 \u0447\u0435\u0440\u043D\u044B\u0435
+      \u0434\u044B\u0440\u044B \u0441\u0432\u043E\u0438\u043C \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u043C
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442\u043E\u043C, \u0447\u0442\u043E\u0431\u044B
+      \u043E\u043D\u0438 \u043D\u0435 \u0443\u0434\u0430\u0440\u0438\u043B\u0438
+      \u0432\u0430\u0441"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Golpea los agujeros negros con tu orbitador para evitar que te golpeen
     Object: {fileID: 0}
 --- !u!1 &221879278
 GameObject:
@@ -2318,8 +2435,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270372752
 MonoBehaviour:
@@ -2472,7 +2589,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280213175}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 0.97
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -2561,7 +2678,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.5
+  m_fontSize: 44.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2760,7 +2877,7 @@ MonoBehaviour:
   _root: {fileID: 960556810}
   _isVerticalScroll: 0
   _selector: {fileID: 1758179111}
-  _magnetismFactor: 0.04
+  _magnetismFactor: 6
   _turnOnDuration: 0
   _turnOffDuration: 0
   _unselectedColour: {r: 0, g: 0, b: 0, a: 0}
@@ -2880,6 +2997,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Game Tips
+    Object: {fileID: 0}
+  - Language: German
+    Text: Spieltipps
+    Object: {fileID: 0}
+  - Language: French
+    Text: Conseils de jeu
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Suggerimenti di gioco
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Dicas de jogo
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0421\u043E\u0432\u0435\u0442\u044B \u043F\u043E \u0438\u0433\u0440\u0435"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Consejos de juego
     Object: {fileID: 0}
 --- !u!1 &310181750
 GameObject:
@@ -3498,7 +3633,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.35
+  m_fontSize: 28.65
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4105,6 +4240,7 @@ GameObject:
   - component: {fileID: 424822305}
   - component: {fileID: 424822307}
   - component: {fileID: 424822306}
+  - component: {fileID: 424822308}
   m_Layer: 5
   m_Name: OkayButtonLabel
   m_TagString: Untagged
@@ -4160,8 +4296,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4186,7 +4322,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4228,6 +4364,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424822304}
   m_CullTransparentMesh: 1
+--- !u!114 &424822308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424822304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Ok
+  FallbackText: Ok
 --- !u!1 &429384847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,7 +4422,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: 0
-  entries: []
+  entries:
+  - Language: English
+    Text: Show How to Play
+    Object: {fileID: 0}
+  - Language: German
+    Text: Spielanleitung anzeigen
+    Object: {fileID: 0}
+  - Language: French
+    Text: Montrer comment jouer
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Mostra come si gioca
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Mostre como jogar
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C, \u043A\u0430\u043A \u0438\u0433\u0440\u0430\u0442\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Mostrar c\xF3mo jugar"
+    Object: {fileID: 0}
 --- !u!1 &461953453
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,8 +4837,8 @@ MonoBehaviour:
   blendMode: 0
   intensity: 1
   gradientType: 0
-  linearColor1: {r: 0, g: 1, b: 0.74177074, a: 1}
-  linearColor2: {r: 0, g: 0.6132076, b: 0.29480588, a: 1}
+  linearColor1: {r: 0.8301887, g: 0, b: 0.7563009, a: 1}
+  linearColor2: {r: 0.34653568, g: 0, b: 1, a: 1}
   cornerColorUpperLeft: {r: 1, g: 0, b: 0, a: 1}
   cornerColorUpperRight: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   cornerColorLowerRight: {r: 0, g: 1, b: 0, a: 1}
@@ -4800,6 +4971,34 @@ MonoBehaviour:
   - Language: English
     Text: Choose a direction for the orbit, if you change direction you will collide
       with your orbiter
+    Object: {fileID: 0}
+  - Language: German
+    Text: "W\xE4hlen Sie eine Richtung f\xFCr die Umlaufbahn, wenn Sie die Richtung
+      \xE4ndern, kollidieren Sie mit Ihrem Orbiter"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Choisissez une direction pour l'orbite, si vous changez de direction, vous
+      entrerez en collision avec votre orbiteur
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Scegli una direzione per l'orbita, se cambi direzione ti scontrerai con
+      il tuo orbiter
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Escolha uma dire\xE7\xE3o para a \xF3rbita, se voc\xEA mudar de dire\xE7\xE3o
+      voc\xEA ir\xE1 colidir com seu orbitador"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435
+      \u0434\u043B\u044F \u043E\u0440\u0431\u0438\u0442\u044B, \u0435\u0441\u043B\u0438
+      \u0432\u044B \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u0435 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435,
+      \u0432\u044B \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C
+      \u0441\u043E \u0441\u0432\u043E\u0438\u043C \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u043C
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442\u043E\u043C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Elija una direcci\xF3n para la \xF3rbita, si cambia de direcci\xF3n, chocar\xE1
+      con su orbitador"
     Object: {fileID: 0}
 --- !u!1 &509947771
 GameObject:
@@ -5125,22 +5324,22 @@ MonoBehaviour:
     Text: Show Tips
     Object: {fileID: 0}
   - Language: German
-    Text: Show Tips
+    Text: Tipps anzeigen
     Object: {fileID: 0}
   - Language: French
-    Text: Show Tips
+    Text: Montre des trucs
     Object: {fileID: 0}
   - Language: Italian
-    Text: Show Tips
+    Text: Mostra suggerimenti
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Show Tips
+    Text: Mostre as dicas
     Object: {fileID: 0}
   - Language: Russian
-    Text: Show Tips
+    Text: "\u041F\u043E\u043A\u0430\u0437\u0430\u0442\u044C \u0441\u043E\u0432\u0435\u0442\u044B"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: Show Tips
+    Text: Mostrar recomendaciones
     Object: {fileID: 0}
 --- !u!1 &532200088
 GameObject:
@@ -5339,7 +5538,7 @@ RectTransform:
   - {fileID: 763017199}
   - {fileID: 887172367}
   m_Father: {fileID: 863834611}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.7}
   m_AnchorMax: {x: 0.9, y: 0.9}
@@ -5771,7 +5970,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.15
+  m_fontSize: 45
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6140,7 +6339,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
+  m_fontSize: 45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6241,7 +6440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618246596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -7, z: -5}
+  m_LocalPosition: {x: 0, y: -7, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6872,6 +7071,11 @@ Transform:
   - {fileID: 1399257053}
   - {fileID: 1661528448}
   - {fileID: 293694180}
+  - {fileID: 792524527}
+  - {fileID: 867414476}
+  - {fileID: 1274831873}
+  - {fileID: 1620980097}
+  - {fileID: 1964211515}
   m_Father: {fileID: 418685313}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7241,8 +7445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720032012
 MonoBehaviour:
@@ -7425,7 +7629,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.45
+  m_fontSize: 25.65
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7761,7 +7965,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.85
+  m_fontSize: 39.6
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7977,7 +8181,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 30.1
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8407,6 +8611,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788629379}
   m_CullTransparentMesh: 1
+--- !u!1 &792524526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792524527}
+  - component: {fileID: 792524528}
+  m_Layer: 0
+  m_Name: CantUpdateConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792524527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792524526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 40
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792524528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792524526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Game configuration could not be updated!
+    Object: {fileID: 0}
+  - Language: German
+    Text: Spielkonfiguration konnte nicht aktualisiert werden!
+    Object: {fileID: 0}
+  - Language: French
+    Text: "La configuration du jeu n'a pas pu \xEAtre mise \xE0 jour\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Impossibile aggiornare la configurazione del gioco!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o foi poss\xEDvel atualizar a configura\xE7\xE3o do jogo!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u043D\u043E\u0432\u0438\u0442\u044C
+      \u043A\u043E\u043D\u0444\u0438\u0433\u0443\u0440\u0430\u0446\u0438\u044E \u0438\u0433\u0440\u044B!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1No se pudo actualizar la configuraci\xF3n del juego!"
+    Object: {fileID: 0}
 --- !u!1 &793559716
 GameObject:
   m_ObjectHideFlags: 0
@@ -9096,8 +9367,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834524845
 MonoBehaviour:
@@ -9176,6 +9447,7 @@ GameObject:
   - component: {fileID: 836249841}
   - component: {fileID: 836249843}
   - component: {fileID: 836249842}
+  - component: {fileID: 836249844}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -9299,6 +9571,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836249840}
   m_CullTransparentMesh: 1
+--- !u!114 &836249844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836249840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Back to Settings
+  FallbackText: Back to Settings
 --- !u!1 &836695401
 GameObject:
   m_ObjectHideFlags: 0
@@ -9337,8 +9623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836695403
 MonoBehaviour:
@@ -9801,8 +10087,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 542065054}
   - {fileID: 1290896783}
+  - {fileID: 542065054}
   - {fileID: 1821692068}
   - {fileID: 1130099091}
   m_Father: {fileID: 944461877}
@@ -9914,6 +10200,85 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   angle: 0
+--- !u!114 &865792028 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2450340415887570269, guid: 45cf6fca9ef2f38468c169eafcc4ea4f, type: 3}
+  m_PrefabInstance: {fileID: 1566369460}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0d1fd0d3cf459cb133ccc22d681ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &867414475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 867414476}
+  - component: {fileID: 867414477}
+  m_Layer: 0
+  m_Name: CompletedGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &867414476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867414475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 41
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &867414477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867414475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: You've got perfect badges on each level - congratulations!
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Sie haben auf jedem Level perfekte Abzeichen - herzlichen Gl\xFCckwunsch!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Vous avez des badges parfaits \xE0 chaque niveau - f\xE9licitations\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Hai distintivi perfetti in ogni livello - congratulazioni!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Voc\xEA tem emblemas perfeitos em cada n\xEDvel - parab\xE9ns!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043E\u0442\u043B\u0438\u0447\u043D\u044B\u0435
+      \u0437\u043D\u0430\u0447\u043A\u0438 \u043D\u0430 \u043A\u0430\u0436\u0434\u043E\u043C
+      \u0443\u0440\u043E\u0432\u043D\u0435 - \u043F\u043E\u0437\u0434\u0440\u0430\u0432\u043B\u044F\u0435\u043C!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Tienes insignias perfectas en cada nivel, \xA1enhorabuena!"
+    Object: {fileID: 0}
 --- !u!1 &886780510
 GameObject:
   m_ObjectHideFlags: 0
@@ -10401,8 +10766,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1760, y: 0}
-  m_SizeDelta: {x: 1800, y: 0}
+  m_AnchoredPosition: {x: -0.0000072576704, y: 0}
+  m_SizeDelta: {x: 1324.8, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &944461878
 MonoBehaviour:
@@ -10467,27 +10832,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 950155855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: d8b69decff2704940b5359e1b2213dae, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_Texture: {fileID: 2800000, guid: 02ef4f657f2e0e345a333d55b7fbda56, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!222 &950155858
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10495,7 +10857,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950155855}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!1 &952412697
 GameObject:
   m_ObjectHideFlags: 0
@@ -10527,7 +10889,8 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.475, y: 1.2, z: 0.475}
-  m_Children: []
+  m_Children:
+  - {fileID: 1973385468}
   m_Father: {fileID: 2009567059}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -10543,8 +10906,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d786c966ba44e8aba7bde9dfb899da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particlesScaleTransform: {fileID: 1973385468}
   _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
+  _scaleProperty: Scale
   _offset: {x: 0, y: 0, z: -1}
 --- !u!54 &952412700
 Rigidbody:
@@ -10569,7 +10934,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952412697}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21f5806466263e047a3e056afae029f6, type: 3}
   m_Name: 
@@ -10703,8 +11068,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1800.0001, y: 0}
-  m_SizeDelta: {x: 1800, y: 0}
+  m_AnchoredPosition: {x: 0.0004406309, y: 0}
+  m_SizeDelta: {x: 1987.2, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &960556811
 MonoBehaviour:
@@ -10852,8 +11217,8 @@ MonoBehaviour:
   blendMode: 0
   intensity: 1
   gradientType: 0
-  linearColor1: {r: 0.015686274, g: 0.8874183, b: 1, a: 1}
-  linearColor2: {r: 0.08109646, g: 0.23570605, b: 0.6415094, a: 1}
+  linearColor1: {r: 0, g: 1, b: 0.88685036, a: 1}
+  linearColor2: {r: 0, g: 0.6132076, b: 0.29480588, a: 1}
   cornerColorUpperLeft: {r: 1, g: 0, b: 0, a: 1}
   cornerColorUpperRight: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   cornerColorLowerRight: {r: 0, g: 1, b: 0, a: 1}
@@ -11042,8 +11407,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052814652
 MonoBehaviour:
@@ -11818,6 +12183,30 @@ MonoBehaviour:
   - Language: English
     Text: Swipe down on the level screen to see the time to beat
     Object: {fileID: 0}
+  - Language: German
+    Text: Wische auf dem Level-Bildschirm nach unten, um die zu schlagende Zeit zu
+      sehen
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Faites glisser vers le bas sur l'\xE9cran de niveau pour voir le temps
+      \xE0 battre"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Scorri verso il basso sullo schermo del livello per vedere il tempo da
+      battere
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Deslize para baixo na tela de n\xEDvel para ver o tempo para vencer"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u0440\u043E\u0432\u0435\u0434\u0438\u0442\u0435 \u0432\u043D\u0438\u0437
+      \u043F\u043E \u044D\u043A\u0440\u0430\u043D\u0443 \u0443\u0440\u043E\u0432\u043D\u044F,
+      \u0447\u0442\u043E\u0431\u044B \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0432\u0440\u0435\u043C\u044F,
+      \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u0431\u0438\u0442\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Desliza hacia abajo en la pantalla de nivel para ver el tiempo de batir
+    Object: {fileID: 0}
 --- !u!1 &1176395320
 GameObject:
   m_ObjectHideFlags: 0
@@ -12105,8 +12494,8 @@ RectTransform:
   m_Father: {fileID: 406297812}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.35, y: 0.1}
-  m_AnchorMax: {x: 0.65, y: 0.425}
+  m_AnchorMin: {x: 0.725, y: 0.35}
+  m_AnchorMax: {x: 0.95, y: 0.65}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12135,7 +12524,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -12173,6 +12562,7 @@ GameObject:
   - component: {fileID: 1209555489}
   - component: {fileID: 1209555491}
   - component: {fileID: 1209555490}
+  - component: {fileID: 1209555492}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -12296,6 +12686,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209555488}
   m_CullTransparentMesh: 1
+--- !u!114 &1209555492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209555488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0d673cf09547a893e311e91529d3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: Back to Settings
+  FallbackText: Back to Settings
 --- !u!1 &1214824172
 GameObject:
   m_ObjectHideFlags: 0
@@ -12416,7 +12820,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215231618}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12512,6 +12916,28 @@ MonoBehaviour:
   - Language: English
     Text: Shatter the stellar entities with your orbiter to open the escape
     Object: {fileID: 0}
+  - Language: German
+    Text: "Zerschmettere die stellaren Wesenheiten mit deinem Orbiter, um die Flucht
+      zu \xF6ffnen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Brisez les entit\xE9s stellaires avec votre orbiteur pour ouvrir l'\xE9vasion"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Distruggi le entit\xE0 stellari con il tuo orbiter per aprire la fuga"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Quebre as entidades estelares com seu orbitador para abrir a fuga
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0420\u0430\u0437\u0431\u0435\u0439\u0442\u0435 \u0437\u0432\u0435\u0437\u0434\u043D\u044B\u0435
+      \u0441\u0443\u0449\u043D\u043E\u0441\u0442\u0438 \u0441\u0432\u043E\u0438\u043C
+      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u043C \u0430\u043F\u043F\u0430\u0440\u0430\u0442\u043E\u043C,
+      \u0447\u0442\u043E\u0431\u044B \u043D\u0430\u0447\u0430\u0442\u044C \u043F\u043E\u0431\u0435\u0433."
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Rompe las entidades estelares con tu orbitador para abrir el escape.
+    Object: {fileID: 0}
 --- !u!1 &1219383387
 GameObject:
   m_ObjectHideFlags: 0
@@ -12559,6 +12985,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Beat the Clock
+    Object: {fileID: 0}
+  - Language: German
+    Text: Wettlauf gegen die Zeit
+    Object: {fileID: 0}
+  - Language: French
+    Text: Battre le temps
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Batti l'orologio
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Vencer o rel\xF3gio"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0411\u0438\u0442\u044C \u0447\u0430\u0441\u044B"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Batir el reloj
     Object: {fileID: 0}
 --- !u!1 &1247021094
 GameObject:
@@ -12903,6 +13347,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270238508}
   m_CullTransparentMesh: 1
+--- !u!1 &1274831872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274831873}
+  - component: {fileID: 1274831874}
+  m_Layer: 0
+  m_Name: SeeHowToPlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274831873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274831872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 42
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1274831874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274831872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Check out the how to play section in the settings
+    Object: {fileID: 0}
+  - Language: German
+    Text: Schau dir den Abschnitt \"Wie man spielt\" in den Einstellungen an
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Consultez la section comment jouer dans les param\xE8tres"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Dai un'occhiata alla sezione come giocare nelle impostazioni
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Confira a se\xE7\xE3o de como jogar nas configura\xE7\xF5es"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0442\u0435\u0441\u044C
+      \u0441 \u0440\u0430\u0437\u0434\u0435\u043B\u043E\u043C, \u043A\u0430\u043A
+      \u0438\u0433\u0440\u0430\u0442\u044C \u0432 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Echa un vistazo a la secci\xF3n de c\xF3mo jugar en la configuraci\xF3n."
+    Object: {fileID: 0}
 --- !u!1 &1287232633
 GameObject:
   m_ObjectHideFlags: 0
@@ -13045,7 +13557,7 @@ RectTransform:
   - {fileID: 1697519069}
   - {fileID: 35006960}
   m_Father: {fileID: 863834611}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.5}
   m_AnchorMax: {x: 0.9, y: 0.7}
@@ -13157,7 +13669,14 @@ MonoBehaviour:
   _canvasGroup: {fileID: 1293267722}
   _okayButton: {fileID: 1203332065}
   _popupMessageText: {fileID: 1456514610}
-  _showHideDuration: 0.25
+  _showHideDuration: 0.33
+  _localisedPopups:
+  - PopupType: 0
+    LocalisationTerm: CantUpdateConfig
+  - PopupType: 1
+    LocalisationTerm: SeeHowToPlay
+  - PopupType: 2
+    LocalisationTerm: CompletedGame
 --- !u!1 &1318674104
 GameObject:
   m_ObjectHideFlags: 0
@@ -13281,6 +13800,25 @@ MonoBehaviour:
   - Language: English
     Text: Complete a level without taking damage
     Object: {fileID: 0}
+  - Language: German
+    Text: "Schlie\xDFe ein Level ab, ohne Schaden zu nehmen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Terminer un niveau sans subir de d\xE9g\xE2ts"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Completa un livello senza subire danni
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Complete um n\xEDvel sem sofrer danos"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u0440\u043E\u0439\u0442\u0438 \u0443\u0440\u043E\u0432\u0435\u043D\u044C,
+      \u043D\u0435 \u043F\u043E\u043B\u0443\u0447\u0438\u0432 \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u0439"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Completa un nivel sin recibir da\xF1o."
+    Object: {fileID: 0}
 --- !u!1 &1321979836
 GameObject:
   m_ObjectHideFlags: 0
@@ -13329,6 +13867,25 @@ MonoBehaviour:
   - Language: English
     Text: Take zero damage and beat the clock
     Object: {fileID: 0}
+  - Language: German
+    Text: Nimm null Schaden und schlage die Uhr
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Ne subissez aucun d\xE9g\xE2t et battez le chrono"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Prendi zero danni e batti il \u200b\u200btempo
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o sofra nenhum dano e ven\xE7a o rel\xF3gio"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u0435 \u043D\u0443\u043B\u0435\u0432\u043E\u0439
+      \u0443\u0440\u043E\u043D \u0438 \u0431\u0435\u0439\u0442\u0435 \u0447\u0430\u0441\u044B"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Recibe cero da\xF1os y gana al reloj"
+    Object: {fileID: 0}
 --- !u!1 &1328723730
 GameObject:
   m_ObjectHideFlags: 0
@@ -13367,8 +13924,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 331.19998, y: 0}
+  m_SizeDelta: {x: 662.39996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328723732
 MonoBehaviour:
@@ -13523,6 +14080,8 @@ GameObject:
   - component: {fileID: 1340580930}
   - component: {fileID: 1340580929}
   - component: {fileID: 1340580928}
+  - component: {fileID: 1340580932}
+  - component: {fileID: 1340580931}
   m_Layer: 5
   m_Name: LeftArrow
   m_TagString: Untagged
@@ -13567,7 +14126,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.5
+      time: 0.00061431667
       value: 0
       inSlope: 0
       outSlope: 0
@@ -13576,7 +14135,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7501874
+      time: 0.5006817
       value: 0.50056225
       inSlope: 3.305599
       outSlope: 3.305599
@@ -13635,6 +14194,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340580926}
   m_CullTransparentMesh: 1
+--- !u!114 &1340580931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340580926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1340580929}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1340580932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340580926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048c4d3994e44d37a933295ece68f7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1340580931}
+  _scrollingItemPicker: {fileID: 293146905}
+  _increaseNormalisedPosition: 0
 --- !u!1 &1348418499
 GameObject:
   m_ObjectHideFlags: 0
@@ -14315,7 +14933,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.15
+  m_fontSize: 41.65
   m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -14377,6 +14995,8 @@ GameObject:
   - component: {fileID: 1393034874}
   - component: {fileID: 1393034873}
   - component: {fileID: 1393034872}
+  - component: {fileID: 1393034876}
+  - component: {fileID: 1393034875}
   m_Layer: 5
   m_Name: RightArrow
   m_TagString: Untagged
@@ -14430,7 +15050,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.24980833
+      time: 0.5003566
       value: 0.50056225
       inSlope: -3.3732612
       outSlope: -3.3732612
@@ -14439,7 +15059,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.07506418
     - serializedVersion: 3
-      time: 0.49924242
+      time: 0.99996364
       value: 0
       inSlope: 0
       outSlope: 0
@@ -14489,6 +15109,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393034870}
   m_CullTransparentMesh: 1
+--- !u!114 &1393034875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393034870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048c4d3994e44d37a933295ece68f7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1393034876}
+  _scrollingItemPicker: {fileID: 293146905}
+  _increaseNormalisedPosition: 1
+--- !u!114 &1393034876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393034870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1393034873}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1394359309
 GameObject:
   m_ObjectHideFlags: 0
@@ -14568,6 +15247,26 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Tap the level screen 3 times to restart quickly
+    Object: {fileID: 0}
+  - Language: German
+    Text: Tippen Sie dreimal auf den Level-Bildschirm, um schnell neu zu starten
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Appuyez sur l'\xE9cran de niveau 3 fois pour red\xE9marrer rapidement"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Tocca 3 volte la schermata del livello per riavviare rapidamente
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Toque na tela de n\xEDvel 3 vezes para reiniciar rapidamente"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041A\u043E\u0441\u043D\u0438\u0442\u0435\u0441\u044C \u044D\u043A\u0440\u0430\u043D\u0430
+      \u0443\u0440\u043E\u0432\u043D\u044F 3 \u0440\u0430\u0437\u0430, \u0447\u0442\u043E\u0431\u044B
+      \u0431\u044B\u0441\u0442\u0440\u043E \u043F\u0435\u0440\u0435\u0437\u0430\u043F\u0443\u0441\u0442\u0438\u0442\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Toque la pantalla de nivel 3 veces para reiniciar r\xE1pidamente"
     Object: {fileID: 0}
 --- !u!1 &1406340638
 GameObject:
@@ -14760,7 +15459,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.65
+  m_fontSize: 28.55
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15255,8 +15954,8 @@ RectTransform:
   m_Father: {fileID: 406297812}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.125, y: 0.5}
-  m_AnchorMax: {x: 0.875, y: 0.9}
+  m_AnchorMin: {x: 0.075, y: 0.2}
+  m_AnchorMax: {x: 0.65, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15282,8 +15981,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15307,12 +16006,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 45
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 15
+  m_fontSizeMax: 45
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -15404,6 +16103,26 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Get to the escape to finish the level
+    Object: {fileID: 0}
+  - Language: German
+    Text: Gehe zur Flucht, um das Level zu beenden
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Acc\xE9dez \xE0 l'\xE9vasion pour terminer le niveau"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Raggiungi la fuga per finire il livello
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "V\xE1 para a fuga para terminar o n\xEDvel"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0414\u043E\u0431\u0435\u0440\u0438\u0442\u0435\u0441\u044C \u0434\u043E
+      \u043F\u043E\u0431\u0435\u0433\u0430, \u0447\u0442\u043E\u0431\u044B \u0437\u0430\u043A\u043E\u043D\u0447\u0438\u0442\u044C
+      \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Llega al escape para terminar el nivel.
     Object: {fileID: 0}
 --- !u!1 &1479799253
 GameObject:
@@ -16306,6 +17025,31 @@ MonoBehaviour:
   - Language: English
     Text: Use elliptical orbits to get your orbiter into tight positions
     Object: {fileID: 0}
+  - Language: German
+    Text: Verwenden Sie elliptische Umlaufbahnen, um Ihren Orbiter in enge Positionen
+      zu bringen
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Utilisez des orbites elliptiques pour placer votre orbiteur dans des positions
+      \xE9troites"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Usa orbite ellittiche per portare il tuo orbiter in posizioni strette
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Use \xF3rbitas el\xEDpticas para colocar seu orbitador em posi\xE7\xF5es
+      apertadas"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u044D\u043B\u043B\u0438\u043F\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435
+      \u043E\u0440\u0431\u0438\u0442\u044B, \u0447\u0442\u043E\u0431\u044B \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C
+      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043F\u043F\u0430\u0440\u0430\u0442
+      \u0432 \u0443\u0437\u043A\u043E\u0435 \u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435."
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Utilice \xF3rbitas el\xEDpticas para colocar su orbitador en posiciones
+      estrechas"
+    Object: {fileID: 0}
 --- !u!1 &1587577100
 GameObject:
   m_ObjectHideFlags: 0
@@ -16391,7 +17135,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.15
+  m_fontSize: 28.4
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16584,6 +17328,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593725202}
   m_CullTransparentMesh: 1
+--- !u!1 &1620980096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1620980097}
+  - component: {fileID: 1620980098}
+  m_Layer: 0
+  m_Name: Back to Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1620980097
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620980096}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1620980098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620980096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Back to Settings
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Zur\xFCck zu den Einstellungen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Retour aux param\xE8tres"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Torna a Impostazioni
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Voltar para Configura\xE7\xF5es"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u043A \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u043C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Volver a la configuraci\xF3n"
+    Object: {fileID: 0}
 --- !u!1 &1632981334
 GameObject:
   m_ObjectHideFlags: 0
@@ -16669,7 +17479,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.85
+  m_fontSize: 40.8
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16833,7 +17643,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 31.5
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17200,6 +18010,24 @@ MonoBehaviour:
   - Language: English
     Text: How to Play
     Object: {fileID: 0}
+  - Language: German
+    Text: Spielanleitung
+    Object: {fileID: 0}
+  - Language: French
+    Text: Comment jouer
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Come giocare
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Como jogar
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041A\u0430\u043A \u0438\u0433\u0440\u0430\u0442\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "C\xF3mo jugar"
+    Object: {fileID: 0}
 --- !u!1 &1672292880
 GameObject:
   m_ObjectHideFlags: 0
@@ -17209,6 +18037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1672292881}
+  - component: {fileID: 1672292882}
   m_Layer: 0
   m_Name: Moving
   m_TagString: Untagged
@@ -17232,6 +18061,21 @@ Transform:
   m_Father: {fileID: 833557112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1672292882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672292880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48f78afc85d74717bb742bb8e53fd5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _escape: {fileID: 865792028}
+  _animator: {fileID: 2009567060}
+  _shrinkObjects: {fileID: 2009567061}
 --- !u!1 &1681444300
 GameObject:
   m_ObjectHideFlags: 0
@@ -17478,7 +18322,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.85
+  m_fontSize: 28.55
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17629,6 +18473,8 @@ GameObject:
   - component: {fileID: 1701362143}
   - component: {fileID: 1701362142}
   - component: {fileID: 1701362144}
+  - component: {fileID: 1701362146}
+  - component: {fileID: 1701362145}
   m_Layer: 5
   m_Name: LeftArrow
   m_TagString: Untagged
@@ -17711,7 +18557,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.49924242
+      time: 0.00068872795
       value: 0
       inSlope: 0
       outSlope: 0
@@ -17720,7 +18566,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7498089
+      time: 0.50071895
       value: 0.50056225
       inSlope: 3.305599
       outSlope: 3.305599
@@ -17741,6 +18587,65 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _isVertical: 0
+--- !u!114 &1701362145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701362140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1701362142}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1701362146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701362140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048c4d3994e44d37a933295ece68f7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1701362145}
+  _scrollingItemPicker: {fileID: 162370323}
+  _increaseNormalisedPosition: 0
 --- !u!1 &1703010710
 GameObject:
   m_ObjectHideFlags: 0
@@ -18021,6 +18926,28 @@ MonoBehaviour:
   - Language: English
     Text: Guide your orbiter around the pulsars to avoid touching them
     Object: {fileID: 0}
+  - Language: German
+    Text: "F\xFChre deinen Orbiter um die Pulsare herum, um sie nicht zu ber\xFChren"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Guidez votre orbiteur autour des pulsars pour \xE9viter de les toucher"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Guida il tuo orbiter intorno alle pulsar per evitare di toccarle
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Guie seu orbitador ao redor dos pulsares para evitar toc\xE1-los"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u0441\u0432\u043E\u0439
+      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043F\u043F\u0430\u0440\u0430\u0442
+      \u0432\u043E\u043A\u0440\u0443\u0433 \u043F\u0443\u043B\u044C\u0441\u0430\u0440\u043E\u0432,
+      \u0447\u0442\u043E\u0431\u044B \u043D\u0435 \u043A\u0430\u0441\u0430\u0442\u044C\u0441\u044F
+      \u0438\u0445."
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Gu\xEDa a tu orbitador alrededor de los p\xFAlsares para evitar tocarlos."
+    Object: {fileID: 0}
 --- !u!224 &1747493014 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4913645894047375190, guid: fe2cf084c45f5c64c9d364e19f460155, type: 3}
@@ -18161,6 +19088,35 @@ MonoBehaviour:
     Text: Use small fast orbits to navigate tight spaces or large swooping orbits
       to cover lots of ground
     Object: {fileID: 0}
+  - Language: German
+    Text: "Verwenden Sie kleine schnelle Umlaufbahnen, um enge R\xE4ume zu navigieren,
+      oder gro\xDFe geschwungene Umlaufbahnen, um viel Boden abzudecken"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Utilisez de petites orbites rapides pour naviguer dans des espaces restreints
+      ou de grandes orbites plongeantes pour couvrir beaucoup de terrain
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Usa piccole orbite veloci per navigare in spazi ristretti o grandi orbite
+      in picchiata per coprire molto terreno
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Use pequenas \xF3rbitas r\xE1pidas para navegar por espa\xE7os apertados
+      ou grandes \xF3rbitas para cobrir muito terreno"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435 \u043D\u0435\u0431\u043E\u043B\u044C\u0448\u0438\u0435
+      \u0431\u044B\u0441\u0442\u0440\u044B\u0435 \u043E\u0440\u0431\u0438\u0442\u044B
+      \u0434\u043B\u044F \u043D\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u0438 \u0432
+      \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u043C \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0435
+      \u0438\u043B\u0438 \u0431\u043E\u043B\u044C\u0448\u0438\u0435 \u043F\u0430\u0440\u044F\u0449\u0438\u0435
+      \u043E\u0440\u0431\u0438\u0442\u044B, \u0447\u0442\u043E\u0431\u044B \u043F\u043E\u043A\u0440\u044B\u0442\u044C
+      \u0431\u043E\u043B\u044C\u0448\u0443\u044E \u0442\u0435\u0440\u0440\u0438\u0442\u043E\u0440\u0438\u044E."
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Utilice peque\xF1as \xF3rbitas r\xE1pidas para navegar en espacios reducidos
+      o grandes \xF3rbitas en picada para cubrir una gran cantidad de terreno"
+    Object: {fileID: 0}
 --- !u!1 &1758179110
 GameObject:
   m_ObjectHideFlags: 0
@@ -18208,6 +19164,8 @@ GameObject:
   - component: {fileID: 1799713183}
   - component: {fileID: 1799713182}
   - component: {fileID: 1799713184}
+  - component: {fileID: 1799713186}
+  - component: {fileID: 1799713185}
   m_Layer: 5
   m_Name: RightArrow
   m_TagString: Untagged
@@ -18299,7 +19257,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.24980833
+      time: 0.50024796
       value: 0.50056225
       inSlope: -3.3732612
       outSlope: -3.3732612
@@ -18308,7 +19266,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.07506418
     - serializedVersion: 3
-      time: 0.49924242
+      time: 0.99974656
       value: 0
       inSlope: 0
       outSlope: 0
@@ -18320,6 +19278,65 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _isVertical: 0
+--- !u!114 &1799713185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799713180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048c4d3994e44d37a933295ece68f7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1799713186}
+  _scrollingItemPicker: {fileID: 162370323}
+  _increaseNormalisedPosition: 1
+--- !u!114 &1799713186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799713180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1799713182}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1801811578
 GameObject:
   m_ObjectHideFlags: 0
@@ -18399,6 +19416,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Perfect Level
+    Object: {fileID: 0}
+  - Language: German
+    Text: Perfektes Niveau
+    Object: {fileID: 0}
+  - Language: French
+    Text: Niveau parfait
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Livello perfetto
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xEDvel Perfeito"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0418\u0434\u0435\u0430\u043B\u044C\u043D\u044B\u0439 \u0443\u0440\u043E\u0432\u0435\u043D\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Nivel perfecto
     Object: {fileID: 0}
 --- !u!1 &1821692067
 GameObject:
@@ -18596,6 +19631,29 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Move in circles to keep the orbiter revolving or you will collide
+    Object: {fileID: 0}
+  - Language: German
+    Text: Bewegen Sie sich im Kreis, damit sich der Orbiter dreht oder Sie kollidieren
+    Object: {fileID: 0}
+  - Language: French
+    Text: "D\xE9placez-vous en rond pour que l'orbiteur continue de tourner ou vous
+      entrerez en collision"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Muoviti in cerchio per mantenere la rotazione dell'orbiter o ti scontrerai
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Mova-se em c\xEDrculos para manter a \xF3rbita girando ou voc\xEA colidir\xE1"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0414\u0432\u0438\u0433\u0430\u0439\u0442\u0435\u0441\u044C \u043A\u0440\u0443\u0433\u0430\u043C\u0438,
+      \u0447\u0442\u043E\u0431\u044B \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u043B
+      \u0432\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F, \u0438\u043D\u0430\u0447\u0435
+      \u0432\u044B \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Mu\xE9vete en c\xEDrculos para mantener el orbitador girando o chocar\xE1s"
     Object: {fileID: 0}
 --- !u!1 &1869429915
 GameObject:
@@ -18811,8 +19869,8 @@ MonoBehaviour:
   blendMode: 0
   intensity: 1
   gradientType: 0
-  linearColor1: {r: 1, g: 0.73099166, b: 0, a: 1}
-  linearColor2: {r: 1, g: 0.29653338, b: 0, a: 1}
+  linearColor1: {r: 0.015686274, g: 0.8874183, b: 1, a: 1}
+  linearColor2: {r: 0.044784598, g: 0.20752771, b: 0.6415094, a: 1}
   cornerColorUpperLeft: {r: 1, g: 0, b: 0, a: 1}
   cornerColorUpperRight: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   cornerColorLowerRight: {r: 0, g: 1, b: 0, a: 1}
@@ -19095,7 +20153,7 @@ Camera:
   far clip plane: 1000
   field of view: 136.1
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 12.314009
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -19259,6 +20317,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1916806500}
   - component: {fileID: 1916806501}
+  - component: {fileID: 1916806502}
+  - component: {fileID: 1916806503}
   m_Layer: 5
   m_Name: Tips
   m_TagString: Untagged
@@ -19304,6 +20364,44 @@ MonoBehaviour:
   _canvasGroup: {fileID: 897627137}
   _backgroundImage: {fileID: 950155857}
   _backButton: {fileID: 1637916573}
+--- !u!223 &1916806502
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916806499}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
+--- !u!114 &1916806503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916806499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1919908395
 GameObject:
   m_ObjectHideFlags: 0
@@ -19587,6 +20685,72 @@ MonoBehaviour:
   - Language: Spanish
     Text: "atr\xE1s"
     Object: {fileID: 0}
+--- !u!1 &1964211514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964211515}
+  - component: {fileID: 1964211516}
+  m_Layer: 0
+  m_Name: Ok
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1964211515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964211514}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1964211516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964211514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: German
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: French
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: Ok
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Ok
+    Object: {fileID: 0}
 --- !u!1 &1964672066
 GameObject:
   m_ObjectHideFlags: 0
@@ -19734,7 +20898,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.15
+  m_fontSize: 45
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -19784,6 +20948,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967911061}
   m_CullTransparentMesh: 1
+--- !u!1 &1973385467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1973385468}
+  m_Layer: 7
+  m_Name: OrbiterSize
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1973385468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973385467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7692308, y: 0.7692308, z: 0.7692308}
+  m_Children: []
+  m_Father: {fileID: 952412698}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1975400612
 GameObject:
   m_ObjectHideFlags: 0
@@ -19870,6 +21064,24 @@ MonoBehaviour:
   - Language: English
     Text: Zero Damage
     Object: {fileID: 0}
+  - Language: German
+    Text: Null Schaden
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Z\xE9ro D\xE9g\xE2t"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Danno zero
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Zero Danos
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0443\u043B\u0435\u0432\u043E\u0439 \u0443\u0440\u043E\u043D"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Da\xF1o cero"
+    Object: {fileID: 0}
 --- !u!1 &1979108795
 GameObject:
   m_ObjectHideFlags: 0
@@ -19926,8 +21138,8 @@ MonoBehaviour:
   blendMode: 0
   intensity: 1
   gradientType: 0
-  linearColor1: {r: 0.8301887, g: 0, b: 0.7563009, a: 1}
-  linearColor2: {r: 0.6313858, g: 0, b: 1, a: 1}
+  linearColor1: {r: 1, g: 0.42762125, b: 0, a: 1}
+  linearColor2: {r: 1, g: 0, b: 0.4098053, a: 1}
   cornerColorUpperLeft: {r: 1, g: 0, b: 0, a: 1}
   cornerColorUpperRight: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   cornerColorLowerRight: {r: 0, g: 1, b: 0, a: 1}
@@ -20147,7 +21359,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 02ef4f657f2e0e345a333d55b7fbda56, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20241,6 +21453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2009567059}
   - component: {fileID: 2009567060}
+  - component: {fileID: 2009567061}
   m_Layer: 0
   m_Name: ExampleMovingPlayerOrbiter
   m_TagString: Untagged
@@ -20283,6 +21496,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2009567061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009567058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e92b98f9004defa2886c17cac98440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _duration: 0.5
+  _transforms:
+  - {fileID: 1973385468}
+  - {fileID: 1566369461}
 --- !u!1 &2024537502
 GameObject:
   m_ObjectHideFlags: 0
@@ -20572,9 +21801,9 @@ Canvas:
   m_GameObject: {fileID: 2032907701}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_RenderMode: 1
+  m_Camera: {fileID: 1887249662}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -21006,7 +22235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.1}
   m_AnchorMax: {x: 0.9, y: 0.9}
-  m_AnchoredPosition: {x: 0.0000038146973, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.0000038146973, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079724657
@@ -21171,22 +22400,23 @@ MonoBehaviour:
     Text: Your stats have been reset
     Object: {fileID: 0}
   - Language: German
-    Text: "Statistik zur\xFCcksetzen"
+    Text: "Deine Statistiken wurden zur\xFCckgesetzt"
     Object: {fileID: 0}
   - Language: French
-    Text: "R\xE9initialisation des statistiques"
+    Text: "Vos statistiques ont \xE9t\xE9 r\xE9initialis\xE9es"
     Object: {fileID: 0}
   - Language: Italian
-    Text: Ripristino delle statistiche
+    Text: Le tue statistiche sono state ripristinate
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Stats Reset
+    Text: "Suas estat\xEDsticas foram redefinidas"
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0421\u0431\u0440\u043E\u0441 \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0438"
+    Text: "\u0412\u0430\u0448\u0430 \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430
+      \u0431\u044B\u043B\u0430 \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u0430"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Restablecimiento de estad\xEDsticas"
+    Text: "Tus estad\xEDsticas se han restablecido"
     Object: {fileID: 0}
 --- !u!1 &2082842960
 GameObject:
@@ -21785,7 +23015,7 @@ MonoBehaviour:
   _hazardPrefab: {fileID: 145789428869962669, guid: 9eb7ab747d933c145b9b5d535ccea8d5, type: 3}
   _cellsRoot: {fileID: 1882281939}
   _rotatingOrbiter: {fileID: 846722361}
-  _movingOrbiter: {fileID: 1672292880}
+  _movingOrbiter: {fileID: 1672292882}
   _wallZOffset: 0.5
   _levelSizeSpeedAdjustmentFactor: 0.5
 --- !u!4 &2143567223
@@ -22089,8 +23319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d786c966ba44e8aba7bde9dfb899da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particlesScaleTransform: {fileID: 9172051211579343217}
   _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
+  _scaleProperty: Scale
   _offset: {x: 0, y: 0, z: -1}
 --- !u!114 &9172051211579343119
 MonoBehaviour:
