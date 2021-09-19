@@ -2,6 +2,7 @@
 using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
+using Code.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -73,8 +74,9 @@ namespace Code.Flow
             CircumDebug.Assert(currentBadgeData.IsPerfect || !newBadgeData.IsPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
             CircumDebug.Assert(currentBadgeData.HasGoldTime || !newBadgeData.HasGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
             CircumDebug.Assert(currentBadgeData.HasPerfectGoldTime || !newBadgeData.HasPerfectGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-            
-            _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime);
+
+            _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime, CheckGameComplete);
+
             if (currentBadgeData.HasPerfectGoldTime)
             {
                 _perfectIcon.ShowHideBadge(false, true);
@@ -88,6 +90,17 @@ namespace Code.Flow
             
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;
+        }
+
+        private void CheckGameComplete()
+        {
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            if (!persistentDataManager.PlayerFirsts.CompletedGame && persistentDataManager.HasCompletedGame())
+            {
+                Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CompletedGame);
+                persistentDataManager.PlayerFirsts.CompletedGame = true;
+                PlayerFirsts.Save(persistentDataManager.PlayerFirsts);
+            }
         }
 
         private void SetTagString(LevelLayout levelLayout)

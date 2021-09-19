@@ -18,6 +18,7 @@ namespace Code.Level
         [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
         [SerializeField] private bool _orbiterEnabled = true;
         [SerializeField] private bool _powerEnabled = false;
+        [SerializeField] private bool _requiredForGameCompletion = true;
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private bool _exampleRotatingOrbiterEnabled = false;
         [SerializeField] private bool _exampleMovingOrbiterEnabled = false;
@@ -32,6 +33,7 @@ namespace Code.Level
         public string TagLineLocalisationTerm => _tagLineLocalisationTerm;
         public bool OrbiterEnabled => _orbiterEnabled;
         public bool PowerEnabled => _powerEnabled;
+        public bool RequiredForGameCompletion => _requiredForGameCompletion;
         public IntroduceElement IntroduceElement => _introduceElement;
         public bool ExampleRotatingOrbiterEnabled => _exampleRotatingOrbiterEnabled;
         public bool ExampleMovingOrbiterEnabled => _exampleMovingOrbiterEnabled;

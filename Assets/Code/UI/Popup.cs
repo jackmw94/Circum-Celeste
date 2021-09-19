@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Code.Debugging;
+using Lean.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,21 +13,40 @@ namespace Code.UI
 {
     public class Popup : SingletonMonoBehaviour<Popup>
     {
+        public enum LocalisedPopupType
+        {
+            CantRefreshConfig,
+            SeeHowToPlay,
+            CompletedGame
+        }
+
+        [Serializable]
+        private struct LocalisedPopup
+        {
+            public LocalisedPopupType PopupType;
+            [LeanTranslationName] public string LocalisationTerm;
+        }
+        
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Button _okayButton;
         [SerializeField] private TextMeshProUGUI _popupMessageText;
         [Space(15)]
         [SerializeField] private float _showHideDuration = 0.25f;
+        [Space(15)]
+        [SerializeField] private LocalisedPopup[] _localisedPopups;
 
-        private readonly Queue<string> _popupQueue = new Queue<string>();
+        private readonly Dictionary<LocalisedPopupType, string> _popupTypeToLocalisationTerm = new Dictionary<LocalisedPopupType, string>();
+        private readonly Queue<LocalisedPopupType> _popupQueue = new Queue<LocalisedPopupType>();
 
         private bool _isShowingPopup = false;
         private Coroutine _showHidePopupCoroutine;
         
         private void Awake()
         {
-            _okayButton.onClick.AddListener(OkayButtonListener);
+            RegenerateLocalisationTermsDictionary();
             
+            _okayButton.onClick.AddListener(OkayButtonListener);
+
             ShowHidePopupUI(false, true);
         }
 
@@ -33,15 +55,20 @@ namespace Code.UI
             _okayButton.onClick.RemoveListener(OkayButtonListener);
         }
 
-        [ContextMenu(nameof(DebugEnqueueMessage))]
-        public void DebugEnqueueMessage()
+        [ContextMenu(nameof(RegenerateLocalisationTermsDictionary))]
+        private void RegenerateLocalisationTermsDictionary()
         {
-            EnqueueMessage($"Hello {Random.Range(0, 100)}");
+            _popupTypeToLocalisationTerm.Clear();
+            foreach (LocalisedPopup localisedPopup in _localisedPopups)
+            {
+                CircumDebug.Assert(!_popupTypeToLocalisationTerm.ContainsKey(localisedPopup.PopupType), $"Duplicate popup settings for popup type {localisedPopup.PopupType}");
+                _popupTypeToLocalisationTerm.Add(localisedPopup.PopupType, localisedPopup.LocalisationTerm);
+            }
         }
-
-        public void EnqueueMessage(string message)
+        
+        public void EnqueueMessage(LocalisedPopupType popup)
         {
-            _popupQueue.Enqueue(message);
+            _popupQueue.Enqueue(popup);
         }
 
         private void OkayButtonListener()
@@ -102,8 +129,10 @@ namespace Code.UI
             _canvasGroup.alpha = amount;
         }
 
-        private void SetPopupMessage(string message)
+        private void SetPopupMessage(LocalisedPopupType popupType)
         {
+            string localisationTerm = _popupTypeToLocalisationTerm[popupType];
+            string message = LeanLocalization.GetTranslationText(localisationTerm);
             _popupMessageText.text = message;
         }
     }

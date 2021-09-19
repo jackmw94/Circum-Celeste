@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ namespace Code.Flow
         private Coroutine _showHideCoroutine = null;
         private int _shaderPropertyId;
         private int _shaderFakeMaskPropertyId;
+        private Action _onCompleteCallback = null;
 
         [Conditional("UNITY_EDITOR")]
         private void OnValidate()
@@ -52,8 +54,10 @@ namespace Code.Flow
             _image.material.SetVector(_fakeMaskPropertyName, fakeMaskBounds);
         }
 
-        public void ShowHideBadge(bool show, bool instant)
+        public void ShowHideBadge(bool show, bool instant, Action onCompleteCallback = null)
         {
+            _onCompleteCallback = onCompleteCallback;
+            
             if (_showHideCoroutine != null)
             {
                 StopCoroutine(_showHideCoroutine);
@@ -77,6 +81,8 @@ namespace Code.Flow
             {
                 _image.material.SetFloat(_shaderPropertyId, f);
             });
+            
+            _onCompleteCallback?.Invoke();
         }
     }
 }

@@ -15,11 +15,13 @@ namespace Code.Level.Player
 
         private bool _doNotLoadOrSave;
         private CircumOptions _circumOptions;
+        private PlayerFirsts _playerFirsts;
         private PlayerStats _playerStats;
         private Dictionary<string, LevelStats> _levelStats = new Dictionary<string, LevelStats>();
 
         public bool DoNotLoadOrSave => _doNotLoadOrSave;
         public PlayerStats PlayerStats => _playerStats;
+        public PlayerFirsts PlayerFirsts => _playerFirsts;
         public CircumOptions Options => _circumOptions;
 
         private void Awake()
@@ -137,6 +139,7 @@ namespace Code.Level.Player
             {
                 _playerStats = PlayerStats.CreateEmptyPlayerStats();
                 _circumOptions = new CircumOptions();
+                _playerFirsts = new PlayerFirsts();
                 return;
             }
             
@@ -148,7 +151,7 @@ namespace Code.Level.Player
                     _levelStats.Add(levelLayout.name, levelStats);
                 }
             }
-
+            _playerFirsts = PlayerFirsts.Load();
             _circumOptions = CircumOptions.Load();
         }
         
@@ -167,7 +170,7 @@ namespace Code.Level.Player
                 
                 LevelStats.SaveLevelStats(levelName, stats);
             }
-
+            PlayerFirsts.Save(_playerFirsts);
             CircumOptions.Save(_circumOptions);
         }
 
@@ -190,6 +193,9 @@ namespace Code.Level.Player
             
             CircumOptions.ResetOptions();
             _circumOptions = new CircumOptions();
+
+            PlayerFirsts.ResetPlayerFirsts();
+            _playerFirsts = new PlayerFirsts();
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)
@@ -202,6 +208,30 @@ namespace Code.Level.Player
         private bool GetDoNotLoadOrSave()
         {
             return CircumPlayerPrefs.HasKey(NoLoadingSavingPlayerPrefsKey) && CircumPlayerPrefs.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
+        }
+
+        public bool HasCompletedGame()
+        {
+            foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
+            {
+                if (!levelLayout.RequiredForGameCompletion)
+                {
+                    continue;
+                }
+
+                if (!_levelStats.TryGetValue(levelLayout.name, out var levelStats))
+                {
+                    // no level stats for required level
+                    return false;
+                }
+
+                if (!levelStats.HasFastestPerfectLevelRecording)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -23,6 +23,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _introduceElement;
     private SerializedProperty _exampleRotatingOrbiterEnabled;
     private SerializedProperty _exampleMovingOrbiterEnabled;
+    private SerializedProperty _requiredForGameCompletion;
     private SerializedProperty _orbiterEnabled;
     private SerializedProperty _powerEnabled;
     private SerializedProperty _gridSize;
@@ -50,6 +51,7 @@ public class LevelLayoutEditor : Editor
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
         _exampleRotatingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleRotatingOrbiterEnabled));
         _exampleMovingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleMovingOrbiterEnabled));
+        _requiredForGameCompletion = serializedObject.FindProperty(nameof(_requiredForGameCompletion));
         _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
         _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
@@ -76,6 +78,7 @@ public class LevelLayoutEditor : Editor
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_powerEnabled);
+        EditorGUILayout.PropertyField(_requiredForGameCompletion);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_goldTime);
         HandleEscapeCriteriaProperty();

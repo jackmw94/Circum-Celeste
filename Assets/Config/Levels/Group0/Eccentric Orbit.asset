@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Eccentric Orbit
   m_EditorClassIdentifier: 
   _levelId: 4916612949418969038
-  _escapeCriteria: 0
+  _escapeCriteria: 2
   _escapeTimer: 0
   _tagLineLocalisationTerm: 
   _orbiterEnabled: 1
   _powerEnabled: 0
+  _requiredForGameCompletion: 0
   _introduceElement: 0
   _exampleRotatingOrbiterEnabled: 0
   _exampleMovingOrbiterEnabled: 1

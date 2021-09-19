@@ -50,7 +50,7 @@ namespace Code.Flow
         {
             if (!_remoteConfigReturned)
             {
-                Popup.Instance.EnqueueMessage("Could not update game configuration!");
+                Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CantRefreshConfig);
             }
 
             yield return new WaitUntil(() => _loadedGameScene);

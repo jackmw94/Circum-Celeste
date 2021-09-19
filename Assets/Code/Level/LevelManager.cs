@@ -2,6 +2,7 @@
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Level
@@ -16,7 +17,7 @@ namespace Code.Level
         
         private Coroutine _startLevelOnceMovedCoroutine = null;
         
-        public LevelInstanceBase CurrentLevel { get; private set; }
+        public LevelInstanceBase CurrentLevelInstance { get; private set; }
 
         public void CreateCurrentLevel(LevelRecording replay = null, InterLevelFlow.InterLevelTransition transition = InterLevelFlow.InterLevelTransition.Regular)
         {
@@ -60,12 +61,12 @@ namespace Code.Level
             bool isReplay = replay != null;
             if (isReplay)
             {
-                CurrentLevel = _levelGenerator.GenerateReplay(replay.RecordingData, levelLayout);
+                CurrentLevelInstance = _levelGenerator.GenerateReplay(replay.RecordingData, levelLayout);
             }
             else
             {
                 InputProvider[] inputProviders = _playerContainer.GetPlayerInputProviders();
-                CurrentLevel = _levelGenerator.GenerateLevel(inputProviders, levelLayout);
+                CurrentLevelInstance = _levelGenerator.GenerateLevel(inputProviders, levelLayout);
             }
 
             if (levelLayout.LevelContext.IsFirstLevel)
@@ -87,12 +88,12 @@ namespace Code.Level
             _interLevelFlow.HideInterLevelUI();
             yield return new WaitUntil(() => !_interLevelFlow.IsOverlaid);
             
-            CurrentLevel.LevelReady();
+            CurrentLevelInstance.LevelReady();
             
-            yield return new WaitUntil(() => CurrentLevel.PlayerStartedPlaying);
+            yield return new WaitUntil(() => CurrentLevelInstance.PlayerStartedPlaying);
 
-            CircumDebug.Log($"Level '{CurrentLevel.name}' has started");
-            CurrentLevel.StartLevel(OnLevelFinished);
+            CircumDebug.Log($"Level '{CurrentLevelInstance.name}' has started");
+            CurrentLevelInstance.StartLevel(OnLevelFinished);
         }
 
         private void OnLevelFinished(LevelResult levelResult)
@@ -101,24 +102,51 @@ namespace Code.Level
             BadgeData newBadgeData = new BadgeData();
             NewFastestTimeInfo newFastestTimeInfo = null;
             bool advanceLevelPrompt = false;
-            
-            if (!isReplay && levelResult.Success)
-            {
-                LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
-                LevelLayoutContext levelContext = currentLevel.LevelContext;
-                
-                LevelRecording levelRecording = new LevelRecording
-                {
-                    LevelIndex = levelContext.LevelIndex,
-                    RecordingData = levelResult.LevelRecordingData
-                };
-                PersistentDataManager.Instance.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
-                advanceLevelPrompt = true;
-                //_levelProvider.AdvanceLevel();
+            if (!isReplay)
+            {
+                PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+                LevelLayout currentLevel = _levelProvider.GetCurrentLevel();
+                
+                if (levelResult.Success)
+                {
+                    LevelLayoutContext levelContext = currentLevel.LevelContext;
+                
+                    LevelRecording levelRecording = new LevelRecording
+                    {
+                        LevelIndex = levelContext.LevelIndex,
+                        RecordingData = levelResult.LevelRecordingData
+                    };
+                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
+
+                    advanceLevelPrompt = true;
+                }
+                else
+                {
+                    persistentDataManager.SetPlayerDied();
+                    
+                    RunTracker runTracker = persistentDataManager.PlayerStats.RunTracker;
+                    if (currentLevel.LevelContext.IsTutorial && runTracker.Deaths >= PlayerFirsts.TutorialDeathsUntilHowToPlaySuggested)
+                    {
+                        StartCoroutine(TryShowHowToPlayPopUpAfterDelay());
+                    }
+                }
             }
             
             _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, newFastestTimeInfo: newFastestTimeInfo, showAdvanceLevelPrompt: advanceLevelPrompt);
+        }
+
+        private IEnumerator TryShowHowToPlayPopUpAfterDelay()
+        {
+            yield return new WaitForSeconds(1.33f);
+            
+            if (Settings.Instance.SettingsAreShowing)
+            {
+                // they might be finding how to play on their own at this point
+                // if they die again then this will show then
+                yield break;
+            }
+            PersistentDataManager.Instance.PlayerFirsts.ShowHowToPlayPopUpIfFirst();
         }
     }
 }
