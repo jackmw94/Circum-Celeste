@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Core;
 using Code.Debugging;
 using UnityEngine;
 
@@ -7,18 +8,16 @@ namespace Code.Level.Player
     [Serializable]
     public class CircumOptions
     {
-        private const string CircumOptionsPlayerPrefsKey = "Circum_Options";
-
         [field: SerializeField] public bool ShowLevelTimer { get; set; } = false;
 
         public static CircumOptions Load()
         {
-            if (!CircumPlayerPrefs.HasKey(CircumOptionsPlayerPrefsKey))
+            if (!CircumPlayerPrefs.HasKey(PlayerPrefsKeys.CircumOptions))
             {
                 return new CircumOptions();
             }
 
-            string serializedOptions = CircumPlayerPrefs.GetString(CircumOptionsPlayerPrefsKey);
+            string serializedOptions = CircumPlayerPrefs.GetString(PlayerPrefsKeys.CircumOptions);
             CircumDebug.Log($"Loaded circum options {serializedOptions}");
             
             CircumOptions deserializedOptions = JsonUtility.FromJson<CircumOptions>(serializedOptions);
@@ -36,14 +35,14 @@ namespace Code.Level.Player
         {
             string serializedCircumOptions = JsonUtility.ToJson(circumOptions);
             
-            CircumPlayerPrefs.SetString(CircumOptionsPlayerPrefsKey, serializedCircumOptions);
+            CircumPlayerPrefs.SetString(PlayerPrefsKeys.CircumOptions, serializedCircumOptions);
             
             CircumDebug.Log($"Saved circum options : {serializedCircumOptions}");
         }
 
         public static void ResetOptions()
         {
-            CircumPlayerPrefs.DeleteKey(CircumOptionsPlayerPrefsKey);
+            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.CircumOptions);
         }
     }
 }

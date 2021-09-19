@@ -8,8 +8,6 @@ namespace Code.Level.Player
     [Serializable]
     public class PlayerStats
     {
-        private const string StatsPlayerPrefsKey = "Circum_PlayerStatistics";
-        
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
         
@@ -67,19 +65,19 @@ namespace Code.Level.Player
             string serialized = JsonUtility.ToJson(stats);
             string compressed = serialized.Compress();
 
-            CircumPlayerPrefs.SetString(StatsPlayerPrefsKey, compressed);
+            CircumPlayerPrefs.SetString(PlayerPrefsKeys.PlayerStats, compressed);
             CircumDebug.Log($"Saved player stats: {stats}");
         }
         
         public static PlayerStats Load()
         {
-            if (!PlayerPrefs.HasKey(StatsPlayerPrefsKey))
+            if (!PlayerPrefs.HasKey(PlayerPrefsKeys.PlayerStats))
             {
                 CircumDebug.Log("Created new player stats since we can't find saved key");
                 return CreateEmptyPlayerStats();
             }
             
-            string serializedPlayerStats = CircumPlayerPrefs.GetString(StatsPlayerPrefsKey);
+            string serializedPlayerStats = CircumPlayerPrefs.GetString(PlayerPrefsKeys.PlayerStats);
 
             if (!string.IsNullOrEmpty(serializedPlayerStats))
             {
@@ -151,7 +149,7 @@ namespace Code.Level.Player
         
         public static void ResetSavedPlayerStats()
         {
-            CircumPlayerPrefs.DeleteKey(StatsPlayerPrefsKey);
+            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.PlayerStats);
         }
     }
 }

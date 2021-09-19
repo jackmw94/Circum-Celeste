@@ -15,7 +15,6 @@ namespace Code.Level.Player
         
         public bool HasFastestLevelRecording => LevelRecordingExists(FastestLevelRecording);
         public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
-        private static string PlayerPrefsKey(string levelName) => $"Circum_PlayerStats_{levelName}";
         
         public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, float goldTime, out BadgeData newBadgeData, out bool replacedExistingFastestTime, out bool replacedPerfectTime)
         {
@@ -71,7 +70,7 @@ namespace Code.Level.Player
         
         public static bool TryLoadLevelStats(string levelName, out LevelStats levelStats)
         {
-            string key = PlayerPrefsKey(levelName);
+            string key = PlayerPrefsKeys.LevelStats(levelName);
             
             if (CircumPlayerPrefs.HasKey(key))
             {
@@ -99,7 +98,7 @@ namespace Code.Level.Player
             string serialized = JsonUtility.ToJson(levelStats);
             string compressed = serialized.Compress();
 
-            string key = PlayerPrefsKey(levelName);
+            string key = PlayerPrefsKeys.LevelStats(levelName);
             
             CircumPlayerPrefs.SetString(key, compressed);
 
@@ -110,7 +109,7 @@ namespace Code.Level.Player
 
         public static void ResetStats(string levelName)
         {
-            string key = PlayerPrefsKey(levelName);
+            string key = PlayerPrefsKeys.LevelStats(levelName);
             
             CircumPlayerPrefs.DeleteKey(key);
         }
