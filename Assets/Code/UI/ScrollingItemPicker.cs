@@ -75,7 +75,7 @@ namespace Code.UI
         {
             _scrollRect.enabled = scrollingEnabled;
         }
-        
+
         public void SetToItemAtIndex(int index)
         {
             Selectable selectedItem = _items[index];
@@ -84,9 +84,16 @@ namespace Code.UI
             int itemCount = _items.Length;
             int divisor = itemCount - 1;
             float perItemFraction = 1f / divisor;
-            float normalisedScrollPosition = 1f - perItemFraction * index;
-        
-            _scrollRect.verticalNormalizedPosition = normalisedScrollPosition;
+            float normalisedScrollPosition = perItemFraction * index;
+
+            if (_isVerticalScroll)
+            {
+                _scrollRect.verticalNormalizedPosition = 1f - normalisedScrollPosition;
+            }
+            else
+            {
+                _scrollRect.horizontalNormalizedPosition = normalisedScrollPosition;
+            }
         }
 
         private void DetermineSelectedItem()
