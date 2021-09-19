@@ -16,6 +16,24 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
+        [MenuItem("Circum/Language/English")]
+        public static void ChangeLanguageToEnglish()
+        {
+            LeanLocalization.SetCurrentLanguageAll("English");
+        }
+        
+        [MenuItem("Circum/Language/French")]
+        public static void ChangeLanguageToFrench()
+        {
+            LeanLocalization.SetCurrentLanguageAll("French");
+        }
+        
+        [MenuItem("Circum/Language/Russian")]
+        public static void ChangeLanguageToRussian()
+        {
+            LeanLocalization.SetCurrentLanguageAll("Russian");
+        }
+
         [MenuItem("Circum/Persistent data/Reset saved data")]
         public static void ResetSavedPlayerStats()
         {
@@ -32,6 +50,12 @@ namespace Code.Debugging
         public static void SetPerfectPlayerStats()
         {
             PlayerStats.SetPerfectPlayerStats();
+        }
+
+        [MenuItem("Circum/Persistent data/Reset player firsts")]
+        public static void ResetPlayerFirsts()
+        {
+            PlayerFirsts.ResetPlayerFirsts();
         }
         
         [MenuItem("Circum/Build/Run validation")]
