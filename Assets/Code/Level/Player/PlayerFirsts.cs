@@ -9,7 +9,7 @@ namespace Code.Level.Player
     [Serializable]
     public class PlayerFirsts
     {
-        public const int TutorialDeathsUntilHowToPlaySuggested = 3;
+        public const int TutorialDeathsUntilHowToPlaySuggested = 2;
         
         [field: SerializeField] public bool SuggestedHowToPlay { get; set; } = false;
         [field: SerializeField] public bool CompletedGame { get; set; } = false;

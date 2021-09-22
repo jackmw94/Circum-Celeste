@@ -21,7 +21,7 @@ namespace Code.Level
         private List<Enemy> _enemies;
         private List<Escape> _escapes;
         private List<Hazard> _hazards;
-        
+
         private float _startTime;
 
         private LevelRecorder _levelRecorder;
@@ -29,8 +29,9 @@ namespace Code.Level
         private bool _escapeShown;
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
-        
-        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards, float speedScale, int gridSize)
+
+        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards,
+            float speedScale, int gridSize)
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
@@ -45,11 +46,11 @@ namespace Code.Level
             CircumDebug.Log($"Grid size = {gridSize}");
             _players.ApplyFunction(p => p.SetOrbiterSpeedConfiguration(RemoteConfigHelper.GetOrbiterPidValuesFromGridSize(gridSize)));
             GetComponentsInChildren<Mover>().ApplyFunction(p => p.SetMovementScale(speedScale));
-            
+
             GameContainer.Instance.CountdownTimerUI.ResetTimer();
-            
+
             _escapeShown = false;
-            
+
             ApplyLevelElementFunction(p => p.LevelSetup());
         }
 
@@ -62,8 +63,8 @@ namespace Code.Level
             // assuming this will always count up, therefore reset == hidden
             GameContainer gameContainer = GameContainer.Instance;
             gameContainer.CountdownTimerUI.ResetTimer();
-            
-            HandleUIIntroductions();
+
+            HandleReadyIntroductions();
         }
 
         protected override void OnStartLevel()
@@ -78,6 +79,8 @@ namespace Code.Level
             ApplyLevelElementFunction(p => p.LevelStarted());
 
             _levelRecorder = gameObject.AddComponent<LevelRecorder>();
+            
+            HandleStartedIntroductions();
         }
 
         public override Vector3 GetPlayerPosition(int playerIndex)
@@ -86,7 +89,7 @@ namespace Code.Level
             {
                 return _players[playerIndex].transform.position;
             }
-            
+
             throw new ArgumentOutOfRangeException(nameof(playerIndex), $"Requested index (={playerIndex}) out of range of players list (count={_players.Count})");
 
         }
@@ -100,12 +103,17 @@ namespace Code.Level
             _escapes.ApplyFunction(levelElementFunction);
         }
 
-        private void HandleUIIntroductions()
+        private void HandleReadyIntroductions()
         {
             UIInputElementsContainer movementUi = GameContainer.Instance.UIInputElementsContainer;
 
-            movementUi.IntroducePowerButton.SetIntroducing(_introduceElement == IntroduceElement.PowerButton);
-            movementUi.IntroduceMoverHandle.SetIntroducing(_introduceElement == IntroduceElement.MovementHandle);
+            movementUi.IntroducePowerButton.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.PowerButton));
+            movementUi.IntroduceMoverHandle.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.MovementHandle));
+        }
+
+        private void HandleStartedIntroductions()
+        {
+            _escapes.ApplyFunction(p => p.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.Escape)));
         }
 
         private void Update()

@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Behaviours
 {
-    public class PulseColour : MonoBehaviour
+    public class PulseColour : IntroductionBehaviour
     {
         [SerializeField] private Colourable _colourable;
         [Space(15)] 

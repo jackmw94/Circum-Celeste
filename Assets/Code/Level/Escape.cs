@@ -7,6 +7,8 @@ namespace Code.Level
 {
     public class Escape : Collectable
     {
+        [SerializeField] private GameObject _introductionObject;
+        
         private ISwitchable[] _switchVfxProperties = null;
 
         private ISwitchable[] SwitchVfxProperties
@@ -20,6 +22,11 @@ namespace Code.Level
             gameObject.SetActiveSafe(false);
         }
 
+        public void SetIntroducing(bool isIntroducing)
+        {
+            _introductionObject.SetActiveSafe(isIntroducing);
+        }
+        
         protected override bool CanObjectCollect(GameObject other)
         {
             return other.IsPlayer();

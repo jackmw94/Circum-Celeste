@@ -3,7 +3,7 @@ using UnityExtras.Code.Core;
 
 namespace Code.Behaviours
 {
-    public class IntermittentJiggle : MonoBehaviour
+    public class IntermittentJiggle : IntroductionBehaviour
     {
         [SerializeField] private AnimationCurve _jiggleScaleCurve;
         [SerializeField] private float _scaleMultiplier = 1f;
