@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Level.Player;
+using Code.UI;
 using Lean.Localization;
 using UnityEditor;
 using UnityExtras.Code.Core;
@@ -16,6 +17,33 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
+        [MenuItem("Circum/Setup recording view")]
+        public static void SetupRecordingView()
+        {
+            Player player = Object.FindObjectOfType<Player>();
+            GameObject cameraPosRoot = new GameObject("CameraPositionRoot", typeof(PositionBetweenTransforms));
+            PositionBetweenTransforms positionBetweenTransforms = cameraPosRoot.GetComponent<PositionBetweenTransforms>();
+            positionBetweenTransforms.Setup(player.transform, player.OrbiterTransform);
+            
+            Transform child = new GameObject("Offset").transform;
+            child.SetParent(cameraPosRoot.transform);
+            child.localPosition = Vector3.up * 3.5f;
+            
+            Camera main = Camera.main;
+            main.orthographicSize = 3;
+            
+            Transform camera = main.transform;
+            Transform cameraRoot = camera.root;
+            cameraRoot.SetParent(child);
+            cameraRoot.localPosition = Vector3.zero;
+
+            AspectRatioToScreenSize[] aspectRatioController = GameObject.FindObjectsOfType<AspectRatioToScreenSize>();
+            aspectRatioController.ApplyFunction(p => p.enabled = false);
+
+            GameObject.Find("GameUI").SetActive(false);
+            GameObject.Find("AppUI").SetActive(false);
+        }
+        
         [MenuItem("Circum/Language/English")]
         public static void ChangeLanguageToEnglish()
         {

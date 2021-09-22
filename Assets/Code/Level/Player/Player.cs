@@ -21,6 +21,7 @@ namespace Code.Level.Player
         public bool IsMoving => _mover.IsMoving;
         public bool IsDead => _health.IsDead;
         public bool NoDamageTaken => _health.NoDamageTaken;
+        public Transform OrbiterTransform => _orbiter.transform;
 
         private void Awake()
         {
