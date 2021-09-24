@@ -10,7 +10,8 @@ namespace Code.Level.Player
     {
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
-        
+
+        [SerializeField] private int _currentLevelIndex = 0;
         [SerializeField] private int _highestLevelReachedIndex = 0;
         [SerializeField] private int _highestNoDeathLevelReachedIndex = 0;
         [SerializeField] private int _highestPerfectLevelReachedIndex = 0;
@@ -20,6 +21,7 @@ namespace Code.Level.Player
         public int HighestLevelIndex => _highestLevelReachedIndex;
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
+        public int RestartLevelIndex => _currentLevelIndex;
 
         public bool IsNextLevelUnlocked(int currentLevelIndex) => currentLevelIndex < _highestLevelReachedIndex;
 
@@ -41,6 +43,11 @@ namespace Code.Level.Player
             {
                 _highestPerfectLevelReachedIndex = Mathf.Max(levelIndex, _highestPerfectLevelReachedIndex);
             }
+        }
+
+        public void SetCurrentLevel(int currentLevelIndex)
+        {
+            _currentLevelIndex = currentLevelIndex;
         }
 
         public void UpdateCompletedTutorials(bool hasCompletedTutorials, bool forceSet = false)

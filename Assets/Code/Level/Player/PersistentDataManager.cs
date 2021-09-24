@@ -40,13 +40,13 @@ namespace Code.Level.Player
         
         public int GetRestartLevelIndex()
         {
-            RunTracker lastRun = _playerStats.RunTracker;
-            if (lastRun == null)
-            {
-                return 0;
-            }
-            
-            return lastRun.HasSkipped ? 0 : lastRun.LevelIndex;
+            return _playerStats.RestartLevelIndex;
+        }
+
+        public void SetCurrentLevel(int currentLevelIndex)
+        {
+            _playerStats.SetCurrentLevel(currentLevelIndex);
+            PlayerStats.Save(_playerStats);
         }
 
         public void SetSkippedLevel(bool save = false)

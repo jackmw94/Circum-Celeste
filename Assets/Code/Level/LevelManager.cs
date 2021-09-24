@@ -119,7 +119,7 @@ namespace Code.Level
                     };
                     persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
-                    advanceLevelPrompt = true;
+                    advanceLevelPrompt = _levelProvider.CanChangeToNextLevel(true);
                 }
                 else
                 {

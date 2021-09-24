@@ -58,7 +58,7 @@ namespace Code.Flow
                     }
                     break;
                 case CircumGestures.SwipeDirection.Left:
-                    if (_levelProvider.CanChangeToNextLevel())
+                    if (_levelProvider.CanChangeToNextLevel(false))
                     {
                         _levelProvider.AdvanceLevel();
                         _interLevelScreen.SetupInterLevelScreen();

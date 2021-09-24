@@ -36,18 +36,8 @@ namespace Code.Level
         private void Start()
         {
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            int restartLevelIndex = persistentDataManager.GetRestartLevelIndex();
-            bool hasCompletedTutorials = persistentDataManager.PlayerStats.CompletedTutorials;
-
-            if (hasCompletedTutorials)
-            {
-                _internalLevelIndex = NumberOfTutorials + restartLevelIndex;
-                CircumDebug.Log($"Initialised level provider. Tutorials completed - set level index to {_internalLevelIndex}");
-            }
-            else
-            {
-                CircumDebug.Log("Initialised level provider. Tutorials not complete");
-            }
+            _internalLevelIndex = persistentDataManager.GetRestartLevelIndex();
+            CircumDebug.Log($"Initialised level provider. {(persistentDataManager.PlayerStats.CompletedTutorials ? "has" : "hasn't")} completed tutorials. internal level index = {_internalLevelIndex}");
         }
 
         public void ResetToStart(bool forceStartAtTutorials = false)
@@ -59,24 +49,19 @@ namespace Code.Level
             }
 
             _internalLevelIndex = NumberOfTutorials;
+            PersistentDataManager.Instance.SetCurrentLevel(_internalLevelIndex);
         }
 
         public void AdvanceLevel()
         {
-            _internalLevelIndex++;
-            if (_internalLevelIndex > MaximumLevelIndex)
-            {
-                _internalLevelIndex = NumberOfTutorials;
-            }
+            _internalLevelIndex = _internalLevelIndex == MaximumLevelIndex ? _internalLevelIndex : _internalLevelIndex + 1;
+            PersistentDataManager.Instance.SetCurrentLevel(_internalLevelIndex);
         }
 
         public void PreviousLevel()
         {
-            _internalLevelIndex--;
-            if (_internalLevelIndex < 0)
-            {
-                _internalLevelIndex = _activeLevelProgression.TutorialLevelLayout.Length + _activeLevelProgression.LevelLayout.Length - 1;
-            }
+            _internalLevelIndex = _internalLevelIndex == 0 ? 0 : _internalLevelIndex - 1;
+            PersistentDataManager.Instance.SetCurrentLevel(_internalLevelIndex);
         }
 
         private LevelLayout GetLevelAtIndex(int index)
@@ -90,9 +75,16 @@ namespace Code.Level
             return _activeLevelProgression.LevelLayout[levelIndex];
         }
         
-        public bool CanChangeToNextLevel()
+        public bool CanChangeToNextLevel(bool allowTutorialAdvancing)
         {
-            int currentLevelIndex = GetCurrentLevel().LevelContext.LevelIndex;
+            LevelLayoutContext levelContext = GetCurrentLevel().LevelContext;
+
+            if (levelContext.IsTutorial && !allowTutorialAdvancing)
+            {
+                return false;
+            }
+            
+            int currentLevelIndex = levelContext.LevelIndex;
             PlayerStats playerStats = PersistentDataManager.Instance.PlayerStats;
             bool nextLevelUnlocked = playerStats.IsNextLevelUnlocked(currentLevelIndex);
             
@@ -101,6 +93,13 @@ namespace Code.Level
 
         public bool CanChangeToPreviousLevel()
         {
+            LevelLayoutContext levelContext = GetCurrentLevel().LevelContext;
+
+            if (levelContext.IsTutorial)
+            {
+                return false;
+            }
+            
             return _internalLevelIndex > NumberOfTutorials;
         }
 
