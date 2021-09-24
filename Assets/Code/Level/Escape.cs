@@ -34,6 +34,7 @@ namespace Code.Level
         
         protected override void CollectableCollected(Vector3 _)
         {
+            SetIntroducing(false);
             SetSwitchVfxPropertiesOn();
             VfxManager.Instance.SpawnVfx(VfxType.PlayerEscaped, transform.position);
         }

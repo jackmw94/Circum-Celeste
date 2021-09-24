@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Code.Core;
 using Code.Debugging;
 using Code.Level.Player;
@@ -15,9 +16,10 @@ namespace Code.Level
         private Queue<LevelRecordFrameData> _frameReplayData;
         private List<Player.Player> _players;
         private LevelElement[] _levelElements;
+        private Escape[] _escapes;
 
         private bool _isPlaying = false;
-        private bool _hasReturnedFinish = false;
+        private bool _hasCalledFinish = false;
         private float _replayTime = 0f;
 
         public void SetupLevel(LevelRecordingData levelRecordingData, List<Player.Player> players)
@@ -26,6 +28,7 @@ namespace Code.Level
             _players = players;
             _replayTime = levelRecordingData.LevelTime;
             _levelElements = GetComponentsInChildren<LevelElement>();
+            _escapes = _levelElements.Where(p => p is Escape).Cast<Escape>().ToArray();
 
             _players.ApplyFunction(p => p.LevelSetup());
             _levelElements.ApplyFunction(p => p.LevelSetup());
@@ -54,7 +57,9 @@ namespace Code.Level
                 return;
             }
 
-            if (!_hasReturnedFinish && (_frameReplayData.Count <= EndLevelWithFramesRemaining || _frameReplayData.Count == 0))
+            bool hasHitEscape = _escapes.Any(p => p.IsCollected);
+
+            if (!_hasCalledFinish && (hasHitEscape || _frameReplayData.Count <= EndLevelWithFramesRemaining || _frameReplayData.Count == 0))
             {
                 FinishReplay();
             }
@@ -74,7 +79,7 @@ namespace Code.Level
             
             LevelFinished(levelResult);
             
-            _hasReturnedFinish = true;
+            _hasCalledFinish = true;
         }
 
         private void FixedUpdate()

@@ -24,7 +24,7 @@ namespace Code.Level.Player
         {
             _rigidbody.velocity = Vector3.zero;
 
-            if (!MovementEnabled)
+            if (!MovementEnabled || InputProvider == null)
             {
                 return;
             }
