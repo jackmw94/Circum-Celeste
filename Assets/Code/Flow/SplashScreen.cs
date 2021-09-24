@@ -1,18 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Code.Behaviours;
 using Code.Core;
+using Code.Debugging;
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityExtras.Code.Core;
 
 namespace Code.Flow
 {
     public class SplashScreen : MonoBehaviour
     {
+        private const float RefreshRemoteConfigTimeout = 2.5f;
+        private const int DontShowSplashScreenAgainForTimeInMinutes = 30;
         private const int IntroSceneIndex = 0;
         private const int GameSceneIndex = 1;
-        
+
+        [SerializeField] private Volume _postProcessingVolume;
         [SerializeField] private Animation _jonkWongleLogoAnimator;
         [SerializeField] private float _startJonkWonglerLogoDelay = 0.75f;
         [SerializeField] private float _playCircumLogoAtNormalisedTimeInJonkWonglerLogo = 0.65f;
@@ -21,6 +28,7 @@ namespace Code.Flow
         [SerializeField] private AnimateMeshShaderProperty _hideSplashScreen;
         [SerializeField] private AnimateMeshShaderProperty _hideCircumLogo;
 
+        private bool _remoteConfigRefreshSuccessful = false;
         private bool _remoteConfigReturned = false;
         private bool _loadedGameScene = false;
 
@@ -29,46 +37,33 @@ namespace Code.Flow
             RemoteConfigHelper.RequestRefresh(success =>
             {
                 _remoteConfigReturned = true;
+                _remoteConfigRefreshSuccessful = success;
             });
 
-            StartCoroutine(PlayJonkWongleLogo());
-            
-            SceneManager.LoadSceneAsync(GameSceneIndex, LoadSceneMode.Additive).completed += operation =>
-            {
-                _loadedGameScene = true;
-            };
+            SceneManager.LoadSceneAsync(GameSceneIndex, LoadSceneMode.Additive).completed += operation => { _loadedGameScene = true; };
+
+            StartCoroutine(ShouldPlaySplashScreen() ? PlayLogos() : CompleteSplashScreen(false));
         }
 
-        private IEnumerator PlayJonkWongleLogo()
+        private bool ShouldPlaySplashScreen()
+        {
+            if (!CircumPlayerPrefs.TryGetLong(PlayerPrefsKeys.SplashScreenLastRunTime, out long lastRunTicks))
+            {
+                return true;
+            }
+            
+            DateTime lastRunDateTime = new DateTime(lastRunTicks);
+            TimeSpan timeSpanSinceLastRun = DateTime.Now - lastRunDateTime;
+            CircumDebug.Log($"There have been {timeSpanSinceLastRun.Minutes} minutes since we last saw the splash screen");
+            return timeSpanSinceLastRun.Minutes > DontShowSplashScreenAgainForTimeInMinutes;
+        }
+        
+        
+        private IEnumerator PlayLogos()
         {
             yield return new WaitForSeconds(_startJonkWonglerLogoDelay);
             _jonkWongleLogoAnimator.Play();
-            yield return HandlePlayBothLogos();
-        }
 
-        private IEnumerator CompleteSplashScreen()
-        {
-            if (!_remoteConfigReturned)
-            {
-                Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CantRefreshConfig);
-            }
-
-            yield return new WaitUntil(() => _loadedGameScene);
-
-            HideSplash();
-        }
-
-        private void HideSplash()
-        {
-            _hideCircumLogo.TriggerAnimation();
-            _hideSplashScreen.TriggerAnimation(() =>
-            {
-                SceneManager.UnloadSceneAsync(IntroSceneIndex);
-            });
-        }
-
-        private IEnumerator HandlePlayBothLogos()
-        {
             yield return WaitUntilJonkWongleLogoFinished(true);
 
             bool showSplashComplete = false;
@@ -79,7 +74,42 @@ namespace Code.Flow
             yield return new WaitUntil(() => showSplashComplete);
             yield return new WaitForSeconds(_holdSplashScreenDuration);
 
-            yield return CompleteSplashScreen();
+            yield return CompleteSplashScreen(true);
+        }
+
+        private IEnumerator CompleteSplashScreen(bool playedLogos)
+        {
+            if (playedLogos)
+            {
+                CircumPlayerPrefs.SetLong(PlayerPrefsKeys.SplashScreenLastRunTime, DateTime.Now.Ticks);
+            }
+
+            float startTime = Time.time;
+            bool HasTimedOut() => Time.time - startTime > RefreshRemoteConfigTimeout;
+
+            yield return Utilities.LerpOverTime(_postProcessingVolume.weight, 0f, 0.25f, f => _postProcessingVolume.weight = f);
+
+            yield return new WaitUntil(() => _loadedGameScene && (_remoteConfigReturned || HasTimedOut()));
+            
+            if (!_remoteConfigReturned || !_remoteConfigRefreshSuccessful)
+            {
+                Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CantRefreshConfig);
+            }
+
+            HideSplash(playedLogos);
+        }
+
+        private void HideSplash(bool playedLogos)
+        {
+            if (playedLogos)
+            {
+                _hideCircumLogo.TriggerAnimation();
+            }
+            
+            _hideSplashScreen.TriggerAnimation(() =>
+            {
+                SceneManager.UnloadSceneAsync(IntroSceneIndex);
+            });
         }
 
         private IEnumerator WaitUntilJonkWongleLogoFinished(bool atReducedTime)

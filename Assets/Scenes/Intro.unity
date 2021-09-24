@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -521,7 +521,7 @@ MonoBehaviour:
   isGlobal: 1
   priority: 1
   blendDistance: 0
-  weight: 1
+  weight: 0
   sharedProfile: {fileID: 11400000, guid: 628ce9c4774f2f84599c4b7f0bd24eff, type: 2}
 --- !u!4 &521994804
 Transform:
@@ -1062,7 +1062,7 @@ RectTransform:
   m_GameObject: {fileID: 1598240601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.012322666, y: 0.012322666, z: 0.012322666}
+  m_LocalScale: {x: 0.011, y: 0.011, z: 0.011}
   m_Children:
   - {fileID: 78262275}
   - {fileID: 521994804}
@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11912d8daeee41eba443b3c035ef7ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _postProcessingVolume: {fileID: 521994803}
   _jonkWongleLogoAnimator: {fileID: 1598240606}
   _startJonkWonglerLogoDelay: 1.5
   _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.8

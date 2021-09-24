@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityExtras.Code.Core;
 
 #if UNITY_EDITOR
+using Code.Core;
 using Code.Flow;
 using UnityEngine;
 using Lean.Localization.Editor;
@@ -60,6 +61,12 @@ namespace Code.Debugging
         public static void ChangeLanguageToRussian()
         {
             LeanLocalization.SetCurrentLanguageAll("Russian");
+        }
+
+        [MenuItem("Circum/Persistent data/Reset splash screen")]
+        public static void ResetSplashScreen()
+        {
+            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
         }
 
         [MenuItem("Circum/Persistent data/Reset saved data")]
