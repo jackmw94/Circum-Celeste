@@ -21,6 +21,11 @@ namespace Code.Level
 
         public void CreateCurrentLevel(LevelRecording replay = null, InterLevelFlow.InterLevelTransition transition = InterLevelFlow.InterLevelTransition.Regular)
         {
+            if (CurrentLevelInstance)
+            {
+                Destroy(CurrentLevelInstance);
+            }
+            
             if (!_interLevelFlow.IsOverlaid)
             {
                 _interLevelFlow.ShowHideUI(() =>
@@ -36,6 +41,11 @@ namespace Code.Level
 
         public void ExitLevel()
         {
+            if (CurrentLevelInstance)
+            {
+                Destroy(CurrentLevelInstance);
+            }
+            
             if (!_levelProvider.GetCurrentLevel().LevelContext.IsFirstLevel)
             {
                 PersistentDataManager.Instance.SetPlayerDied();
