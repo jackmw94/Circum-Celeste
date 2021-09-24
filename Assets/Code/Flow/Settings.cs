@@ -206,13 +206,16 @@ namespace Code.Flow
         
         private void ToggleFeedbacks()
         {
-            Feedbacks.Instance.FeedbacksActive = !Feedbacks.Instance.FeedbacksActive;
+            bool feedbackActiveForUserSettings = Feedbacks.Instance.IsActiveForReason(ActiveState.ActiveReason.UserSetting);
+            Feedbacks.Instance.SetActiveInactive(ActiveState.ActiveReason.UserSetting, !feedbackActiveForUserSettings);
+            
             UpdateFeedbacksLabel();
         }
 
         private void UpdateFeedbacksLabel()
         {
-            string localisationTerm = Feedbacks.Instance.FeedbacksActive ? _turnFeedbacksOffLocalisationTerm : _turnFeedbacksOnLocalisationTerm;
+            bool feedbackActiveForUserSettings = Feedbacks.Instance.IsActiveForReason(ActiveState.ActiveReason.UserSetting); 
+            string localisationTerm = feedbackActiveForUserSettings ? _turnFeedbacksOffLocalisationTerm : _turnFeedbacksOnLocalisationTerm;
             string labelText = LeanLocalization.GetTranslationText(localisationTerm);
             _toggleFeedbacksLabel.text = labelText;
         }

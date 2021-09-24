@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Core;
+using Code.Juice;
 using Code.Level.Player;
 using UnityEngine;
 
@@ -9,25 +10,41 @@ namespace Code.Level
     {
         private Action<LevelResult> _levelFinishedCallback;
         private LevelTimeUI _levelTimeUI;
+        private Feedbacks _feedbacks;
         
         public virtual bool PlayerStartedPlaying => true;
         protected bool IsStarted { get; private set; }
+        private bool _hasFinished = false;
+
+        public static Action LevelStarted = () => { };
+        public static Action LevelStopped = () => { };
+        
         private CircumOptions PlayerOptions => PersistentDataManager.Instance.Options;
 
         private void Awake()
         {
+            _feedbacks = Feedbacks.Instance;
+
             _levelTimeUI = GameContainer.Instance.LevelTimeUI;
             _levelTimeUI.SettingsShowHideTime(PlayerOptions.ShowLevelTimer);
+            
         }
 
         private void OnDestroy()
         {
+            if (!_hasFinished)
+            {
+                LevelStopped();
+            }
+            
             _levelTimeUI.StartStopTimer(false);
             _levelTimeUI.GameplayShowHideTime(false);
         }
 
         public void LevelReady()
         {
+            _feedbacks.SetActiveInactive(ActiveState.ActiveReason.Gameplay, true);
+            
             _levelTimeUI.ResetTimer();
             _levelTimeUI.GameplayShowHideTime(true);
             OnLevelReady();
@@ -36,6 +53,8 @@ namespace Code.Level
         public void StartLevel(Action<LevelResult> levelFinishedCallback)
         {
             IsStarted = true;
+            LevelStarted();
+            
             _levelFinishedCallback = levelFinishedCallback;
             _levelTimeUI.StartStopTimer(true);
             OnStartLevel();
@@ -44,7 +63,11 @@ namespace Code.Level
         protected void LevelFinished(LevelResult levelResult)
         {
             IsStarted = false;
+            _hasFinished = true;
+            LevelStopped();
             _levelFinishedCallback(levelResult);
+            
+            _feedbacks.SetActiveInactive(ActiveState.ActiveReason.Gameplay, false);
             
             _levelTimeUI.ManuallySetTimer(levelResult.LevelRecordingData.LevelTime);
             _levelTimeUI.StartStopTimer(false);

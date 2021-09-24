@@ -8,20 +8,11 @@ namespace Code.Level
 {
     public class LevelTimeUI : MonoBehaviour
     {
-        [Flags]
-        private enum OptionalUIVisibilitySetting
-        {
-            None = 0,
-            UserSetting = 1 << 0,
-            Gameplay = 1 << 1,
-            Visible = UserSetting | Gameplay
-        }
-        
         [SerializeField] private TextMeshProUGUI _text;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private float _showHideDuration = 0.25f;
 
-        private OptionalUIVisibilitySetting _optionalUIVisibility = OptionalUIVisibilitySetting.None;
+        private ActiveState _activeState = new ActiveState();
         private float _time = 0f;
         private bool _isRunning = false;
 
@@ -50,26 +41,18 @@ namespace Code.Level
 
         public void GameplayShowHideTime(bool show)
         {
-            UpdateVisibility(OptionalUIVisibilitySetting.Gameplay, show);
+            UpdateVisibility(ActiveState.ActiveReason.Gameplay, show);
         }
 
         public void SettingsShowHideTime(bool show)
         {
-            UpdateVisibility(OptionalUIVisibilitySetting.UserSetting, show);
+            UpdateVisibility(ActiveState.ActiveReason.UserSetting, show);
         }
 
-        private void UpdateVisibility(OptionalUIVisibilitySetting setting, bool showing)
+        private void UpdateVisibility(ActiveState.ActiveReason reason, bool showing)
         {
-            if (showing)
-            {
-                _optionalUIVisibility |= setting;
-            }
-            else
-            {
-                _optionalUIVisibility &= ~setting;
-            }
-            
-            ShowHideTimeInternal(_optionalUIVisibility == OptionalUIVisibilitySetting.Visible);
+            _activeState.SetUnsetReason(reason, showing);
+            ShowHideTimeInternal(_activeState.IsActive);
         }
         
         private void ShowHideTimeInternal(bool show)

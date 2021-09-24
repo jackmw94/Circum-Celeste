@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Code.Core;
 using Code.Debugging;
+using Code.Level;
+using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
 using UnityExtras.Code.Optional.Singletons;
@@ -44,12 +46,14 @@ namespace Code.Juice
 
         private readonly Dictionary<FeedbackType, FeedbackSetting> _feedbackSettingsByType = new Dictionary<FeedbackType, FeedbackSetting>();
 
-        public bool FeedbacksActive { get; set; } = true;
+        private ActiveState _activeState = new ActiveState();
         
         private void Awake()
         {
             RegenerateFeedbacksDictionary();
             RemoteConfigHelper.RemoteConfigUpdated += SetFeedbacksFromRemoteConfig;
+            
+            _activeState.SetUnsetReason(ActiveState.ActiveReason.UserSetting, true);
         }
 
         private void OnDestroy()
@@ -67,9 +71,19 @@ namespace Code.Juice
             }
         }
 
+        public void SetActiveInactive(ActiveState.ActiveReason reason, bool setActive)
+        {
+            _activeState.SetUnsetReason(reason, setActive);
+        }
+
+        public bool IsActiveForReason(ActiveState.ActiveReason reason)
+        {
+            return _activeState.IsActiveForReason(reason);
+        }
+
         public void TriggerFeedback(FeedbackType feedbackType)
         {
-            if (!FeedbacksActive)
+            if (!_activeState.IsActive)
             {
                 return;
             }

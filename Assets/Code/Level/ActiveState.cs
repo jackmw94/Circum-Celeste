@@ -13,20 +13,25 @@ namespace Code.Level
             Visible = UserSetting | Gameplay
         }
         
-        private ActiveReason _optionalUIVisibility = ActiveReason.None;
+        private ActiveReason _activeState = ActiveReason.None;
 
-        public bool IsActive => _optionalUIVisibility == ActiveReason.Visible;
+        public bool IsActive => _activeState == ActiveReason.Visible;
 
         public void SetUnsetReason(ActiveReason reason, bool set)
         {
             if (set)
             {
-                _optionalUIVisibility |= reason;
+                _activeState |= reason;
             }
             else
             {
-                _optionalUIVisibility &= ~reason;
+                _activeState &= ~reason;
             }
+        }
+
+        public bool IsActiveForReason(ActiveReason reason)
+        {
+            return _activeState.HasFlag(reason);
         }
     }
 }
