@@ -12,6 +12,7 @@ namespace Code.Level.Player
         public const int TutorialDeathsUntilHowToPlaySuggested = 2;
         
         [field: SerializeField] public bool SuggestedHowToPlay { get; set; } = false;
+        [field: SerializeField] public bool SeenReplaysScreen { get; set; } = false;
         [field: SerializeField] public bool CompletedGame { get; set; } = false;
 
         public void ShowHowToPlayPopUpIfFirst()
@@ -27,6 +28,31 @@ namespace Code.Level.Player
             persistentDataManager.PlayerFirsts.SuggestedHowToPlay = true;
             
             Save(persistentDataManager.PlayerFirsts);
+        }
+
+        public void ShowReplayScreenIntroIfFirst()
+        {
+            if (SeenReplaysScreen)
+            {
+                return;
+            }
+            
+            // show intro
+            
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            persistentDataManager.PlayerFirsts.SeenReplaysScreen = true;
+            
+            Save(persistentDataManager.PlayerFirsts);
+        }
+
+        public void SetReplaysScreenAsSeen()
+        {
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            
+            persistentDataManager.PlayerFirsts.SeenReplaysScreen = true;
+            Save(persistentDataManager.PlayerFirsts);
+            
+            CircumDebug.Log("Set replays screen as seen");
         }
 
         public static PlayerFirsts Load()

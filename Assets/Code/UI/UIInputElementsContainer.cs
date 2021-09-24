@@ -11,10 +11,14 @@ namespace Code.UI
         [SerializeField] private MomentaryButton _powerButton;
         [SerializeField] private Introducer _introducePowerButton;
 
+        [SerializeField] private Introducer _orbiterIntroducer;
+
         public MoverHandle MoverHandle => _moverHandle;
         public Introducer IntroduceMoverHandle => _introduceMoverHandle;
         
         public MomentaryButton PowerButton => _powerButton;
         public Introducer IntroducePowerButton => _introducePowerButton;
+
+        public Introducer IntroduceOrbiter => _orbiterIntroducer;
     }
 }

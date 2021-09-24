@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Code.Level;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityExtras.Code.Core;
 
@@ -7,6 +9,9 @@ namespace Code.Behaviours
     public class Introducer : MonoBehaviour, ISelectHandler, IDragHandler
     {
         [SerializeField] private IntroductionBehaviour[] _introductionBehaviour;
+        [Space(15)]
+        [SerializeField] private bool _stopOnLevelStart = true;
+        [SerializeField] private bool _stopOnLevelQuit = true;
         [Space(15)]
         [SerializeField] private bool _stopOnSelect = true;
         [Space(15)]
@@ -17,15 +22,44 @@ namespace Code.Behaviours
         
         private void Start()
         {
-            _introductionBehaviour.ApplyFunction(p => p.enabled = false);
+            _introductionBehaviour.ApplyFunction(p => p.SetEnabled(false));
+
+            LevelInstanceBase.LevelStarted += OnLevelStarted;
+            LevelInstanceBase.LevelStopped += OnLevelStopped;
         }
-        
+
+        private void OnDestroy()
+        {
+            LevelInstanceBase.LevelStarted -= OnLevelStarted;
+            LevelInstanceBase.LevelStopped -= OnLevelStopped;
+        }
+
         public void SetIntroducing(bool isIntroducing)
         {
             _currentDragTime = 0f;
-            _introductionBehaviour.ApplyFunction(p => p.enabled = isIntroducing);
+            _introductionBehaviour.ApplyFunction(p => p.SetEnabled(isIntroducing));
         }
 
+        private void OnLevelStarted()
+        {
+            if (!_stopOnLevelStart)
+            {
+                return;
+            }
+            
+            SetIntroducing(false);
+        }
+
+        private void OnLevelStopped()
+        {
+            if (!_stopOnLevelQuit)
+            {
+                return;
+            }
+            
+            SetIntroducing(false);
+        }
+        
         public void OnSelect(BaseEventData eventData)
         {
             if (!_stopOnSelect)

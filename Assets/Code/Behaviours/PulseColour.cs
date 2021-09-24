@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Behaviours
 {
@@ -29,10 +30,8 @@ namespace Code.Behaviours
 
         private void Update()
         {
-            float pulseTime = Time.time - _startPulsingTime;
-            float sinVal = Mathf.Sin(pulseTime * _frequency - Mathf.PI / 2f);
-            float lerpVal = sinVal / 2f + 0.5f;
-            Color colour = Color.Lerp(_defaultColor, _pulsedColour, lerpVal);
+            float pulseValue = Utilities.GetSinePulse(_startPulsingTime, _frequency);
+            Color colour = Color.Lerp(_defaultColor, _pulsedColour, pulseValue);
             _colourable.SetColour(colour);
         }
     }

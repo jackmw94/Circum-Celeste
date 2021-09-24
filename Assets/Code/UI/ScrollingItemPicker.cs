@@ -78,9 +78,6 @@ namespace Code.UI
 
         public void SetToItemAtIndex(int index)
         {
-            Selectable selectedItem = _items[index];
-            selectedItem.SetOnOff(true, _selectedColour, 0f);
-
             int itemCount = _items.Length;
             int divisor = itemCount - 1;
             float perItemFraction = 1f / divisor;

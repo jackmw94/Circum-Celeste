@@ -19,7 +19,7 @@ MonoBehaviour:
   _orbiterEnabled: 1
   _powerEnabled: 0
   _requiredForGameCompletion: 0
-  _introduceElement: 0
+  _introduceElement: 8
   _exampleRotatingOrbiterEnabled: 1
   _exampleMovingOrbiterEnabled: 0
   _gridSize: 9

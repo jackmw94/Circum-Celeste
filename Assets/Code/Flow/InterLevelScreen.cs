@@ -15,6 +15,7 @@ namespace Code.Flow
         [SerializeField] private float _showHideDuration = 0.5f;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private ScrollingItemPicker _scrollingItemPicker;
+        [SerializeField] private TeaseScrollRect _teaseScrollRect;
         [Space(15)]
         [SerializeField] private Button _leftArrow;
         [SerializeField] private Button _rightArrow;
@@ -90,7 +91,8 @@ namespace Code.Flow
             };
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, levelRecording, perfectLevelRecording, ReplayLevel);
-            
+
+            _teaseScrollRect.enabled = !persistentDataManager.PlayerFirsts.SeenReplaysScreen && newFastestTimeInfo != null;
             _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData, newFastestTimeInfo, showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);

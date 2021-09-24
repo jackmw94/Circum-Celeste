@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bd9ff2f25c66c724c937727f08b162d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 470ea6c0591f80048a93f19796bb5597, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -379,33 +379,33 @@ MonoBehaviour:
       time: 0.5
       value: 0.93550843
       inSlope: Infinity
-      outSlope: -11.067395
+      outSlope: -15.891647
       tangentMode: 71
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5845283
+      time: 0.55886793
       value: 0
-      inSlope: -11.067395
-      outSlope: 1460.8364
+      inSlope: -15.891647
+      outSlope: 2097.4512
       tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5851687
+      time: 0.55931395
       value: 0.93550843
       inSlope: Infinity
-      outSlope: -11.067404
+      outSlope: -15.891664
       tangentMode: 71
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.669697
+      time: 0.6181818
       value: 0
-      inSlope: -11.067404
+      inSlope: -15.891664
       outSlope: 0
       tangentMode: 69
       weightedMode: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
+      inSlope: -0
       outSlope: -1.3898586
       tangentMode: 69
       weightedMode: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _duration: 4
+  _duration: 7
 --- !u!1 &8244140385589922250
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 8244140385589922252}
   - component: {fileID: 2450340415887570269}
   - component: {fileID: 7258373518819133325}
+  - component: {fileID: 147864538084201447}
   m_Layer: 0
   m_Name: Escape
   m_TagString: Untagged
@@ -485,6 +486,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &147864538084201447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244140385589922250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c77a98a2ff4967be0ae650704f93e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8325260007342393034
 GameObject:
   m_ObjectHideFlags: 0

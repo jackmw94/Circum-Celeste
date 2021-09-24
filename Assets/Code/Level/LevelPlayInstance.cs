@@ -109,6 +109,7 @@ namespace Code.Level
 
             movementUi.IntroducePowerButton.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.PowerButton));
             movementUi.IntroduceMoverHandle.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.MovementHandle));
+            movementUi.IntroduceOrbiter.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.Orbiter));
         }
 
         private void HandleStartedIntroductions()
