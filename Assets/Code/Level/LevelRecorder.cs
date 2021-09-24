@@ -14,7 +14,7 @@ namespace Code.Level
         private float _levelTime = 0f;
         private readonly List<LevelRecordFrameData> _frameData = new List<LevelRecordFrameData>();
 
-        private LevelElement[] _levelElements;
+        private Recordable[] _recordableElements;
         
         // pauses recording
         public bool RecordingActive { private get; set; } = true;
@@ -24,8 +24,8 @@ namespace Code.Level
 
         private void Awake()
         {
-            _levelElements = GetComponentsInChildren<LevelElement>(true);
-            CircumDebug.Log($"Started recording with following level elements: \n{_levelElements.JoinToString("\n")}");
+            _recordableElements = GetComponentsInChildren<Recordable>(true);
+            CircumDebug.Log($"Started recording with following level elements: \n{_recordableElements.JoinToString("\n")}");
         }
 
         private void FixedUpdate()
@@ -35,12 +35,12 @@ namespace Code.Level
                 return;
             }
 
-            Vector3[] elementPositions = new Vector3[_levelElements.Length];
-            bool[] elementsActive = new bool[_levelElements.Length];
+            Vector3[] elementPositions = new Vector3[_recordableElements.Length];
+            bool[] elementsActive = new bool[_recordableElements.Length];
             
-            for (int i = 0; i < _levelElements.Length; i++)
+            for (int i = 0; i < _recordableElements.Length; i++)
             {
-                LevelElement element = _levelElements[i];
+                Recordable element = _recordableElements[i];
                 elementPositions[i] = element.transform.position;
                 elementsActive[i] = element.gameObject.activeSelf;
             }

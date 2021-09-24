@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4761992637811591851}
   - component: {fileID: 1961697690167233048}
   - component: {fileID: 5629148944564760007}
+  - component: {fileID: 1197338980892752643}
   m_Layer: 7
   m_Name: Orbiter
   m_TagString: Untagged
@@ -177,6 +178,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mover: {fileID: 6384775745932153091}
+--- !u!114 &1197338980892752643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775745932153144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c77a98a2ff4967be0ae650704f93e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6384775747002654524
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +243,7 @@ GameObject:
   - component: {fileID: 8219585338611663803}
   - component: {fileID: 4657203298447811017}
   - component: {fileID: 8284530869948181096}
+  - component: {fileID: 4946021707526709550}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -446,5 +460,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3e0044a9d114e8eb3f0d61d003ff050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4946021707526709550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775747270266416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c77a98a2ff4967be0ae650704f93e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -16,6 +16,7 @@ namespace Code.Level
         private Queue<LevelRecordFrameData> _frameReplayData;
         private List<Player.Player> _players;
         private LevelElement[] _levelElements;
+        private Transform[] _recordables;
         private Escape[] _escapes;
 
         private bool _isPlaying = false;
@@ -27,13 +28,40 @@ namespace Code.Level
             _frameReplayData = new Queue<LevelRecordFrameData>(levelRecordingData.FrameData);
             _players = players;
             _replayTime = levelRecordingData.LevelTime;
+            
             _levelElements = GetComponentsInChildren<LevelElement>();
+            _recordables = GetRecordables(levelRecordingData);
+
             _escapes = _levelElements.Where(p => p is Escape).Cast<Escape>().ToArray();
 
             _players.ApplyFunction(p => p.LevelSetup());
             _levelElements.ApplyFunction(p => p.LevelSetup());
             
             CircumDebug.Log($"Initialised replay with {_frameReplayData.Count} values for elements:\n{_levelElements.JoinToString("\n")}");
+        }
+
+        private Transform[] GetRecordables(LevelRecordingData levelRecordingData)
+        {
+            Recordable[] recordables = GetComponentsInChildren<Recordable>();
+            if (levelRecordingData.FrameData.Count == 0)
+            {
+                CircumDebug.LogWarning("There are no frames to replay! Handled but very unexpected");
+                return recordables.Select(p => p.transform).ToArray();
+            }
+
+            LevelRecordFrameData frame = levelRecordingData.FrameData[0];
+            if (frame.LevelElementPositions.Length == recordables.Length)
+            {
+                return recordables.Select(p => p.transform).ToArray();
+            }
+
+            if (frame.LevelElementPositions.Length == _levelElements.Length)
+            {
+                return _levelElements.Select(p => p.transform).ToArray();
+            }
+            
+            CircumDebug.LogError($"Unexpected number of recorded objects. {frame.LevelElementPositions.Length} objects recorded. {recordables.Length} recordable components. {_levelElements.Length} level elements");
+            return recordables.Select(p => p.transform).ToArray();
         }
 
         protected override void OnLevelReady()
@@ -91,11 +119,11 @@ namespace Code.Level
             
             LevelRecordFrameData frameData = _frameReplayData.Dequeue();
 
-            for (int i = 0; i < _levelElements.Length; i++)
+            for (int i = 0; i < _recordables.Length; i++)
             {
-                LevelElement levelElement = _levelElements[i];
-                levelElement.transform.position = frameData.LevelElementPositions[i];
-                levelElement.gameObject.SetActiveSafe(frameData.LevelElementsActive[i]);
+                Transform recordable = _recordables[i];
+                recordable.transform.position = frameData.LevelElementPositions[i];
+                recordable.gameObject.SetActiveSafe(frameData.LevelElementsActive[i]);
             }
         }
 
