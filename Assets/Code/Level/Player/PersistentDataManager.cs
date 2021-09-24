@@ -138,7 +138,7 @@ namespace Code.Level.Player
             if (_doNotLoadOrSave)
             {
                 _playerStats = PlayerStats.CreateEmptyPlayerStats();
-                _circumOptions = new CircumOptions();
+                _circumOptions = CircumOptions.CreateCircumOptions();
                 _playerFirsts = new PlayerFirsts();
                 return;
             }
@@ -192,10 +192,12 @@ namespace Code.Level.Player
             _levelStats.Clear();
             
             CircumOptions.ResetOptions();
-            _circumOptions = new CircumOptions();
+            _circumOptions = CircumOptions.CreateCircumOptions();
 
             PlayerFirsts.ResetPlayerFirsts();
             _playerFirsts = new PlayerFirsts();
+            
+            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)

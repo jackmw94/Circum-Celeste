@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Code.Core;
+using Code.Debugging;
 using Code.Juice;
 using Code.Level;
 using Code.Level.Player;
@@ -16,8 +18,7 @@ namespace Code.Flow
 {
     public class Settings : SingletonMonoBehaviour<Settings>
     {
-        private const string UpdateRemoteConfigDefaultText = "Update game configuration";
-        
+        [SerializeField] private AnimateSettingsSection _animateGameOptionsSection;
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
@@ -31,18 +32,24 @@ namespace Code.Flow
         [Space(15)]
         [SerializeField] private Button _restartLevelButton;
         [SerializeField] private Button _backButton;
+        [SerializeField] private Button _gameOptionsButton;
         [SerializeField] private Button _toggleFeedbacks;
         [SerializeField] private Button _toggleShowLevelTime;
         [SerializeField] private Button _gameTipsButton;
         [SerializeField] private Button _howToPlayButton;
+        [SerializeField] private Button _changeQualityLevelButton;
         [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
+        [SerializeField] private TextMeshProUGUI _changeQualityLevelLabel;
         [Space(15)]
         [SerializeField, LeanTranslationName] private string _showLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _hideLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _turnFeedbacksOnLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _turnFeedbacksOffLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _changeQualitySettingLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _qualitySettingHighLocalisationTerm;
+        [SerializeField, LeanTranslationName] private string _qualitySettingMediumLocalisationTerm;
 
         private bool _settingsOn = false;
         private Coroutine _turnOnOffCoroutine = null;
@@ -60,6 +67,8 @@ namespace Code.Flow
             _toggleShowLevelTime.onClick.AddListener(ToggleShowLevelTimer);
             _gameTipsButton.onClick.AddListener(ShowTips);
             _howToPlayButton.onClick.AddListener(ShowHowToPlay);
+            _gameOptionsButton.onClick.AddListener(ShowGameOptions);
+            _changeQualityLevelButton.onClick.AddListener(ChangeQualityLevel);
 
             TurnOffInstant();
         }
@@ -85,18 +94,45 @@ namespace Code.Flow
             _toggleShowLevelTime.onClick.RemoveListener(ToggleShowLevelTimer);
             _gameTipsButton.onClick.RemoveListener(ShowTips);
             _howToPlayButton.onClick.RemoveListener(ShowHowToPlay);
+            _gameOptionsButton.onClick.RemoveListener(ShowGameOptions);
+            _changeQualityLevelButton.onClick.RemoveListener(ChangeQualityLevel);
+        }
+
+        private void ChangeQualityLevel()
+        {
+            CircumOptions.SetNextQualitySetting();
+            CircumDebug.Log($"Set next quality setting to {CircumOptions.QualitySetting}");
+            UpdateQualityLevelLabel();
+            CircumOptions.Save(CircumOptions);
+        }
+
+        private void ShowGameOptions()
+        {
+            _animateGameOptionsSection.ShowSettingsSection();
         }
 
         private void OnSettingShowing()
         {
             _resetStatsButton.Reset();
             
+            UpdateAllLabels();
+        }
+
+        private void UpdateAllLabels()
+        {
+            UpdateQualityLevelLabel();
             UpdateFeedbacksLabel();
             UpdateShowLevelTimerLabel();
         }
 
         private void SettingsButtonClicked()
         {
+            if (!_animateGameOptionsSection.TopLevelCurrentlyShowing)
+            {
+                _animateGameOptionsSection.ShowTopSettings();
+                return;
+            }
+            
             _settingsOn = !_settingsOn;
             TurnSettingsOnOff(_settingsOn);
         }
@@ -126,6 +162,27 @@ namespace Code.Flow
             string localisationTerm = CircumOptions.ShowLevelTimer ? _hideLevelTimeLocalisationTerm : _showLevelTimeLocalisationTerm;
             string labelText = LeanLocalization.GetTranslationText(localisationTerm);
             _toggleShowLevelTimerLabel.text = labelText;
+        }
+
+        private void UpdateQualityLevelLabel()
+        {
+            string currentLevelLocalisationTerm = QualitySettingToLabelTerm(CircumOptions.QualitySetting);
+            string currentLevelLabelText = LeanLocalization.GetTranslationText(currentLevelLocalisationTerm);
+            string baseLabelText = LeanLocalization.GetTranslationText(_changeQualitySettingLocalisationTerm);
+            
+            string labelText = $"{baseLabelText} ({currentLevelLabelText})";
+            _changeQualityLevelLabel.text = labelText;
+        }
+
+        private string QualitySettingToLabelTerm(CircumQuality.CircumQualitySetting qualitySetting)
+        {
+            switch (qualitySetting)
+            {
+                case CircumQuality.CircumQualitySetting.Medium: return _qualitySettingMediumLocalisationTerm;
+                case CircumQuality.CircumQualitySetting.High: return _qualitySettingHighLocalisationTerm;
+            }
+
+            throw new ArgumentOutOfRangeException($"There is no localisation term for quality setting {qualitySetting}");
         }
 
         private void BackButtonListener()

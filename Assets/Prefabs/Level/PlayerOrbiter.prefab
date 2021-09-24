@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d786c966ba44e8aba7bde9dfb899da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _vfxPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _particlesScaleTransform: {fileID: 6384775747002654523}
-  _particlesPrefab: {fileID: 15244264703895015, guid: d6a89e99ec744354db61da14b1704eae, type: 3}
   _positionProperty: Position
   _scaleProperty: Scale
   _offset: {x: 0, y: 0, z: -1}
