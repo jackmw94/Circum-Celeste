@@ -37,6 +37,12 @@ namespace Code.Level
         {
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
             _internalLevelIndex = persistentDataManager.GetRestartLevelIndex();
+
+            if (persistentDataManager.PlayerStats.CompletedTutorials)
+            {
+                _internalLevelIndex = Mathf.Max(_internalLevelIndex, NumberOfTutorials);
+            }
+            
             CircumDebug.Log($"Initialised level provider. {(persistentDataManager.PlayerStats.CompletedTutorials ? "has" : "hasn't")} completed tutorials. internal level index = {_internalLevelIndex}");
         }
 
