@@ -11,6 +11,7 @@ namespace Code.Behaviours
         [SerializeField] private float _animationDuration;
         [SerializeField] private AnimationCurve _animationCurve;
         [SerializeField] private bool _setFirstFrameOnAwake = false;
+        [SerializeField] private bool _playOnAwake = false;
 
         private Action _onComplete = null;
         private Coroutine _animationCoroutine = null;
@@ -24,6 +25,11 @@ namespace Code.Behaviours
             if (_setFirstFrameOnAwake)
             {
                 SetValue(0f);
+            }
+
+            if (_playOnAwake)
+            {
+                TriggerAnimation();
             }
         }
 

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityExtras.Code.Optional.EasingFunctions;
 
 namespace Code.Behaviours
 {
-    public class AnimateMovement : MonoBehaviour
+    public class WobbleMovement : MonoBehaviour
     {
         [SerializeField] private Vector3 _targetLocalPosition;
         [SerializeField] private EasingFunctions.EasingType _easing;

@@ -6,6 +6,7 @@
         PickupCollected,
         PlayerDied,
         PlayerEscaped,
-        HazardHit
+        HazardHit,
+        BlackHoleHit
     }
 }

@@ -1077,6 +1077,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _setFirstFrameOnAwake: 0
+  _playOnAwake: 0
   _image: {fileID: 950155857}
 --- !u!1 &162370321
 GameObject:
@@ -1417,7 +1418,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &188961536
 MonoBehaviour:
@@ -2496,7 +2497,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &270372752
 MonoBehaviour:
@@ -3290,6 +3291,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _setFirstFrameOnAwake: 1
+  _playOnAwake: 0
   _image: {fileID: 950155857}
 --- !u!1 &311549196
 GameObject:
@@ -3794,7 +3796,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &340334186
 RectTransform:
@@ -4277,7 +4279,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 56.25}
+  m_SizeDelta: {x: 0, y: 37.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &394778711
 MonoBehaviour:
@@ -5295,7 +5297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 56.25}
+  m_SizeDelta: {x: 0, y: 37.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489047517
 MonoBehaviour:
@@ -7295,7 +7297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &596139321
 MonoBehaviour:
@@ -8539,6 +8541,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _setFirstFrameOnAwake: 0
+  _playOnAwake: 0
   _image: {fileID: 1984476862}
 --- !u!1 &720032010
 GameObject:
@@ -8579,7 +8582,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &720032012
 MonoBehaviour:
@@ -8846,7 +8849,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 56.25}
+  m_SizeDelta: {x: 0, y: 37.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743967437
 MonoBehaviour:
@@ -9592,7 +9595,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &785700334
 MonoBehaviour:
@@ -10089,6 +10092,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _setFirstFrameOnAwake: 1
+  _playOnAwake: 0
   _image: {fileID: 1984476862}
 --- !u!1 &804000229
 GameObject:
@@ -10649,7 +10653,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836695403
 MonoBehaviour:
@@ -11774,7 +11778,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &913305455
 MonoBehaviour:
@@ -15573,7 +15577,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328723732
 MonoBehaviour:
@@ -21648,7 +21652,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 225}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1806015301
 MonoBehaviour:
@@ -22754,7 +22758,7 @@ Camera:
   far clip plane: 1000
   field of view: 136.1
   orthographic: 1
-  orthographic size: 12.322666
+  orthographic size: 11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -24345,7 +24349,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.75
+  m_fontSize: 20.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

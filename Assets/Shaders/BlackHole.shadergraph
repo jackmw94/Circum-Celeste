@@ -1236,6 +1236,7 @@
     },
     "m_Path": "Shader Graphs",
     "m_ConcretePrecision": 0,
+    "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": ""
     },
@@ -1296,6 +1297,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -1363,8 +1365,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1122.4000244140625,
-            "y": 452.0000305175781,
+            "x": -1231.199951171875,
+            "y": -385.6000061035156,
             "width": 148.0,
             "height": 118.39999389648438
         }
@@ -1383,6 +1385,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -1508,10 +1511,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1289.5999755859375,
-            "y": 202.3999786376953,
-            "width": 126.40003204345703,
-            "height": 118.39999389648438
+            "x": -1398.4000244140625,
+            "y": -635.2000122070313,
+            "width": 125.59998321533203,
+            "height": 118.39996337890625
         }
     },
     "m_Slots": [
@@ -1528,6 +1531,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -1613,6 +1617,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -1779,6 +1784,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -1951,6 +1957,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -1988,6 +1995,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -2040,6 +2048,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -2060,10 +2069,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1769.599853515625,
-            "y": 376.0,
+            "x": -1878.4000244140625,
+            "y": -461.60003662109377,
             "width": 128.0,
-            "height": 172.80001831054688
+            "height": 173.60000610351563
         }
     },
     "m_Slots": [
@@ -2086,6 +2095,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -2128,8 +2138,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1122.4000244140625,
-            "y": 320.0,
+            "x": -1231.199951171875,
+            "y": -517.5999145507813,
             "width": 148.0,
             "height": 118.39999389648438
         }
@@ -2148,6 +2158,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -2188,10 +2199,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -216.8000946044922,
-            "y": 483.99993896484377,
-            "width": 208.00001525878907,
-            "height": 350.4000244140625
+            "x": -325.5999755859375,
+            "y": -353.6000061035156,
+            "width": 208.0,
+            "height": 350.3999938964844
         }
     },
     "m_Slots": [
@@ -2220,6 +2231,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -2257,6 +2269,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -2274,9 +2287,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1156.800048828125,
-            "y": 578.4000244140625,
-            "width": 208.0,
+            "x": 904.7999877929688,
+            "y": -377.60003662109377,
+            "width": 208.00006103515626,
             "height": 391.1999816894531
         }
     },
@@ -2291,6 +2304,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -2311,8 +2325,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1769.599853515625,
-            "y": 313.6000061035156,
+            "x": -1878.4000244140625,
+            "y": -524.0,
             "width": 148.0,
             "height": 34.399993896484378
         }
@@ -2325,6 +2339,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -2529,6 +2544,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -2822,6 +2838,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -2984,10 +3001,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1944.800048828125,
-            "y": 1877.60009765625,
+            "x": 1357.60009765625,
+            "y": 2957.60009765625,
             "width": 208.0,
-            "height": 278.400146484375
+            "height": 277.60009765625
         }
     },
     "m_Slots": [
@@ -3001,6 +3018,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -3086,6 +3104,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -3142,8 +3161,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 777.5999755859375,
-            "y": 549.6000366210938,
+            "x": 575.9998779296875,
+            "y": -377.60003662109377,
             "width": 208.0,
             "height": 326.39996337890627
         }
@@ -3165,6 +3184,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -3339,6 +3359,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3506,6 +3527,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3618,6 +3640,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3680,6 +3703,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3856,10 +3880,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -406.40008544921877,
-            "y": 399.199951171875,
-            "width": 126.39999389648438,
-            "height": 142.4000244140625
+            "x": -515.199951171875,
+            "y": -438.3999328613281,
+            "width": 125.60000610351563,
+            "height": 142.40000915527345
         }
     },
     "m_Slots": [
@@ -3879,6 +3903,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -3896,10 +3921,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 427.20013427734377,
-            "y": 2560.0,
-            "width": 162.3999481201172,
-            "height": 34.39990234375
+            "x": -159.99993896484376,
+            "y": 3304.7998046875,
+            "width": 163.1999969482422,
+            "height": 33.60009765625
         }
     },
     "m_Slots": [
@@ -3910,6 +3935,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3953,6 +3979,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -3994,10 +4021,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1580.8001708984375,
-            "y": 2101.599853515625,
+            "x": 993.6001586914063,
+            "y": 2846.39990234375,
             "width": 208.0,
-            "height": 326.400146484375
+            "height": 325.60009765625
         }
     },
     "m_Slots": [
@@ -4017,6 +4044,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4034,10 +4062,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -406.40008544921877,
-            "y": 223.19998168945313,
-            "width": 126.39999389648438,
-            "height": 142.4000244140625
+            "x": -515.199951171875,
+            "y": -614.3999633789063,
+            "width": 125.60000610351563,
+            "height": 142.40000915527345
         }
     },
     "m_Slots": [
@@ -4057,6 +4085,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4098,10 +4127,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -797.5999755859375,
-            "y": 234.3999786376953,
-            "width": 142.39996337890626,
-            "height": 34.399993896484378
+            "x": -968.0,
+            "y": -603.199951171875,
+            "width": 142.4000244140625,
+            "height": 34.39996337890625
         }
     },
     "m_Slots": [
@@ -4112,6 +4141,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -4369,6 +4399,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4571,10 +4602,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1052.800048828125,
-            "y": 2101.599853515625,
-            "width": 208.0,
-            "height": 302.400146484375
+            "x": 465.6000061035156,
+            "y": 2846.39990234375,
+            "width": 207.99996948242188,
+            "height": 301.60009765625
         }
     },
     "m_Slots": [
@@ -4591,6 +4622,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4655,10 +4687,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 690.4000854492188,
-            "y": 2560.0,
-            "width": 119.99999237060547,
-            "height": 149.599853515625
+            "x": 103.20010375976563,
+            "y": 3304.7998046875,
+            "width": 120.0,
+            "height": 148.800048828125
         }
     },
     "m_Slots": [
@@ -4681,6 +4713,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4698,8 +4731,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1260.800048828125,
-            "y": 2491.199951171875,
+            "x": 673.60009765625,
+            "y": 3236.0,
             "width": 208.0,
             "height": 349.599853515625
         }
@@ -4730,6 +4763,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -4761,6 +4795,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -4958,6 +4993,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -5043,6 +5079,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -5074,6 +5111,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -5270,6 +5308,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -5371,10 +5410,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 583.8165893554688,
-            "y": 635.1665649414063,
-            "width": 0.0,
-            "height": 0.0
+            "x": 403.1999206542969,
+            "y": -202.39999389648438,
+            "width": 124.0,
+            "height": 34.400001525878909
         }
     },
     "m_Slots": [
@@ -5385,6 +5424,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -5518,10 +5558,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -576.7999877929688,
-            "y": 104.79998779296875,
-            "width": 126.39999389648438,
-            "height": 118.39999389648438
+            "x": -716.7999267578125,
+            "y": -721.6000366210938,
+            "width": 125.59996795654297,
+            "height": 118.4000244140625
         }
     },
     "m_Slots": [
@@ -5538,6 +5578,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -5673,10 +5714,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1535.199951171875,
-            "y": 556.0,
-            "width": 197.5999755859375,
-            "height": 33.60003662109375
+            "x": -1644.0,
+            "y": -281.6000061035156,
+            "width": 198.4000244140625,
+            "height": 34.399993896484378
         }
     },
     "m_Slots": [
@@ -5687,6 +5728,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -5889,6 +5931,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -5920,6 +5963,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -5940,10 +5984,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 734.4000244140625,
-            "y": 2101.599853515625,
-            "width": 208.0,
-            "height": 326.400146484375
+            "x": 147.19998168945313,
+            "y": 2846.39990234375,
+            "width": 208.00001525878907,
+            "height": 325.60009765625
         }
     },
     "m_Slots": [
@@ -5963,6 +6007,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -6049,10 +6094,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1553.599853515625,
-            "y": 313.6000061035156,
-            "width": 125.5999755859375,
-            "height": 117.5999755859375
+            "x": -1662.4000244140625,
+            "y": -524.0,
+            "width": 125.59998321533203,
+            "height": 118.39999389648438
         }
     },
     "m_Slots": [
@@ -6069,6 +6114,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -6103,6 +6149,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -6163,6 +6210,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -6194,6 +6242,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -6623,6 +6672,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -6754,6 +6804,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -6873,6 +6924,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -6990,10 +7042,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 948.7999267578125,
-            "y": 2491.199951171875,
-            "width": 125.60002899169922,
-            "height": 118.39989471435547
+            "x": 361.6000061035156,
+            "y": 3236.0,
+            "width": 125.60000610351563,
+            "height": 117.599853515625
         }
     },
     "m_Slots": [
@@ -7010,6 +7062,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -7158,6 +7211,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -7176,10 +7230,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 948.7999267578125,
-            "y": 2634.39990234375,
-            "width": 125.60002899169922,
-            "height": 118.39989471435547
+            "x": 361.6000061035156,
+            "y": 3379.199951171875,
+            "width": 125.60000610351563,
+            "height": 117.599853515625
         }
     },
     "m_Slots": [
@@ -7196,6 +7250,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": false,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -7350,6 +7405,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -7387,6 +7443,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -7543,10 +7600,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2272.0,
-            "y": 1560.0,
+            "x": 1692.7999267578125,
+            "y": 2978.39990234375,
             "width": 208.0,
-            "height": 326.4000244140625
+            "height": 325.60009765625
         }
     },
     "m_Slots": [
@@ -7566,6 +7623,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }
@@ -7603,6 +7661,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -7638,6 +7697,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -7687,6 +7747,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -7739,6 +7800,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     },
@@ -7774,10 +7836,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 329.5999755859375,
-            "y": 494.39996337890627,
-            "width": 207.9999542236328,
-            "height": 350.4000244140625
+            "x": 103.99987030029297,
+            "y": -377.60003662109377,
+            "width": 208.0,
+            "height": 350.3999938964844
         }
     },
     "m_Slots": [
@@ -7800,6 +7862,7 @@
     "synonyms": [],
     "m_Precision": 0,
     "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
     }

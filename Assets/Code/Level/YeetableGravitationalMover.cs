@@ -1,6 +1,8 @@
 ﻿using Code.Core;
 using Code.Juice;
+using Code.VFX;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
@@ -39,9 +41,12 @@ namespace Code.Level
             }
             
             // got yeet
-            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.HitEnemy);
-            Vector3 direction = (transform.position - other.transform.position).normalized;
+            Vector3 transformPosition = transform.position;
+            Vector3 direction = (transformPosition - other.transform.position).normalized;
             _hitVector += (Vector2)direction * _yeetScale;
+
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.HitEnemy);
+            VfxManager.Instance.SpawnVfx(VfxType.BlackHoleHit, transformPosition.ModifyVectorElement(2, 20f));
         }
     }
 }
