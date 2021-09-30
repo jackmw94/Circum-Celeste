@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Code.UI
 {
-    public class WorldRecordsScreen : MonoBehaviour
+    public class YourFastestTimesScreen : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _fastestTimeLabel;
         [SerializeField] private TextMeshProUGUI _fastestPerfectTimeLabel;
