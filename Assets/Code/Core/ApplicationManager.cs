@@ -6,7 +6,7 @@ namespace Code.Core
     {
         [SerializeField] private int _targetFrameRate = 60;
         [SerializeField] private bool _vsyncOn;
-
+        
         private void Awake()
         {
             Application.targetFrameRate = _targetFrameRate;

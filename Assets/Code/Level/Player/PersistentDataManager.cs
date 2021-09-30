@@ -197,19 +197,19 @@ namespace Code.Level.Player
             PlayerFirsts.ResetPlayerFirsts();
             _playerFirsts = new PlayerFirsts();
             
-            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
+            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)
         {
             _doNotLoadOrSave = doNotLoadOrSave;
             int toggledValue = _doNotLoadOrSave ? 1 : 0;
-            CircumPlayerPrefs.SetInt(NoLoadingSavingPlayerPrefsKey, toggledValue);
+            PersistentDataHelper.SetInt(NoLoadingSavingPlayerPrefsKey, toggledValue);
         }
 
         private bool GetDoNotLoadOrSave()
         {
-            return CircumPlayerPrefs.HasKey(NoLoadingSavingPlayerPrefsKey) && CircumPlayerPrefs.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
+            return PersistentDataHelper.HasKey(NoLoadingSavingPlayerPrefsKey) && PersistentDataHelper.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
         }
 
         public bool HasCompletedGame()

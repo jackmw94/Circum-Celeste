@@ -47,7 +47,7 @@ namespace Code.Flow
 
         private bool ShouldPlaySplashScreen()
         {
-            if (!CircumPlayerPrefs.TryGetLong(PlayerPrefsKeys.SplashScreenLastRunTime, out long lastRunTicks))
+            if (!PersistentDataHelper.TryGetLong(PlayerPrefsKeys.SplashScreenLastRunTime, out long lastRunTicks))
             {
                 return true;
             }
@@ -66,6 +66,8 @@ namespace Code.Flow
 
             yield return WaitUntilJonkWongleLogoFinished(true);
 
+            yield return WaitUntilLoggedIn();
+            
             bool showSplashComplete = false;
             _showSplashScreen.TriggerAnimation(() =>
             {
@@ -77,11 +79,27 @@ namespace Code.Flow
             yield return CompleteSplashScreen(true);
         }
 
+        private IEnumerator WaitUntilLoggedIn()
+        {
+            bool socialAuthenticationFinished = false;
+
+            RemoteDataManager.Instance.LoginWithSocialAPI(_ =>
+            {
+                socialAuthenticationFinished = true;
+            });
+
+            yield return new WaitUntil(() => socialAuthenticationFinished);
+        }
+
         private IEnumerator CompleteSplashScreen(bool playedLogos)
         {
             if (playedLogos)
             {
-                CircumPlayerPrefs.SetLong(PlayerPrefsKeys.SplashScreenLastRunTime, DateTime.Now.Ticks);
+                PersistentDataHelper.SetLong(PlayerPrefsKeys.SplashScreenLastRunTime, DateTime.Now.Ticks);
+            }
+            else
+            {
+                yield return WaitUntilLoggedIn();
             }
 
             float startTime = Time.time;

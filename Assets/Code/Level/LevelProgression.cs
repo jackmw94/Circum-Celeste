@@ -18,12 +18,12 @@ namespace Code.Level
         {
             for (int i = 0; i < _tutorialLevels.Length; i++)
             {
-                _tutorialLevels[i].LevelContext.LevelIndex = -1;
+                // first tutorial is -1, second -2, etc.
+                _tutorialLevels[i].LevelContext.LevelIndex = -i - 1;
             }
 
             for (int i = 0; i < _levelLayout.Length; i++)
             {
-                // user facing level number, rather than index
                 _levelLayout[i].LevelContext.LevelIndex = i;
             }
         }

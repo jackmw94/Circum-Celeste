@@ -1,9 +1,11 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 namespace Code.Level
 {
@@ -21,6 +23,15 @@ namespace Code.Level
 
         public void CreateCurrentLevel(LevelRecording replay = null, InterLevelFlow.InterLevelTransition transition = InterLevelFlow.InterLevelTransition.Regular)
         {
+            if (replay != null)
+            {
+                LevelLayoutContext levelContext = _levelProvider.GetCurrentLevel().LevelContext;
+                Analytics.CustomEvent("StartedLevel", new Dictionary<string, object>
+                {
+                    { "LevelNumber", levelContext.LevelNumber },
+                });
+            }
+            
             if (CurrentLevelInstance)
             {
                 Destroy(CurrentLevelInstance);
@@ -121,12 +132,20 @@ namespace Code.Level
                 if (levelResult.Success)
                 {
                     LevelLayoutContext levelContext = currentLevel.LevelContext;
-                
+
                     LevelRecording levelRecording = new LevelRecording
                     {
                         LevelIndex = levelContext.LevelIndex,
                         RecordingData = levelResult.LevelRecordingData
                     };
+                    
+                    Analytics.CustomEvent("CompletedLevel", new Dictionary<string, object>
+                    {
+                        { "LevelNumber", levelContext.LevelNumber },
+                        { "NoDamage", levelResult.NoDamage },
+                        { "GoldTime", levelRecording.HasBeatenGoldTime(currentLevel.GoldTime) },
+                    });
+
                     persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
                     advanceLevelPrompt = _levelProvider.CanChangeToNextLevel(true);

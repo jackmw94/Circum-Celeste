@@ -11,6 +11,8 @@ namespace Code.Level
         [field: SerializeField] public int LevelIndex;
         [field: SerializeField] public LevelRecordingData RecordingData;
 
+        public bool IsDirty { get; set; } 
+
         public bool HasBeatenGoldTime(float goldTime)
         {
             return RecordingData.LevelTime <= goldTime;

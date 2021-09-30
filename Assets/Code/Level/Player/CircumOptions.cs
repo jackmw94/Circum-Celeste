@@ -35,12 +35,12 @@ namespace Code.Level.Player
 
         public static CircumOptions Load()
         {
-            if (!CircumPlayerPrefs.HasKey(PlayerPrefsKeys.CircumOptions))
+            if (!PersistentDataHelper.HasKey(PlayerPrefsKeys.CircumOptions))
             {
                 return CreateCircumOptions();
             }
 
-            string serializedOptions = CircumPlayerPrefs.GetString(PlayerPrefsKeys.CircumOptions);
+            string serializedOptions = PersistentDataHelper.GetString(PlayerPrefsKeys.CircumOptions);
             CircumDebug.Log($"Loaded circum options {serializedOptions}");
             
             CircumOptions deserializedOptions = JsonUtility.FromJson<CircumOptions>(serializedOptions);
@@ -61,14 +61,14 @@ namespace Code.Level.Player
         {
             string serializedCircumOptions = JsonUtility.ToJson(circumOptions);
             
-            CircumPlayerPrefs.SetString(PlayerPrefsKeys.CircumOptions, serializedCircumOptions);
+            PersistentDataHelper.SetString(PlayerPrefsKeys.CircumOptions, serializedCircumOptions, false);
             
             CircumDebug.Log($"Saved circum options : {serializedCircumOptions}");
         }
 
         public static void ResetOptions()
         {
-            CircumPlayerPrefs.DeleteKey(PlayerPrefsKeys.CircumOptions);
+            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.CircumOptions);
         }
 
         public void SetNextQualitySetting()

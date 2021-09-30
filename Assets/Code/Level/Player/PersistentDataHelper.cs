@@ -1,28 +1,25 @@
-﻿using System;
+﻿using Code.Core;
+using Code.Debugging;
 using UnityExtras.Code.Core;
 
 namespace Code.Level.Player
 {
-    public static class CircumPlayerPrefs
+    public static class PersistentDataHelper
     {
         private static IPlayerPrefsProvider _playerPrefsProvider;
 
-        private static string FirstIntKey(string key) => $"{key}_int1";
-        private static string SecondIntKey(string key) => $"{key}_int2";
+        private static string LongKey_FirstInt(string key) => $"{key}_int1";
+        private static string LongKey_SecondInt(string key) => $"{key}_int2";
         
-        static CircumPlayerPrefs()
+        static PersistentDataHelper()
         {
-#if CONCURRENT_PLAYER_PREFS
-            _playerPrefsProvider = new ConcurrentPlayerPrefs();
-#else
             _playerPrefsProvider = new SynchronousPlayerPrefs();
-#endif
         }
 
         public static bool TryGetLong(string key, out long longValue)
         {
-            string firstIntKey = FirstIntKey(key);
-            string secondIntKey = SecondIntKey(key);
+            string firstIntKey = LongKey_FirstInt(key);
+            string secondIntKey = LongKey_SecondInt(key);
 
             if (!HasKey(firstIntKey) || !HasKey(secondIntKey))
             {
@@ -47,8 +44,8 @@ namespace Code.Level.Player
         {
             (int first, int second) = Utilities.DeconstructLongToInts(longValue);
 
-            string firstIntKey = FirstIntKey(key);
-            string secondIntKey = SecondIntKey(key);
+            string firstIntKey = LongKey_FirstInt(key);
+            string secondIntKey = LongKey_SecondInt(key);
             
             SetInt(firstIntKey, first);
             SetInt(secondIntKey, second);
@@ -60,7 +57,22 @@ namespace Code.Level.Player
 
         public static bool HasKey(string key) => _playerPrefsProvider.HasKey(key);
 
-        public static void SetString(string key, string value) => _playerPrefsProvider.SetString(key, value);
+        public static void SetString(string key, string value, bool saveRemote)
+        {
+            _playerPrefsProvider.SetString(key, value);
+
+            if (saveRemote)
+            {
+                if (RemoteDataManager.Instance.IsLoggedIn)
+                {
+                    RemoteDataManager.Instance.SetString(key, value);
+                }
+                else
+                {
+                    CircumDebug.LogError($"Could not save {key} remotely because we're not logged in!");
+                }
+            }
+        }
 
         public static void Save() => _playerPrefsProvider.Save();
 
@@ -72,8 +84,8 @@ namespace Code.Level.Player
             }
             else
             {
-                _playerPrefsProvider.DeleteKey(FirstIntKey(key));
-                _playerPrefsProvider.DeleteKey(SecondIntKey(key));
+                _playerPrefsProvider.DeleteKey(LongKey_FirstInt(key));
+                _playerPrefsProvider.DeleteKey(LongKey_SecondInt(key));
             }
         }
 

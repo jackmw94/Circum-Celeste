@@ -22,7 +22,8 @@ namespace Code.Flow
         [Space(15)]
         [SerializeField] private PositiveFeedbackScreen _positiveFeedbackScreen;
         [SerializeField] private LevelOverviewScreen _levelOverviewScreen;
-        [SerializeField] private WorldRecordsScreen _worldRecordsScreen;
+        [SerializeField] private YourFastestTimesScreen _worldRecordsScreen;
+        [SerializeField] private FriendsLevelRanking _friendsLevelRanking;
         [SerializeField] private RunOverviewScreen _runOverviewScreen;
         [Space(15)]
         [SerializeField] private LevelProvider _levelProvider;
@@ -89,6 +90,8 @@ namespace Code.Flow
                 HasGoldTime = levelRecording?.HasBeatenGoldTime(goldTime) ?? false,
                 HasPerfectGoldTime = perfectLevelRecording?.HasBeatenGoldTime(goldTime) ?? false
             };
+            
+            _friendsLevelRanking.SetupRecordsScreen(levelLayout.GoldTime, ReplayLevel);
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, levelRecording, perfectLevelRecording, ReplayLevel);
 
