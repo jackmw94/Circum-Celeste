@@ -4,7 +4,6 @@ using Code.Level;
 using Code.Level.Player;
 using Code.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
 
@@ -91,7 +90,7 @@ namespace Code.Flow
                 HasPerfectGoldTime = perfectLevelRecording?.HasBeatenGoldTime(goldTime) ?? false
             };
             
-            _friendsLevelRanking.SetupRecordsScreen(levelLayout.GoldTime, ReplayLevel);
+            _friendsLevelRanking.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, levelRecording, perfectLevelRecording, ReplayLevel);
 

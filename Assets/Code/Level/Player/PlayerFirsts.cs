@@ -57,12 +57,12 @@ namespace Code.Level.Player
 
         public static PlayerFirsts Load()
         {
-            if (!PersistentDataHelper.HasKey(PlayerPrefsKeys.PlayerFirsts))
+            if (!PersistentDataHelper.HasKey(PersistentDataKeys.PlayerFirsts))
             {
                 return new PlayerFirsts();
             }
 
-            string serializedPlayerFirsts = PersistentDataHelper.GetString(PlayerPrefsKeys.PlayerFirsts);
+            string serializedPlayerFirsts = PersistentDataHelper.GetString(PersistentDataKeys.PlayerFirsts);
             CircumDebug.Log($"Loaded player firsts {serializedPlayerFirsts}");
             
             PlayerFirsts deserializedPlayerFirsts = JsonUtility.FromJson<PlayerFirsts>(serializedPlayerFirsts);
@@ -79,14 +79,14 @@ namespace Code.Level.Player
         public static void Save(PlayerFirsts playerFirsts)
         {
             string serializedPlayerFirsts = JsonUtility.ToJson(playerFirsts);
-            PersistentDataHelper.SetString(PlayerPrefsKeys.PlayerFirsts, serializedPlayerFirsts, false);
+            PersistentDataHelper.SetString(PersistentDataKeys.PlayerFirsts, serializedPlayerFirsts, false);
             
             CircumDebug.Log($"Saved player firsts : {serializedPlayerFirsts}");
         }
 
         public static void ResetPlayerFirsts()
         {
-            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.PlayerFirsts);
+            PersistentDataHelper.DeleteKey(PersistentDataKeys.PlayerFirsts);
         }
     }
 }

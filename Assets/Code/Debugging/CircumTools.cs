@@ -66,7 +66,7 @@ namespace Code.Debugging
         [MenuItem("Circum/Persistent data/Reset splash screen")]
         public static void ResetSplashScreen()
         {
-            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
+            PersistentDataHelper.DeleteKey(PersistentDataKeys.SplashScreenLastRunTime, true);
         }
 
         [MenuItem("Circum/Persistent data/Reset saved data")]

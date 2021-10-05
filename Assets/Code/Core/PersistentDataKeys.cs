@@ -1,6 +1,6 @@
 ﻿namespace Code.Core
 {
-    public static class PlayerPrefsKeys
+    public static class PersistentDataKeys
     {
 #if PERSISTENT_DATA_DEBUG
         public const string SplashScreenLastRunTime = "Circum_Debug_SplashScreenLastRunTime";

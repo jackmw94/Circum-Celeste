@@ -185,9 +185,9 @@ namespace Code.Level.Player
             PlayerStats.ResetSavedPlayerStats();
             _playerStats = PlayerStats.CreateEmptyPlayerStats();
             
-            foreach (LevelLayout levels in _levelProvider.ActiveLevelProgression.LevelLayout)
+            foreach (LevelLayout level in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                LevelStats.ResetStats(levels.name);
+                LevelStats.ResetStats(level.name);
             }
             _levelStats.Clear();
             
@@ -197,7 +197,7 @@ namespace Code.Level.Player
             PlayerFirsts.ResetPlayerFirsts();
             _playerFirsts = new PlayerFirsts();
             
-            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.SplashScreenLastRunTime, true);
+            PersistentDataHelper.DeleteKey(PersistentDataKeys.SplashScreenLastRunTime, true);
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)

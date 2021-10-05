@@ -47,7 +47,7 @@ namespace Code.Flow
 
         private bool ShouldPlaySplashScreen()
         {
-            if (!PersistentDataHelper.TryGetLong(PlayerPrefsKeys.SplashScreenLastRunTime, out long lastRunTicks))
+            if (!PersistentDataHelper.TryGetLong(PersistentDataKeys.SplashScreenLastRunTime, out long lastRunTicks))
             {
                 return true;
             }
@@ -95,7 +95,7 @@ namespace Code.Flow
         {
             if (playedLogos)
             {
-                PersistentDataHelper.SetLong(PlayerPrefsKeys.SplashScreenLastRunTime, DateTime.Now.Ticks);
+                PersistentDataHelper.SetLong(PersistentDataKeys.SplashScreenLastRunTime, DateTime.Now.Ticks);
             }
             else
             {

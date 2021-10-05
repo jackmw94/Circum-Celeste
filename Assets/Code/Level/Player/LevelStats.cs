@@ -76,14 +76,14 @@ namespace Code.Level.Player
         
         public static bool TryLoadLevelStats(string levelName, out LevelStats levelStats)
         {
-            string metaDataKey = PlayerPrefsKeys.LevelMetaStats(levelName);
+            string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
             bool foundKey = PersistentDataHelper.HasKey(metaDataKey);
             if (foundKey)
             {
                 return LoadLevelStats(levelName, out levelStats);
             }
             
-            string oldLevelKey = PlayerPrefsKeys.LevelStats_Old(levelName);
+            string oldLevelKey = PersistentDataKeys.LevelStats_Old(levelName);
             bool foundOldKey = PersistentDataHelper.HasKey(oldLevelKey);
             if (foundOldKey)
             {
@@ -96,8 +96,8 @@ namespace Code.Level.Player
 
         private static bool LoadLevelStats(string levelName, out LevelStats levelStats)
         {
-            string perfectRecordingKey = PlayerPrefsKeys.PerfectLevelRecording(levelName);
-            string imperfectRecordingKey = PlayerPrefsKeys.ImperfectLevelRecording(levelName);
+            string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
+            string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
 
             string serializedPerfectRecording = PersistentDataHelper.GetString(perfectRecordingKey);
             string serializedImperfectRecording = PersistentDataHelper.GetString(imperfectRecordingKey);
@@ -121,7 +121,7 @@ namespace Code.Level.Player
 
         private static bool LoadOldStats(string levelName, out LevelStats levelStats)
         {
-            string oldLevelKey = PlayerPrefsKeys.LevelStats_Old(levelName);
+            string oldLevelKey = PersistentDataKeys.LevelStats_Old(levelName);
             string serializedStats = PersistentDataHelper.GetString(oldLevelKey);
             string decompressedStats = TryDecompressData(serializedStats);
             
@@ -150,11 +150,13 @@ namespace Code.Level.Player
 
         public static void SaveLevelStats(string levelName, LevelStats levelStats)
         {
+#if UNITY_EDITOR
             if (ForceOldSaveMethod)
             {
                 OldSaveLevelStats(levelName, levelStats);
                 return;
             }
+#endif
 
             if (!levelStats._isDirty)
             {
@@ -164,16 +166,16 @@ namespace Code.Level.Player
             bool metaDataIsDirty = levelStats.FastestLevelRecording.IsDirty || (levelStats.FastestPerfectLevelRecording?.IsDirty ?? false);
             if (metaDataIsDirty)
             {
-                string metaDataKey = PlayerPrefsKeys.LevelMetaStats(levelName);
+                string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
                 LevelMetaData levelMetaData = new LevelMetaData(levelStats);
                 string serializedMetaData = JsonUtility.ToJson(levelMetaData);
                 PersistentDataHelper.SetString(metaDataKey, serializedMetaData, true);
             }
 
-            string perfectRecordingKey = PlayerPrefsKeys.PerfectLevelRecording(levelName);
+            string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
             TrySaveLevelRecording(perfectRecordingKey, levelStats.FastestPerfectLevelRecording);
 
-            string imperfectRecordingKey = PlayerPrefsKeys.ImperfectLevelRecording(levelName);
+            string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
             TrySaveLevelRecording(imperfectRecordingKey, levelStats.FastestLevelRecording);
             
             CircumDebug.Log($"Saved level stats for {levelName} ({levelStats.FastestLevelRecording.RecordingData.FrameData.Count} fastest level frames)");
@@ -184,7 +186,7 @@ namespace Code.Level.Player
             string serialized = JsonUtility.ToJson(levelStats);
             string compressed = serialized.Compress();
 
-            string key = PlayerPrefsKeys.LevelStats_Old(levelName);
+            string key = PersistentDataKeys.LevelStats_Old(levelName);
             
             PersistentDataHelper.SetString(key, compressed, true);
 
@@ -206,10 +208,10 @@ namespace Code.Level.Player
 
         public static void ResetStats(string levelName)
         {
-            string oldKey = PlayerPrefsKeys.LevelStats_Old(levelName);
-            string metaKey = PlayerPrefsKeys.LevelMetaStats(levelName);
-            string perfectRecordingKey = PlayerPrefsKeys.PerfectLevelRecording(levelName);
-            string imperfectRecordingKey = PlayerPrefsKeys.ImperfectLevelRecording(levelName);
+            string oldKey = PersistentDataKeys.LevelStats_Old(levelName);
+            string metaKey = PersistentDataKeys.LevelMetaStats(levelName);
+            string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
+            string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
             
             PersistentDataHelper.DeleteKey(oldKey);
             PersistentDataHelper.DeleteKey(metaKey);

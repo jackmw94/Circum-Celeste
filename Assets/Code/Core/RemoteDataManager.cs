@@ -7,6 +7,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.Core
@@ -15,19 +16,48 @@ namespace Code.Core
     {
         public bool IsLoggedIn { get; private set; } = false;
 
-        private readonly Dictionary<string, string> _friendsList = new Dictionary<string, string>();
+        //private readonly Dictionary<string, FriendIdentities> _friendsList = new Dictionary<string, FriendIdentities>();
 
         public void Login(string username, Action<bool> onCompleteCallback)
         {
-            PlayFabClientAPI.LoginWithCustomID(new LoginWithCustomIDRequest()
+            PlayFabClientAPI.LoginWithCustomID(new LoginWithCustomIDRequest
             {
                 CustomId = username,
-                CreateAccount = true
+                CreateAccount = true,
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+                {
+                    GetUserAccountInfo = true
+                }
+                
             }, result =>
             {
-                IsLoggedIn = true;
-                CircumDebug.Log("Logged in with playfab");
-                onCompleteCallback(true);
+                UserAccountInfo userAccountInfo = result.InfoResultPayload.AccountInfo;
+                UserTitleInfo userTitleInfo = userAccountInfo.TitleInfo;
+                if (string.IsNullOrEmpty(userTitleInfo.DisplayName) || userTitleInfo.DisplayName.EqualsIgnoreCase(" "))
+                {
+                    string newUserName = Social.localUser.userName;
+                    PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
+                    {
+                        DisplayName = newUserName
+                    }, nameResult =>
+                    {
+                        IsLoggedIn = true;
+                        CircumDebug.Log($"Logged in with playfab and updated name to {newUserName}");
+                        onCompleteCallback(true);
+                    }, error =>
+                    {
+                        IsLoggedIn = true;
+                        CircumDebug.LogError($"Logged in with playfab but couldn't update username : {error.ErrorMessage}");
+                        onCompleteCallback(true);
+                    });
+                }
+                else
+                {
+                    IsLoggedIn = true;
+                    CircumDebug.Log("Logged in with playfab");
+                    onCompleteCallback(true);
+                }
+                
             }, error =>
             {
                 CircumDebug.LogError(error.ToString());
@@ -35,42 +65,52 @@ namespace Code.Core
             });
         }
 
-        public void AddNewSocialFriends(IUserProfile[] friendIds)
-        {
-            // update playfab friends
-            foreach (IUserProfile friendId in friendIds)
-            {
-                string friendCircumUsername = friendId.GetCircumUsername();
-                if (!_friendsList.ContainsKey(friendCircumUsername))
-                {
-                    AddFriend(friendCircumUsername);
-                }
-            }
-        }
+        // public string GetFriendDisplayName(string playfabId)
+        // {
+        //     bool foundFriend = _friendsList.TryGetValue(playfabId, out var identities);
+        //     return foundFriend ? identities.DisplayName : null;
+        // }
 
-        private void AddFriend(string circumUsername)
-        {
-            PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest()
-            {
-                Username = circumUsername
-            }, findPlayerResult =>
-            {
-                PlayFabClientAPI.AddFriend(new AddFriendRequest
-                {
-                    FriendUsername = circumUsername
-                }, addFriendResult =>
-                {
-                    CircumDebug.Log($"Added friend {circumUsername}");
-                    _friendsList.Add(circumUsername, findPlayerResult.AccountInfo.PlayFabId);
-                }, error =>
-                {
-                    CircumDebug.LogError($"Could not add friend {circumUsername} : {error}");
-                });
-            }, error =>
-            {
-                CircumDebug.Log($"Can't add player {circumUsername} since they're not signed up");
-            });
-        }
+        // public void AddNewSocialFriends(IUserProfile[] friendIds)
+        // {
+        //     // update playfab friends
+        //     foreach (IUserProfile friendId in friendIds)
+        //     {
+        //         string friendCircumUsername = friendId.GetCircumUsername();
+        //         if (!_friendsList.ContainsKey(friendCircumUsername))
+        //         {
+        //             AddFriend(friendCircumUsername);
+        //         }
+        //     }
+        // }
+        //
+        // private void AddFriend(string displayName)
+        // {
+        //     PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest()
+        //     {
+        //         TitleDisplayName = displayName
+        //     }, findPlayerResult =>
+        //     {
+        //         PlayFabClientAPI.AddFriend(new AddFriendRequest
+        //         {
+        //             FriendUsername = displayName
+        //         }, addFriendResult =>
+        //         {
+        //             CircumDebug.Log($"Added friend {displayName}");
+        //             _friendsList.Add(displayName, new FriendIdentities()
+        //             {
+        //                 CircumUsername = displayName,
+        //                 DisplayName = addFriendResult.Request.
+        //             } findPlayerResult.AccountInfo.PlayFabId);
+        //         }, error =>
+        //         {
+        //             CircumDebug.LogError($"Could not add friend {displayName} : {error}");
+        //         });
+        //     }, error =>
+        //     {
+        //         CircumDebug.Log($"Can't add player {displayName} since they're not signed up");
+        //     });
+        // }
 
         public void LoginWithSocialAPI(Action<bool> onCompleteCallback)
         {
@@ -87,13 +127,13 @@ namespace Code.Core
                     {
                         onCompleteCallback(true);
                         
-                        UpdateFriendsList(updatedFriendsList =>
-                        {
-                            if (updatedFriendsList)
-                            {
-                                AddNewSocialFriends(localUser.friends);
-                            }
-                        });
+                        // UpdateFriendsList(updatedFriendsList =>
+                        // {
+                        //     // if (updatedFriendsList)
+                        //     // {
+                        //     //     AddNewSocialFriends(localUser.friends);
+                        //     // }
+                        // });
                     });
                 }
                 else
@@ -103,51 +143,77 @@ namespace Code.Core
             });
         }
         
-        public void GetFriendData(string friendUsername, string dataKey, Action<bool, string> onCompleteCallback)
-        {
-            if (!_friendsList.TryGetValue(friendUsername, out string playfabUsername))
-            {
-                onCompleteCallback(false, null);
-                return;
-            }
-            
-            PlayFabClientAPI.GetUserData(new GetUserDataRequest
-            {
-                PlayFabId = playfabUsername, 
-                Keys = new List<string>()
-                {
-                    dataKey
-                }
-            }, result =>
-            {
-                onCompleteCallback(true, result.Data[dataKey].Value);
-            }, error =>
-            {
-                onCompleteCallback(false, null);
-            });
-        }
+        // public void GetFriendData(string friendUsername, string dataKey, Action<bool, string> onCompleteCallback)
+        // {
+        //     if (!_friendsList.TryGetValue(friendUsername, out string playfabUsername))
+        //     {
+        //         onCompleteCallback(false, null);
+        //         return;
+        //     }
+        //     
+        //     PlayFabClientAPI.GetUserData(new GetUserDataRequest
+        //     {
+        //         PlayFabId = playfabUsername, 
+        //         Keys = new List<string>()
+        //         {
+        //             dataKey
+        //         }
+        //     }, result =>
+        //     {
+        //         onCompleteCallback(true, result.Data[dataKey].Value);
+        //     }, error =>
+        //     {
+        //         onCompleteCallback(false, null);
+        //     });
+        // }
 
-        public void UpdateFriendsList(Action<bool> onCompleteCallback)
-        {
-            PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest(), result =>
-            {
-                foreach (FriendInfo friendInfo in result.Friends)
-                {
-                    if (_friendsList.ContainsKey(friendInfo.Username))
-                    {
-                        continue;
-                    }
-                    
-                    _friendsList.Add(friendInfo.Username, friendInfo.FriendPlayFabId);
-                }
-
-                onCompleteCallback(true);
-            }, error =>
-            {
-                CircumDebug.LogError($"Could not get friend data : {error}");
-                onCompleteCallback(false);
-            });
-        }
+        // public void UpdateFriendsList(Action<bool> onCompleteCallback)
+        // {
+        //     PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest()
+        //     {
+        //         ProfileConstraints = new PlayerProfileViewConstraints()
+        //         {
+        //             ShowCreated = true,
+        //             ShowLocations = true, 
+        //             ShowMemberships = true,
+        //             ShowOrigination = true,
+        //             ShowStatistics = true, 
+        //             ShowTags = true,
+        //             ShowAvatarUrl = true,
+        //             ShowBannedUntil = true,
+        //             ShowCampaignAttributions = true,
+        //             ShowDisplayName = true,
+        //             ShowExperimentVariants = true,
+        //             ShowLastLogin = true,
+        //             ShowLinkedAccounts = true,
+        //             ShowContactEmailAddresses = true, 
+        //             ShowPushNotificationRegistrations = true,
+        //             ShowValuesToDate = true,
+        //             ShowTotalValueToDateInUsd = true,
+        //         }
+        //     }, result =>
+        //     {
+        //         foreach (FriendInfo friendInfo in result.Friends)
+        //         {
+        //             if (_friendsList.ContainsKey(friendInfo.FriendPlayFabId))
+        //             {
+        //                 continue;
+        //             }
+        //             
+        //             _friendsList.Add(friendInfo.FriendPlayFabId, new FriendIdentities()
+        //             {
+        //                 DisplayName = friendInfo.TitleDisplayName,
+        //                 CircumUsername = "" 
+        //             });
+        //         }
+        //
+        //         onCompleteCallback(true);
+        //     }, error =>
+        //     {
+        //         CircumDebug.LogError($"Could not get friend data : {error}");
+        //         onCompleteCallback(false);
+        //     });
+        // }
         
         public void SetString(string key, string value, Action<bool> onCompleteCallback = null)
         {

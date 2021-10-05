@@ -72,19 +72,19 @@ namespace Code.Level.Player
             string serialized = JsonUtility.ToJson(stats);
             string compressed = serialized.Compress();
 
-            PersistentDataHelper.SetString(PlayerPrefsKeys.PlayerStats, compressed, true);
+            PersistentDataHelper.SetString(PersistentDataKeys.PlayerStats, compressed, true);
             CircumDebug.Log($"Saved player stats: {stats}");
         }
         
         public static PlayerStats Load()
         {
-            if (!PlayerPrefs.HasKey(PlayerPrefsKeys.PlayerStats))
+            if (!PlayerPrefs.HasKey(PersistentDataKeys.PlayerStats))
             {
                 CircumDebug.Log("Created new player stats since we can't find saved key");
                 return CreateEmptyPlayerStats();
             }
             
-            string serializedPlayerStats = PersistentDataHelper.GetString(PlayerPrefsKeys.PlayerStats);
+            string serializedPlayerStats = PersistentDataHelper.GetString(PersistentDataKeys.PlayerStats);
 
             if (!string.IsNullOrEmpty(serializedPlayerStats))
             {
@@ -156,7 +156,7 @@ namespace Code.Level.Player
         
         public static void ResetSavedPlayerStats()
         {
-            PersistentDataHelper.DeleteKey(PlayerPrefsKeys.PlayerStats);
+            PersistentDataHelper.DeleteKey(PersistentDataKeys.PlayerStats);
         }
     }
 }
