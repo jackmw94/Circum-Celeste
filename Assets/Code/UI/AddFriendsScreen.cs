@@ -50,7 +50,7 @@ namespace Code.UI
         {
             _messageLabel.text = "";
             _uniqueIdLabel.text = RemoteDataManager.Instance.IsLoggedIn ? 
-                RemoteDataManager.Instance.PlayFabId : 
+                RemoteDataManager.Instance.OurPlayFabId : 
                 LeanLocalization.GetTranslationText(_notLoggedInLocalisationTerm, "[user not logged in]");
             RefreshFriendsListUI();
         }
@@ -65,7 +65,7 @@ namespace Code.UI
         private void AddFriendButtonListener()
         {
             string friendPlayFabId = _friendIdInput.text;
-            if (friendPlayFabId == RemoteDataManager.Instance.PlayFabId)
+            if (friendPlayFabId == RemoteDataManager.Instance.OurPlayFabId)
             {
                 ShowMessage(_cantAddYourselfAsFriendLocalisationTerm, true);
                 return;
@@ -85,7 +85,7 @@ namespace Code.UI
                 {
                     FunctionName = "requiteFriendship",
                     FunctionParameter = new { 
-                        ourPlayFabId = RemoteDataManager.Instance.PlayFabId,
+                        ourPlayFabId = RemoteDataManager.Instance.OurPlayFabId,
                         friendPlayFabId = friendPlayFabId
                     }
                 }, scriptResult =>

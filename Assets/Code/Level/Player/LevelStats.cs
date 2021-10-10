@@ -13,6 +13,9 @@ namespace Code.Level.Player
 
         public LevelRecording LevelRecording;
 
+        // need to track this separately to the best recording since a gold time recording gets overwritten by a perfect one
+        public bool HasPreviouslyCompletedInGoldTime = false;
+
         private bool _isDirty = false;
 
         public bool HasRecording => LevelRecordingExists(LevelRecording);
@@ -51,12 +54,18 @@ namespace Code.Level.Player
             if (!LevelRecordingExists(currentRecording))
             {
                 currentRecording = levelRecording;
-                firstGold = levelRecording.LevelTime <= goldTime;
+                HasPreviouslyCompletedInGoldTime = levelRecording.LevelTime <= goldTime;
+                firstGold = HasPreviouslyCompletedInGoldTime;
                 firstPerfect = levelRecording.IsPerfect;
                 currentRecording.IsDirty = true;
                 _isDirty = true;
                 return;
             }
+            
+            bool hadBeatGold = HasPreviouslyCompletedInGoldTime;
+            bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
+            HasPreviouslyCompletedInGoldTime |= hasNowBeatGold;
+            firstGold = !hadBeatGold && hasNowBeatGold;
 
             if (currentRecording.IsPerfect && !levelRecording.IsPerfect)
             {
@@ -71,11 +80,9 @@ namespace Code.Level.Player
             }
             
             // new recording is better
-            bool hadBeatGold = currentRecording.HasBeatenGoldTime(goldTime);
-            bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
             currentRecording = levelRecording;
-            firstGold = !hadBeatGold && hasNowBeatGold;
             firstPerfect = beatenOnPerfectState;
+            
             replacedExistingLevel = true;
             currentRecording.IsDirty = true;
             _isDirty = true;
@@ -255,7 +262,6 @@ namespace Code.Level.Player
 
         public void SetRecordingFromOldData(LevelRecording oldRecording, LevelRecording oldPerfectRecording)
         {
-
             if (LevelRecordingExists(oldPerfectRecording))
             {
                 LevelRecording = oldPerfectRecording;

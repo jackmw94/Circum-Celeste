@@ -80,8 +80,9 @@ namespace Code.Flow
             float goldTime = levelLayout.GoldTime;
 
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            LevelRecording levelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName);
-
+            LevelStats levelStats = persistentDataManager.GetStatsForLevelAtIndex(levelName);
+            LevelRecording levelRecording = levelStats == null ? null : levelStats.HasRecording ? levelStats.LevelRecording : null;
+            
             BadgeData currentBadgeData;
             if (levelRecording == null)
             {
@@ -95,12 +96,13 @@ namespace Code.Flow
             else
             {
                 bool hasPerfect = levelRecording.RecordingData.IsPerfect;
-                bool hasGoldTime = levelRecording.HasBeatenGoldTime(goldTime);
+                bool previouslyHasGoldTime = levelStats.HasPreviouslyCompletedInGoldTime;
+                bool hasPerfectGold = hasPerfect && levelRecording.HasBeatenGoldTime(goldTime);
                 currentBadgeData = new BadgeData
                 {
                     IsPerfect = hasPerfect,
-                    HasGoldTime = hasGoldTime,
-                    HasPerfectGoldTime = hasPerfect && hasGoldTime
+                    HasGoldTime = previouslyHasGoldTime,
+                    HasPerfectGoldTime = hasPerfectGold
                 };
             }
 

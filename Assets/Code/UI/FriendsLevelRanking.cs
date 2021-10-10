@@ -34,6 +34,8 @@ namespace Code.UI
             public string Username => _username;
             public float Time => _levelTime;
             public bool IsPerfect => _isPerfect;
+
+            public bool IsOurRecord => PlayfabId.EqualsIgnoreCase(RemoteDataManager.Instance.OurPlayFabId);
         }
 
         [SerializeField] private LevelManager _levelManager;
@@ -75,13 +77,14 @@ namespace Code.UI
 
         private IEnumerator UpdateLevelCoroutine()
         {
-            yield return new WaitUntil(() => RemoteDataManager.Instance.IsLoggedIn);
+            RemoteDataManager remoteDataManager = RemoteDataManager.Instance;
+            yield return new WaitUntil(() => remoteDataManager.IsLoggedIn);
             
             string statsKey = PersistentDataKeys.LevelMetaStats(_currentLevelName);
             PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest
             {
                 FunctionName = "getBestLevels",
-                FunctionParameter = new { levelDataKey = statsKey }
+                FunctionParameter = new { levelDataKey = statsKey, titleDisplayName = remoteDataManager.OurDisplayName }
             }, scriptResult =>
             {
                 Debug.Log($"Returned from get best level\n{scriptResult.Logs.Select(p => p.Message).JoinToString("\n")}");

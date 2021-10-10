@@ -15,7 +15,8 @@ namespace Code.Core
     public class RemoteDataManager : SingletonMonoBehaviour<RemoteDataManager>
     {
         public bool IsLoggedIn { get; private set; } = false;
-        public string PlayFabId { get; private set; } = "";
+        public string OurPlayFabId { get; private set; } = "";
+        public string OurDisplayName { get; private set; } = "";
         public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
 
         public void Login(string username, Action<bool> onCompleteCallback)
@@ -26,12 +27,14 @@ namespace Code.Core
                 CreateAccount = true,
                 InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
                 {
-                    GetUserAccountInfo = true
+                    GetUserAccountInfo = true,
+                    GetPlayerProfile = true
                 }
                 
             }, result =>
             {
-                PlayFabId = result.PlayFabId;
+                OurPlayFabId = result.PlayFabId;
+                OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                 UpdateFriendsList();
                 
                 UserAccountInfo userAccountInfo = result.InfoResultPayload.AccountInfo;

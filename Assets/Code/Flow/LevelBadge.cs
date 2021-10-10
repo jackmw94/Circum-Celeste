@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
+using Code.Debugging;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
@@ -40,6 +41,9 @@ namespace Code.Flow
         {
             _shaderPropertyId = Shader.PropertyToID(_shaderPropertyName);
             _shaderFakeMaskPropertyId = Shader.PropertyToID(_fakeMaskPropertyName);
+
+            Material instancedMaterial = Instantiate(_image.material);
+            _image.material = instancedMaterial;
             
             UpdateFakeMaskBounds();
         }
@@ -51,7 +55,7 @@ namespace Code.Flow
             // the graph itself checks that it's within the y-bounds specified by the two transforms
             
             Vector4 fakeMaskBounds = new Vector4(_fakeMaskLowerYPosition.position.y, _fakeMaskUpperYPosition.position.y);
-            _image.material.SetVector(_fakeMaskPropertyName, fakeMaskBounds);
+            _image.material.SetVector(_shaderFakeMaskPropertyId, fakeMaskBounds);
         }
 
         public void ShowHideBadge(bool show, bool instant, Action onCompleteCallback = null)
@@ -71,6 +75,8 @@ namespace Code.Flow
             float initialValue = _image.material.GetFloat(_shaderPropertyId);
             float targetValue = show ? _shaderOnValue : _shaderOffValue;
             float zeroToOneDuration = instant || !show ? 0f : _animationUnitDuration;
+            
+            CircumDebug.Log($"{(show ? "showing" : "hiding")} {gameObject} {(instant ? "instantly" : "with transition")}");
 
             if (!instant)
             {

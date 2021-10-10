@@ -9,12 +9,15 @@ namespace Code.UI
 {
     public class FriendsLevelEntry : MonoBehaviour
     {
-        public TextMeshProUGUI _friendsUsernameLabel;
-        public TextMeshProUGUI _levelTimeLabel;
-        public Image _perfectIcon;
-        public Image _goldTimeIcon;
-        public Image _perfectGoldIcon;
-        public Button _replayButton;
+        [SerializeField] private TextMeshProUGUI _friendsUsernameLabel;
+        [SerializeField] private TextMeshProUGUI _levelTimeLabel;
+        [SerializeField] private Image _perfectIcon;
+        [SerializeField] private Image _goldTimeIcon;
+        [SerializeField] private Image _perfectGoldIcon;
+        [SerializeField] private Button _replayButton;
+        [Space(15)]
+        [SerializeField] private Color _ourRecordTextColor;
+        [SerializeField] private Color _otherUserRecordTextColor;
 
         public void SetupEmptyRecord() => SetupRecord("", "", new BadgeData(), null, (levelName, data) => { });
         
@@ -23,6 +26,7 @@ namespace Code.UI
             if (friendLevelData != null)
             {
                 _friendsUsernameLabel.text = displayName;
+                _friendsUsernameLabel.color = friendLevelData.IsOurRecord ? _ourRecordTextColor : _otherUserRecordTextColor;
 
                 _perfectIcon.gameObject.SetActiveSafe(badgeData.IsPerfect && !badgeData.HasPerfectGoldTime);
                 _goldTimeIcon.gameObject.SetActiveSafe(badgeData.HasGoldTime && !badgeData.HasPerfectGoldTime);
