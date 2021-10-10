@@ -51,7 +51,7 @@ namespace Code.Level.Player
 
         public void Validate()
         {
-            CircumDebug.Assert(_playersInputs.Length == 1 && _playersInputs[0] == InputType.UI,
+            Debug.Assert(_playersInputs.Length == 1 && _playersInputs[0] == InputType.UI,
                 $"We're not building with expected player inputs! There are {_playersInputs.Length}{(_playersInputs.Length > 0 ? $" and the first is {_playersInputs[0]}" : "")}");
 
         }

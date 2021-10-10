@@ -16,9 +16,9 @@ namespace Code.UI
         public Image _perfectGoldIcon;
         public Button _replayButton;
 
-        public void SetupEmptyRecord() => SetupRecord("", new BadgeData(), null, data => { });
+        public void SetupEmptyRecord() => SetupRecord("", "", new BadgeData(), null, (levelName, data) => { });
         
-        public void SetupRecord(string displayName, BadgeData badgeData, FriendsLevelRanking.FriendLevelData friendLevelData, Action<FriendsLevelRanking.FriendLevelData> replayCallback)
+        public void SetupRecord(string displayName, string levelName, BadgeData badgeData, FriendsLevelRanking.FriendLevelData friendLevelData, Action<string, FriendsLevelRanking.FriendLevelData> replayCallback)
         {
             if (friendLevelData != null)
             {
@@ -32,13 +32,17 @@ namespace Code.UI
 
                 _replayButton.interactable = true;
                 _replayButton.onClick.RemoveAllListeners();
-                _replayButton.onClick.AddListener(() => { replayCallback(friendLevelData); });
+                _replayButton.onClick.AddListener(() => { replayCallback(levelName, friendLevelData); });
             }
             else
             {
                 _friendsUsernameLabel.text = "-";
                 _levelTimeLabel.text = "[none]";
                 _replayButton.interactable = false;
+
+                _perfectIcon.gameObject.SetActiveSafe(false);
+                _goldTimeIcon.gameObject.SetActiveSafe(false);
+                _perfectGoldIcon.gameObject.SetActiveSafe(false);
             }
         }
     }

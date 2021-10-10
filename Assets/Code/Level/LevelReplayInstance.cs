@@ -99,10 +99,11 @@ namespace Code.Level
             
             LevelRecordingData levelRecordingData = new LevelRecordingData
             {
+                IsPerfect = false,
                 FrameData = null,
                 LevelTime = _replayTime
             };
-            LevelResult result = new LevelResult(false, false, levelRecordingData, true);
+            LevelResult result = new LevelResult(false, levelRecordingData, true);
             LevelResult levelResult = result;
             
             LevelFinished(levelResult);

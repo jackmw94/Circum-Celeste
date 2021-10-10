@@ -8,39 +8,33 @@ namespace Code.Level.Player
     [Serializable]
     public class LevelStats
     {
-#if UNITY_EDITOR
-        private static bool ForceOldSaveMethod => false;
-#endif
-        
-        public LevelRecording FastestLevelRecording;
-        public LevelRecording FastestPerfectLevelRecording;
+        [Obsolete] public LevelRecording FastestLevelRecording;
+        [Obsolete] public LevelRecording FastestPerfectLevelRecording;
+
+        public LevelRecording LevelRecording;
 
         private bool _isDirty = false;
 
-        public bool HasFastestLevelRecording => LevelRecordingExists(FastestLevelRecording);
-        public bool HasFastestPerfectLevelRecording => LevelRecordingExists(FastestPerfectLevelRecording);
+        public bool HasRecording => LevelRecordingExists(LevelRecording);
+
         
-        public void UpdateFastestRecording(LevelRecording levelRecording, bool perfect, float goldTime, out BadgeData newBadgeData, out bool replacedExistingFastestTime, out bool replacedPerfectTime)
+        public bool UpdateFastestRecording(LevelRecording newLevelRecording, float goldTime, out BadgeData newBadgeData, out bool replacedExistingRecording)
         {
             newBadgeData = new BadgeData();
-            replacedPerfectTime = false;
 
-            UpdateFastestRecordingInternal(levelRecording, ref FastestLevelRecording, goldTime, out _, out bool firstGold, out replacedExistingFastestTime);
-            newBadgeData.HasGoldTime = firstGold;
-
-            if (!perfect)
+            bool HasPerfectAndGoldTime(LevelRecording levelRecording)
             {
-                return;
+                return LevelRecordingExists(levelRecording) && levelRecording.IsPerfect && levelRecording.HasBeatenGoldTime(goldTime);
             }
-            
-            UpdateFastestRecordingInternal(levelRecording, ref FastestPerfectLevelRecording, goldTime, out bool firstPerfect, out bool firstPerfectGold, out replacedPerfectTime);
 
-            // this messing around with replaced time flags solves the awkward case where the user beats a previous imperfect time with a faster (first) perfect time
-            // naively the perfect value would overwrite the regular value and since the perfect time was first it wouldn't overwrite despite being an replacement of the existing regular time
-            replacedExistingFastestTime |= replacedPerfectTime;
-            
+            bool previouslyHadPerfectGoldTime = HasPerfectAndGoldTime(LevelRecording);
+
+            UpdateFastestRecordingInternal(newLevelRecording, ref LevelRecording, goldTime, out bool firstPerfect, out bool firstGold, out replacedExistingRecording);
+            newBadgeData.HasGoldTime = firstGold;
             newBadgeData.IsPerfect = firstPerfect;
-            newBadgeData.HasPerfectGoldTime = firstPerfectGold;
+            newBadgeData.HasPerfectGoldTime = HasPerfectAndGoldTime(newLevelRecording) && !previouslyHadPerfectGoldTime;
+
+            return replacedExistingRecording;
         }
 
         private static bool LevelRecordingExists(LevelRecording levelRecording)
@@ -48,36 +42,57 @@ namespace Code.Level.Player
             return levelRecording != null && levelRecording.RecordingData.FrameData.Count > 0;
         }
 
-        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, float goldTime, out bool firstEntry, out bool firstGold, out bool replacedExistingFastestTime)
+        private void UpdateFastestRecordingInternal(LevelRecording levelRecording, ref LevelRecording currentRecording, float goldTime, out bool firstPerfect, out bool firstGold, out bool replacedExistingLevel)
         {
-            firstEntry = false;
             firstGold = false;
-            replacedExistingFastestTime = false;
-            
+            firstPerfect = false;
+            replacedExistingLevel = false;
+
             if (!LevelRecordingExists(currentRecording))
             {
                 currentRecording = levelRecording;
-                firstEntry = true;
-                firstGold = levelRecording.RecordingData.LevelTime <= goldTime;
+                firstGold = levelRecording.LevelTime <= goldTime;
+                firstPerfect = levelRecording.IsPerfect;
                 currentRecording.IsDirty = true;
                 _isDirty = true;
+                return;
             }
-            else if (currentRecording.RecordingData.LevelTime > levelRecording.RecordingData.LevelTime)
+
+            if (currentRecording.IsPerfect && !levelRecording.IsPerfect)
             {
-                bool hadBeatGold = currentRecording.HasBeatenGoldTime(goldTime);
-                bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
-                currentRecording = levelRecording;
-                firstGold = !hadBeatGold && hasNowBeatGold;
-                replacedExistingFastestTime = true;
-                currentRecording.IsDirty = true;
-                _isDirty = true;
+                return;
             }
+
+            bool beatenOnPerfectState = !currentRecording.IsPerfect && levelRecording.IsPerfect;
+            bool beatenOnTime = currentRecording.LevelTime > levelRecording.LevelTime;
+            if (!beatenOnPerfectState && !beatenOnTime)
+            {
+                return;
+            }
+            
+            // new recording is better
+            bool hadBeatGold = currentRecording.HasBeatenGoldTime(goldTime);
+            bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
+            currentRecording = levelRecording;
+            firstGold = !hadBeatGold && hasNowBeatGold;
+            firstPerfect = beatenOnPerfectState;
+            replacedExistingLevel = true;
+            currentRecording.IsDirty = true;
+            _isDirty = true;
         }
         
         public static bool TryLoadLevelStats(string levelName, out LevelStats levelStats)
         {
             string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
             bool foundKey = PersistentDataHelper.HasKey(metaDataKey);
+            
+#if UNITY_EDITOR
+            if (PersistentDataManager.Instance.ForceOldSaveMethod)
+            {
+                foundKey = false;
+            }
+#endif
+            
             if (foundKey)
             {
                 return LoadLevelStats(levelName, out levelStats);
@@ -96,22 +111,16 @@ namespace Code.Level.Player
 
         private static bool LoadLevelStats(string levelName, out LevelStats levelStats)
         {
-            string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
-            string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
+            string recordingKey = PersistentDataKeys.LevelRecording(levelName);
 
-            string serializedPerfectRecording = PersistentDataHelper.GetString(perfectRecordingKey);
-            string serializedImperfectRecording = PersistentDataHelper.GetString(imperfectRecordingKey);
+            string serializedRecording = PersistentDataHelper.GetString(recordingKey);
+            string decompressedRecording = TryDecompressData(serializedRecording);
 
-            string decompressedPerfectRecording = TryDecompressData(serializedPerfectRecording);
-            string decompressedImperfectRecording = TryDecompressData(serializedImperfectRecording);
-
-            LevelRecording perfectRecording = JsonUtility.FromJson<LevelRecording>(decompressedPerfectRecording);
-            LevelRecording imperfectRecording = JsonUtility.FromJson<LevelRecording>(decompressedImperfectRecording);
+            LevelRecording levelRecording = JsonUtility.FromJson<LevelRecording>(decompressedRecording);
 
             levelStats = new LevelStats
             {
-                FastestLevelRecording = imperfectRecording,
-                FastestPerfectLevelRecording = perfectRecording
+                LevelRecording = levelRecording
             };
             
             CircumDebug.Log($"Loaded {levelName} with new method");
@@ -121,20 +130,22 @@ namespace Code.Level.Player
 
         private static bool LoadOldStats(string levelName, out LevelStats levelStats)
         {
+            // disabling to prevent compiler warning RE obsolete data. This function transfers the obsolete data to new
+#pragma warning disable 612
             string oldLevelKey = PersistentDataKeys.LevelStats_Old(levelName);
             string serializedStats = PersistentDataHelper.GetString(oldLevelKey);
             string decompressedStats = TryDecompressData(serializedStats);
             
             levelStats = JsonUtility.FromJson<LevelStats>(decompressedStats);
-            
-            // given that we load on awake, this is probably too early to save
-            // safer to wait until we try save next
-            if (levelStats.HasFastestLevelRecording) levelStats.FastestLevelRecording.IsDirty = true;
-            if (levelStats.HasFastestPerfectLevelRecording) levelStats.FastestPerfectLevelRecording.IsDirty = true;
-            levelStats._isDirty = true;
 
-            CircumDebug.Log($"Loaded {oldLevelKey} with old method");
+            levelStats.SetRecordingFromOldData(levelStats.FastestLevelRecording, levelStats.FastestPerfectLevelRecording);
+
+            levelStats._isDirty = true;
+            if (levelStats.HasRecording) levelStats.LevelRecording.IsDirty = true;
+#pragma warning restore 612
             
+            CircumDebug.Log($"Loaded {oldLevelKey} with old method");
+
             return true;
         }
 
@@ -151,7 +162,7 @@ namespace Code.Level.Player
         public static void SaveLevelStats(string levelName, LevelStats levelStats)
         {
 #if UNITY_EDITOR
-            if (ForceOldSaveMethod)
+            if (PersistentDataManager.Instance.ForceOldSaveMethod)
             {
                 OldSaveLevelStats(levelName, levelStats);
                 return;
@@ -163,8 +174,7 @@ namespace Code.Level.Player
                 return;
             }
             
-            bool metaDataIsDirty = levelStats.FastestLevelRecording.IsDirty || (levelStats.FastestPerfectLevelRecording?.IsDirty ?? false);
-            if (metaDataIsDirty)
+            if (levelStats.LevelRecording.IsDirty)
             {
                 string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
                 LevelMetaData levelMetaData = new LevelMetaData(levelStats);
@@ -172,17 +182,29 @@ namespace Code.Level.Player
                 PersistentDataHelper.SetString(metaDataKey, serializedMetaData, true);
             }
 
-            string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
-            TrySaveLevelRecording(perfectRecordingKey, levelStats.FastestPerfectLevelRecording);
+            string recordingKey = PersistentDataKeys.LevelRecording(levelName);
+            TrySaveLevelRecording(recordingKey, levelStats.LevelRecording);
 
-            string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
-            TrySaveLevelRecording(imperfectRecordingKey, levelStats.FastestLevelRecording);
-            
-            CircumDebug.Log($"Saved level stats for {levelName} ({levelStats.FastestLevelRecording.RecordingData.FrameData.Count} fastest level frames)");
+            CircumDebug.Log($"Saved level stats for {levelName} ({levelStats.LevelRecording.RecordingData.FrameData.Count} fastest level frames)");
         }
         
         public static void OldSaveLevelStats(string levelName, LevelStats levelStats)
         {
+            // disabling to prevent compiler warning RE obsolete data. This function forces saving using the obsolete data for testing purposes
+#pragma warning disable 612
+            if (levelStats.LevelRecording != null && levelStats.LevelRecording.RecordingData.IsPerfect)
+            {
+                levelStats.FastestPerfectLevelRecording = levelStats.LevelRecording;
+            }
+            else
+            {
+                levelStats.FastestLevelRecording = levelStats.LevelRecording;
+            }
+
+            LevelRecording notSavedLevelRecording = levelStats.LevelRecording;
+            levelStats.LevelRecording = null;
+
+            
             string serialized = JsonUtility.ToJson(levelStats);
             string compressed = serialized.Compress();
 
@@ -190,7 +212,12 @@ namespace Code.Level.Player
             
             PersistentDataHelper.SetString(key, compressed, true);
 
-            CircumDebug.Log($"Saved level stats for using old method for {levelName} ({levelStats.FastestLevelRecording.RecordingData.FrameData.Count} fastest level frames)");
+            levelStats.LevelRecording = notSavedLevelRecording;
+            levelStats.FastestLevelRecording = null;
+            levelStats.FastestPerfectLevelRecording = null;
+
+            CircumDebug.Log($"Saved level stats for using old method for {levelName}");
+#pragma warning restore 612
         }
 
         private static void TrySaveLevelRecording(string key, LevelRecording levelRecording)
@@ -208,15 +235,39 @@ namespace Code.Level.Player
 
         public static void ResetStats(string levelName)
         {
+            
+#pragma warning disable 612
+            // allow using obsolete data functions here for backwards compatibility sake
             string oldKey = PersistentDataKeys.LevelStats_Old(levelName);
-            string metaKey = PersistentDataKeys.LevelMetaStats(levelName);
             string perfectRecordingKey = PersistentDataKeys.PerfectLevelRecording(levelName);
             string imperfectRecordingKey = PersistentDataKeys.ImperfectLevelRecording(levelName);
+#pragma warning restore 612
+            
+            string metaKey = PersistentDataKeys.LevelMetaStats(levelName);
+            string levelRecordingKey = PersistentDataKeys.LevelRecording(levelName);
             
             PersistentDataHelper.DeleteKey(oldKey);
             PersistentDataHelper.DeleteKey(metaKey);
             PersistentDataHelper.DeleteKey(perfectRecordingKey);
             PersistentDataHelper.DeleteKey(imperfectRecordingKey);
+            PersistentDataHelper.DeleteKey(levelRecordingKey);
+        }
+
+        public void SetRecordingFromOldData(LevelRecording oldRecording, LevelRecording oldPerfectRecording)
+        {
+
+            if (LevelRecordingExists(oldPerfectRecording))
+            {
+                LevelRecording = oldPerfectRecording;
+                LevelRecording.RecordingData.IsPerfect = true;
+                return;
+            }
+
+            if (LevelRecordingExists(oldRecording))
+            {
+                LevelRecording = oldRecording;
+                LevelRecording.RecordingData.IsPerfect = false;
+            }
         }
     }
 }

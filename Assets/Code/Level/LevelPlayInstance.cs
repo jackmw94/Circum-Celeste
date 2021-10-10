@@ -154,10 +154,11 @@ namespace Code.Level
 
             bool perfectLevel = _players.All(p => p.NoDamageTaken);
 
-            LevelResult levelResult = new LevelResult(true, perfectLevel, new LevelRecordingData
+            LevelResult levelResult = new LevelResult(true, new LevelRecordingData
             {
                 FrameData = _levelRecorder.FrameData,
-                LevelTime = _levelRecorder.LevelTime 
+                LevelTime = _levelRecorder.LevelTime,
+                IsPerfect = perfectLevel
             });
 
             LevelFinished(levelResult);
@@ -182,10 +183,11 @@ namespace Code.Level
                 return false;
             }
             
-            LevelResult levelResult = new LevelResult(false, false, new LevelRecordingData()
+            LevelResult levelResult = new LevelResult(false, new LevelRecordingData()
             {
                 FrameData = null,
-                LevelTime = _levelRecorder.LevelTime
+                LevelTime = _levelRecorder.LevelTime,
+                IsPerfect = false
             });
             LevelFinished(levelResult);
             return true;

@@ -19,9 +19,7 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
         [Space(15)]
-        [SerializeField] private LevelBadge _perfectIcon;
-        [SerializeField] private LevelBadge _fastTimeIcon;
-        [SerializeField] private LevelBadge _fastPerfectTimeIcon;
+        [SerializeField] private BadgeIndicator _badgeIndicator;
         [Space(15)] 
         [SerializeField] private Color _regularNewFastestTimeLabelColour;
         [SerializeField] private Color _perfectNewFastestTimeLabelColour;
@@ -71,22 +69,7 @@ namespace Code.Flow
                 _newFastestTimeLabel.color = newFastestTimeInfo.IsPerfect ? _perfectNewFastestTimeLabelColour : _regularNewFastestTimeLabelColour;
             }
 
-            CircumDebug.Assert(currentBadgeData.IsPerfect || !newBadgeData.IsPerfect, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-            CircumDebug.Assert(currentBadgeData.HasGoldTime || !newBadgeData.HasGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-            CircumDebug.Assert(currentBadgeData.HasPerfectGoldTime || !newBadgeData.HasPerfectGoldTime, "Arguments say this level was NOT perfect but WAS the first perfect. Unexpected.");
-
-            _fastPerfectTimeIcon.ShowHideBadge(currentBadgeData.HasPerfectGoldTime, !newBadgeData.HasPerfectGoldTime, CheckGameComplete);
-
-            if (currentBadgeData.HasPerfectGoldTime)
-            {
-                _perfectIcon.ShowHideBadge(false, true);
-                _fastTimeIcon.ShowHideBadge(false, true);
-            }
-            else
-            {
-                _perfectIcon.ShowHideBadge(currentBadgeData.IsPerfect, !newBadgeData.IsPerfect);
-                _fastTimeIcon.ShowHideBadge(currentBadgeData.HasGoldTime, !newBadgeData.HasGoldTime);
-            }
+            _badgeIndicator.SetupBadgeIndicator(currentBadgeData, newBadgeData, CheckGameComplete);
             
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;

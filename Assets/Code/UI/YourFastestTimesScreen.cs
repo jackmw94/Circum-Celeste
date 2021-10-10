@@ -2,6 +2,7 @@
 using System.Text;
 using Code.Debugging;
 using Code.Level;
+using Code.Level.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,17 +12,15 @@ namespace Code.UI
     public class YourFastestTimesScreen : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _fastestTimeLabel;
-        [SerializeField] private TextMeshProUGUI _fastestPerfectTimeLabel;
         [SerializeField] private TextMeshProUGUI _goldTimeLabel;
-        [Space(15)]
         [SerializeField] private Button _fastestTimeReplayButton;
-        [SerializeField] private Button _fastestPerfectTimeReplayButton;
+        [SerializeField] private BadgeIndicator _badgeIndicator;
 
-        public void SetupRecordsScreen(float goldTime, LevelRecording fastestTime, LevelRecording fastestPerfectTime, Action<LevelRecording> replayRecording)
+        public void SetupRecordsScreen(float goldTime, BadgeData badgeData, LevelRecording fastestTime, Action<LevelRecording> replayRecording)
         {
             _goldTimeLabel.text = GetTimeString(goldTime);
             SetupRecord(fastestTime, _fastestTimeLabel, _fastestTimeReplayButton, replayRecording);
-            SetupRecord(fastestPerfectTime, _fastestPerfectTimeLabel, _fastestPerfectTimeReplayButton, replayRecording);
+            _badgeIndicator.SetupBadgeIndicator(badgeData);
         }
 
         private static string GetTimeString(float goldTime)

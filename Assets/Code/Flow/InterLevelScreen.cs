@@ -80,19 +80,33 @@ namespace Code.Flow
             float goldTime = levelLayout.GoldTime;
 
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            LevelRecording levelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName, false);
-            LevelRecording perfectLevelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName, true);
-            
-            BadgeData currentBadgeData = new BadgeData
+            LevelRecording levelRecording = persistentDataManager.GetRecordingForLevelAtIndex(levelName);
+
+            BadgeData currentBadgeData;
+            if (levelRecording == null)
             {
-                IsPerfect = perfectLevelRecording != null,
-                HasGoldTime = levelRecording?.HasBeatenGoldTime(goldTime) ?? false,
-                HasPerfectGoldTime = perfectLevelRecording?.HasBeatenGoldTime(goldTime) ?? false
-            };
-            
+                currentBadgeData = new BadgeData
+                {
+                    IsPerfect = false,
+                    HasGoldTime = false,
+                    HasPerfectGoldTime = false
+                };
+            }
+            else
+            {
+                bool hasPerfect = levelRecording.RecordingData.IsPerfect;
+                bool hasGoldTime = levelRecording.HasBeatenGoldTime(goldTime);
+                currentBadgeData = new BadgeData
+                {
+                    IsPerfect = hasPerfect,
+                    HasGoldTime = hasGoldTime,
+                    HasPerfectGoldTime = hasPerfect && hasGoldTime
+                };
+            }
+
             _friendsLevelRanking.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
             
-            _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, levelRecording, perfectLevelRecording, ReplayLevel);
+            _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, currentBadgeData, levelRecording, ReplayLevel);
 
             _teaseScrollRect.enabled = !persistentDataManager.PlayerFirsts.SeenReplaysScreen && newFastestTimeInfo != null;
             _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData, newFastestTimeInfo, showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);

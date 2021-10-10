@@ -142,11 +142,11 @@ namespace Code.Level
                     Analytics.CustomEvent("CompletedLevel", new Dictionary<string, object>
                     {
                         { "LevelNumber", levelContext.LevelNumber },
-                        { "NoDamage", levelResult.NoDamage },
+                        { "NoDamage", levelResult.LevelRecordingData.IsPerfect },
                         { "GoldTime", levelRecording.HasBeatenGoldTime(currentLevel.GoldTime) },
                     });
 
-                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelResult.NoDamage, levelRecording, out newBadgeData, out newFastestTimeInfo);
+                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
                     advanceLevelPrompt = _levelProvider.CanChangeToNextLevel(true);
                 }

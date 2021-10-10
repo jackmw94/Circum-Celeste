@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,10 @@ namespace Code.Level.Player
     public class PersistentDataManager : SingletonMonoBehaviour<PersistentDataManager>
     {
         private const string NoLoadingSavingPlayerPrefsKey = "Circum_DoNotLoadData";
+        
+#if UNITY_EDITOR
+        public bool ForceOldSaveMethod;
+#endif
         
         [SerializeField] private LevelProvider _levelProvider;
 
@@ -79,7 +84,7 @@ namespace Code.Level.Player
             if (save) SaveStats();
         }
 
-        public LevelRecording GetRecordingForLevelAtIndex(string levelName, bool perfect)
+        public LevelRecording GetRecordingForLevelAtIndex(string levelName)
         {
             if (!_levelStats.TryGetValue(levelName, out LevelStats levelStats))
             {
@@ -87,22 +92,18 @@ namespace Code.Level.Player
             }
             
             // found level stats
-            
-            if (perfect)
-            {
-                return levelStats.HasFastestPerfectLevelRecording ? levelStats.FastestPerfectLevelRecording : null;
-            }
-
-            return levelStats.HasFastestLevelRecording ? levelStats.FastestLevelRecording : null;
+            return levelStats.HasRecording ? levelStats.LevelRecording : null;
         }
         
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, bool playerTookNoHits, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo)
         {
             newBadgeData = new BadgeData();
             newFastestTimeInfo = null;
+
+            bool isPerfect = levelRecording.RecordingData.IsPerfect;
             
             RunTracker runTracker = _playerStats.RunTracker;
-            runTracker.IsPerfect &= playerTookNoHits && runTracker.Deaths == 0;
+            runTracker.IsPerfect &= isPerfect && runTracker.Deaths == 0;
             
             int levelIndex = currentLevel.LevelContext.LevelIndex;
             _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped);
@@ -118,14 +119,14 @@ namespace Code.Level.Player
                     _levelStats.Add(currentLevel.name, levelStats);
                 }
                 
-                levelStats.UpdateFastestRecording(levelRecording, playerTookNoHits, currentLevel.GoldTime, out newBadgeData, out bool replacedExistingFastestTime, out bool replacedPerfectTime);
+                levelStats.UpdateFastestRecording(levelRecording, currentLevel.GoldTime, out newBadgeData, out bool replacedExistingFastestTime);
 
                 if (replacedExistingFastestTime)
                 {
                     newFastestTimeInfo = new NewFastestTimeInfo()
                     {
-                        Time = levelRecording.RecordingData.LevelTime,
-                        IsPerfect = replacedPerfectTime
+                        Time = levelRecording.LevelTime,
+                        IsPerfect = levelRecording.IsPerfect
                     };
                 }
             }
@@ -221,13 +222,14 @@ namespace Code.Level.Player
                     continue;
                 }
 
-                if (!_levelStats.TryGetValue(levelLayout.name, out var levelStats))
+                if (!_levelStats.TryGetValue(levelLayout.name, out LevelStats levelStats))
                 {
                     // no level stats for required level
                     return false;
                 }
 
-                if (!levelStats.HasFastestPerfectLevelRecording)
+                bool hasPerfectRecording = levelStats.HasRecording && levelStats.LevelRecording.RecordingData.IsPerfect;
+                if (!hasPerfectRecording)
                 {
                     return false;
                 }

@@ -22,8 +22,9 @@ namespace Code.Flow
         [SerializeField] private InterLevelScreen _interLevelScreen;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
-        [SerializeField] private CircumTips _gameTips;
-        [SerializeField] private CircumTips _howToPlay;
+        [SerializeField] private CircumScreen _gameTips;
+        [SerializeField] private CircumScreen _howToPlay;
+        [SerializeField] private CircumScreen _addFriends;
         [Space(15)]
         [SerializeField] private Button _toggleSettingsButton;
         [SerializeField] private CanvasGroup _buttonCanvasGroup;
@@ -38,6 +39,7 @@ namespace Code.Flow
         [SerializeField] private Button _gameTipsButton;
         [SerializeField] private Button _howToPlayButton;
         [SerializeField] private Button _changeQualityLevelButton;
+        [SerializeField] private Button _addFriendsButton;
         [SerializeField] private AreYouSureButtonWrapper _resetStatsButton;
         [SerializeField] private TextMeshProUGUI _toggleFeedbacksLabel;
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
@@ -69,6 +71,7 @@ namespace Code.Flow
             _howToPlayButton.onClick.AddListener(ShowHowToPlay);
             _gameOptionsButton.onClick.AddListener(ShowGameOptions);
             _changeQualityLevelButton.onClick.AddListener(ChangeQualityLevel);
+            _addFriendsButton.onClick.AddListener(ShowAddFriends);
 
             TurnOffInstant();
         }
@@ -96,6 +99,7 @@ namespace Code.Flow
             _howToPlayButton.onClick.RemoveListener(ShowHowToPlay);
             _gameOptionsButton.onClick.RemoveListener(ShowGameOptions);
             _changeQualityLevelButton.onClick.RemoveListener(ChangeQualityLevel);
+            _addFriendsButton.onClick.RemoveListener(ShowAddFriends);
         }
 
         private void ChangeQualityLevel()
@@ -147,14 +151,19 @@ namespace Code.Flow
             CircumOptions.Save(circumOptions);
         }
 
+        private void ShowAddFriends()
+        {
+            _addFriends.ShowHideScreen(true);
+        }
+
         private void ShowTips()
         {
-            _gameTips.ShowHideTipsScreen(true);
+            _gameTips.ShowHideScreen(true);
         }
         
         private void ShowHowToPlay()
         {
-            _howToPlay.ShowHideTipsScreen(true);
+            _howToPlay.ShowHideScreen(true);
         }
 
         private void UpdateShowLevelTimerLabel()

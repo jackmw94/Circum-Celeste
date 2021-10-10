@@ -31,6 +31,7 @@ namespace Code.Flow
         private bool _remoteConfigRefreshSuccessful = false;
         private bool _remoteConfigReturned = false;
         private bool _loadedGameScene = false;
+        private bool _splashScreensTriggered = false;
 
         private void Awake()
         {
@@ -41,8 +42,15 @@ namespace Code.Flow
             });
 
             SceneManager.LoadSceneAsync(GameSceneIndex, LoadSceneMode.Additive).completed += operation => { _loadedGameScene = true; };
+            
+            TriggerSplashScreens();
+        }
 
+        public void TriggerSplashScreens()
+        {
+            CircumDebug.Assert(!_splashScreensTriggered, "Wrote this assuming splash screens would only be triggered once but appears they're being triggered more. Test this code against this assumption");
             StartCoroutine(ShouldPlaySplashScreen() ? PlayLogos() : CompleteSplashScreen(false));
+            _splashScreensTriggered = true;
         }
 
         private bool ShouldPlaySplashScreen()

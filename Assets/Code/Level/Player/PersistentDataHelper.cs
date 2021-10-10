@@ -65,7 +65,7 @@ namespace Code.Level.Player
             {
                 if (RemoteDataManager.Instance.IsLoggedIn)
                 {
-                    RemoteDataManager.Instance.SetString(key, value);
+                    RemoteDataManager.Instance.SetUserData(key, value);
                 }
                 else
                 {
