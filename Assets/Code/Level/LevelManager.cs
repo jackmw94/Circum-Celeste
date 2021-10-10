@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Code.Core;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
@@ -26,10 +27,7 @@ namespace Code.Level
             if (replay != null)
             {
                 LevelLayoutContext levelContext = _levelProvider.GetCurrentLevel().LevelContext;
-                Analytics.CustomEvent("StartedLevel", new Dictionary<string, object>
-                {
-                    { "LevelNumber", levelContext.LevelNumber },
-                });
+                AnalyticsHelper.LevelStartedEvent(levelContext.LevelNumber);
             }
             
             if (CurrentLevelInstance)
@@ -132,19 +130,18 @@ namespace Code.Level
                 if (levelResult.Success)
                 {
                     LevelLayoutContext levelContext = currentLevel.LevelContext;
+                    LevelRecordingData levelRecordingData = levelResult.LevelRecordingData;
 
                     LevelRecording levelRecording = new LevelRecording
                     {
                         LevelIndex = levelContext.LevelIndex,
-                        RecordingData = levelResult.LevelRecordingData
+                        RecordingData = levelRecordingData
                     };
-                    
-                    Analytics.CustomEvent("CompletedLevel", new Dictionary<string, object>
-                    {
-                        { "LevelNumber", levelContext.LevelNumber },
-                        { "NoDamage", levelResult.LevelRecordingData.IsPerfect },
-                        { "GoldTime", levelRecording.HasBeatenGoldTime(currentLevel.GoldTime) },
-                    });
+
+                    int levelNumber = levelContext.LevelNumber;
+                    bool isPerfect = levelRecordingData.IsPerfect;
+                    bool beatGoldTime = levelRecording.HasBeatenGoldTime(currentLevel.GoldTime);
+                    AnalyticsHelper.LevelCompletedEvent(levelNumber, isPerfect, beatGoldTime);
 
                     persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo);
 
