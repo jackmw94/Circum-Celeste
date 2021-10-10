@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Code.Core;
 using Code.Level;
 using Code.Level.Player;
@@ -38,6 +37,9 @@ namespace Code.UI
             public bool IsOurRecord => PlayfabId.EqualsIgnoreCase(RemoteDataManager.Instance.OurPlayFabId);
         }
 
+        [SerializeField] private float _updateLevelDelay = 3f;
+        [SerializeField] private float _loadingHideDuration = 0.33f;
+        [SerializeField] private CanvasGroup _loadingOverlay;
         [SerializeField] private LevelManager _levelManager;
         [SerializeField] private FriendsLevelEntry _firstPlace;
         [SerializeField] private FriendsLevelEntry _secondPlace;
@@ -45,6 +47,7 @@ namespace Code.UI
 
         private string _currentLevelName;
         private float _currentLevelGoldTime;
+        private Coroutine _showHideLoadingCoroutine = null;
         
         private Action<LevelRecording> _replayRecording = null;
         private Coroutine _updateLevelCoroutine = null;
@@ -57,6 +60,8 @@ namespace Code.UI
             _currentLevelGoldTime = goldTime;
             
             _replayRecording = replayRecording;
+            
+            ShowHideLoading(true);
 
             _firstPlace.SetupEmptyRecord();
             _secondPlace.SetupEmptyRecord();
@@ -77,6 +82,8 @@ namespace Code.UI
 
         private IEnumerator UpdateLevelCoroutine()
         {
+            yield return new WaitForSeconds(_updateLevelDelay);
+            
             RemoteDataManager remoteDataManager = RemoteDataManager.Instance;
             yield return new WaitUntil(() => remoteDataManager.IsLoggedIn);
             
@@ -96,6 +103,8 @@ namespace Code.UI
                 
                 string serialized = scriptResult.FunctionResult.ToString();
                 FriendLevelsData deserialized = JsonUtility.FromJson<FriendLevelsData>(serialized);
+                
+                ShowHideLoading(false);
                 
                 PopulatePlaces(_currentLevelName, deserialized, _currentLevelGoldTime);
                 
@@ -166,6 +175,27 @@ namespace Code.UI
             {
                 
             });
+        }
+
+        private void ShowHideLoading(bool show)
+        {
+            if (_showHideLoadingCoroutine != null)
+            {
+                StopCoroutine(_showHideLoadingCoroutine);
+            }
+            _showHideLoadingCoroutine = StartCoroutine(ShowHideCoroutine(show));
+        }
+
+        private IEnumerator ShowHideCoroutine(bool show)
+        {
+            _loadingOverlay.blocksRaycasts = true;
+            float targetValue = show ? 1f : 0f;
+            float zeroToOneDuration = show ? 0f : _loadingHideDuration;
+            yield return Utilities.LerpOverTime(_loadingOverlay.alpha, targetValue, zeroToOneDuration, f =>
+            {
+                _loadingOverlay.alpha = f;
+            });
+            _loadingOverlay.blocksRaycasts = show;
         }
     }
 }

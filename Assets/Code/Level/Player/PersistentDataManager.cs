@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Code.Core;
 using UnityEngine;
@@ -17,7 +17,9 @@ namespace Code.Level.Player
 #endif
         
         [SerializeField] private LevelProvider _levelProvider;
-
+        [SerializeField] private float _levelIndexUpdateRate = 4f;
+        
+        private Coroutine _updateLevelIndexCoroutine = null;
         private bool _doNotLoadOrSave;
         private CircumOptions _circumOptions;
         private PlayerFirsts _playerFirsts;
@@ -51,6 +53,18 @@ namespace Code.Level.Player
         public void SetCurrentLevel(int currentLevelIndex)
         {
             _playerStats.SetCurrentLevel(currentLevelIndex);
+
+            // delay to prevent exceeding remote data update rate
+            if (_updateLevelIndexCoroutine != null)
+            {
+                StopCoroutine(_updateLevelIndexCoroutine);
+            }
+            _updateLevelIndexCoroutine = StartCoroutine(UpdateCurrentLevelCoroutine());
+        }
+
+        private IEnumerator UpdateCurrentLevelCoroutine()
+        {
+            yield return new WaitForSeconds(_levelIndexUpdateRate);
             PlayerStats.Save(_playerStats);
         }
 
@@ -84,15 +98,9 @@ namespace Code.Level.Player
             if (save) SaveStats();
         }
 
-        public LevelRecording GetRecordingForLevelAtIndex(string levelName)
+        public LevelStats GetStatsForLevelAtIndex(string levelName)
         {
-            if (!_levelStats.TryGetValue(levelName, out LevelStats levelStats))
-            {
-                return null;
-            }
-            
-            // found level stats
-            return levelStats.HasRecording ? levelStats.LevelRecording : null;
+            return !_levelStats.TryGetValue(levelName, out LevelStats levelStats) ? null : levelStats;
         }
         
         public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo)
