@@ -25,10 +25,13 @@ namespace Code.Level.Player
 
         public bool IsNextLevelUnlocked(int currentLevelIndex) => currentLevelIndex < _highestLevelReachedIndex;
 
-        public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped)
+        public void UpdateHighestLevel(int levelIndex, bool noDeaths, bool noHits, bool hasSkipped, out bool firstTimeCompletingLevel)
         {
+            int prevHighestLevel = _highestLevelReachedIndex;
             _highestLevelReachedIndex = Mathf.Max(levelIndex + 1, _highestLevelReachedIndex);
 
+            firstTimeCompletingLevel = prevHighestLevel != _highestLevelReachedIndex;
+            
             if (hasSkipped)
             {
                 return;

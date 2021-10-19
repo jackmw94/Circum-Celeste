@@ -3,6 +3,7 @@ using System.Collections;
 using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
+using Code.VFX;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -67,13 +68,13 @@ namespace Code.Flow
             }
         }
         
-        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool showAdvanceLevelPrompt = false)
+        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool showAdvanceLevelPrompt = false, bool firstTimeCompletingLevel = false)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, newFastestTimeInfo, showAdvanceLevelPrompt));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, newFastestTimeInfo, showAdvanceLevelPrompt, firstTimeCompletingLevel));
         }
 
         public void HideInterLevelUI(InterLevelTransition transition = InterLevelTransition.Regular)
@@ -106,7 +107,7 @@ namespace Code.Flow
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool showAdvanceLevelPrompt)
+        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool showAdvanceLevelPrompt, bool firstTimeCompletingLevel)
         {
             _isTransitioning = true;
             if (transition == InterLevelTransition.Regular)
@@ -118,6 +119,11 @@ namespace Code.Flow
             
             // Show overlay, hides level reset
             yield return ShowOverlayCoroutine(transition);
+
+            if (firstTimeCompletingLevel)
+            {
+                AppFeedbacks.Instance.TriggerComets();
+            }
             
             yield return _interLevelScreen.ShowHideScreen(true, transition);
 

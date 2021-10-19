@@ -121,6 +121,7 @@ namespace Code.Level
             BadgeData newBadgeData = new BadgeData();
             NewFastestTimeInfo newFastestTimeInfo = null;
             bool advanceLevelPrompt = false;
+            bool firstTimeCompletingLevel = false;
 
             if (!isReplay)
             {
@@ -143,7 +144,7 @@ namespace Code.Level
                     bool beatGoldTime = levelRecording.HasBeatenGoldTime(currentLevel.GoldTime);
                     AnalyticsHelper.LevelCompletedEvent(levelNumber, isPerfect, beatGoldTime);
 
-                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo);
+                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo, out firstTimeCompletingLevel);
 
                     advanceLevelPrompt = _levelProvider.CanChangeToNextLevel(true);
                 }
@@ -159,7 +160,7 @@ namespace Code.Level
                 }
             }
             
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, newFastestTimeInfo: newFastestTimeInfo, showAdvanceLevelPrompt: advanceLevelPrompt);
+            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, newFastestTimeInfo: newFastestTimeInfo, showAdvanceLevelPrompt: advanceLevelPrompt, firstTimeCompletingLevel: firstTimeCompletingLevel);
         }
 
         private IEnumerator TryShowHowToPlayPopUpAfterDelay()

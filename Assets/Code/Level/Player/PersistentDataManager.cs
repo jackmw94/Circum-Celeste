@@ -103,7 +103,7 @@ namespace Code.Level.Player
             return !_levelStats.TryGetValue(levelName, out LevelStats levelStats) ? null : levelStats;
         }
         
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo)
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo, out bool firstTimeCompletingLevel)
         {
             newBadgeData = new BadgeData();
             newFastestTimeInfo = null;
@@ -114,7 +114,7 @@ namespace Code.Level.Player
             runTracker.IsPerfect &= isPerfect && runTracker.Deaths == 0;
             
             int levelIndex = currentLevel.LevelContext.LevelIndex;
-            _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped);
+            _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped, out firstTimeCompletingLevel);
             
             bool levelIsTutorial = currentLevel.LevelContext.IsTutorial;
             _playerStats.UpdateCompletedTutorials(levelIsTutorial);
