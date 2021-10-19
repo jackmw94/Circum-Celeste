@@ -17,7 +17,10 @@ namespace Code.UI
         [Serializable]
         public class FriendLevelsData
         {
+            [SerializeField] private int _totalNumberOfFriends;
             [SerializeField] private FriendLevelData[] _data;
+
+            public int TotalNumberOfFriends => _totalNumberOfFriends;
             public FriendLevelData[] Data => _data;
         }
 
@@ -39,7 +42,8 @@ namespace Code.UI
 
         [SerializeField] private float _updateLevelDelay = 3f;
         [SerializeField] private float _loadingHideDuration = 0.33f;
-        [SerializeField] private CanvasGroup _loadingOverlay;
+        [SerializeField] private UIPanel _loadingPanel;
+        [SerializeField] private UIPanel _noFriendsPanel;
         [SerializeField] private LevelManager _levelManager;
         [SerializeField] private FriendsLevelEntry _firstPlace;
         [SerializeField] private FriendsLevelEntry _secondPlace;
@@ -47,7 +51,6 @@ namespace Code.UI
 
         private string _currentLevelName;
         private float _currentLevelGoldTime;
-        private Coroutine _showHideLoadingCoroutine = null;
         
         private Action<LevelRecording> _replayRecording = null;
         private Coroutine _updateLevelCoroutine = null;
@@ -61,7 +64,8 @@ namespace Code.UI
             
             _replayRecording = replayRecording;
             
-            ShowHideLoading(true);
+            _loadingPanel.ShowHideLoading(true, true);
+            _noFriendsPanel.ShowHideLoading(false, true);
 
             _firstPlace.SetupEmptyRecord();
             _secondPlace.SetupEmptyRecord();
@@ -104,7 +108,8 @@ namespace Code.UI
                 string serialized = scriptResult.FunctionResult.ToString();
                 FriendLevelsData deserialized = JsonUtility.FromJson<FriendLevelsData>(serialized);
                 
-                ShowHideLoading(false);
+                _loadingPanel.ShowHideLoading(false, false);
+                _noFriendsPanel.ShowHideLoading(deserialized.TotalNumberOfFriends == 0, false);
                 
                 PopulatePlaces(_currentLevelName, deserialized, _currentLevelGoldTime);
                 
@@ -175,27 +180,6 @@ namespace Code.UI
             {
                 
             });
-        }
-
-        private void ShowHideLoading(bool show)
-        {
-            if (_showHideLoadingCoroutine != null)
-            {
-                StopCoroutine(_showHideLoadingCoroutine);
-            }
-            _showHideLoadingCoroutine = StartCoroutine(ShowHideCoroutine(show));
-        }
-
-        private IEnumerator ShowHideCoroutine(bool show)
-        {
-            _loadingOverlay.blocksRaycasts = true;
-            float targetValue = show ? 1f : 0f;
-            float zeroToOneDuration = show ? 0f : _loadingHideDuration;
-            yield return Utilities.LerpOverTime(_loadingOverlay.alpha, targetValue, zeroToOneDuration, f =>
-            {
-                _loadingOverlay.alpha = f;
-            });
-            _loadingOverlay.blocksRaycasts = show;
         }
     }
 }
