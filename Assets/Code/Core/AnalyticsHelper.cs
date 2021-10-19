@@ -8,19 +8,19 @@ namespace Code.Core
 {
     public static class AnalyticsHelper
     {
-        public static void LevelStartedEvent(int levelContextLevelNumber)
+        public static void LevelStartedEvent(int levelNumber)
         {
             PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
                 {
                     Body = new Dictionary<string, object>()
                     {
-                        {"LevelNumber", levelContextLevelNumber},
+                        {"LevelNumber", levelNumber},
                     },
                     EventName = "StartedLevel"
                 },
                 result =>
                 {
-                    // do nothing
+                    CircumDebug.Log($"Wrote started level event for level number {levelNumber}");
                 },
                 error =>
                 {
@@ -41,7 +41,7 @@ namespace Code.Core
                 EventName = "CompletedLevel"
             }, response =>
             {
-                // do nothing
+                CircumDebug.Log($"Wrote completed level event for level number {levelNumber} (perf={isPerfect}, beatGold={beatGoldTime})");
             }, error =>
             {
                 CircumDebug.LogError($"Could not log level completed event! {error.GenerateErrorReport()}");
