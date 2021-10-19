@@ -35,7 +35,7 @@ namespace Code.Level.Player
                 movement = movement.normalized;
             }
 
-            float movementScale = Time.deltaTime * _speed * MovementSizeScaler;
+            float movementScale = Time.fixedDeltaTime * _speed * MovementSizeScaler;
             transform.Translate(movement * movementScale, Space.World);
         }
     }
