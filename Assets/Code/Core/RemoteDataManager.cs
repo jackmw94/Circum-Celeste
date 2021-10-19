@@ -34,7 +34,6 @@ namespace Code.Core
             }, result =>
             {
                 OurPlayFabId = result.PlayFabId;
-                OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                 UpdateFriendsList();
                 
                 UserAccountInfo userAccountInfo = result.InfoResultPayload.AccountInfo;
@@ -48,6 +47,7 @@ namespace Code.Core
                     }, nameResult =>
                     {
                         IsLoggedIn = true;
+                        OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                         CircumDebug.Log($"Logged in with playfab and updated name to {newUserName}");
                         onCompleteCallback(true);
                     }, error =>
@@ -60,6 +60,7 @@ namespace Code.Core
                 else
                 {
                     IsLoggedIn = true;
+                    OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                     CircumDebug.Log("Logged in with playfab");
                     onCompleteCallback(true);
                 }
