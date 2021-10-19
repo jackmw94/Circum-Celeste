@@ -13,6 +13,6 @@
         public int LevelNumber => LevelIndex + 1;
         
         public bool IsFirstLevel => LevelIndex == 0;
-        public bool IsTutorial => LevelIndex == -1;
+        public bool IsTutorial => LevelIndex < 0;
     }
 }
