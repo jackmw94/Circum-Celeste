@@ -12,6 +12,8 @@ namespace Code.VFX
 
         private IEnumerator Start()
         {
+            transform.rotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+            
             yield return Utilities.LerpOverTime(0f, 1f, _settings.Duration, f =>
             {
                 float easedF = EasingFunctions.EaseInSine(f);
