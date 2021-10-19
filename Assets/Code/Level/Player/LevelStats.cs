@@ -64,8 +64,13 @@ namespace Code.Level.Player
             
             bool hadBeatGold = HasPreviouslyCompletedInGoldTime;
             bool hasNowBeatGold = levelRecording.HasBeatenGoldTime(goldTime);
-            HasPreviouslyCompletedInGoldTime |= hasNowBeatGold;
+
             firstGold = !hadBeatGold && hasNowBeatGold;
+            if (firstGold)
+            {
+                _isDirty = true;
+                HasPreviouslyCompletedInGoldTime = true;
+            }
 
             if (currentRecording.IsPerfect && !levelRecording.IsPerfect)
             {
@@ -180,14 +185,11 @@ namespace Code.Level.Player
             {
                 return;
             }
-            
-            if (levelStats.LevelRecording.IsDirty)
-            {
-                string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
-                LevelMetaData levelMetaData = new LevelMetaData(levelStats);
-                string serializedMetaData = JsonUtility.ToJson(levelMetaData);
-                PersistentDataHelper.SetString(metaDataKey, serializedMetaData, true);
-            }
+
+            string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
+            LevelMetaData levelMetaData = new LevelMetaData(levelStats);
+            string serializedMetaData = JsonUtility.ToJson(levelMetaData);
+            PersistentDataHelper.SetString(metaDataKey, serializedMetaData, true);
 
             string recordingKey = PersistentDataKeys.LevelRecording(levelName);
             TrySaveLevelRecording(recordingKey, levelStats.LevelRecording);

@@ -19,11 +19,9 @@ namespace Code.Flow
         [SerializeField] private Button _leftArrow;
         [SerializeField] private Button _rightArrow;
         [Space(15)]
-        [SerializeField] private PositiveFeedbackScreen _positiveFeedbackScreen;
         [SerializeField] private LevelOverviewScreen _levelOverviewScreen;
         [SerializeField] private YourFastestTimesScreen _worldRecordsScreen;
         [SerializeField] private FriendsLevelRanking _friendsLevelRanking;
-        [SerializeField] private RunOverviewScreen _runOverviewScreen;
         [Space(15)]
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
@@ -84,31 +82,36 @@ namespace Code.Flow
             LevelRecording levelRecording = levelStats == null ? null : levelStats.HasRecording ? levelStats.LevelRecording : null;
             
             BadgeData currentBadgeData;
-            if (levelRecording == null)
+            BadgeData bestLevelBadgeData;
+            if (levelRecording == null || levelLayout.LevelContext.IsTutorial)
             {
-                currentBadgeData = new BadgeData
-                {
-                    IsPerfect = false,
-                    HasGoldTime = false,
-                    HasPerfectGoldTime = false
-                };
+                currentBadgeData = default;
+                bestLevelBadgeData = default;
+                newBadgeData = default;
             }
             else
             {
                 bool hasPerfect = levelRecording.RecordingData.IsPerfect;
                 bool previouslyHasGoldTime = levelStats.HasPreviouslyCompletedInGoldTime;
-                bool hasPerfectGold = hasPerfect && levelRecording.HasBeatenGoldTime(goldTime);
+                bool bestLevelHasGoldTime = levelRecording.HasBeatenGoldTime(goldTime);
+                bool hasPerfectGold = hasPerfect && bestLevelHasGoldTime;
                 currentBadgeData = new BadgeData
                 {
                     IsPerfect = hasPerfect,
                     HasGoldTime = previouslyHasGoldTime,
                     HasPerfectGoldTime = hasPerfectGold
                 };
+                bestLevelBadgeData = new BadgeData()
+                {
+                    IsPerfect = hasPerfect,
+                    HasGoldTime = bestLevelHasGoldTime,
+                    HasPerfectGoldTime = hasPerfectGold
+                };
             }
 
             _friendsLevelRanking.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
             
-            _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, currentBadgeData, levelRecording, ReplayLevel);
+            _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, bestLevelBadgeData, levelRecording, ReplayLevel);
 
             _teaseScrollRect.enabled = !persistentDataManager.PlayerFirsts.SeenReplaysScreen && newFastestTimeInfo != null;
             _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData, newFastestTimeInfo, showAdvanceLevelButtons, PlayLevel, NextLevelButtonListener);
