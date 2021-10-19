@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Code.Core;
 using Code.Debugging;
 using Code.Level.Player;
@@ -23,6 +24,8 @@ namespace Code.UI
         [Space(15)]
         [SerializeField] private Transform _friendsListRoot;
         [SerializeField] private GameObject _friendEntryPrefab;
+        [SerializeField] private Button _refreshFriendsButton;
+        [SerializeField] private GameObject _noFriendsIndicator;
         [Space(15)]
         [SerializeField] private TextMeshProUGUI _messageLabel;
         [SerializeField] private Color _successColour;
@@ -39,11 +42,13 @@ namespace Code.UI
         private void Awake()
         {
             _addFriendButton.onClick.AddListener(AddFriendButtonListener);
+            _refreshFriendsButton.onClick.AddListener(RefreshFriendsButtonListener);
         }
 
         private void OnDestroy()
         {
             _addFriendButton.onClick.RemoveListener(AddFriendButtonListener);
+            _refreshFriendsButton.onClick.RemoveListener(RefreshFriendsButtonListener);
         }
 
         private void OnEnable()
@@ -55,11 +60,26 @@ namespace Code.UI
             RefreshFriendsListUI();
         }
 
+        private void RefreshFriendsButtonListener()
+        {
+            _friendsListRoot.DestroyAllChildren();
+            RemoteDataManager.Instance.UpdateFriendsList(_ =>
+            {
+                RefreshFriendsListUI();
+            });
+        }
+
         private void RefreshFriendsListUI()
         {
             _friendsListRoot.DestroyAllChildren();
-            RemoteDataManager.Instance.FriendDisplayNames.ApplyFunction(p =>
-                Instantiate(_friendEntryPrefab, _friendsListRoot).GetComponentInChildren<TextMeshProUGUI>().text = p);
+            HashSet<string> friendDisplayNames = RemoteDataManager.Instance.FriendDisplayNames;
+            friendDisplayNames.ApplyFunction(friendName =>
+            {
+                GameObject friendEntryInstance = Instantiate(_friendEntryPrefab, _friendsListRoot);
+                TextMeshProUGUI friendNameLabel = friendEntryInstance.GetComponentInChildren<TextMeshProUGUI>();
+                friendNameLabel.text = friendName;
+            });
+            _noFriendsIndicator.SetActiveSafe(friendDisplayNames.Count == 0);
         }
 
         private void AddFriendButtonListener()
