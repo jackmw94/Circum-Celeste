@@ -209,6 +209,7 @@ namespace Code.Flow
         private void ResetPlayerStats()
         {
             PersistentDataManager.Instance.ResetStats();
+            RemoteDataManager.Instance.ResetStats();
             _levelProvider.ResetToStart(true);
             _interLevelScreen.SetupInterLevelScreen();
         }

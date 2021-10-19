@@ -127,5 +127,19 @@ namespace Code.Core
                 onCompleteCallback?.Invoke(false);
             });
         }
+
+        public void ResetStats()
+        {
+            PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+            {
+                FunctionName = "resetAllUserData"
+            }, result =>
+            {
+                CircumDebug.Log($"Reset all remote user data\n{result.Logs.Select(p => p.Message).JoinToString("\n")}");
+            }, error =>
+            {
+                CircumDebug.LogError($"Could not reset remote user data {error.GenerateErrorReport()}");
+            });
+        }
     }
 }
