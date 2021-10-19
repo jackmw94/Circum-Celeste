@@ -76,8 +76,6 @@ namespace Code.Flow
             float targetValue = show ? _shaderOnValue : _shaderOffValue;
             float zeroToOneDuration = instant || !show ? 0f : _animationUnitDuration;
             
-            CircumDebug.Log($"{(show ? "showing" : "hiding")} {gameObject} {(instant ? "instantly" : "with transition")}");
-
             if (!instant)
             {
                 yield return new WaitForSeconds(_animateInDelay);
