@@ -33,8 +33,8 @@ namespace Code.Core
         public static CircumQualitySetting EstimateBestDefaultQualitySetting()
         {
             int systemMemorySize = SystemInfo.systemMemorySize;
-            bool useHighQualitySettings = systemMemorySize >= HighQualityEstimateSystemMemoryThreshold;
-            CircumDebug.Log($"System memory size is at {systemMemorySize} so using {(useHighQualitySettings ? "high" : "medium")} quality settings");
+            bool useHighQualitySettings = systemMemorySize >= HighQualityEstimateSystemMemoryThreshold || SystemInfo.supportsComputeShaders;
+            CircumDebug.Log($"System memory size is at {systemMemorySize} or has computer shaders {SystemInfo.supportsComputeShaders} so using {(useHighQualitySettings ? "high" : "medium")} quality settings");
             return useHighQualitySettings ? CircumQualitySetting.High : CircumQualitySetting.Medium;
         }
     }
