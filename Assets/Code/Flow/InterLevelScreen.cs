@@ -3,6 +3,7 @@ using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using Code.UI;
+using Code.VFX;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
@@ -107,6 +108,11 @@ namespace Code.Flow
                     HasGoldTime = bestLevelHasGoldTime,
                     HasPerfectGoldTime = hasPerfectGold
                 };
+            }
+            
+            if (currentBadgeData.HasPerfectGoldTime)
+            {
+                AppFeedbacks.Instance.TriggerMenuEdgeBurst();
             }
 
             _friendsLevelRanking.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);

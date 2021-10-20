@@ -3,6 +3,7 @@ using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using Code.UI;
+using Code.VFX;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -83,6 +84,8 @@ namespace Code.Flow
                 Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CompletedGame);
                 persistentDataManager.PlayerFirsts.CompletedGame = true;
                 PlayerFirsts.Save(persistentDataManager.PlayerFirsts);
+                
+                AppFeedbacks.Instance.TriggerComets();
             }
         }
 
