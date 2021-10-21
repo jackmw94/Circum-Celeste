@@ -25,7 +25,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _exampleMovingOrbiterEnabled;
     private SerializedProperty _requiredForGameCompletion;
     private SerializedProperty _orbiterEnabled;
-    private SerializedProperty _powerEnabled;
+    private SerializedProperty _playerInvulnerable;
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
     private SerializedProperty _goldTime;
@@ -52,7 +52,7 @@ public class LevelLayoutEditor : Editor
         _exampleRotatingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleRotatingOrbiterEnabled));
         _exampleMovingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleMovingOrbiterEnabled));
         _requiredForGameCompletion = serializedObject.FindProperty(nameof(_requiredForGameCompletion));
-        _powerEnabled = serializedObject.FindProperty(nameof(_powerEnabled));
+        _playerInvulnerable = serializedObject.FindProperty(nameof(_playerInvulnerable));
         _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
         TryResizeArray();
@@ -77,7 +77,7 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_exampleMovingOrbiterEnabled);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_orbiterEnabled);
-        EditorGUILayout.PropertyField(_powerEnabled);
+        EditorGUILayout.PropertyField(_playerInvulnerable);
         EditorGUILayout.PropertyField(_requiredForGameCompletion);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_goldTime);
