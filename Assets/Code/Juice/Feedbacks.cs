@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Code.Core;
 using Code.Debugging;
 using Code.Level;
-using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
 using UnityExtras.Code.Optional.Singletons;
@@ -21,23 +19,31 @@ namespace Code.Juice
             PlayerDamaged,
         }
 
+        public enum VibrationType
+        {
+            None,
+            Regular,
+            Weak,
+            Strong,
+            Nope
+        }
+
         [Serializable]
         public class FeedbackSetting
         {
             [SerializeField] private FeedbackType _feedbackType;
             [SerializeField, Range(0f, 1f)] private float _screenShakeAmount;
-            [SerializeField] private float _vibrationDuration;
+            [SerializeField] private VibrationType _vibrationType;
             [SerializeField] private TimeControl.TimeControlFeedback _timeControlFeedback;
             [SerializeField] private bool _triggerVignette;
             
             public FeedbackType FeedbackType => _feedbackType;
             public float ScreenShakeAmount => _screenShakeAmount;
-            public float VibrationDuration => _vibrationDuration;
+            public VibrationType VibrationType => _vibrationType;
             public TimeControl.TimeControlFeedback TimeControlFeedback => _timeControlFeedback;
             public bool TriggerVignette => _triggerVignette;
         }
         
-        [SerializeField] private Vibration _vibration;
         [SerializeField] private TimeControl _timeControl;
         [SerializeField] private ScreenShaker _screenShake;
         [SerializeField] private AnimateVignette _vignetteFeedback;
@@ -51,14 +57,10 @@ namespace Code.Juice
         private void Awake()
         {
             RegenerateFeedbacksDictionary();
-            RemoteConfigHelper.RemoteConfigUpdated += SetFeedbacksFromRemoteConfig;
+            
+            Vibration.Init();
             
             _activeState.SetUnsetReason(ActiveState.ActiveReason.UserSetting, true);
-        }
-
-        private void OnDestroy()
-        {
-            RemoteConfigHelper.RemoteConfigUpdated -= SetFeedbacksFromRemoteConfig;
         }
 
         [ContextMenu(nameof(RegenerateFeedbacksDictionary))]
@@ -93,7 +95,8 @@ namespace Code.Juice
                 Debug.LogError($"There is no feedback type for {feedbackType}");
                 return;
             }
-            _vibration.AddVibration(feedbackSetting.VibrationDuration);
+
+            TriggerVibration(feedbackSetting.VibrationType);
             _screenShake.AddShake(feedbackSetting.ScreenShakeAmount);
             _timeControl.AddTimeState(feedbackSetting.TimeControlFeedback);
             if (feedbackSetting.TriggerVignette)
@@ -102,25 +105,19 @@ namespace Code.Juice
             }
         }
 
-        private void SetFeedbacksFromRemoteConfig()
+        private void TriggerVibration(VibrationType vibrationType)
         {
-            if (string.IsNullOrEmpty(RemoteConfigHelper.FeedbackProperties))
+            switch (vibrationType)
             {
-                return;
+                case VibrationType.None: return;
+                case VibrationType.Regular: Vibration.Vibrate(); break;
+                case VibrationType.Weak: Vibration.VibratePop(); break;
+                case VibrationType.Strong: Vibration.VibratePeek(); break;
+                case VibrationType.Nope: Vibration.VibrateNope(); break;
+                default: throw new ArgumentOutOfRangeException(nameof(vibrationType), vibrationType, null);
             }
-
-            // bit of a hack - we use a single string for feedback settings with objects separated by #
-            string[] splitSerializedFeedbackSettings = RemoteConfigHelper.FeedbackProperties.Split('#');
-            FeedbackSetting[] feedbackSettings = new FeedbackSetting[splitSerializedFeedbackSettings.Length];
-            for (int i = 0; i < feedbackSettings.Length; i++)
-            {
-                feedbackSettings[i] = JsonUtility.FromJson<FeedbackSetting>(splitSerializedFeedbackSettings[i]);
-            }
-
-            _feedbackSettings = feedbackSettings;
-            RegenerateFeedbacksDictionary();
         }
-
+        
         [ContextMenu(nameof(PrintSerializedFeedbacks))]
         private void PrintSerializedFeedbacks()
         {

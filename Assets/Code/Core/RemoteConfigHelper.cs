@@ -55,9 +55,6 @@ namespace Code.Core
         public static float PickupColliderSize = DefaultPickupColliderSize;
         public static float HazardColliderSize = DefaultHazardColliderSize;
         public static float PlayerSpeed = DefaultPlayerSpeed;
-        public static float SlingIntegralOffset = DefaultSlingIntegralOffset;
-        public static float SlingProportionalOffset = DefaultSlingProportionalOffset;
-        public static string FeedbackProperties = "";
         public static float MoverDeadZone = DefaultMoverDeadZone;
         public static float LevelSizeSpeedAdjustmentFactor = DefaultLevelSizeSpeedAdjustmentFactor;
         //
@@ -111,9 +108,6 @@ namespace Code.Core
             PickupColliderSize = ConfigManager.appConfig.GetFloat(nameof(PickupColliderSize), DefaultPickupColliderSize);
             HazardColliderSize = ConfigManager.appConfig.GetFloat(nameof(HazardColliderSize), DefaultHazardColliderSize);
             PlayerSpeed = ConfigManager.appConfig.GetFloat(nameof(PlayerSpeed), DefaultPlayerSpeed);
-            SlingIntegralOffset = ConfigManager.appConfig.GetFloat(nameof(SlingIntegralOffset), DefaultSlingIntegralOffset);
-            SlingProportionalOffset = ConfigManager.appConfig.GetFloat(nameof(SlingProportionalOffset), DefaultSlingProportionalOffset);
-            FeedbackProperties = ConfigManager.appConfig.GetString(nameof(FeedbackProperties));
             MoverDeadZone = ConfigManager.appConfig.GetFloat(nameof(MoverDeadZone));
             LevelSizeSpeedAdjustmentFactor = ConfigManager.appConfig.GetFloat(nameof(LevelSizeSpeedAdjustmentFactor));
             OrbiterP9x9 = ConfigManager.appConfig.GetFloat(nameof(OrbiterP9x9));
@@ -126,7 +120,6 @@ namespace Code.Core
 
         private static void AssertConfigHasProperties()
         {
-            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelative)),$"There is no app config property for {nameof(MoverUIRelative)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelativeMovementSensitivity)),$"There is no app config property for {nameof(MoverUIRelativeMovementSensitivity)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverUIRelativeMovementRatio)),$"There is no app config property for {nameof(MoverUIRelativeMovementRatio)}");
@@ -136,9 +129,6 @@ namespace Code.Core
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PickupColliderSize)),$"There is no app config property for {nameof(PickupColliderSize)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(HazardColliderSize)),$"There is no app config property for {nameof(HazardColliderSize)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(PlayerSpeed)),$"There is no app config property for {nameof(PlayerSpeed)}");
-            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingIntegralOffset)),$"There is no app config property for {nameof(SlingIntegralOffset)}");
-            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(SlingProportionalOffset)),$"There is no app config property for {nameof(SlingProportionalOffset)}");
-            CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(FeedbackProperties)),$"There is no app config property for {nameof(FeedbackProperties)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(MoverDeadZone)),$"There is no app config property for {nameof(MoverDeadZone)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(LevelSizeSpeedAdjustmentFactor)),$"There is no app config property for {nameof(LevelSizeSpeedAdjustmentFactor)}");
             CircumDebug.Assert(ConfigManager.appConfig.HasKey(nameof(OrbiterP9x9)),$"There is no app config property for {nameof(OrbiterP9x9)}");
@@ -161,9 +151,6 @@ namespace Code.Core
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), PickupColliderSize);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(HazardColliderSize)), HazardColliderSize);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), PlayerSpeed);
-            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), SlingIntegralOffset);
-            PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), SlingProportionalOffset);
-            PlayerPrefs.SetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), FeedbackProperties);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(MoverDeadZone)), MoverDeadZone);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(LevelSizeSpeedAdjustmentFactor)), LevelSizeSpeedAdjustmentFactor);
             PlayerPrefs.SetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP9x9)), OrbiterP9x9);
@@ -186,9 +173,6 @@ namespace Code.Core
             PickupColliderSize = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PickupColliderSize)), DefaultPickupColliderSize);
             HazardColliderSize = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(HazardColliderSize)), DefaultHazardColliderSize);
             PlayerSpeed = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(PlayerSpeed)), DefaultPlayerSpeed);
-            SlingIntegralOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingIntegralOffset)), DefaultSlingIntegralOffset);
-            SlingProportionalOffset = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(SlingProportionalOffset)), DefaultSlingIntegralOffset);
-            FeedbackProperties = PlayerPrefs.GetString(PlayerPrefsKeyFromName(nameof(FeedbackProperties)), "");
             MoverDeadZone = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(MoverDeadZone)), DefaultMoverDeadZone);
             LevelSizeSpeedAdjustmentFactor = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(LevelSizeSpeedAdjustmentFactor)), DefaultLevelSizeSpeedAdjustmentFactor);
             OrbiterP9x9 = PlayerPrefs.GetFloat(PlayerPrefsKeyFromName(nameof(OrbiterP9x9)), DefaultOrbiter9x9P);

@@ -2,7 +2,7 @@
 
 namespace Code.Level
 {
-    public class ActiveState
+    public class ActiveState // todo: find a way to make this more generic
     {
         [Flags]
         public enum ActiveReason
