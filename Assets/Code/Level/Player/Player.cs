@@ -15,7 +15,6 @@ namespace Code.Level.Player
         [SerializeField] private PlayerHealth _health;
         [SerializeField] private PlayerInput _input;
         [SerializeField] private PlayerMover _mover;
-        [SerializeField] private SlingController _sling;
 
         public bool IsRecording { get; private set; } = false;
         public bool IsMoving => _mover.IsMoving;
@@ -26,19 +25,19 @@ namespace Code.Level.Player
         private void Awake()
         {
             _health.SetOnDeathCallback(PlayerDied);
-            _health.IsInvulnerable = true;
+            _health.GameStateInvulnerable = true;
 
             TurnInputBehavioursOffOn(false);
         }
 
-        public void Initialise(int maxHealth, InputProvider inputProvider, bool orbiterEnabled, bool powerEnabled, bool isRecording = true)
+        public void Initialise(int maxHealth, InputProvider inputProvider, bool orbiterEnabled, bool playerInvulnerable, bool isRecording = true)
         {
             IsRecording = isRecording;
 
             _health.SetMaximumHealth(maxHealth);
             _health.ResetHealth();
+            _health.LevelInvulnerable = playerInvulnerable;
 
-            _sling.SlingEnabled = powerEnabled;
             _orbiter.gameObject.SetActive(orbiterEnabled);
 
             _input.Initialise(inputProvider);
@@ -54,7 +53,7 @@ namespace Code.Level.Player
         {
             base.LevelStarted();
 
-            _health.IsInvulnerable = false;
+            _health.GameStateInvulnerable = false;
             _health.OrbiterCanDamage = false;
             StartCoroutine(SetOrbiterDamageOnAfterDelay());
         }
@@ -64,7 +63,7 @@ namespace Code.Level.Player
             base.LevelFinished();
             
             TurnInputBehavioursOffOn(false);
-            _health.IsInvulnerable = true;
+            _health.GameStateInvulnerable = true;
             gameObject.SetActive(false);
         }
 

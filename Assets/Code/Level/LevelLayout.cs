@@ -18,7 +18,7 @@ namespace Code.Level
         [SerializeField] private float _escapeTimer = 25f;
         [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
         [SerializeField] private bool _orbiterEnabled = true;
-        [SerializeField] private bool _powerEnabled = false;
+        [SerializeField] private bool _playerInvulnerable = false;
         [SerializeField] private bool _requiredForGameCompletion = true;
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private bool _exampleRotatingOrbiterEnabled = false;
@@ -33,7 +33,7 @@ namespace Code.Level
         public float EscapeTimer => _escapeTimer;
         public string TagLineLocalisationTerm => _tagLineLocalisationTerm;
         public bool OrbiterEnabled => _orbiterEnabled;
-        public bool PowerEnabled => _powerEnabled;
+        public bool PlayerInvulnerable => _playerInvulnerable;
         public bool RequiredForGameCompletion => _requiredForGameCompletion;
         public IntroduceElement IntroduceElement => _introduceElement;
         public bool ExampleRotatingOrbiterEnabled => _exampleRotatingOrbiterEnabled;

@@ -125,7 +125,7 @@ namespace Code.Level
             {
                 Player.Player player = allPlayers[i];
                 InputProvider inputProvider = playersInputs?[i];
-                player.Initialise(5, inputProvider, level.OrbiterEnabled, level.PowerEnabled);
+                player.Initialise(5, inputProvider, level.OrbiterEnabled, level.PlayerInvulnerable);
             }
 
             return allPlayers;

@@ -1196,6 +1196,24 @@ MonoBehaviour:
   - Language: English
     Text: '[You have no friends]'
     Object: {fileID: 0}
+  - Language: German
+    Text: '[Du hast keine Freunde]'
+    Object: {fileID: 0}
+  - Language: French
+    Text: '[Tu n''as pas d''amis]'
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: '[Tu non hai amici]'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "[Voc\xEA n\xE3o tem amigos]"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "[\u0423 \u0442\u0435\u0431\u044F \u043D\u0435\u0442 \u0434\u0440\u0443\u0437\u0435\u0439]"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: '[No tienes amigos]'
+    Object: {fileID: 0}
 --- !u!1 &108418651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,6 +1261,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: '[No trophies]'
+    Object: {fileID: 0}
+  - Language: German
+    Text: "[Keine Troph\xE4en]"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "[Pas de troph\xE9es]"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: '[Nessun trofeo]'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "[Sem trof\xE9us]"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "[\u0411\u0435\u0437 \u0442\u0440\u043E\u0444\u0435\u0435\u0432]"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: '[Sin trofeos]'
     Object: {fileID: 0}
 --- !u!1 &140625682
 GameObject:
@@ -1873,6 +1909,25 @@ MonoBehaviour:
   - Language: English
     Text: Could not find a player with this code
     Object: {fileID: 0}
+  - Language: German
+    Text: Mit diesem Code konnte kein Spieler gefunden werden
+    Object: {fileID: 0}
+  - Language: French
+    Text: Impossible de trouver un joueur avec ce code
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Impossibile trovare un giocatore con questo codice
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o foi poss\xEDvel encontrar um jogador com este c\xF3digo"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043D\u0430\u0439\u0442\u0438
+      \u043F\u043B\u0435\u0435\u0440 \u0441 \u044D\u0442\u0438\u043C \u043A\u043E\u0434\u043E\u043C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "No se pudo encontrar un jugador con este c\xF3digo."
+    Object: {fileID: 0}
 --- !u!1 &158842557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,6 +1975,25 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: 'Your unique friend code is:'
+    Object: {fileID: 0}
+  - Language: German
+    Text: 'Dein einzigartiger Freundescode ist:'
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Votre code ami unique est\_:"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Il tuo codice amico univoco \xE8:"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Seu c\xF3digo de amigo exclusivo \xE9:"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u0430\u0448 \u0443\u043D\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439
+      \u043A\u043E\u0434 \u0434\u0440\u0443\u0433\u0430:"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Tu c\xF3digo de amigo \xFAnico es:"
     Object: {fileID: 0}
 --- !u!1 &162370321
 GameObject:
@@ -3072,6 +3146,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: '[player is not logged in]'
+    Object: {fileID: 0}
+  - Language: German
+    Text: '[Spieler ist nicht eingeloggt]'
+    Object: {fileID: 0}
+  - Language: French
+    Text: "[le joueur n'est pas connect\xE9]"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: '[il giocatore non ha effettuato l''accesso]'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "[jogador n\xE3o est\xE1 logado]"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "[\u0438\u0433\u0440\u043E\u043A \u043D\u0435 \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D]"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "[el jugador no ha iniciado sesi\xF3n]"
     Object: {fileID: 0}
 --- !u!1 &227660130
 GameObject:
@@ -4585,6 +4677,93 @@ MonoBehaviour:
   - Language: English
     Text: Add friends from the settings menu!
     Object: {fileID: 0}
+  - Language: German
+    Text: "F\xFCge Freunde aus dem Einstellungsmen\xFC hinzu!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Ajoutez des amis depuis le menu des param\xE8tres\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Aggiungi amici dal menu delle impostazioni!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Adicione amigos a partir do menu de configura\xE7\xF5es!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0439\u0442\u0435 \u0434\u0440\u0443\u0437\u0435\u0439
+      \u0438\u0437 \u043C\u0435\u043D\u044E \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043A!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1Agrega amigos desde el men\xFA de configuraci\xF3n!"
+    Object: {fileID: 0}
+--- !u!1 &302025066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 302025067}
+  - component: {fileID: 302025068}
+  m_Layer: 0
+  m_Name: YouHaveNewFriend
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &302025067
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302025066}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 66
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &302025068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302025066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Someone has added you as a friend! Check the friends screen in the settings
+      menu to see and add new friends.
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Jemand hat Sie als Freund hinzugef\xFCgt! "
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Quelqu'un vous a ajout\xE9 comme ami ! "
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: 'Qualcuno ti ha aggiunto come amico! '
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Algu\xE9m adicionou voc\xEA como amigo! "
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041A\u0442\u043E-\u0442\u043E \u0434\u043E\u0431\u0430\u0432\u0438\u043B
+      \u0432\u0430\u0441 \u0432 \u0434\u0440\u0443\u0437\u044C\u044F! "
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1Alguien te ha agregado como amigo! "
+    Object: {fileID: 0}
 --- !u!1 &310181750
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,6 +5116,25 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: You are already friends with this player
+    Object: {fileID: 0}
+  - Language: German
+    Text: Du bist bereits mit diesem Spieler befreundet
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Vous \xEAtes d\xE9j\xE0 ami avec ce joueur"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "Sei gi\xE0 amico di questo giocatore"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Voc\xEA j\xE1 \xE9 amigo deste jogador"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u044B \u0443\u0436\u0435 \u0434\u0440\u0443\u0436\u0438\u0442\u0435
+      \u0441 \u044D\u0442\u0438\u043C \u0438\u0433\u0440\u043E\u043A\u043E\u043C"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Ya eres amigo de este jugador
     Object: {fileID: 0}
 --- !u!1 &317522573
 GameObject:
@@ -13468,6 +13666,25 @@ MonoBehaviour:
   - Language: English
     Text: Successfully added friend!
     Object: {fileID: 0}
+  - Language: German
+    Text: "Freund erfolgreich hinzugef\xFCgt!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Ami ajout\xE9 avec succ\xE8s\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Amico aggiunto con successo!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Amigo adicionado com sucesso!
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0423\u0441\u043F\u0435\u0448\u043D\u043E \u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D
+      \u0434\u0440\u0443\u0433!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1Amigo agregado exitosamente!"
+    Object: {fileID: 0}
 --- !u!1 &540082202
 GameObject:
   m_ObjectHideFlags: 0
@@ -15627,6 +15844,7 @@ Transform:
   - {fileID: 108418652}
   - {fileID: 103145841}
   - {fileID: 296347944}
+  - {fileID: 302025067}
   m_Father: {fileID: 418685313}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16284,6 +16502,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Add friends
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Freunde hinzuf\xFCgen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Ajouter des amis
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Aggiungere amici
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Adicionar amigos
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0434\u0440\u0443\u0437\u0435\u0439"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "A\xF1ade amigos"
     Object: {fileID: 0}
 --- !u!1 &720032010
 GameObject:
@@ -17506,6 +17742,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Trophies
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Troph\xE4en"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Troph\xE9es"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: trofei
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Trof\xE9us"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0422\u0440\u043E\u0444\u0435\u0438"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Trofeos
     Object: {fileID: 0}
 --- !u!1 &770057320
 GameObject:
@@ -18961,6 +19215,24 @@ MonoBehaviour:
   - Language: English
     Text: Time
     Object: {fileID: 0}
+  - Language: German
+    Text: Zeit
+    Object: {fileID: 0}
+  - Language: French
+    Text: Temps
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Tempo
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Tempo
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u0440\u0435\u043C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Tiempo
+    Object: {fileID: 0}
 --- !u!1 &831538224
 GameObject:
   m_ObjectHideFlags: 0
@@ -20034,6 +20306,24 @@ MonoBehaviour:
   - Language: English
     Text: Friends
     Object: {fileID: 0}
+  - Language: German
+    Text: Freunde
+    Object: {fileID: 0}
+  - Language: French
+    Text: Amis
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Gli amici
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Amigos
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0414\u0440\u0443\u0437\u044C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Amigos
+    Object: {fileID: 0}
 --- !u!114 &865792028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2450340415887570269, guid: 45cf6fca9ef2f38468c169eafcc4ea4f, type: 3}
@@ -21072,6 +21362,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Name
+    Object: {fileID: 0}
+  - Language: German
+    Text: Name
+    Object: {fileID: 0}
+  - Language: French
+    Text: Nom
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Nome
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Nome
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0418\u043C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Nombre
     Object: {fileID: 0}
 --- !u!1 &944461876
 GameObject:
@@ -23016,7 +23324,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: -0.5000038}
+  m_AnchoredPosition: {x: 0, y: -0.5000076}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116717224
@@ -25183,6 +25491,8 @@ MonoBehaviour:
     LocalisationTerm: SeeHowToPlay
   - PopupType: 2
     LocalisationTerm: CompletedGame
+  - PopupType: 3
+    LocalisationTerm: YouHaveNewFriend
 --- !u!1 &1318602167
 GameObject:
   m_ObjectHideFlags: 0
@@ -35926,6 +36236,25 @@ MonoBehaviour:
   - Language: English
     Text: Could not add a friend at this time
     Object: {fileID: 0}
+  - Language: German
+    Text: "Konnte derzeit keinen Freund hinzuf\xFCgen"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Impossible d'ajouter un ami pour le moment
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Impossibile aggiungere un amico in questo momento
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o foi poss\xEDvel adicionar um amigo neste momento"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C
+      \u0434\u0440\u0443\u0433\u0430 \u0432 \u044D\u0442\u043E \u0432\u0440\u0435\u043C\u044F"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: No se pudo agregar un amigo en este momento
+    Object: {fileID: 0}
 --- !u!1 &1661528447
 GameObject:
   m_ObjectHideFlags: 0
@@ -37093,6 +37422,25 @@ MonoBehaviour:
   - Language: English
     Text: You can't add yourself as a friend!
     Object: {fileID: 0}
+  - Language: German
+    Text: "Sie k\xF6nnen sich selbst nicht als Freund hinzuf\xFCgen!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: Vous ne pouvez pas vous ajouter en tant qu'ami !
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Non puoi aggiungerti come amico!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Voc\xEA n\xE3o pode se adicionar como amigo!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0412\u044B \u043D\u0435 \u043C\u043E\u0436\u0435\u0442\u0435 \u0434\u043E\u0431\u0430\u0432\u0438\u0442\u044C
+      \u0441\u0435\u0431\u044F \u0432 \u0434\u0440\u0443\u0437\u044C\u044F!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1No puedes agregarte a ti mismo como amigo!"
+    Object: {fileID: 0}
 --- !u!1 &1724691875
 GameObject:
   m_ObjectHideFlags: 0
@@ -37454,6 +37802,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Best Replay
+    Object: {fileID: 0}
+  - Language: German
+    Text: Beste Wiederholung
+    Object: {fileID: 0}
+  - Language: French
+    Text: Meilleure rediffusion
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Miglior replay
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: Melhor Replay
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041B\u0443\u0447\u0448\u0438\u0439 \u043F\u043E\u0432\u0442\u043E\u0440"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Mejor repetici\xF3n"
     Object: {fileID: 0}
 --- !u!1 &1758179110
 GameObject:
@@ -39200,7 +39566,7 @@ Camera:
   far clip plane: 1000
   field of view: 136.1
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 12.322666
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -40830,7 +41196,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.25
+  m_fontSize: 50
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -42169,6 +42535,24 @@ MonoBehaviour:
   entries:
   - Language: English
     Text: Level Rankings
+    Object: {fileID: 0}
+  - Language: German
+    Text: Level-Rankings
+    Object: {fileID: 0}
+  - Language: French
+    Text: Classements de niveau
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Classifiche di livello
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Classifica\xE7\xF5es de n\xEDvel"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0420\u0435\u0439\u0442\u0438\u043D\u0433 \u0443\u0440\u043E\u0432\u043D\u0435\u0439"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: Clasificaciones de nivel
     Object: {fileID: 0}
 --- !u!1 &2091093958
 GameObject:

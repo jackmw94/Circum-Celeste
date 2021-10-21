@@ -237,7 +237,6 @@ GameObject:
   - component: {fileID: 6384775747270266427}
   - component: {fileID: 6384775747270266426}
   - component: {fileID: 6384775747270266425}
-  - component: {fileID: 6384775747270266424}
   - component: {fileID: 6384775747270266375}
   - component: {fileID: 6384775747270266374}
   - component: {fileID: 1647022148288233393}
@@ -362,24 +361,6 @@ MonoBehaviour:
   _speed: 400
   _magnitude: 0.5
   _defaultPosition: {x: 0, y: 0, z: 0}
---- !u!114 &6384775747270266424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384775747270266416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc2de6a02c7419c8d9c3ae1350fe169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _integralOffset: 0.7
-  _proportionalOffset: -0.2
-  _warmUpTime: 0.1
-  _warmDownTime: 0.5
-  _playerInput: {fileID: 6384775747270266374}
-  _orbitMover: {fileID: 6384775745932153091}
 --- !u!114 &6384775747270266375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,7 +417,7 @@ MonoBehaviour:
   _health: {fileID: 6384775747270266375}
   _input: {fileID: 6384775747270266374}
   _mover: {fileID: 6384775747270266427}
-  _sling: {fileID: 6384775747270266424}
+  _sling: {fileID: 0}
 --- !u!136 &4657203298447811017
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -14,8 +14,11 @@ namespace Code.Core
         private int _maximumHealth = 5;
         private int _currentHealth = 5;
         private Action _onDeath = null;
-            
-        public bool IsInvulnerable { get; set; }
+
+        public bool GameStateInvulnerable { private get; set; }
+        public bool LevelInvulnerable { private get; set; }
+
+        public bool IsInvulnerable => GameStateInvulnerable || LevelInvulnerable;
     
         public bool IsDead => _currentHealth <= 0;
         public bool NoDamageTaken => _currentHealth == _maximumHealth;
