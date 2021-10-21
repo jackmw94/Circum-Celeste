@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Debugging;
@@ -14,10 +15,13 @@ namespace Code.Core
 {
     public class RemoteDataManager : SingletonMonoBehaviour<RemoteDataManager>
     {
+        public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
+        
         public bool IsLoggedIn { get; private set; } = false;
         public string OurPlayFabId { get; private set; } = "";
         public string OurDisplayName { get; private set; } = "";
-        public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
+        
+        private Coroutine _checkNewFriendRequest = null;
 
         public void Login(string username, Action<bool> onCompleteCallback)
         {
@@ -47,12 +51,14 @@ namespace Code.Core
                     }, nameResult =>
                     {
                         IsLoggedIn = true;
+                        _checkNewFriendRequest = StartCoroutine(CheckNewFriendCoroutine());
                         OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                         CircumDebug.Log($"Logged in with playfab and updated name to {newUserName}");
                         onCompleteCallback(true);
                     }, error =>
                     {
                         IsLoggedIn = true;
+                        _checkNewFriendRequest = StartCoroutine(CheckNewFriendCoroutine());
                         CircumDebug.LogError($"Logged in with playfab but couldn't update username : {error.ErrorMessage}");
                         onCompleteCallback(true);
                     });
@@ -60,6 +66,7 @@ namespace Code.Core
                 else
                 {
                     IsLoggedIn = true;
+                    _checkNewFriendRequest = StartCoroutine(CheckNewFriendCoroutine());
                     OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                     CircumDebug.Log("Logged in with playfab");
                     onCompleteCallback(true);
@@ -139,6 +146,45 @@ namespace Code.Core
             }, error =>
             {
                 CircumDebug.LogError($"Could not reset remote user data {error.GenerateErrorReport()}");
+            });
+        }
+
+        private IEnumerator CheckNewFriendCoroutine()
+        {
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            
+            while (true)
+            {
+                if (persistentDataManager.PlayerFirsts.SeenNewFriendPopUp)
+                {
+                    // at time of writing, we only check new friends to show them the popup once they have a new one
+                    yield break;
+                }
+                
+                SendCheckNewFriendRequest();
+                yield return new WaitForSeconds(15f);
+            }
+        }
+
+        private void SendCheckNewFriendRequest()
+        {
+            string hasNewFriendKey = "HasNewFriend";
+            PlayFabClientAPI.GetUserData(new GetUserDataRequest()
+            {
+                Keys = new List<string>()
+                {
+                    hasNewFriendKey
+                }
+            }, result =>
+            {
+                if (!result.Data.ContainsKey(hasNewFriendKey))
+                {
+                    return;
+                }
+                PersistentDataManager.Instance.PlayerFirsts.ShowNewFriendPopupIfFirst();
+            }, error =>
+            {
+                CircumDebug.LogError($"Could not check for new friend tag : {error.GenerateErrorReport()}");
             });
         }
     }

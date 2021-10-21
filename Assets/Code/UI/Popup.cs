@@ -17,7 +17,8 @@ namespace Code.UI
         {
             CantRefreshConfig,
             SeeHowToPlay,
-            CompletedGame
+            CompletedGame,
+            YouHaveNewFriend
         }
 
         [Serializable]

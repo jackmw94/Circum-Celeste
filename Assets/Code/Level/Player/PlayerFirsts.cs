@@ -14,6 +14,7 @@ namespace Code.Level.Player
         [field: SerializeField] public bool SuggestedHowToPlay { get; set; } = false;
         [field: SerializeField] public bool SeenReplaysScreen { get; set; } = false;
         [field: SerializeField] public bool CompletedGame { get; set; } = false;
+        [field: SerializeField] public bool SeenNewFriendPopUp { get; set; } = false;
 
         public void ShowHowToPlayPopUpIfFirst()
         {
@@ -41,6 +42,21 @@ namespace Code.Level.Player
             
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
             persistentDataManager.PlayerFirsts.SeenReplaysScreen = true;
+            
+            Save(persistentDataManager.PlayerFirsts);
+        }
+
+        public void ShowNewFriendPopupIfFirst()
+        {
+            if (SeenNewFriendPopUp)
+            {
+                return;
+            }
+            
+            Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.YouHaveNewFriend);
+
+            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            persistentDataManager.PlayerFirsts.SeenNewFriendPopUp = true;
             
             Save(persistentDataManager.PlayerFirsts);
         }
