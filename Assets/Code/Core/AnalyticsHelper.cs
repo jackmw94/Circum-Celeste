@@ -10,42 +10,55 @@ namespace Code.Core
     {
         public static void LevelStartedEvent(int levelNumber)
         {
-            PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
-                {
-                    Body = new Dictionary<string, object>()
+            if (!RemoteDataManager.Instance.IsLoggedIn)
+            {
+                return;
+            }
+
+            try
+            {
+                PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
                     {
-                        {"LevelNumber", levelNumber},
+                        Body = new Dictionary<string, object>()
+                        {
+                            {"LevelNumber", levelNumber},
+                        },
+                        EventName = "StartedLevel"
                     },
-                    EventName = "StartedLevel"
-                },
-                result =>
-                {
-                    CircumDebug.Log($"Wrote started level event for level number {levelNumber}");
-                },
-                error =>
-                {
-                    CircumDebug.LogError($"Could not log level started event! {error.GenerateErrorReport()}");
-                });
+                    result => { CircumDebug.Log($"Wrote started level event for level number {levelNumber}"); },
+                    error => { CircumDebug.LogError($"Could not log level started event! {error.GenerateErrorReport()}"); });
+            }
+            catch (PlayFabException playFabException)
+            {
+                CircumDebug.LogError($"Could not send analytics event : {playFabException.Message}");
+            }
         }
         
         public static void LevelCompletedEvent(int levelNumber, bool isPerfect, bool beatGoldTime)
         {
-            PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
+            if (!RemoteDataManager.Instance.IsLoggedIn)
             {
-                Body = new Dictionary<string, object>()
-                {
-                    {"LevelNumber", levelNumber},
-                    {"NoDamage", isPerfect},
-                    {"BeatGoldTime", beatGoldTime}
-                },
-                EventName = "CompletedLevel"
-            }, response =>
+                return;
+            }
+
+            try
             {
-                CircumDebug.Log($"Wrote completed level event for level number {levelNumber} (perf={isPerfect}, beatGold={beatGoldTime})");
-            }, error =>
+                PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
+                    {
+                        Body = new Dictionary<string, object>()
+                        {
+                            {"LevelNumber", levelNumber},
+                            {"NoDamage", isPerfect},
+                            {"BeatGoldTime", beatGoldTime}
+                        },
+                        EventName = "CompletedLevel"
+                    }, response => { CircumDebug.Log($"Wrote completed level event for level number {levelNumber} (perf={isPerfect}, beatGold={beatGoldTime})"); },
+                    error => { CircumDebug.LogError($"Could not log level completed event! {error.GenerateErrorReport()}"); });
+            }
+            catch (PlayFabException playFabException)
             {
-                CircumDebug.LogError($"Could not log level completed event! {error.GenerateErrorReport()}");
-            });
+                CircumDebug.LogError($"Could not write analytics event : {playFabException.Message}");
+            }
         }
     }
 }
