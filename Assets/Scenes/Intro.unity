@@ -2828,7 +2828,7 @@ RectTransform:
   m_GameObject: {fileID: 1598240601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -15}
-  m_LocalScale: {x: 0.011, y: 0.011, z: 0.011}
+  m_LocalScale: {x: 0.012322666, y: 0.012322666, z: 0.012322666}
   m_Children:
   - {fileID: 78262275}
   - {fileID: 521994804}
@@ -3242,9 +3242,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _postProcessingVolume: {fileID: 521994803}
   _jonkWongleLogoAnimator: {fileID: 1598240606}
-  _startJonkWonglerLogoDelay: 0.75
-  _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.75
-  _holdSplashScreenDuration: 1
+  _startJonkWonglerLogoDelay: 0.6
+  _playCircumLogoAtNormalisedTimeInJonkWonglerLogo: 0.7
+  _holdSplashScreenDuration: 0.8
   _showSplashScreen: {fileID: 1179428032}
   _hideSplashScreen: {fileID: 51186256}
   _hideCircumLogo: {fileID: 856175197}
