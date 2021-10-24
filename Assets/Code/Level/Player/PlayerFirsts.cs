@@ -15,6 +15,7 @@ namespace Code.Level.Player
         [field: SerializeField] public bool SeenReplaysScreen { get; set; } = false;
         [field: SerializeField] public bool CompletedGame { get; set; } = false;
         [field: SerializeField] public bool SeenNewFriendPopUp { get; set; } = false;
+        [field: SerializeField] public bool UsedLevelOverviewArrows { get; set; } = false;
 
         public void ShowHowToPlayPopUpIfFirst()
         {
@@ -25,10 +26,9 @@ namespace Code.Level.Player
             
             Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.SeeHowToPlay);
             
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            persistentDataManager.PlayerFirsts.SuggestedHowToPlay = true;
+            SuggestedHowToPlay = true;
             
-            Save(persistentDataManager.PlayerFirsts);
+            Save(this);
         }
 
         public void ShowReplayScreenIntroIfFirst()
@@ -38,12 +38,21 @@ namespace Code.Level.Player
                 return;
             }
             
-            // show intro
+            SeenReplaysScreen = true;
             
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            persistentDataManager.PlayerFirsts.SeenReplaysScreen = true;
+            Save(this);
+        }
+
+        public void SetLevelOverviewArrowsUsed()
+        {
+            if (UsedLevelOverviewArrows)
+            {
+                return;
+            }
+
+            UsedLevelOverviewArrows = true;
             
-            Save(persistentDataManager.PlayerFirsts);
+            Save(this);
         }
 
         public void ShowNewFriendPopupIfFirst()
@@ -55,19 +64,16 @@ namespace Code.Level.Player
             
             Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.YouHaveNewFriend);
 
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            persistentDataManager.PlayerFirsts.SeenNewFriendPopUp = true;
+            SeenNewFriendPopUp = true;
             
-            Save(persistentDataManager.PlayerFirsts);
+            Save(this);
         }
 
         public void SetReplaysScreenAsSeen()
         {
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+            SeenReplaysScreen = true;
             
-            persistentDataManager.PlayerFirsts.SeenReplaysScreen = true;
-            Save(persistentDataManager.PlayerFirsts);
-            
+            Save(this);
             CircumDebug.Log("Set replays screen as seen");
         }
 
@@ -82,14 +88,14 @@ namespace Code.Level.Player
             CircumDebug.Log($"Loaded player firsts {serializedPlayerFirsts}");
             
             PlayerFirsts deserializedPlayerFirsts = JsonUtility.FromJson<PlayerFirsts>(serializedPlayerFirsts);
-
-            if (deserializedPlayerFirsts == null)
+            
+            if (deserializedPlayerFirsts != null)
             {
-                CircumDebug.LogError("Loaded player firsts were null, creating new.");
-                return new PlayerFirsts();
+                return deserializedPlayerFirsts;
             }
             
-            return deserializedPlayerFirsts;
+            CircumDebug.LogError("Loaded player firsts were null, creating new.");
+            return new PlayerFirsts();
         }
 
         public static void Save(PlayerFirsts playerFirsts)
