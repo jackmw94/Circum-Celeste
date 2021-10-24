@@ -6,6 +6,11 @@
         /// Level index for referencing in code
         /// </summary>
         public int LevelIndex { get; set; } = 0;
+
+        /// <summary>
+        /// Should completing this levels complete all tutorials
+        /// </summary>
+        public bool IsFinalTutorial { get; set; } = false;
         
         /// <summary>
         /// Level number for showing to user

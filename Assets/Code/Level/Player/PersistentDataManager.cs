@@ -61,7 +61,7 @@ namespace Code.Level.Player
             }
             _updateLevelIndexCoroutine = StartCoroutine(UpdateCurrentLevelCoroutine());
         }
-
+        
         private IEnumerator UpdateCurrentLevelCoroutine()
         {
             yield return new WaitForSeconds(_levelIndexUpdateRate);
@@ -115,11 +115,10 @@ namespace Code.Level.Player
             
             int levelIndex = currentLevel.LevelContext.LevelIndex;
             _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped, out firstTimeCompletingLevel);
-            
-            bool levelIsTutorial = currentLevel.LevelContext.IsTutorial;
-            _playerStats.UpdateCompletedTutorials(levelIsTutorial);
 
-            if (!levelIsTutorial)
+            _playerStats.UpdateCompletedTutorials(currentLevel.LevelContext.IsFinalTutorial);
+
+            if (!currentLevel.LevelContext.IsTutorial)
             {
                 if (!_levelStats.TryGetValue(currentLevel.name, out LevelStats levelStats))
                 {
@@ -155,7 +154,7 @@ namespace Code.Level.Player
             _playerStats = PlayerStats.Load();
             foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                if (LevelStats.TryLoadLevelStats(levelLayout.name, out LevelStats levelStats))
+                if (LevelStats.TryLoadLevelStats(levelLayout.name, levelLayout.GoldTime, out LevelStats levelStats))
                 {
                     _levelStats.Add(levelLayout.name, levelStats);
                 }
@@ -236,7 +235,10 @@ namespace Code.Level.Player
                     return false;
                 }
 
-                bool hasPerfectRecording = levelStats.HasRecording && levelStats.LevelRecording.RecordingData.IsPerfect;
+                bool hasPerfectRecording = levelStats.HasRecording && 
+                                           levelStats.LevelRecording.RecordingData.IsPerfect && 
+                                           levelStats.LevelRecording.HasBeatenGoldTime(levelLayout.GoldTime);
+                
                 if (!hasPerfectRecording)
                 {
                     return false;

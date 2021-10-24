@@ -20,6 +20,7 @@ namespace Code.Level
             {
                 // first tutorial is -1, second -2, etc.
                 _tutorialLevels[i].LevelContext.LevelIndex = -i - 1;
+                _tutorialLevels[i].LevelContext.IsFinalTutorial = i == _tutorialLevels.Length - 1;
             }
 
             for (int i = 0; i < _levelLayout.Length; i++)
