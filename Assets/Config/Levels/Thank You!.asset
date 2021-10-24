@@ -17,7 +17,7 @@ MonoBehaviour:
   _escapeTimer: 25
   _tagLineLocalisationTerm: 
   _orbiterEnabled: 1
-  _powerEnabled: 1
+  _playerInvulnerable: 1
   _requiredForGameCompletion: 0
   _introduceElement: 0
   _exampleRotatingOrbiterEnabled: 0
