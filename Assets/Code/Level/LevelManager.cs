@@ -65,7 +65,11 @@ namespace Code.Level
                 StopCoroutine(_startLevelOnceMovedCoroutine);
             }
 
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, InterLevelFlow.InterLevelTransition.Fast);
+            _interLevelFlow.ShowInterLevelUI(new InterLevelFlow.InterLevelFlowSetupData
+            {
+                Transition = InterLevelFlow.InterLevelTransition.Fast,
+                OnShown = ClearCurrentLevel
+            });
         }
 
         private void ClearCurrentLevel()
@@ -122,6 +126,7 @@ namespace Code.Level
             NewFastestTimeInfo newFastestTimeInfo = null;
             bool hasComeFromLevelCompletion = false;
             bool firstTimeCompletingLevel = false;
+            bool completedPerfectLevel = false;
 
             if (!isReplay)
             {
@@ -144,6 +149,8 @@ namespace Code.Level
                     bool beatGoldTime = levelRecording.HasBeatenGoldTime(currentLevel.GoldTime);
                     AnalyticsHelper.LevelCompletedEvent(levelNumber, isPerfect, beatGoldTime);
 
+                    completedPerfectLevel = isPerfect && beatGoldTime;
+
                     persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo, out firstTimeCompletingLevel);
 
                     hasComeFromLevelCompletion = _levelProvider.CanChangeToNextLevel(true);
@@ -160,7 +167,15 @@ namespace Code.Level
                 }
             }
             
-            _interLevelFlow.ShowInterLevelUI(ClearCurrentLevel, newBadgeData: newBadgeData, newFastestTimeInfo: newFastestTimeInfo, hasComeFromLevelCompletion: hasComeFromLevelCompletion, firstTimeCompletingLevel: firstTimeCompletingLevel);
+            _interLevelFlow.ShowInterLevelUI(new InterLevelFlow.InterLevelFlowSetupData
+            {
+                OnShown = ClearCurrentLevel,
+                NewBadgeData = newBadgeData,
+                NewFastestTimeInfo = newFastestTimeInfo,
+                HasComeFromLevelCompletion = hasComeFromLevelCompletion,
+                FirstTimeCompletingLevel = firstTimeCompletingLevel,
+                LevelGotPerfect = completedPerfectLevel
+            });
         }
 
         private IEnumerator TryShowHowToPlayPopUpAfterDelay()

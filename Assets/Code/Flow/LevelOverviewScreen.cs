@@ -48,7 +48,7 @@ namespace Code.Flow
             _advanceButton.onClick.RemoveListener(AdvanceButtonClicked);
         }
 
-        public void SetupLevelOverview(LevelLayout levelLayout, BadgeData currentBadgeData, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool showAdvancePrompt, Action playLevelCallback, Action advanceLevelCallback)
+        public void SetupLevelOverview(InterLevelFlow.InterLevelFlowSetupData interLevelFlowSetupData, LevelLayout levelLayout, BadgeData currentBadgeData, Action playLevelCallback, Action advanceLevelCallback)
         {
             int levelNumber = levelLayout.LevelContext.LevelNumber;
             
@@ -59,9 +59,10 @@ namespace Code.Flow
 
             SetTagString(levelLayout);
             
-            _playButtonRoot.SetActiveSafe(!showAdvancePrompt);
-            _playAndAdvanceButtonRoot.SetActiveSafe(showAdvancePrompt);
+            _playButtonRoot.SetActiveSafe(!interLevelFlowSetupData.HasComeFromLevelCompletion);
+            _playAndAdvanceButtonRoot.SetActiveSafe(interLevelFlowSetupData.HasComeFromLevelCompletion);
 
+            NewFastestTimeInfo newFastestTimeInfo = interLevelFlowSetupData.NewFastestTimeInfo;
             bool hasNewFastestTime = newFastestTimeInfo != null;
             _newFastestTimeRoot.SetActive(hasNewFastestTime);
             if (hasNewFastestTime)
@@ -70,7 +71,7 @@ namespace Code.Flow
                 _newFastestTimeLabel.color = newFastestTimeInfo.IsPerfect ? _perfectNewFastestTimeLabelColour : _regularNewFastestTimeLabelColour;
             }
 
-            _badgeIndicator.SetupBadgeIndicator(currentBadgeData, newBadgeData, CheckGameComplete);
+            _badgeIndicator.SetupBadgeIndicator(currentBadgeData, interLevelFlowSetupData.NewBadgeData, CheckGameComplete);
             
             _playLevelCallback = playLevelCallback;
             _advanceLevelCallback = advanceLevelCallback;

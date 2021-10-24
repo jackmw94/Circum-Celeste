@@ -72,8 +72,9 @@ namespace Code.Flow
             }
         }
 
-        public void SetupInterLevelScreen(BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool hasComeFromLevelCompletion = false)
+        public void SetupInterLevelScreen(InterLevelFlow.InterLevelFlowSetupData interLevelFlowSetupData = null)
         {
+            interLevelFlowSetupData ??= new InterLevelFlow.InterLevelFlowSetupData();
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
             string levelName = levelLayout.name;
             float goldTime = levelLayout.GoldTime;
@@ -88,7 +89,6 @@ namespace Code.Flow
             {
                 currentBadgeData = default;
                 bestLevelBadgeData = default;
-                newBadgeData = default;
             }
             else
             {
@@ -110,7 +110,7 @@ namespace Code.Flow
                 };
             }
             
-            if (currentBadgeData.HasPerfectGoldTime && hasComeFromLevelCompletion)
+            if (interLevelFlowSetupData.LevelGotPerfect)
             {
                 AppFeedbacks.Instance.TriggerMenuEdgeBurst();
             }
@@ -119,8 +119,8 @@ namespace Code.Flow
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, bestLevelBadgeData, levelRecording, ReplayLevel);
 
-            _teaseScrollRect.enabled = !persistentDataManager.PlayerFirsts.SeenReplaysScreen && newFastestTimeInfo != null;
-            _levelOverviewScreen.SetupLevelOverview(levelLayout, currentBadgeData, newBadgeData, newFastestTimeInfo, hasComeFromLevelCompletion, PlayLevel, NextLevelButtonListener);
+            _teaseScrollRect.enabled = !persistentDataManager.PlayerFirsts.SeenReplaysScreen && interLevelFlowSetupData.NewFastestTimeInfo != null;
+            _levelOverviewScreen.SetupLevelOverview(interLevelFlowSetupData, levelLayout, currentBadgeData, PlayLevel, NextLevelButtonListener);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
             _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial);

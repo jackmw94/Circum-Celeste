@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Code.Flow
 {
@@ -16,6 +14,17 @@ namespace Code.Flow
             Regular,
             Fast,
             Instant
+        }
+        
+        public class InterLevelFlowSetupData
+        {
+            public Action OnShown = null;
+            public InterLevelTransition Transition = InterLevelTransition.Regular;
+            public BadgeData NewBadgeData = new BadgeData();
+            public NewFastestTimeInfo NewFastestTimeInfo = null;
+            public bool HasComeFromLevelCompletion = false;
+            public bool FirstTimeCompletingLevel = false;
+            public bool LevelGotPerfect = false;
         }
 
         [SerializeField] private LevelProvider _levelProvider;
@@ -36,7 +45,10 @@ namespace Code.Flow
 
         private void Start()
         {
-            ShowInterLevelUI(transition: InterLevelTransition.Instant);
+            ShowInterLevelUI(new InterLevelFlowSetupData
+            {
+                Transition = InterLevelTransition.Instant
+            });
         }
 
         private void Update()
@@ -68,13 +80,13 @@ namespace Code.Flow
             }
         }
         
-        public void ShowInterLevelUI(Action onShown = null, InterLevelTransition transition = InterLevelTransition.Regular, BadgeData newBadgeData = new BadgeData(), NewFastestTimeInfo newFastestTimeInfo = null, bool hasComeFromLevelCompletion = false, bool firstTimeCompletingLevel = false)
+        public void ShowInterLevelUI(InterLevelFlowSetupData interLevelFlowSetupData)
         {
             if (_showHideInterLevelCoroutine != null)
             {
                 StopCoroutine(_showHideInterLevelCoroutine);
             }
-            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(onShown, transition, newBadgeData, newFastestTimeInfo, hasComeFromLevelCompletion, firstTimeCompletingLevel));
+            _showHideInterLevelCoroutine = StartCoroutine(ShowInterLevelUICoroutine(interLevelFlowSetupData));
         }
 
         public void HideInterLevelUI(InterLevelTransition transition = InterLevelTransition.Regular)
@@ -107,27 +119,27 @@ namespace Code.Flow
 
         }
         
-        private IEnumerator ShowInterLevelUICoroutine(Action onShown, InterLevelTransition transition, BadgeData newBadgeData, NewFastestTimeInfo newFastestTimeInfo, bool hasComeFromLevelCompletion, bool firstTimeCompletingLevel)
+        private IEnumerator ShowInterLevelUICoroutine(InterLevelFlowSetupData interLevelFlowSetupData)
         {
             _isTransitioning = true;
-            if (transition == InterLevelTransition.Regular)
+            if (interLevelFlowSetupData.Transition == InterLevelTransition.Regular)
             {
                 yield return new WaitForSeconds(_startDelay);
             }
 
-            _interLevelScreen.SetupInterLevelScreen(newBadgeData, newFastestTimeInfo, hasComeFromLevelCompletion);
+            _interLevelScreen.SetupInterLevelScreen(interLevelFlowSetupData);
             
             // Show overlay, hides level reset
-            yield return ShowOverlayCoroutine(transition);
+            yield return ShowOverlayCoroutine(interLevelFlowSetupData.Transition);
 
-            if (firstTimeCompletingLevel)
+            if (interLevelFlowSetupData.FirstTimeCompletingLevel)
             {
                 AppFeedbacks.Instance.TriggerComets();
             }
             
-            yield return _interLevelScreen.ShowHideScreen(true, transition);
+            yield return _interLevelScreen.ShowHideScreen(true, interLevelFlowSetupData.Transition);
 
-            onShown?.Invoke();
+            interLevelFlowSetupData.OnShown?.Invoke();
             _isTransitioning = false;
         }
 
