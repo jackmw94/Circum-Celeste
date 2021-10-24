@@ -152,6 +152,8 @@ namespace Code.Core
         private IEnumerator CheckNewFriendCoroutine()
         {
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+
+            yield return new WaitForSeconds(5f);
             
             while (true)
             {
@@ -160,9 +162,9 @@ namespace Code.Core
                     // at time of writing, we only check new friends to show them the popup once they have a new one
                     yield break;
                 }
-                
+
+                yield return new WaitForSeconds(45f);
                 SendCheckNewFriendRequest();
-                yield return new WaitForSeconds(15f);
             }
         }
 
