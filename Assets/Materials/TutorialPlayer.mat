@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player
+  m_Name: TutorialPlayer
   m_Shader: {fileID: -6465566751694194690, guid: e2b1f721f9c27ab4a9ee8bcf909d67e3, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -122,7 +122,7 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - Colour: {r: 5.9621205, g: 6.7271714, b: 2.6908686, a: 1}
+    - Colour: {r: 5.9875345, g: 6.727171, b: 2.7120008, a: 0.078431375}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
