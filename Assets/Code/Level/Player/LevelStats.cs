@@ -93,7 +93,7 @@ namespace Code.Level.Player
             _isDirty = true;
         }
         
-        public static bool TryLoadLevelStats(string levelName, out LevelStats levelStats)
+        public static bool TryLoadLevelStats(string levelName, float goldTime, out LevelStats levelStats)
         {
             string metaDataKey = PersistentDataKeys.LevelMetaStats(levelName);
             bool foundKey = PersistentDataHelper.HasKey(metaDataKey);
@@ -114,7 +114,7 @@ namespace Code.Level.Player
             bool foundOldKey = PersistentDataHelper.HasKey(oldLevelKey);
             if (foundOldKey)
             {
-                return LoadOldStats(levelName, out levelStats);
+                return LoadOldStats(levelName, goldTime, out levelStats);
             }
             
             levelStats = null;
@@ -140,7 +140,7 @@ namespace Code.Level.Player
             return true;
         }
 
-        private static bool LoadOldStats(string levelName, out LevelStats levelStats)
+        private static bool LoadOldStats(string levelName, float goldTime, out LevelStats levelStats)
         {
             // disabling to prevent compiler warning RE obsolete data. This function transfers the obsolete data to new
 #pragma warning disable 612
@@ -150,9 +150,13 @@ namespace Code.Level.Player
             
             levelStats = JsonUtility.FromJson<LevelStats>(decompressedStats);
 
-            levelStats.SetRecordingFromOldData(levelStats.FastestLevelRecording, levelStats.FastestPerfectLevelRecording);
+            levelStats.SetRecordingFromOldData(levelStats.FastestLevelRecording, levelStats.FastestPerfectLevelRecording, goldTime);
 
             levelStats._isDirty = true;
+            levelStats.HasPreviouslyCompletedInGoldTime =
+                levelStats.FastestLevelRecording.HasBeatenGoldTime(goldTime) || 
+                levelStats.FastestPerfectLevelRecording.HasBeatenGoldTime(goldTime);
+            
             if (levelStats.HasRecording) levelStats.LevelRecording.IsDirty = true;
 #pragma warning restore 612
             
@@ -262,12 +266,13 @@ namespace Code.Level.Player
             PersistentDataHelper.DeleteKey(levelRecordingKey);
         }
 
-        public void SetRecordingFromOldData(LevelRecording oldRecording, LevelRecording oldPerfectRecording)
+        public void SetRecordingFromOldData(LevelRecording oldRecording, LevelRecording oldPerfectRecording, float goldTime)
         {
             if (LevelRecordingExists(oldPerfectRecording))
             {
                 LevelRecording = oldPerfectRecording;
                 LevelRecording.RecordingData.IsPerfect = true;
+                HasPreviouslyCompletedInGoldTime = LevelRecording.HasBeatenGoldTime(goldTime);
                 return;
             }
 
