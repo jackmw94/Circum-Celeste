@@ -7,22 +7,13 @@ namespace Code.Core
     public class PidController
     {
         [SerializeField] private PidProperties _pidProperties;
-    
-        private float _proportionalOffset;
-        private float _maxIntegralOffset;
-    
+        
         private float _integral;
         private float _lastError;
 
-        private float TotalProportionalFactor => _pidProperties.ProportionalFactor + _proportionalOffset;
-        private float TotalMaxIntegral => _pidProperties.MaxIntegral + _maxIntegralOffset;
+        private float TotalProportionalFactor => _pidProperties.ProportionalFactor;
+        private float TotalMaxIntegral => _pidProperties.MaxIntegral;
 
-        public void SetPidOffsets(float maxIntegralOffset, float proportionalOffset)
-        {
-            _maxIntegralOffset = maxIntegralOffset;
-            _proportionalOffset = proportionalOffset;
-        }
-    
         public float GetPidDiff(float target, float current, float frameTime)
         {
             float proportionalError = target - current;

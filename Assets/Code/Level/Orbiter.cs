@@ -9,7 +9,7 @@ namespace Code.Level
         // level element so it's tracked by recorder
         // level state functions are not called
 
-        [SerializeField] private OrbiterMover _mover;
+        [SerializeField] private GravitationalMover _mover;
 
         public void SetPidValues(Vector3 pidValues)
         {

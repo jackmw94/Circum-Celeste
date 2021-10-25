@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 6384775745932153092}
   - component: {fileID: 6384775745932153093}
   - component: {fileID: 6384775745932153094}
-  - component: {fileID: 6384775745932153091}
   - component: {fileID: 6384775745932153090}
   - component: {fileID: 6384775745932153095}
   - component: {fileID: 4761992637811591851}
   - component: {fileID: 1961697690167233048}
   - component: {fileID: 5629148944564760007}
   - component: {fileID: 1197338980892752643}
+  - component: {fileID: 1049177167496735642}
   m_Layer: 7
   m_Name: Orbiter
   m_TagString: Untagged
@@ -89,23 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6384775745932153091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6384775745932153144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21f5806466263e047a3e056afae029f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _xPidController:
-    _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
-  _yPidController:
-    _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
-  _target: {fileID: 6384775747270266428}
 --- !u!54 &6384775745932153090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35017282c3942a689bb434fb2c98303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mover: {fileID: 6384775745932153091}
+  _mover: {fileID: 1049177167496735642}
 --- !u!114 &1197338980892752643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +174,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c77a98a2ff4967be0ae650704f93e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1049177167496735642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384775745932153144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b777989566f4e068b1c7e48f4c31e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _xPidController:
+    _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
+  _yPidController:
+    _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
+  _target: {fileID: 6384775747270266428}
 --- !u!1 &6384775747002654524
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c10034ef39bb41dc8dd511950558a0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbiter: {fileID: 0}
+  _orbiter: {fileID: 6384775745932153092}
   _speed: 400
   _magnitude: 0.5
   _defaultPosition: {x: 0, y: 0, z: 0}
@@ -417,7 +417,6 @@ MonoBehaviour:
   _health: {fileID: 6384775747270266375}
   _input: {fileID: 6384775747270266374}
   _mover: {fileID: 6384775747270266427}
-  _sling: {fileID: 0}
 --- !u!136 &4657203298447811017
 CapsuleCollider:
   m_ObjectHideFlags: 0

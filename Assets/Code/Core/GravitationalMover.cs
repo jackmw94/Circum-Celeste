@@ -51,5 +51,11 @@ namespace Code.Core
         {
             _target = target;
         }
+        
+        public void SetPidValues(Vector3 pidValues)
+        {
+            _xPidController.SetPIDValues(pidValues.x, pidValues.y, pidValues.z);
+            _yPidController.SetPIDValues(pidValues.x, pidValues.y, pidValues.z);
+        }
     }
 }
