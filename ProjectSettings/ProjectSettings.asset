@@ -349,6 +349,12 @@ PlayerSettings:
       m_Kind: 2
       m_SubKind: iPad
     - m_Textures:
+      - {fileID: 2800000, guid: 1a3d29bd5e12910418589f5337164e20, type: 3}
+      m_Width: 1024
+      m_Height: 1024
+      m_Kind: 4
+      m_SubKind: App Store
+    - m_Textures:
       - {fileID: 2800000, guid: 023c34652bf50684ea30bb8ceb15a980, type: 3}
       m_Width: 180
       m_Height: 180
@@ -376,12 +382,6 @@ PlayerSettings:
       m_Height: 76
       m_Kind: 0
       m_SubKind: iPad
-    - m_Textures:
-      - {fileID: 2800000, guid: 1a3d29bd5e12910418589f5337164e20, type: 3}
-      m_Width: 1024
-      m_Height: 1024
-      m_Kind: 4
-      m_SubKind: App Store
   - m_BuildTarget: Android
     m_Icons:
     - m_Textures: []
@@ -554,7 +554,7 @@ PlayerSettings:
   actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
-  enableCrashReportAPI: 0
+  enableCrashReportAPI: 1
   cameraUsageDescription: 
   locationUsageDescription: 
   microphoneUsageDescription: 
@@ -806,7 +806,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED;CIRCUM_LOGGING
-    4: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED;CIRCUM_LOGGING
+    4: MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_TOOLS;MOREMOUNTAINS_TEXTMESHPRO_INSTALLED
     7: CIRCUM_LOGGING
   additionalCompilerArguments: {}
   platformArchitecture: {}
