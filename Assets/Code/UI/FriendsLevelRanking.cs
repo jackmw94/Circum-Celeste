@@ -48,6 +48,7 @@ namespace Code.UI
         [SerializeField] private FriendsLevelEntry _firstPlace;
         [SerializeField] private FriendsLevelEntry _secondPlace;
         [SerializeField] private FriendsLevelEntry _thirdPlace;
+        [SerializeField] private FriendsScreenSelectable _panelSelectable;
 
         private string _currentLevelName;
         private float _currentLevelGoldTime;
@@ -86,7 +87,7 @@ namespace Code.UI
 
         private IEnumerator UpdateLevelCoroutine()
         {
-            yield return new WaitForSeconds(_updateLevelDelay);
+            yield return new WaitUntil(() => _panelSelectable.IsSelected);
             
             RemoteDataManager remoteDataManager = RemoteDataManager.Instance;
             yield return new WaitUntil(() => remoteDataManager.IsLoggedIn);

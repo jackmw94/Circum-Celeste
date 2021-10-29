@@ -11,6 +11,7 @@ namespace Code.UI
     {
         [SerializeField] private TextMeshProUGUI _friendsUsernameLabel;
         [SerializeField] private TextMeshProUGUI _levelTimeLabel;
+        [SerializeField] private GameObject _firstPlaceIcon;
         [SerializeField] private Image _perfectIcon;
         [SerializeField] private Image _goldTimeIcon;
         [SerializeField] private Image _perfectGoldIcon;
@@ -37,6 +38,8 @@ namespace Code.UI
                 _replayButton.interactable = true;
                 _replayButton.onClick.RemoveAllListeners();
                 _replayButton.onClick.AddListener(() => { replayCallback(levelName, friendLevelData); });
+
+                _firstPlaceIcon.SetActiveSafe(true);
             }
             else
             {
@@ -47,6 +50,8 @@ namespace Code.UI
                 _perfectIcon.gameObject.SetActiveSafe(false);
                 _goldTimeIcon.gameObject.SetActiveSafe(false);
                 _perfectGoldIcon.gameObject.SetActiveSafe(false);
+                
+                _firstPlaceIcon.SetActiveSafe(false);
             }
         }
     }
