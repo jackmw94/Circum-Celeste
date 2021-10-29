@@ -104,12 +104,12 @@ namespace Code.Debugging
             {
                 if (string.IsNullOrEmpty(q.Text))
                 {
-                    Debug.Log($"There is no entry in localisation {p.gameObject} for {q.Language}");
+                    Debug.LogWarning($"There is no entry in localisation {p.gameObject} for {q.Language}");
                 }
             }));
             
 #if CIRCUM_LOGGING
-            Debug.LogError("Circum logging is still enabled. Don't want this for a published build");
+            Debug.LogWarning("Circum logging is still enabled. Don't want this for a published build");
 #endif
             
             Debug.Log("--- Validation complete ---");
