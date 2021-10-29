@@ -45,6 +45,9 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _toggleShowLevelTimerLabel;
         [SerializeField] private TextMeshProUGUI _changeQualityLevelLabel;
         [Space(15)]
+        [SerializeField] private NotificationUI _settingsNotifications;
+        [SerializeField] private NotificationUI _friendsButtonNotifications;
+        [Space(15)]
         [SerializeField, LeanTranslationName] private string _showLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _hideLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _turnFeedbacksOnLocalisationTerm;
@@ -153,6 +156,7 @@ namespace Code.Flow
 
         private void ShowAddFriends()
         {
+            _friendsButtonNotifications.SetSeen();
             _addFriends.ShowHideScreen(true);
         }
 
@@ -235,6 +239,11 @@ namespace Code.Flow
             if (on)
             {
                 OnSettingShowing();
+                _settingsNotifications.SetSeen();
+            }
+            else
+            {
+                _friendsButtonNotifications.SetSeen();
             }
             
             if (_turnOnOffCoroutine != null)
@@ -265,6 +274,12 @@ namespace Code.Flow
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
             _canvasGroup.alpha = 0f;
+        }
+
+        public void ShowNewFriendsNotification(int newFriendsCount)
+        {
+            _settingsNotifications.AddNotification(newFriendsCount);
+            _friendsButtonNotifications.AddNotification(newFriendsCount);
         }
     }
 }

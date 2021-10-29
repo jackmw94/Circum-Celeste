@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Code.Core;
 using Code.Debugging;
@@ -10,10 +11,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
+using UnityExtras.Code.Optional.Singletons;
 
 namespace Code.UI
 {
-    public class AddFriendsScreen : MonoBehaviour
+    public class AddFriendsScreen : SingletonMonoBehaviour<AddFriendsScreen>
     {
         [SerializeField] private TextMeshProUGUI _uniqueIdLabel;
         [SerializeField, LeanTranslationName] private string _notLoggedInLocalisationTerm;
@@ -38,6 +40,8 @@ namespace Code.UI
         [SerializeField, LeanTranslationName] private string _cantAddYourselfAsFriendLocalisationTerm;
 
         private Coroutine _showMessageCoroutine = null;
+
+        public bool IsShowing { get; private set; } = false;
         
         private void Awake()
         {
@@ -58,12 +62,19 @@ namespace Code.UI
                 RemoteDataManager.Instance.OurPlayFabId : 
                 LeanLocalization.GetTranslationText(_notLoggedInLocalisationTerm, "[user not logged in]");
             RefreshFriendsListUI();
+
+            IsShowing = true;
+        }
+
+        private void OnDisable()
+        {
+            IsShowing = false;
         }
 
         private void RefreshFriendsButtonListener()
         {
             _friendsListRoot.DestroyAllChildren();
-            RemoteDataManager.Instance.UpdateFriendsList(_ =>
+            RemoteDataManager.Instance.UpdateFriendsList((_1, _2) =>
             {
                 RefreshFriendsListUI();
             });
@@ -117,7 +128,7 @@ namespace Code.UI
                 });
                 
                 _friendsLevelScreen.RefreshScreen();
-                RemoteDataManager.Instance.UpdateFriendsList(success =>
+                RemoteDataManager.Instance.UpdateFriendsList((success, _) =>
                 {
                     if (success)
                     {

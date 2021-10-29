@@ -8,6 +8,8 @@ namespace Code.Level.Player
     [Serializable]
     public class PlayerStats
     {
+        [SerializeField] private int _knownFriendsCount = -1;
+        
         [SerializeField] private bool _completedTutorials;
         [SerializeField] private RunTracker _runTracker = null;
 
@@ -22,6 +24,7 @@ namespace Code.Level.Player
         public int HighestLevelNoDeathsIndex => _highestNoDeathLevelReachedIndex;
         public int HighestPerfectLevelIndex => _highestPerfectLevelReachedIndex;
         public int RestartLevelIndex => _currentLevelIndex;
+        public int KnownFriendsCount => _knownFriendsCount;
 
         public bool IsNextLevelUnlocked(int currentLevelIndex) => currentLevelIndex < _highestLevelReachedIndex;
 
@@ -48,6 +51,11 @@ namespace Code.Level.Player
             }
         }
 
+        public void SetKnownFriendsCount(int knownFriends)
+        {
+            _knownFriendsCount = knownFriends;
+        }
+
         public void SetCurrentLevel(int currentLevelIndex)
         {
             _currentLevelIndex = currentLevelIndex;
@@ -67,7 +75,7 @@ namespace Code.Level.Player
         
         public override string ToString()
         {
-            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}";
+            return $"Tutorials complete = {_completedTutorials}\nHighest level reached = {_highestLevelReachedIndex}\nHighest level with no deaths = {_highestNoDeathLevelReachedIndex}\nHighest level on perfect run = {_highestPerfectLevelReachedIndex}\nLast run = {_runTracker}\nKnown friends count = {_knownFriendsCount}";
         }
 
         public static void Save(PlayerStats stats)

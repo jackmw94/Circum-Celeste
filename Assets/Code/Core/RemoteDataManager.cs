@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Debugging;
+using Code.Flow;
 using Code.Level.Player;
+using Code.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
@@ -15,13 +17,31 @@ namespace Code.Core
 {
     public class RemoteDataManager : SingletonMonoBehaviour<RemoteDataManager>
     {
+        private const float EditorFriendRefreshDelay = 10f;
+        private const float PlatformFriendRefreshDelay = 45f;
+        
         public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
         
         public bool IsLoggedIn { get; private set; } = false;
         public string OurPlayFabId { get; private set; } = "";
         public string OurDisplayName { get; private set; } = "";
+
+        private float CheckFriendsRefreshDelay => Application.isEditor ? EditorFriendRefreshDelay : PlatformFriendRefreshDelay;
         
         private Coroutine _checkNewFriendRequest = null;
+
+        private void Awake()
+        {
+#if UNITY_ANDROID
+#if CIRCUM_LOGGING
+            GooglePlayGames.PlayGamesPlatform.DebugLogEnabled = true;
+#endif
+            
+#if !UNITY_EDITOR
+            GooglePlayGames.PlayGamesPlatform.Activate();
+#endif
+#endif
+        }
 
         public void Login(string username, Action<bool> onCompleteCallback)
         {
@@ -38,7 +58,6 @@ namespace Code.Core
             }, result =>
             {
                 OurPlayFabId = result.PlayFabId;
-                UpdateFriendsList();
                 
                 UserAccountInfo userAccountInfo = result.InfoResultPayload.AccountInfo;
                 UserTitleInfo userTitleInfo = userAccountInfo.TitleInfo;
@@ -81,6 +100,11 @@ namespace Code.Core
         
         public void LoginWithSocialAPI(Action<bool> onCompleteCallback)
         {
+            if (Social.Active == null)
+            {
+                onCompleteCallback(false);
+            }
+            
             ILocalUser localUser = Social.localUser;
             localUser.Authenticate(socialAuthenticateSuccess =>
             {
@@ -102,17 +126,30 @@ namespace Code.Core
             });
         }
 
-        public void UpdateFriendsList(Action<bool> onComplete = null)
+        public void UpdateFriendsList(Action<bool, int> onComplete = null)
         {
             PlayFabClientAPI.GetFriendsList(new GetFriendsListRequest(), result =>
             {
+                CircumDebug.Log($"Updated friends list. Had {FriendDisplayNames.Count} cached friends, found {result.Friends.Count} friends, known count = {PersistentDataManager.Instance.PlayerStats.KnownFriendsCount}");
+                
                 FriendDisplayNames.Clear();
                 result.Friends.ApplyFunction(p => FriendDisplayNames.Add(p.TitleDisplayName));
-                onComplete?.Invoke(true);
+
+                PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
+                PlayerStats playerStats = persistentDataManager.PlayerStats;
+                int changeInFriendsCount = playerStats.KnownFriendsCount == -1 ? 0 : FriendDisplayNames.Count - playerStats.KnownFriendsCount;
+
+                if (FriendDisplayNames.Count != playerStats.KnownFriendsCount)
+                {
+                    playerStats.SetKnownFriendsCount(FriendDisplayNames.Count);
+                    PlayerStats.Save(playerStats);
+                }
+                
+                onComplete?.Invoke(true, changeInFriendsCount);
             }, error =>
             {
                 CircumDebug.LogError(error.ToString());
-                onComplete?.Invoke(false);
+                onComplete?.Invoke(false, 0);
             });
         }
         
@@ -151,43 +188,33 @@ namespace Code.Core
 
         private IEnumerator CheckNewFriendCoroutine()
         {
-            PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-
             yield return new WaitForSeconds(5f);
             
             while (true)
             {
-                if (persistentDataManager.PlayerFirsts.SeenNewFriendPopUp)
+                if (ShouldNotifyUserOfNewFriends())
                 {
-                    // at time of writing, we only check new friends to show them the popup once they have a new one
-                    yield break;
+                    SendCheckNewFriendRequest();
                 }
-
-                yield return new WaitForSeconds(45f);
-                SendCheckNewFriendRequest();
+                yield return new WaitForSeconds(CheckFriendsRefreshDelay);
             }
         }
 
         private void SendCheckNewFriendRequest()
         {
-            string hasNewFriendKey = "HasNewFriend";
-            PlayFabClientAPI.GetUserData(new GetUserDataRequest()
+            UpdateFriendsList((success, friendsCountDifference) =>
             {
-                Keys = new List<string>()
+                if (success && friendsCountDifference > 0 && ShouldNotifyUserOfNewFriends())
                 {
-                    hasNewFriendKey
+                    PersistentDataManager.Instance.PlayerFirsts.ShowNewFriendPopupIfFirst();
+                    Settings.Instance.ShowNewFriendsNotification(friendsCountDifference);
                 }
-            }, result =>
-            {
-                if (!result.Data.ContainsKey(hasNewFriendKey))
-                {
-                    return;
-                }
-                PersistentDataManager.Instance.PlayerFirsts.ShowNewFriendPopupIfFirst();
-            }, error =>
-            {
-                CircumDebug.LogError($"Could not check for new friend tag : {error.GenerateErrorReport()}");
             });
+        }
+
+        private bool ShouldNotifyUserOfNewFriends()
+        {
+            return !Settings.Instance.SettingsAreShowing && !AddFriendsScreen.Instance.IsShowing;
         }
     }
 }
