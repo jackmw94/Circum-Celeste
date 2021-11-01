@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Core;
 using Code.Debugging;
+using Code.Juice;
 using Code.Level.Player;
 using UnityEngine;
 using UnityExtras.Code.Core;
@@ -105,6 +106,8 @@ namespace Code.Level
             };
             LevelResult result = new LevelResult(false, levelRecordingData, true);
             LevelResult levelResult = result;
+            
+            Feedbacks.Instance.TriggerFeedback(Feedbacks.FeedbackType.CompletedLevel);
             
             LevelFinished(levelResult);
             

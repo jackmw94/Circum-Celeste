@@ -39,5 +39,10 @@ namespace Code.Level.Player
             
             return gameObj.IsEnemy() || (OrbiterCanDamage && gameObj.IsOrbiter());
         }
+
+        public void TutorialDisableOnStayDamage()
+        {
+            _onStayDamageDelay = float.MaxValue;
+        }
     }
 }

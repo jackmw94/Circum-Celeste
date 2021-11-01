@@ -20,6 +20,7 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _escapeCriteria;
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLineLocalisationTerm;
+    private SerializedProperty _tutorialDescription;
     private SerializedProperty _introduceElement;
     private SerializedProperty _exampleRotatingOrbiterEnabled;
     private SerializedProperty _exampleMovingOrbiterEnabled;
@@ -48,6 +49,7 @@ public class LevelLayoutEditor : Editor
         _escapeTimer = serializedObject.FindProperty(nameof(_escapeTimer));
         
         _tagLineLocalisationTerm = serializedObject.FindProperty(nameof(_tagLineLocalisationTerm));
+        _tutorialDescription = serializedObject.FindProperty(nameof(_tutorialDescription));
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
         _exampleRotatingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleRotatingOrbiterEnabled));
         _exampleMovingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleMovingOrbiterEnabled));
@@ -71,6 +73,8 @@ public class LevelLayoutEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(_tagLineLocalisationTerm);
+        GUILayout.Space(15);
+        EditorGUILayout.PropertyField(_tutorialDescription);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_introduceElement);
         EditorGUILayout.PropertyField(_exampleRotatingOrbiterEnabled);

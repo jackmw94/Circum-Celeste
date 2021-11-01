@@ -63,9 +63,23 @@ namespace Code.Level
             CircumDebug.Log($"Setting moving components to have a speed factor of {speedFactor}");
 
             // Initialise level instance
-            LevelPlayInstance levelPlayInstance = _cellsRoot.gameObject.AddComponent<LevelPlayInstance>();
+            LevelPlayInstance levelPlayInstance;
+            if (level.LevelContext.IsTutorial)
+            {
+                LevelTutorialInstance levelTutorialInstance = _cellsRoot.gameObject.AddComponent<LevelTutorialInstance>();
+                
+                levelTutorialInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
+                levelTutorialInstance.InitialiseTutorial(level.TutorialDescription);
+                
+                levelPlayInstance = levelTutorialInstance;
+            }
+            else
+            {
+                levelPlayInstance = _cellsRoot.gameObject.AddComponent<LevelPlayInstance>();
+                levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
+            }
+
             levelPlayInstance.name = level.name;
-            levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
 
             return levelPlayInstance;
         }

@@ -16,11 +16,11 @@ namespace Code.Level
         private float _escapeDuration;
         private IntroduceElement _introduceElement;
 
-        private List<Player.Player> _players;
-        private List<Pickup> _pickups;
-        private List<Enemy> _enemies;
-        private List<Escape> _escapes;
-        private List<Hazard> _hazards;
+        protected List<Player.Player> _players;
+        protected List<Pickup> _pickups;
+        protected List<Enemy> _enemies;
+        protected List<Escape> _escapes;
+        protected List<Hazard> _hazards;
 
         private float _startTime;
 
@@ -117,7 +117,7 @@ namespace Code.Level
             _escapes.ApplyFunction(p => p.SetIntroducing(_introduceElement.HasFlag(IntroduceElement.Escape)));
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (!IsStarted)
             {
@@ -143,7 +143,7 @@ namespace Code.Level
 #endif
         }
 
-        private void LevelCompleted()
+        protected void LevelCompleted()
         {
             CircumDebug.Assert(IsStarted, "Level has been completed before it's started? What's the deal with that..?");
             CircumDebug.Log($"-*- LEVEL {name} COMPLETED! -*-");
@@ -226,7 +226,7 @@ namespace Code.Level
             }
         }
         
-        private void ShowEscape()
+        protected void ShowEscape()
         {
             CircumDebug.Log("Showing escapes");
             _escapeShown = true;
@@ -234,9 +234,9 @@ namespace Code.Level
         }
 
 #if UNITY_EDITOR
-        private void DebugUpdate()
+        protected void DebugUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(EditorKeyCodeBindings.ShowEscape))
             {
                 CircumDebug.Log("Debug showing escapes");
                 ShowEscape();

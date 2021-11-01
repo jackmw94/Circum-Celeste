@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3212ede92347389df56e0890042839, type: 3}
+  m_Name: Moving The Heavens Tutorial Desc
+  m_EditorClassIdentifier: 
+  _tutorialCommands:
+  - OrbiterEnabled: 0
+    OrbiterDamageEnabled: 0
+    PickupsEnabled: 0
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: WelcomeToCircum
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 3
+  - OrbiterEnabled: 0
+    OrbiterDamageEnabled: 0
+    PickupsEnabled: 0
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: WelcomeToCircum
+    IntroduceElement: 2
+    CompleteCommandCriteria: 1
+    Duration: 1
+  - OrbiterEnabled: 0
+    OrbiterDamageEnabled: 0
+    PickupsEnabled: 0
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: 
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 2
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 0
+    PickupsEnabled: 0
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: TutorialOrbiterDesc1
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 7
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 1
+    PickupsEnabled: 0
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: TutorialOrbiterDesc2
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 10
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 1
+    PickupsEnabled: 1
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: TutorialOrbiterDesc3
+    IntroduceElement: 0
+    CompleteCommandCriteria: 2
+    Duration: 0
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 1
+    PickupsEnabled: 1
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: 
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 2
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 1
+    PickupsEnabled: 1
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 0
+    _instruction: TutorialBadgesDesc
+    IntroduceElement: 0
+    CompleteCommandCriteria: 0
+    Duration: 8
+  - OrbiterEnabled: 1
+    OrbiterDamageEnabled: 1
+    PickupsEnabled: 1
+    HazardsEnabled: 0
+    BlackHolesEnabled: 0
+    EscapeEnabled: 1
+    _instruction: TutorialFinishDesc
+    IntroduceElement: 0
+    CompleteCommandCriteria: 3
+    Duration: 0

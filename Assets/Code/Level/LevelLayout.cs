@@ -20,6 +20,7 @@ namespace Code.Level
         [SerializeField] private bool _orbiterEnabled = true;
         [SerializeField] private bool _playerInvulnerable = false;
         [SerializeField] private bool _requiredForGameCompletion = true;
+        [SerializeField] private TutorialDescription _tutorialDescription;
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private bool _exampleRotatingOrbiterEnabled = false;
         [SerializeField] private bool _exampleMovingOrbiterEnabled = false;
@@ -35,6 +36,7 @@ namespace Code.Level
         public bool OrbiterEnabled => _orbiterEnabled;
         public bool PlayerInvulnerable => _playerInvulnerable;
         public bool RequiredForGameCompletion => _requiredForGameCompletion;
+        public TutorialDescription TutorialDescription => _tutorialDescription;
         public IntroduceElement IntroduceElement => _introduceElement;
         public bool ExampleRotatingOrbiterEnabled => _exampleRotatingOrbiterEnabled;
         public bool ExampleMovingOrbiterEnabled => _exampleMovingOrbiterEnabled;

@@ -8,7 +8,9 @@ namespace Code.Core
 {
     public abstract class EntityHealth : MonoBehaviour
     {
-        private const float OnStayDamageDelay = 2.25f;
+        private const float DefaultOnStayDamageDelay = 2.25f;
+        
+        protected float _onStayDamageDelay = DefaultOnStayDamageDelay;
         
         private readonly Dictionary<GameObject, Coroutine> _onStayDamageAppliers = new Dictionary<GameObject, Coroutine>();
         private int _maximumHealth = 5;
@@ -22,6 +24,7 @@ namespace Code.Core
     
         public bool IsDead => _currentHealth <= 0;
         public bool NoDamageTaken => _currentHealth == _maximumHealth;
+        public int CurrentHealth => _currentHealth;
         public float HealthFraction => _currentHealth / (float)_maximumHealth;
             
         public void SetMaximumHealth(int maximumHealth)
@@ -80,9 +83,10 @@ namespace Code.Core
 
         private IEnumerator HandleOnStayDamage()
         {
-            yield return new WaitForSeconds(OnStayDamageDelay);
+            yield return new WaitForSeconds(_onStayDamageDelay);
             
             // if we shuffle around without orbiting then it'll kill ya
+            // this coroutine is stopped if object exits
             HitTaken(_maximumHealth);
         }
         

@@ -20,6 +20,7 @@ namespace Code.Level.Player
         public bool IsMoving => _mover.IsMoving;
         public bool IsDead => _health.IsDead;
         public bool NoDamageTaken => _health.NoDamageTaken;
+        public int CurrentHealth => _health.CurrentHealth;
         public Transform OrbiterTransform => _orbiter.transform;
 
         private void Awake()
@@ -71,6 +72,21 @@ namespace Code.Level.Player
         {
             TurnInputBehavioursOffOn(false);
             VfxManager.Instance.SpawnVfx(VfxType.PlayerDied, transform.position);
+        }
+
+        public void SetInvulnerable(bool isInvulnerable)
+        {
+            _health.LevelInvulnerable = isInvulnerable;
+        }
+
+        public void TutorialResetHealth()
+        {
+            _health.ResetHealth();
+        }
+
+        public void TutorialDisableOnStayDamage()
+        {
+            _health.TutorialDisableOnStayDamage();
         }
 
         private IEnumerator SetOrbiterDamageOnAfterDelay()

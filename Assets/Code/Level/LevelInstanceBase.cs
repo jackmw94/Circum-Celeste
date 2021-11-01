@@ -21,7 +21,7 @@ namespace Code.Level
         
         private CircumOptions PlayerOptions => PersistentDataManager.Instance.Options;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _feedbacks = Feedbacks.Instance;
 
@@ -30,7 +30,7 @@ namespace Code.Level
             
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             if (!_hasFinished)
             {
