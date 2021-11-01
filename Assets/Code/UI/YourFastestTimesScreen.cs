@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
+using Lean.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ namespace Code.UI
         [SerializeField] private TextMeshProUGUI _goldTimeLabel;
         [SerializeField] private Button _fastestTimeReplayButton;
         [SerializeField] private BadgeIndicator _badgeIndicator;
+        [SerializeField, LeanTranslationName] private string _noTimeAvailableLocalisationTerm;
 
         public void SetupRecordsScreen(float goldTime, BadgeData badgeData, LevelRecording fastestTime, Action<LevelRecording> replayRecording)
         {
@@ -51,7 +52,7 @@ namespace Code.UI
             return sb.ToString(); 
         }
 
-        private static void SetupRecord(LevelRecording levelRecording, TextMeshProUGUI timeLabel, Button replayButton, Action<LevelRecording> replayCallback)
+        private void SetupRecord(LevelRecording levelRecording, TextMeshProUGUI timeLabel, Button replayButton, Action<LevelRecording> replayCallback)
         {
             if (levelRecording != null)
             {
@@ -66,7 +67,7 @@ namespace Code.UI
             }
             else
             {
-                timeLabel.text = "[none]";
+                timeLabel.text = LeanLocalization.GetTranslationText(_noTimeAvailableLocalisationTerm, "[none]");
                 replayButton.interactable = false;
             }
         }

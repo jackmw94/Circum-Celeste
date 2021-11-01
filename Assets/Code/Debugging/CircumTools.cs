@@ -57,6 +57,30 @@ namespace Code.Debugging
             LeanLocalization.SetCurrentLanguageAll("French");
         }
         
+        [MenuItem("Circum/Language/German")]
+        public static void ChangeLanguageToGerman()
+        {
+            LeanLocalization.SetCurrentLanguageAll("German");
+        }
+        
+        [MenuItem("Circum/Language/Portuguese")]
+        public static void ChangeLanguageToPortuguese()
+        {
+            LeanLocalization.SetCurrentLanguageAll("Portuguese");
+        }
+        
+        [MenuItem("Circum/Language/Italian")]
+        public static void ChangeLanguageToItalian()
+        {
+            LeanLocalization.SetCurrentLanguageAll("Italian");
+        }
+        
+        [MenuItem("Circum/Language/Spanish")]
+        public static void ChangeLanguageToSpanish()
+        {
+            LeanLocalization.SetCurrentLanguageAll("Spanish");
+        }
+        
         [MenuItem("Circum/Language/Russian")]
         public static void ChangeLanguageToRussian()
         {
