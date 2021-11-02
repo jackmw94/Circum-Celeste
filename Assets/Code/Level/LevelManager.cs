@@ -1,12 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using Code.Core;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
-using Code.UI;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 namespace Code.Level
 {

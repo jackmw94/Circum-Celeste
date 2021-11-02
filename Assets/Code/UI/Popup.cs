@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Code.Debugging;
+using Code.Level;
 using Lean.Localization;
 using TMPro;
 using UnityEngine;
@@ -27,7 +28,8 @@ namespace Code.UI
             public LocalisedPopupType PopupType;
             [LeanTranslationName] public string LocalisationTerm;
         }
-        
+
+        [SerializeField] private LevelManager _levelManager;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Button _okayButton;
         [SerializeField] private TextMeshProUGUI _popupMessageText;
@@ -86,7 +88,7 @@ namespace Code.UI
 
         private void Update()
         {
-            if (_isShowingPopup)
+            if (_isShowingPopup || _levelManager.CurrentLevelInstance)
             {
                 return;
             }

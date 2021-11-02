@@ -192,10 +192,7 @@ namespace Code.Core
             
             while (true)
             {
-                if (ShouldNotifyUserOfNewFriends())
-                {
-                    SendCheckNewFriendRequest();
-                }
+                SendCheckNewFriendRequest();
                 yield return new WaitForSeconds(CheckFriendsRefreshDelay);
             }
         }
