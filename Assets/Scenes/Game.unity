@@ -23267,6 +23267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137286bccf7040c092e95b5b870fca80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelManager: {fileID: 2143567224}
   _canvasGroup: {fileID: 1293267722}
   _okayButton: {fileID: 1203332065}
   _popupMessageText: {fileID: 1456514610}
