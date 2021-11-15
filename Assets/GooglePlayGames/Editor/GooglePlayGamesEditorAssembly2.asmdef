@@ -1,7 +1,9 @@
 {
     "name": "GooglePlayGamesEditorAssembly2",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:ba5f86153067b9b4d9e3fb0402489ca8"
+    ],
     "includePlatforms": [
         "Editor"
     ],
