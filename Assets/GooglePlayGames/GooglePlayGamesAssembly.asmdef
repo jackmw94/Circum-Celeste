@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [
-        "Android"
+        "Android",
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
