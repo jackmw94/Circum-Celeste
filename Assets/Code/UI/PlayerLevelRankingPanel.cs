@@ -12,51 +12,25 @@ using UnityExtras.Code.Core;
 
 namespace Code.UI
 {
-    public class FriendsLevelRanking : MonoBehaviour
+    public abstract class PlayerLevelRankingPanel : MonoBehaviour
     {
-        [Serializable]
-        public class FriendLevelsData
-        {
-            [SerializeField] private int _totalNumberOfFriends;
-            [SerializeField] private FriendLevelData[] _data;
-
-            public int TotalNumberOfFriends => _totalNumberOfFriends;
-            public FriendLevelData[] Data => _data;
-        }
-
-        [Serializable]
-        public class FriendLevelData
-        {
-            [SerializeField] private string _playfabId;
-            [SerializeField] private string _username;
-            [SerializeField] private float _levelTime;
-            [SerializeField] private bool _isPerfect;
-
-            public string PlayfabId => _playfabId;
-            public string Username => _username;
-            public float Time => _levelTime;
-            public bool IsPerfect => _isPerfect;
-
-            public bool IsOurRecord => PlayfabId.EqualsIgnoreCase(RemoteDataManager.Instance.OurPlayFabId);
-        }
-
-        [SerializeField] private float _updateLevelDelay = 3f;
-        [SerializeField] private float _loadingHideDuration = 0.33f;
         [SerializeField] private UIPanel _loadingPanel;
         [SerializeField] private UIPanel _noFriendsPanel;
         [SerializeField] private LevelManager _levelManager;
-        [SerializeField] private FriendsLevelEntry _firstPlace;
-        [SerializeField] private FriendsLevelEntry _secondPlace;
-        [SerializeField] private FriendsLevelEntry _thirdPlace;
+        [SerializeField] private PlayerLevelEntry _firstPlace;
+        [SerializeField] private PlayerLevelEntry _secondPlace;
+        [SerializeField] private PlayerLevelEntry _thirdPlace;
         [SerializeField] private FriendsScreenSelectable _panelSelectable;
 
-        private string _currentLevelName;
+        protected string _currentLevelName;
         private float _currentLevelGoldTime;
         
         private Action<LevelRecording> _replayRecording = null;
         private Coroutine _updateLevelCoroutine = null;
 
         public void RefreshScreen() => SetupRecordsScreen(_currentLevelName, _currentLevelGoldTime, _replayRecording);
+
+        protected abstract ExecuteCloudScriptRequest GetCloudScriptRequest();
 
         public void SetupRecordsScreen(string levelName, float goldTime, Action<LevelRecording> replayRecording)
         {
@@ -92,12 +66,7 @@ namespace Code.UI
             RemoteDataManager remoteDataManager = RemoteDataManager.Instance;
             yield return new WaitUntil(() => remoteDataManager.IsLoggedIn);
             
-            string statsKey = PersistentDataKeys.LevelMetaStats(_currentLevelName);
-            PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest
-            {
-                FunctionName = "getBestLevels",
-                FunctionParameter = new { levelDataKey = statsKey, titleDisplayName = remoteDataManager.OurDisplayName }
-            }, scriptResult =>
+            PlayFabClientAPI.ExecuteCloudScript(GetCloudScriptRequest(), scriptResult =>
             {
                 Debug.Log($"Returned from get best level\n{scriptResult.Logs.Select(p => p.Message).JoinToString("\n")}");
                 
@@ -107,7 +76,7 @@ namespace Code.UI
                 }
                 
                 string serialized = scriptResult.FunctionResult.ToString();
-                FriendLevelsData deserialized = JsonUtility.FromJson<FriendLevelsData>(serialized);
+                PlayerLevelsData deserialized = JsonUtility.FromJson<PlayerLevelsData>(serialized);
                 
                 _loadingPanel.ShowHideLoading(false, false);
                 _noFriendsPanel.ShowHideLoading(deserialized.TotalNumberOfFriends == 0, false);
@@ -120,34 +89,34 @@ namespace Code.UI
             });
         }
 
-        private void PopulatePlaces(string levelName, FriendLevelsData friendLevelsData, float goldTime)
+        private void PopulatePlaces(string levelName, PlayerLevelsData playerLevelsData, float goldTime)
         {
-            if (friendLevelsData.Data.Length > 0)
+            if (playerLevelsData.Data.Length > 0)
             {
-                FriendLevelData friendLevelData = friendLevelsData.Data[0];
-                BadgeData badgeData = GetBadgeData(friendLevelData, goldTime);
-                _firstPlace.SetupRecord(friendLevelData.Username, levelName, badgeData, friendLevelData, RequestReplay);
+                PlayerLevelData playerLevelData = playerLevelsData.Data[0];
+                BadgeData badgeData = GetBadgeData(playerLevelData, goldTime);
+                _firstPlace.SetupRecord(playerLevelData.Username, levelName, badgeData, playerLevelData, RequestReplay);
             }
             
-            if (friendLevelsData.Data.Length > 1)
+            if (playerLevelsData.Data.Length > 1)
             {
-                FriendLevelData friendLevelData = friendLevelsData.Data[1];
-                BadgeData badgeData = GetBadgeData(friendLevelData, goldTime);
-                _secondPlace.SetupRecord(friendLevelData.Username, levelName, badgeData, friendLevelData, RequestReplay);
+                PlayerLevelData playerLevelData = playerLevelsData.Data[1];
+                BadgeData badgeData = GetBadgeData(playerLevelData, goldTime);
+                _secondPlace.SetupRecord(playerLevelData.Username, levelName, badgeData, playerLevelData, RequestReplay);
             }
             
-            if (friendLevelsData.Data.Length > 2)
+            if (playerLevelsData.Data.Length > 2)
             {
-                FriendLevelData friendLevelData = friendLevelsData.Data[2];
-                BadgeData badgeData = GetBadgeData(friendLevelData, goldTime);
-                _thirdPlace.SetupRecord(friendLevelData.Username, levelName, badgeData, friendLevelData, RequestReplay);
+                PlayerLevelData playerLevelData = playerLevelsData.Data[2];
+                BadgeData badgeData = GetBadgeData(playerLevelData, goldTime);
+                _thirdPlace.SetupRecord(playerLevelData.Username, levelName, badgeData, playerLevelData, RequestReplay);
             }
         }
 
-        private BadgeData GetBadgeData(FriendLevelData friendLevelData, float goldTime)
+        private BadgeData GetBadgeData(PlayerLevelData playerLevelData, float goldTime)
         {
-            bool hasGoldTime = friendLevelData.Time <= goldTime;
-            bool isPerfect = friendLevelData.IsPerfect;
+            bool hasGoldTime = playerLevelData.Time <= goldTime;
+            bool isPerfect = playerLevelData.IsPerfect;
             BadgeData badgeData = new BadgeData()
             {
                 IsPerfect = isPerfect,
@@ -158,14 +127,14 @@ namespace Code.UI
             return badgeData;
         }
 
-        private void RequestReplay(string levelName, FriendLevelData friendLevelData)
+        private void RequestReplay(string levelName, PlayerLevelData playerLevelData)
         {
             // show overlay to prevent further interaction
 
             string levelKey = PersistentDataKeys.LevelRecording(levelName);
             PlayFabClientAPI.GetUserData(new GetUserDataRequest
             {
-                PlayFabId = friendLevelData.PlayfabId,
+                PlayFabId = playerLevelData.PlayfabId,
                 Keys = new List<string>
                 {
                     levelKey
@@ -179,7 +148,7 @@ namespace Code.UI
                 _levelManager.CreateCurrentLevel(levelRecording);
             }, error =>
             {
-                
+                Debug.LogError($"Could not get replay : {error.ErrorMessage}");
             });
         }
     }

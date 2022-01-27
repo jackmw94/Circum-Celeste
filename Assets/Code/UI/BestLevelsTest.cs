@@ -42,7 +42,7 @@ public class BestLevelsTest : MonoBehaviour
                 Debug.Log(scriptResult.FunctionResult);
 
                 string serialized = scriptResult.FunctionResult.ToString();
-                FriendsLevelRanking.FriendLevelsData deserialized = JsonUtility.FromJson<FriendsLevelRanking.FriendLevelsData>(serialized);
+                PlayerLevelsData deserialized = JsonUtility.FromJson<PlayerLevelsData>(serialized);
                 
                 
                 if (scriptResult.Error != null)

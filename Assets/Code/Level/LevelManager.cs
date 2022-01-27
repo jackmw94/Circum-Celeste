@@ -3,18 +3,25 @@ using Code.Core;
 using Code.Debugging;
 using Code.Flow;
 using Code.Level.Player;
+using Code.UI;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Level
 {
     public class LevelManager : MonoBehaviour
     {
+        private const float ShowHowToPlayPopUpDelay = 1.33f;
+        private const float CheckGlobalLevelRankingDelay = 1f;
+        
         [SerializeField] private InterLevelFlow _interLevelFlow;
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private PlayerContainer _playerContainer;
         [Space(15)]
         [SerializeField] private LevelGenerator _levelGenerator;
-        
+
         private Coroutine _startLevelOnceMovedCoroutine = null;
         
         public LevelInstanceBase CurrentLevelInstance { get; private set; }
@@ -148,8 +155,13 @@ namespace Code.Level
 
                     completedPerfectLevel = isPerfect && beatGoldTime;
 
-                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo, out firstTimeCompletingLevel);
+                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo, out firstTimeCompletingLevel, out bool replacedPreviousLevelRecord);
 
+                    if (replacedPreviousLevelRecord)
+                    {
+                        StartCoroutine(CheckIfBeatGlobalRecordAfterDelay(currentLevel.name));
+                    }
+                    
                     hasComeFromLevelCompletion = _levelProvider.CanChangeToNextLevel(true);
                 }
                 else
@@ -175,9 +187,32 @@ namespace Code.Level
             });
         }
 
+        private IEnumerator CheckIfBeatGlobalRecordAfterDelay(string levelName)
+        {
+            yield return new WaitForSeconds(CheckGlobalLevelRankingDelay);
+            PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest
+            {
+                FunctionName = "playerUpdateWorldBestLevels",
+                FunctionParameter = new { LevelId = levelName }
+            }, result =>
+            {
+                result.Logs.ApplyFunction(Debug.Log);
+                Debug.Log(result.FunctionResult);
+                bool valueChanged = (bool)result.FunctionResult;
+                if (valueChanged)
+                {
+                    // trigger congrats
+                    NewGlobalRecordPanel.ShowNewGlobalRecordFeedback();
+                }
+            }, error =>
+            {
+                CircumDebug.LogError($"Error checking whether player attained global ranking : {error}");
+            });
+        }
+
         private IEnumerator TryShowHowToPlayPopUpAfterDelay()
         {
-            yield return new WaitForSeconds(1.33f);
+            yield return new WaitForSeconds(ShowHowToPlayPopUpDelay);
             
             if (Settings.Instance.SettingsAreShowing)
             {

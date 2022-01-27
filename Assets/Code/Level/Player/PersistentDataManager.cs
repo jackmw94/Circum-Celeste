@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Code.Core;
+using Code.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityExtras.Code.Optional.Singletons;
@@ -11,14 +12,14 @@ namespace Code.Level.Player
     public class PersistentDataManager : SingletonMonoBehaviour<PersistentDataManager>
     {
         private const string NoLoadingSavingPlayerPrefsKey = "Circum_DoNotLoadData";
-        
+
 #if UNITY_EDITOR
         public bool ForceOldSaveMethod;
 #endif
-        
+
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private float _levelIndexUpdateRate = 4f;
-        
+
         private Coroutine _updateLevelIndexCoroutine = null;
         private bool _doNotLoadOrSave;
         private CircumOptions _circumOptions;
@@ -59,9 +60,10 @@ namespace Code.Level.Player
             {
                 StopCoroutine(_updateLevelIndexCoroutine);
             }
+
             _updateLevelIndexCoroutine = StartCoroutine(UpdateCurrentLevelCoroutine());
         }
-        
+
         private IEnumerator UpdateCurrentLevelCoroutine()
         {
             yield return new WaitForSeconds(_levelIndexUpdateRate);
@@ -102,17 +104,18 @@ namespace Code.Level.Player
         {
             return !_levelStats.TryGetValue(levelName, out LevelStats levelStats) ? null : levelStats;
         }
-        
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo, out bool firstTimeCompletingLevel)
+
+        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo,
+            out bool firstTimeCompletingLevel, out bool replacedPreviousLevelRecord)
         {
             newBadgeData = new BadgeData();
             newFastestTimeInfo = null;
 
             bool isPerfect = levelRecording.RecordingData.IsPerfect;
-            
+
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= isPerfect && runTracker.Deaths == 0;
-            
+
             int levelIndex = currentLevel.LevelContext.LevelIndex;
             _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped, out firstTimeCompletingLevel);
 
@@ -125,17 +128,21 @@ namespace Code.Level.Player
                     levelStats = new LevelStats();
                     _levelStats.Add(currentLevel.name, levelStats);
                 }
-                
-                levelStats.UpdateFastestRecording(levelRecording, currentLevel.GoldTime, out newBadgeData, out bool replacedExistingFastestTime);
 
-                if (replacedExistingFastestTime)
+                levelStats.UpdateFastestRecording(levelRecording, currentLevel.GoldTime, out newBadgeData, out replacedPreviousLevelRecord);
+
+                if (replacedPreviousLevelRecord)
                 {
-                    newFastestTimeInfo = new NewFastestTimeInfo()
+                    newFastestTimeInfo = new NewFastestTimeInfo
                     {
                         Time = levelRecording.LevelTime,
                         IsPerfect = levelRecording.IsPerfect
                     };
                 }
+            }
+            else
+            {
+                replacedPreviousLevelRecord = false;
             }
 
             SaveStats();
@@ -150,7 +157,7 @@ namespace Code.Level.Player
                 _playerFirsts = new PlayerFirsts();
                 return;
             }
-            
+
             _playerStats = PlayerStats.Load();
             foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
@@ -159,25 +166,27 @@ namespace Code.Level.Player
                     _levelStats.Add(levelLayout.name, levelStats);
                 }
             }
+
             _playerFirsts = PlayerFirsts.Load();
             _circumOptions = CircumOptions.Load();
         }
-        
+
         private void SaveStats()
         {
             if (_doNotLoadOrSave)
             {
                 return;
             }
-            
+
             PlayerStats.Save(_playerStats);
-            foreach (KeyValuePair<string,LevelStats> statsForLevel in _levelStats)
+            foreach (KeyValuePair<string, LevelStats> statsForLevel in _levelStats)
             {
                 string levelName = statsForLevel.Key;
                 LevelStats stats = statsForLevel.Value;
-                
+
                 LevelStats.SaveLevelStats(levelName, stats);
             }
+
             PlayerFirsts.Save(_playerFirsts);
             CircumOptions.Save(_circumOptions);
         }
@@ -192,19 +201,20 @@ namespace Code.Level.Player
         {
             PlayerStats.ResetSavedPlayerStats();
             _playerStats = PlayerStats.CreateEmptyPlayerStats();
-            
+
             foreach (LevelLayout level in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
                 LevelStats.ResetStats(level.name);
             }
+
             _levelStats.Clear();
-            
+
             CircumOptions.ResetOptions();
             _circumOptions = CircumOptions.CreateCircumOptions();
 
             PlayerFirsts.ResetPlayerFirsts();
             _playerFirsts = new PlayerFirsts();
-            
+
             PersistentDataHelper.DeleteKey(PersistentDataKeys.SplashScreenLastRunTime, true);
         }
 
@@ -235,10 +245,10 @@ namespace Code.Level.Player
                     return false;
                 }
 
-                bool hasPerfectRecording = levelStats.HasRecording && 
-                                           levelStats.LevelRecording.RecordingData.IsPerfect && 
+                bool hasPerfectRecording = levelStats.HasRecording &&
+                                           levelStats.LevelRecording.RecordingData.IsPerfect &&
                                            levelStats.LevelRecording.HasBeatenGoldTime(levelLayout.GoldTime);
-                
+
                 if (!hasPerfectRecording)
                 {
                     return false;

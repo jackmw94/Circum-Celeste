@@ -7,7 +7,7 @@ using UnityExtras.Code.Core;
 
 namespace Code.UI
 {
-    public class FriendsLevelEntry : MonoBehaviour
+    public class PlayerLevelEntry : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _friendsUsernameLabel;
         [SerializeField] private TextMeshProUGUI _levelTimeLabel;
@@ -22,22 +22,22 @@ namespace Code.UI
 
         public void SetupEmptyRecord() => SetupRecord("", "", new BadgeData(), null, (levelName, data) => { });
         
-        public void SetupRecord(string displayName, string levelName, BadgeData badgeData, FriendsLevelRanking.FriendLevelData friendLevelData, Action<string, FriendsLevelRanking.FriendLevelData> replayCallback)
+        public void SetupRecord(string displayName, string levelName, BadgeData badgeData, PlayerLevelData playerLevelData, Action<string, PlayerLevelData> replayCallback)
         {
-            if (friendLevelData != null)
+            if (playerLevelData != null)
             {
                 _friendsUsernameLabel.text = displayName;
-                _friendsUsernameLabel.color = friendLevelData.IsOurRecord ? _ourRecordTextColor : _otherUserRecordTextColor;
+                _friendsUsernameLabel.color = playerLevelData.IsOurRecord ? _ourRecordTextColor : _otherUserRecordTextColor;
 
                 _perfectIcon.gameObject.SetActiveSafe(badgeData.IsPerfect && !badgeData.HasPerfectGoldTime);
                 _goldTimeIcon.gameObject.SetActiveSafe(badgeData.HasGoldTime && !badgeData.HasPerfectGoldTime);
                 _perfectGoldIcon.gameObject.SetActiveSafe(badgeData.HasPerfectGoldTime);
                     
-                _levelTimeLabel.text = friendLevelData.Time.ToString("0.00");
+                _levelTimeLabel.text = playerLevelData.Time.ToString("0.00");
 
                 _replayButton.interactable = true;
                 _replayButton.onClick.RemoveAllListeners();
-                _replayButton.onClick.AddListener(() => { replayCallback(levelName, friendLevelData); });
+                _replayButton.onClick.AddListener(() => { replayCallback(levelName, playerLevelData); });
 
                 _firstPlaceIcon.SetActiveSafe(true);
             }

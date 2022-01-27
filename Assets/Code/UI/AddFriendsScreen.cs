@@ -9,6 +9,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
@@ -22,7 +23,7 @@ namespace Code.UI
         [Space(15)]
         [SerializeField] private TMP_InputField _friendIdInput;
         [SerializeField] private Button _addFriendButton;
-        [SerializeField] private FriendsLevelRanking _friendsLevelScreen;
+        [SerializeField] private PlayerLevelRankingPanel _friendsLevelRanking;
         [Space(15)]
         [SerializeField] private Transform _friendsListRoot;
         [SerializeField] private GameObject _friendEntryPrefab;
@@ -127,7 +128,7 @@ namespace Code.UI
                     CircumDebug.LogError(error.ToString());
                 });
                 
-                _friendsLevelScreen.RefreshScreen();
+                _friendsLevelRanking.RefreshScreen();
                 RemoteDataManager.Instance.UpdateFriendsList((success, _) =>
                 {
                     if (success)

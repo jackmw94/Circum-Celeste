@@ -57,6 +57,8 @@ namespace Code.Level.Player
                 HasPreviouslyCompletedInGoldTime = levelRecording.LevelTime <= goldTime;
                 firstGold = HasPreviouslyCompletedInGoldTime;
                 firstPerfect = levelRecording.IsPerfect;
+                replacedExistingLevel = true;
+                
                 currentRecording.IsDirty = true;
                 _isDirty = true;
                 return;

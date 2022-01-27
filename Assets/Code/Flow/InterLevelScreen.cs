@@ -22,7 +22,8 @@ namespace Code.Flow
         [Space(15)]
         [SerializeField] private LevelOverviewScreen _levelOverviewScreen;
         [SerializeField] private YourFastestTimesScreen _worldRecordsScreen;
-        [SerializeField] private FriendsLevelRanking _friendsLevelRanking;
+        [SerializeField] private PlayerLevelRankingPanel _friendsLevelRankingScreen;
+        [SerializeField] private PlayerLevelRankingPanel _globalLevelRankingScreen;
         [Space(15)]
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
@@ -115,7 +116,8 @@ namespace Code.Flow
                 AppFeedbacks.Instance.TriggerMenuEdgeBurst();
             }
 
-            _friendsLevelRanking.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
+            _friendsLevelRankingScreen.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
+            _globalLevelRankingScreen.SetupRecordsScreen(levelLayout.name, levelLayout.GoldTime, ReplayLevel);
             
             _worldRecordsScreen.SetupRecordsScreen(levelLayout.GoldTime, bestLevelBadgeData, levelRecording, ReplayLevel);
 
