@@ -38,7 +38,12 @@ namespace Code.Core
 #endif
             
 #if !UNITY_EDITOR
-            GooglePlayGames.PlayGamesPlatform.Activate();
+            GooglePlayGames.BasicApi.PlayGamesClientConfiguration config = new 
+            GooglePlayGames.BasicApi.PlayGamesClientConfiguration.Builder().Build();
+            GooglePlayGames.PlayGamesPlatform.InitializeInstance(config);
+            
+            GooglePlayGames.PlayGamesPlatform platform = GooglePlayGames.PlayGamesPlatform.Activate();
+            CircumDebug.Log($"Called activate on google play games. {platform.localUser}");
 #endif
 #endif
         }
@@ -102,15 +107,19 @@ namespace Code.Core
         {
             if (Social.Active == null)
             {
+                CircumDebug.Log("There was no active social platform! Cannot log user in");
                 onCompleteCallback(false);
+                return;
             }
             
             ILocalUser localUser = Social.localUser;
-            localUser.Authenticate(socialAuthenticateSuccess =>
+            CircumDebug.Log($"Logging in with social API. User: {localUser.userName} ({localUser.id})");
+
+            localUser.Authenticate((socialAuthenticateSuccess, messages) =>
             {
                 CircumDebug.Log(socialAuthenticateSuccess
-                    ? $"Authentication successful\nUsername: {localUser.userName}\nUser ID: {localUser.id}"
-                    : "Authentication failed");
+                    ? $"Authentication successful: {messages}"
+                    : $"Authentication failed: {messages}");
 
                 if (socialAuthenticateSuccess)
                 {
