@@ -21,6 +21,7 @@ namespace Code.Level
         protected List<Enemy> _enemies;
         protected List<Escape> _escapes;
         protected List<Hazard> _hazards;
+        protected List<BeamHazard> _beamHazards;
 
         private float _startTime;
 
@@ -30,8 +31,16 @@ namespace Code.Level
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
 
-        public void SetupLevel(LevelLayout levelLayout, List<Player.Player> players, List<Pickup> pickups, List<Enemy> enemies, List<Escape> escapes, List<Hazard> hazards,
-            float speedScale, int gridSize)
+        public void SetupLevel(
+            LevelLayout levelLayout, 
+            List<Player.Player> players,
+            List<Pickup> pickups, 
+            List<Enemy> enemies, 
+            List<Escape> escapes,
+            List<Hazard> hazards,
+            List<BeamHazard> beamHazards,
+            float speedScale, 
+            int gridSize)
         {
             _escapeCriteria = levelLayout.EscapeCriteria;
             _escapeDuration = levelLayout.EscapeTimer;
@@ -42,6 +51,7 @@ namespace Code.Level
             _enemies = enemies;
             _escapes = escapes;
             _hazards = hazards;
+            _beamHazards = beamHazards;
 
             CircumDebug.Log($"Grid size = {gridSize}");
             _players.ApplyFunction(p => p.SetupForGridSize(gridSize));
@@ -101,6 +111,7 @@ namespace Code.Level
             _pickups.ApplyFunction(levelElementFunction);
             _hazards.ApplyFunction(levelElementFunction);
             _escapes.ApplyFunction(levelElementFunction);
+            _beamHazards.ApplyFunction(levelElementFunction);
         }
 
         private void HandleReadyIntroductions()

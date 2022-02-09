@@ -20,6 +20,7 @@ namespace Code.Level
             public List<GameObject> FollowerEnemyObjects { get; set; }
             public List<GameObject> EscapeObjects { get; set; }
             public List<GameObject> HazardObjects { get; set; }
+            public List<GameObject> BeamHazardObjects { get; set; }
         }
         
         [SerializeField] private PlayerProvider _playerProvider;
@@ -28,6 +29,7 @@ namespace Code.Level
         [SerializeField] private GameObject _followerEnemyPrefab;
         [SerializeField] private GameObject _escapePrefab;
         [SerializeField] private GameObject _hazardPrefab;
+        [SerializeField] private GameObject _beamHazardPrefab;
         [Space(15)]
         [SerializeField] private Transform _cellsRoot;
         [Space(15)]
@@ -55,6 +57,7 @@ namespace Code.Level
             List<Enemy> allEnemies = levelObjects.FollowerEnemyObjects.Select(p => p.GetComponentInChildren<Enemy>()).ToList();
             List<Escape> allEscapes = levelObjects.EscapeObjects.Select(p => p.GetComponentInChildren<Escape>()).ToList();
             List<Hazard> allHazards = levelObjects.HazardObjects.Select(p => p.GetComponentInChildren<Hazard>()).ToList();
+            List<BeamHazard> allBeamHazards = levelObjects.BeamHazardObjects.Select(p => p.GetComponentInChildren<BeamHazard>()).ToList();
             
             // Calculate size-adjusted speed scale
             int levelGridSize = level.GridSize;
@@ -68,7 +71,7 @@ namespace Code.Level
             {
                 LevelTutorialInstance levelTutorialInstance = _cellsRoot.gameObject.AddComponent<LevelTutorialInstance>();
                 
-                levelTutorialInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
+                levelTutorialInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, allBeamHazards, speedFactor, levelGridSize);
                 levelTutorialInstance.InitialiseTutorial(level.TutorialDescription);
                 
                 levelPlayInstance = levelTutorialInstance;
@@ -76,7 +79,7 @@ namespace Code.Level
             else
             {
                 levelPlayInstance = _cellsRoot.gameObject.AddComponent<LevelPlayInstance>();
-                levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, speedFactor, levelGridSize);
+                levelPlayInstance.SetupLevel(level, allPlayers, allPickups, allEnemies, allEscapes, allHazards, allBeamHazards, speedFactor, levelGridSize);
             }
 
             levelPlayInstance.name = level.name;
@@ -115,6 +118,7 @@ namespace Code.Level
             List<GameObject> followerEnemyObjects = GenerateCells(level, CellType.Enemy, _followerEnemyPrefab);
             List<GameObject> escapeObjects = GenerateCells(level, CellType.Escape, _escapePrefab);
             List<GameObject> hazardObjects = GenerateCells(level, CellType.Hazard, _hazardPrefab);
+            List<GameObject> beamHazardObjects = GenerateCells(level, CellType.BeamHazard, _beamHazardPrefab);
 
             bool hasTutorial = level.ExampleMovingOrbiterEnabled || level.ExampleRotatingOrbiterEnabled;
             _rotatingOrbiter.SetActive(level.ExampleRotatingOrbiterEnabled);
@@ -126,6 +130,7 @@ namespace Code.Level
             {
                 EscapeObjects = escapeObjects,
                 HazardObjects = hazardObjects,
+                BeamHazardObjects = beamHazardObjects,
                 PickupObjects = pickupObjects,
                 FollowerEnemyObjects = followerEnemyObjects
             };
@@ -133,7 +138,7 @@ namespace Code.Level
 
         private List<Player.Player> GeneratePlayers(LevelLayout level, int numberOfPlayers, InputProvider[] playersInputs)
         {
-            List<GameObject> playerObjects = GenerateCells(level, CellType.PlayerStart, _playerProvider.GetPlayer(PlayerProvider.PlayerType.Newtonian), numberOfPlayers);
+            List<GameObject> playerObjects = GenerateCells(level, CellType.PlayerStart, _playerProvider.GetPlayer(level.PlayerType), numberOfPlayers);
             List<Player.Player> allPlayers = playerObjects.Select(p => p.GetComponentInChildren<Player.Player>()).ToList();
             for (int i = 0; i < allPlayers.Count; i++)
             {

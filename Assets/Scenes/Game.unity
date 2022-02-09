@@ -3467,7 +3467,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280213175}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -27249,7 +27249,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: -0.4999962}
+  m_AnchoredPosition: {x: 0, y: -0.49999237}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116717224
@@ -45948,6 +45948,7 @@ MonoBehaviour:
   _followerEnemyPrefab: {fileID: 2807176686548070314, guid: 10789580cc6fb3943a5d97ac9f9ec064, type: 3}
   _escapePrefab: {fileID: 8244140385589922250, guid: 45cf6fca9ef2f38468c169eafcc4ea4f, type: 3}
   _hazardPrefab: {fileID: 145789428869962669, guid: 9eb7ab747d933c145b9b5d535ccea8d5, type: 3}
+  _beamHazardPrefab: {fileID: 4135815579421090554, guid: 381107011b1d95d48b6ab1673e1fa440, type: 3}
   _cellsRoot: {fileID: 1882281939}
   _rotatingOrbiter: {fileID: 846722361}
   _movingOrbiter: {fileID: 1672292882}
@@ -46007,7 +46008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _platformLevelProgression: {fileID: 11400000, guid: 4a9ac6ff43b8b5d41a063c007b516a68, type: 2}
-  _editorLevelProgression: {fileID: 11400000, guid: 4a9ac6ff43b8b5d41a063c007b516a68, type: 2}
+  _editorLevelProgression: {fileID: 11400000, guid: ab1a8cb0f3b3eb349b48b952624b47c8, type: 2}
 --- !u!1001 &355197205780179735
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ namespace Code.Level
     {
         [SerializeField] private long _levelId = 0;
         [SerializeField] private EscapeCriteria _escapeCriteria;
+        [SerializeField] private PlayerProvider.PlayerType _playerType;
         [SerializeField] private float _escapeTimer = 25f;
         [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
         [SerializeField] private bool _orbiterEnabled = true;
@@ -31,6 +32,7 @@ namespace Code.Level
         public long LevelId => _levelId;
         public int GridSize => _gridSize;
         public EscapeCriteria EscapeCriteria => _escapeCriteria;
+        public PlayerProvider.PlayerType PlayerType => _playerType;
         public float EscapeTimer => _escapeTimer;
         public string TagLineLocalisationTerm => _tagLineLocalisationTerm;
         public bool OrbiterEnabled => _orbiterEnabled;

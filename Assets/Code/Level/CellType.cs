@@ -9,5 +9,6 @@
         Escape,
         PlayerStart,
         Hazard,
+        BeamHazard,
     }
 }

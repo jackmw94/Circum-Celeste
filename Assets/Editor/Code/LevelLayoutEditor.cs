@@ -16,8 +16,10 @@ public class LevelLayoutEditor : Editor
     private const string LevelCellEscapeTexturePath = "Assets/Editor/Textures/LevelCellEscape.jpg";
     private const string LevelCellPlayerStartTexturePath = "Assets/Editor/Textures/LevelCellPlayerStart.jpg";
     private const string LevelCellHazardTexturePath = "Assets/Editor/Textures/LevelCellHazard.jpg";
+    private const string LevelCellBeamHazardTexturePath = "Assets/Editor/Textures/LevelCellBeamHazard.png";
 
     private SerializedProperty _escapeCriteria;
+    private SerializedProperty _playerType;
     private SerializedProperty _escapeTimer;
     private SerializedProperty _tagLineLocalisationTerm;
     private SerializedProperty _tutorialDescription;
@@ -38,13 +40,15 @@ public class LevelLayoutEditor : Editor
     private Texture _levelCellEscapeTexture;
     private Texture _levelCellPlayerStartTexture;
     private Texture _levelCellHazardTexture;
+    private Texture _levelCellBeamHazardTexture;
     
     private void OnEnable()
     {
         _gridSize = serializedObject.FindProperty(nameof(_gridSize));
         _cells = serializedObject.FindProperty(nameof(_cells));
         _goldTime = serializedObject.FindProperty(nameof(_goldTime));
-        
+
+        _playerType = serializedObject.FindProperty(nameof(_playerType));
         _escapeCriteria = serializedObject.FindProperty(nameof(_escapeCriteria));
         _escapeTimer = serializedObject.FindProperty(nameof(_escapeTimer));
         
@@ -66,6 +70,7 @@ public class LevelLayoutEditor : Editor
         _levelCellEscapeTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellEscapeTexturePath);
         _levelCellPlayerStartTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellPlayerStartTexturePath);
         _levelCellHazardTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellHazardTexturePath);
+        _levelCellBeamHazardTexture = AssetDatabase.LoadAssetAtPath<Texture>(LevelCellBeamHazardTexturePath);
     }
     
     public override void OnInspectorGUI()
@@ -80,6 +85,7 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_exampleRotatingOrbiterEnabled);
         EditorGUILayout.PropertyField(_exampleMovingOrbiterEnabled);
         GUILayout.Space(15);
+        EditorGUILayout.PropertyField(_playerType);
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_playerInvulnerable);
         EditorGUILayout.PropertyField(_requiredForGameCompletion);
@@ -160,6 +166,7 @@ public class LevelLayoutEditor : Editor
             case CellType.Escape: return _levelCellEscapeTexture;
             case CellType.PlayerStart: return _levelCellPlayerStartTexture;
             case CellType.Hazard: return _levelCellHazardTexture;
+            case CellType.BeamHazard: return _levelCellBeamHazardTexture;
         }
 
         throw new UnexpectedValuesException($"Could not get texture for cell type {cellType}");
