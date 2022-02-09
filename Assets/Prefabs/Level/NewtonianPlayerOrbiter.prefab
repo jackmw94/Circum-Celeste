@@ -188,10 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 6384775747270266428}
   _rigidbody: {fileID: 6384775745932153090}
-  _forceScalar: 0.5
-  _bounceDistance: 0.1
-  _velocityReduction: 0.95
-  _clampTargetRadius: {x: 0.2, y: 2, z: 0}
+  _moverProperties: {fileID: 11400000, guid: 5734862c2454213429fa36d05debc672, type: 2}
 --- !u!1 &6384775747002654524
 GameObject:
   m_ObjectHideFlags: 0
