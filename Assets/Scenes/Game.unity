@@ -25530,11 +25530,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b777989566f4e068b1c7e48f4c31e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 1141470956}
   _xPidController:
     _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
   _yPidController:
     _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
-  _target: {fileID: 1141470956}
 --- !u!54 &952412700
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45942,7 +45942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d368c45a8c56441942581e01f78839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 6384775747002654524, guid: 8e02ea1964f673d4d9245cb0a1eb75da, type: 3}
+  _playerProvider: {fileID: 11400000, guid: a2287d5aaf0831d48b3cf0358e8945bd, type: 2}
   _wallPrefab: {fileID: 7678716605668470420, guid: bf5be18e4077b3849a49bb225e9bb40d, type: 3}
   _pickupPrefab: {fileID: 145789428869962669, guid: c29ad3aae3da3964890aa0f95bbeef3e, type: 3}
   _followerEnemyPrefab: {fileID: 2807176686548070314, guid: 10789580cc6fb3943a5d97ac9f9ec064, type: 3}
@@ -47432,8 +47432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b777989566f4e068b1c7e48f4c31e6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 9172051211579343218}
   _xPidController:
     _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
   _yPidController:
     _pidProperties: {fileID: 11400000, guid: bc2d8c0e07883ab479630a2f2db57522, type: 2}
-  _target: {fileID: 9172051211579343218}

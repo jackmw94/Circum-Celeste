@@ -22,7 +22,7 @@ namespace Code.Level
             public List<GameObject> HazardObjects { get; set; }
         }
         
-        [SerializeField] private GameObject _playerPrefab;
+        [SerializeField] private PlayerProvider _playerProvider;
         [SerializeField] private GameObject _wallPrefab;
         [SerializeField] private GameObject _pickupPrefab;
         [SerializeField] private GameObject _followerEnemyPrefab;
@@ -133,7 +133,7 @@ namespace Code.Level
 
         private List<Player.Player> GeneratePlayers(LevelLayout level, int numberOfPlayers, InputProvider[] playersInputs)
         {
-            List<GameObject> playerObjects = GenerateCells(level, CellType.PlayerStart, _playerPrefab, numberOfPlayers);
+            List<GameObject> playerObjects = GenerateCells(level, CellType.PlayerStart, _playerProvider.GetPlayer(PlayerProvider.PlayerType.Newtonian), numberOfPlayers);
             List<Player.Player> allPlayers = playerObjects.Select(p => p.GetComponentInChildren<Player.Player>()).ToList();
             for (int i = 0; i < allPlayers.Count; i++)
             {

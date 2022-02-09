@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using Code.Debugging;
+using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Core
 {
-    public class GravitationalMover : Mover
+    public class GravitationalMover : OrbiterMover
     {
         [SerializeField] protected PidController _xPidController;
         [SerializeField] protected PidController _yPidController;
-        [Space(15)]
-        [SerializeField] protected Transform _target;
         
         private void FixedUpdate()
         {
@@ -41,15 +41,20 @@ namespace Code.Core
             return new Vector3(xDiff, yDiff, 0f);
         }
 
+        public override void SetupGridSize(int gridSize)
+        {
+            base.SetupGridSize(gridSize);
+
+            Vector3 pidValues = RemoteConfigHelper.GetOrbiterPidValuesFromGridSize(gridSize);
+            SetPidValues(pidValues);
+            
+            CircumDebug.Log($"Pid values for orbiter : {pidValues.ToPreciseString()}");
+        }
+
         public void ResetPid()
         {
             _xPidController.ResetPid();
             _yPidController.ResetPid();
-        }
-
-        public void SetTarget(Transform target)
-        {
-            _target = target;
         }
         
         public void SetPidValues(Vector3 pidValues)

@@ -100,10 +100,9 @@ namespace Code.Level.Player
             _mover.MovementEnabled = inputIsOn;
         }
 
-        public void SetOrbiterSpeedConfiguration(Vector3 pidValues)
+        public void SetupForGridSize(int gridSize)
         {
-            CircumDebug.Log($"Pid values for orbiter : {pidValues.ToPreciseString()}");
-            _orbiter.SetPidValues(pidValues);
+            _orbiter.SetupGridSize(gridSize);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Code.Level
             _hazards = hazards;
 
             CircumDebug.Log($"Grid size = {gridSize}");
-            _players.ApplyFunction(p => p.SetOrbiterSpeedConfiguration(RemoteConfigHelper.GetOrbiterPidValuesFromGridSize(gridSize)));
+            _players.ApplyFunction(p => p.SetupForGridSize(gridSize));
             GetComponentsInChildren<Mover>().ApplyFunction(p => p.SetMovementScale(speedScale));
 
             GameContainer.Instance.CountdownTimerUI.ResetTimer();

@@ -16,6 +16,7 @@ namespace Code.Debugging
         public static KeyCode SwitchToUIInput => KeyCode.U;
         public static KeyCode PlayerInvulnerable => KeyCode.I;
         public static KeyCode ShowEscape => KeyCode.E;
+        public static KeyCode ResetOrbiter => KeyCode.R;
 #endif
     }
 }

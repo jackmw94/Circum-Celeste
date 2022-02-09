@@ -1,5 +1,4 @@
 ﻿using Code.Core;
-using Code.Level.Player;
 using UnityEngine;
 
 namespace Code.Level
@@ -9,11 +8,11 @@ namespace Code.Level
         // level element so it's tracked by recorder
         // level state functions are not called
 
-        [SerializeField] private GravitationalMover _mover;
-
-        public void SetPidValues(Vector3 pidValues)
+        [SerializeField] private OrbiterMover _mover;
+        
+        public void SetupGridSize(int gridSize)
         {
-            _mover.SetPidValues(pidValues);
+            _mover.SetupGridSize(gridSize);
         }
     }
 }
