@@ -3,11 +3,12 @@ using System.Collections;
 using System.Linq;
 using Code.Core;
 using Code.Level.Player;
+using Code.UI;
 using Lean.Localization;
 using TMPro;
-using UnityCommonFeatures;
 using UnityEngine;
 using UnityEngine.UI;
+using UIPanel = UnityCommonFeatures.UIPanel;
 
 namespace Code.Level
 {
@@ -22,12 +23,18 @@ namespace Code.Level
         [SerializeField] private TextMeshProUGUI _daysRemainingLabel;
         [SerializeField] private TextMeshProUGUI _attemptsRemainingLabel;
         [SerializeField] private TextMeshProUGUI _scoreLabel;
+        [SerializeField] private TextMeshProUGUI _playButtonLabel;
         [SerializeField] private Button _playButton;
         [Space(15)]
         [SerializeField, LeanTranslationName] private string _challengeScoreTranslation;
         [SerializeField, LeanTranslationName] private string _daysRemainingTranslation;
         [SerializeField, LeanTranslationName] private string _attemptsRemainingTranslation;
+        [Space(15)]
+        [SerializeField] private Color _playButtonDefaultTextColour;
+        [SerializeField] private Color _playButtonNoAttemptsColour;
+        [SerializeField] private PulseTextColour _pulseTextColour;
 
+        private bool _anyAttemptsRemaining = false;
         private ChallengeLevel _currentChallengeLevel = null;
         public static int CurrentDayIndex => (DateTime.Now - DayZero).Days;
         public static int CurrentWeekIndex => CurrentDayIndex / 7;
@@ -92,12 +99,20 @@ namespace Code.Level
             int daysRemaining = 6 - CurrentDayIndex;
             string daysRemainingTranslation = LeanLocalization.GetTranslationText(_daysRemainingTranslation);
             _daysRemainingLabel.text = string.Format(daysRemainingTranslation, daysRemaining);
-            
-            _playButton.interactable = attemptsRemaining > 0;
+
+            _anyAttemptsRemaining = attemptsRemaining > 0;
+            _playButton.interactable = true;
+            _playButtonLabel.color = _anyAttemptsRemaining ? _playButtonDefaultTextColour : _playButtonNoAttemptsColour;
         }
 
         private void PlayLevel()
         {
+            if (!_anyAttemptsRemaining)
+            {
+                _pulseTextColour.PulseColour();
+                return;
+            }
+            
             PersistentDataManager.Instance.ChallengeData.ChallengeAttempted();
             _levelManager.CreateChallengeLevel(_currentChallengeLevel, OnChallengeCompleted);
             StartCoroutine(UpdateScreenAfterDelay(UpdateScreenOnLevelStartDelay));

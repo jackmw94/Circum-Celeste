@@ -2709,6 +2709,7 @@ GameObject:
   - component: {fileID: 214358117}
   - component: {fileID: 214358119}
   - component: {fileID: 214358118}
+  - component: {fileID: 214358120}
   m_Layer: 5
   m_Name: Attempts remaining
   m_TagString: Untagged
@@ -2832,6 +2833,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214358116}
   m_CullTransparentMesh: 1
+--- !u!114 &214358120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214358116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 944e007e4c8b44e295180a72320b1570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 214358118}
+  _animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.037098277
+      value: 1
+      inSlope: -1.7687038
+      outSlope: -1.7687038
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07420982
+    - serializedVersion: 3
+      time: 1.0007576
+      value: 0
+      inSlope: -0.13662928
+      outSlope: -0.13662928
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.1005704
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _colour: {r: 0.6792453, g: 0, b: 0, a: 1}
 --- !u!1 &218103035
 GameObject:
   m_ObjectHideFlags: 0
@@ -15535,7 +15583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15878,7 +15926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16510,7 +16558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18610,7 +18658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22484,7 +22532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32833,7 +32881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36062,7 +36110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -36464,6 +36512,73 @@ MonoBehaviour:
   recordFingers: 1
   recordThreshold: 5
   recordLimit: 10
+--- !u!1 &1510964098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510964099}
+  - component: {fileID: 1510964100}
+  m_Layer: 0
+  m_Name: Try again tomorrow!
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510964099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510964098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 650063435}
+  m_RootOrder: 90
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510964100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510964098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Try again tomorrow!
+    Object: {fileID: 0}
+  - Language: German
+    Text: Versuchen Sie es morgen erneut!
+    Object: {fileID: 0}
+  - Language: French
+    Text: Essaye encore demain!
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Riprova domani!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Tente novamente amanh\xE3!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u0441\u043D\u043E\u0432\u0430
+      \u0437\u0430\u0432\u0442\u0440\u0430!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1Trata de nuevo ma\xF1ana!"
+    Object: {fileID: 0}
 --- !u!1 &1518018019
 GameObject:
   m_ObjectHideFlags: 0
@@ -43731,7 +43846,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44431,10 +44546,14 @@ MonoBehaviour:
   _daysRemainingLabel: {fileID: 1705939241}
   _attemptsRemainingLabel: {fileID: 214358118}
   _scoreLabel: {fileID: 311914883}
+  _playButtonLabel: {fileID: 1051978125}
   _playButton: {fileID: 988058189}
   _challengeScoreTranslation: Challenge Score
   _daysRemainingTranslation: Challenge Time Remaining
   _attemptsRemainingTranslation: Challenge Attempts Remaining
+  _playButtonDefaultTextColour: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  _playButtonNoAttemptsColour: {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
+  _pulseTextColour: {fileID: 214358120}
 --- !u!225 &1695505192
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -47814,7 +47933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50546,7 +50665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3101428892703722188, guid: f32dd209b86330049a56671389eb661d, type: 3}
       propertyPath: m_LocalPosition.x
