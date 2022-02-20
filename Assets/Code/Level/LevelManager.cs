@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Code.Core;
 using Code.Debugging;
 using Code.Flow;
@@ -21,11 +22,33 @@ namespace Code.Level
         [SerializeField] private PlayerContainer _playerContainer;
         [Space(15)]
         [SerializeField] private LevelGenerator _levelGenerator;
+        [Space(30)]
+        [SerializeField] private bool _dontUpdateLevelRankingsInEditor = true;
 
         private Coroutine _startLevelOnceMovedCoroutine = null;
         
         public LevelInstanceBase CurrentLevelInstance { get; private set; }
 
+        public void CreateChallengeLevel(ChallengeLevel challengeLevel, Action<LevelResult> onChallengeCompleted)
+        {
+            if (CurrentLevelInstance)
+            {
+                Destroy(CurrentLevelInstance);
+            }
+            
+            if (!_interLevelFlow.IsOverlaid)
+            {
+                _interLevelFlow.ShowHideUI(() =>
+                {
+                    CreateLevelInternal(challengeLevel.LevelLayout, null, onChallengeCompleted);
+                }, InterLevelFlow.InterLevelTransition.Regular);
+            }
+            else
+            {
+                CreateLevelInternal(challengeLevel.LevelLayout, null, onChallengeCompleted);
+            }
+        }
+        
         public void CreateCurrentLevel(LevelRecording replay = null, InterLevelFlow.InterLevelTransition transition = InterLevelFlow.InterLevelTransition.Regular)
         {
             if (replay != null)
@@ -39,16 +62,18 @@ namespace Code.Level
                 Destroy(CurrentLevelInstance);
             }
             
+            LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
+            
             if (!_interLevelFlow.IsOverlaid)
             {
                 _interLevelFlow.ShowHideUI(() =>
                 {
-                    CreateLevelInternal(replay);
+                    CreateLevelInternal(levelLayout, replay, OnLevelFinished);
                 }, transition);
             }
             else
             {
-                CreateLevelInternal(replay);
+                CreateLevelInternal(levelLayout, replay, OnLevelFinished);
             }
         }
 
@@ -81,10 +106,8 @@ namespace Code.Level
             _levelGenerator.DestroyLevel();
         }
 
-        private void CreateLevelInternal(LevelRecording replay)
+        private void CreateLevelInternal(LevelLayout levelLayout, LevelRecording replay, Action<LevelResult> onLevelFinished)
         {
-            LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
-            
             bool isReplay = replay != null;
             if (isReplay)
             {
@@ -107,10 +130,10 @@ namespace Code.Level
             {
                 StopCoroutine(_startLevelOnceMovedCoroutine);
             }
-            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelWhenReady());
+            _startLevelOnceMovedCoroutine = StartCoroutine(StartLevelWhenReady(onLevelFinished));
         }
         
-        private IEnumerator StartLevelWhenReady()
+        private IEnumerator StartLevelWhenReady(Action<LevelResult> onLevelFinished)
         {
             _interLevelFlow.HideInterLevelUI();
             yield return new WaitUntil(() => !_interLevelFlow.IsOverlaid);
@@ -120,17 +143,15 @@ namespace Code.Level
             yield return new WaitUntil(() => CurrentLevelInstance.PlayerStartedPlaying);
 
             CircumDebug.Log($"Level '{CurrentLevelInstance.name}' has started");
-            CurrentLevelInstance.StartLevel(OnLevelFinished);
+            CurrentLevelInstance.StartLevel(onLevelFinished);
         }
-
-        private void OnLevelFinished(LevelResult levelResult)
+        
+        public void OnLevelFinished(LevelResult levelResult)
         {
             bool isReplay = levelResult.WasReplay;
-            BadgeData newBadgeData = new BadgeData();
-            NewFastestTimeInfo newFastestTimeInfo = null;
             bool hasComeFromLevelCompletion = false;
-            bool firstTimeCompletingLevel = false;
             bool completedPerfectLevel = false;
+            PersistentDataManager.UpdatedStatisticsData updatedStatisticsData = null;
 
             if (!isReplay)
             {
@@ -155,9 +176,9 @@ namespace Code.Level
 
                     completedPerfectLevel = isPerfect && beatGoldTime;
 
-                    persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording, out newBadgeData, out newFastestTimeInfo, out firstTimeCompletingLevel, out bool replacedPreviousLevelRecord);
+                    updatedStatisticsData = persistentDataManager.UpdateStatisticsAfterLevel(currentLevel, levelRecording);
 
-                    if (replacedPreviousLevelRecord)
+                    if (updatedStatisticsData.ReplacedPreviousLevelRecord)
                     {
                         StartCoroutine(CheckIfBeatGlobalRecordAfterDelay(currentLevel.name));
                     }
@@ -179,25 +200,33 @@ namespace Code.Level
             _interLevelFlow.ShowInterLevelUI(new InterLevelFlow.InterLevelFlowSetupData
             {
                 OnShown = ClearCurrentLevel,
-                NewBadgeData = newBadgeData,
-                NewFastestTimeInfo = newFastestTimeInfo,
+                NewBadgeData = updatedStatisticsData?.NewBadgeData ?? new BadgeData(),
+                NewFastestTimeInfo = updatedStatisticsData?.NewFastestTimeInfo,
                 HasComeFromLevelCompletion = hasComeFromLevelCompletion,
-                FirstTimeCompletingLevel = firstTimeCompletingLevel,
-                LevelGotPerfect = completedPerfectLevel
+                FirstTimeCompletingLevel = updatedStatisticsData?.FirstTimeCompletingLevel ?? false,
+                LevelGotPerfect = completedPerfectLevel,
+                AddedScore = updatedStatisticsData?.AddedToScore ?? -1
             });
         }
 
         private IEnumerator CheckIfBeatGlobalRecordAfterDelay(string levelName)
         {
             yield return new WaitForSeconds(CheckGlobalLevelRankingDelay);
+            
+#if UNITY_EDITOR
+            if (_dontUpdateLevelRankingsInEditor)
+            {
+                yield break;
+            }
+#endif
+            
             PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest
             {
                 FunctionName = "playerUpdateWorldBestLevels",
                 FunctionParameter = new { LevelId = levelName }
             }, result =>
             {
-                result.Logs.ApplyFunction(Debug.Log);
-                Debug.Log(result.FunctionResult);
+                result.Logs.ApplyFunction(p => CircumDebug.Log(p.Message));
                 bool valueChanged = (bool)result.FunctionResult;
                 if (valueChanged)
                 {
