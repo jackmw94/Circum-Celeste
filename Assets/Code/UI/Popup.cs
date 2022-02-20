@@ -29,6 +29,7 @@ namespace Code.UI
             [LeanTranslationName] public string LocalisationTerm;
         }
 
+        [SerializeField] private BackgroundOverlay _backgroundOverlay;
         [SerializeField] private LevelManager _levelManager;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private Button _okayButton;
@@ -37,6 +38,8 @@ namespace Code.UI
         [SerializeField] private float _showHideDuration = 0.25f;
         [Space(15)]
         [SerializeField] private LocalisedPopup[] _localisedPopups;
+        [Space(30)]
+        [SerializeField] private LocalisedPopupType _debugTriggerPopup;
 
         private readonly Dictionary<LocalisedPopupType, string> _popupTypeToLocalisationTerm = new Dictionary<LocalisedPopupType, string>();
         private readonly Queue<LocalisedPopupType> _popupQueue = new Queue<LocalisedPopupType>();
@@ -53,9 +56,16 @@ namespace Code.UI
             ShowHidePopupUI(false, true);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             _okayButton.onClick.RemoveListener(OkayButtonListener);
+        }
+
+        [ContextMenu(nameof(DebugTriggerPopup))]
+        private void DebugTriggerPopup()
+        {
+            EnqueueMessage(_debugTriggerPopup);
         }
 
         [ContextMenu(nameof(RegenerateLocalisationTermsDictionary))]
@@ -112,7 +122,11 @@ namespace Code.UI
 
         private IEnumerator ShowHidePopupCoroutine(bool show, bool instant)
         {
-            if (show) _isShowingPopup = true;
+            if (show)
+            {
+                _isShowingPopup = true;
+                yield return ShowHideBackgroundOverlay(true);
+            }
 
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = true;
@@ -124,7 +138,21 @@ namespace Code.UI
             _canvasGroup.interactable = show;
             _canvasGroup.blocksRaycasts = show;
 
-            if (!show) _isShowingPopup = false;
+            if (!show)
+            {
+                yield return ShowHideBackgroundOverlay(false);
+                _isShowingPopup = false;
+            }
+        }
+
+        private IEnumerator ShowHideBackgroundOverlay(bool show)
+        {
+            bool backgroundOverlayTransitionComplete = false;
+            _backgroundOverlay.ActivateDeactivate(show, () =>
+            {
+                backgroundOverlayTransitionComplete = true;
+            });
+            yield return new WaitUntil(() => backgroundOverlayTransitionComplete);
         }
 
         private void SetOnAmount(float amount)

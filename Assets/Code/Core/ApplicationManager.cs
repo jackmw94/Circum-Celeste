@@ -40,6 +40,16 @@ namespace Code.Core
 
         private void TryLogExceptionToPlayFab(string exception)
         {
+#if UNITY_EDITOR
+            return;
+#endif
+            
+            if (!PlayFabClientAPI.IsClientLoggedIn())
+            {
+                Debug.LogError($"Can't log this exception to playfab since we are not logged in! {exception}");
+                return;
+            }
+            
             _loggedException = true;
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Debugging;
+﻿using Code.Debugging;
 using UnityEngine;
 using UnityExtras.Code.Core;
 
@@ -16,12 +15,14 @@ namespace Code.Core
             {
                 return;
             }
-
+            
+#if UNITY_EDITOR
             if (Input.GetKeyDown(EditorKeyCodeBindings.ResetOrbiter))
             {
                 transform.localPosition = Vector3.zero;
                 _rigidbody.velocity = Vector3.zero;
             }
+#endif
             
             FixedUpdateInternal();
         }

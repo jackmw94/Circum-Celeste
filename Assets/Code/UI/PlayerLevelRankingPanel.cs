@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Core;
+using Code.Debugging;
 using Code.Level;
 using Code.Level.Player;
 using PlayFab;
@@ -68,11 +69,11 @@ namespace Code.UI
             
             PlayFabClientAPI.ExecuteCloudScript(GetCloudScriptRequest(), scriptResult =>
             {
-                Debug.Log($"Returned from get best level\n{scriptResult.Logs.Select(p => p.Message).JoinToString("\n")}");
+                CircumDebug.Log($"Returned from get best level\n{scriptResult.Logs.Select(p => p.Message).JoinToString("\n")}");
                 
                 if (scriptResult.Error != null)
                 {
-                    Debug.LogError($"{scriptResult.Error.Error} : {scriptResult.Error.Message}\n{scriptResult.Error.StackTrace}");
+                    CircumDebug.LogError($"{scriptResult.Error.Error} : {scriptResult.Error.Message}\n{scriptResult.Error.StackTrace}");
                 }
                 
                 string serialized = scriptResult.FunctionResult.ToString();
@@ -141,7 +142,7 @@ namespace Code.UI
                 }
             }, result =>
             {
-                Debug.Log($"GOT SOME STUFF : " + result.Data[levelKey].Value.Length);
+                Debug.Log($"Request replay returned {result.Data[levelKey].Value.Length} frames");
                 string compressedRecording = result.Data[levelKey].Value;
                 string decompressedRecording = compressedRecording.Decompress();
                 LevelRecording levelRecording = JsonUtility.FromJson<LevelRecording>(decompressedRecording);

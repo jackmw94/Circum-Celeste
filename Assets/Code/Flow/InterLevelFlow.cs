@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections;
+using Code.Core;
 using Code.Level;
 using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
+using UnityExtras.Code.Core;
 
 namespace Code.Flow
 {
     public class InterLevelFlow : MonoBehaviour
     {
+        private const float WaitForLoginTimeout = 3f;
+        
         public enum InterLevelTransition
         {
             Regular,
@@ -25,6 +29,7 @@ namespace Code.Flow
             public bool HasComeFromLevelCompletion = false;
             public bool FirstTimeCompletingLevel = false;
             public bool LevelGotPerfect = false;
+            public int AddedScore = 0;
         }
 
         [SerializeField] private LevelProvider _levelProvider;
@@ -43,8 +48,9 @@ namespace Code.Flow
 
         private bool SwipeToChangeLevelAvailable => IsOverlaid && !_isTransitioning && !Settings.Instance.SettingsAreShowing;
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitUntilWithTimeout(() => RemoteDataManager.Instance.IsLoggedIn, WaitForLoginTimeout);
             ShowInterLevelUI(new InterLevelFlowSetupData
             {
                 Transition = InterLevelTransition.Instant
@@ -163,14 +169,21 @@ namespace Code.Flow
                 playerPosition = currentLevel.GetPlayerPosition(0);
             }
 
-            _levelOverlay.ShowOverlay(playerPosition, transition == InterLevelTransition.Instant);
+            _levelOverlay.ShowOverlay(new LevelOverlay.OverlayTransitionConfiguration
+            {
+                Position = playerPosition,
+                Instant = transition == InterLevelTransition.Instant
+            });
 
             yield return new WaitUntil(() => _levelOverlay.OverlayIsOn);
         }
 
         private IEnumerator HideOverlayCoroutine(bool instant)
         {
-            _levelOverlay.HideOverlay(instant);
+            _levelOverlay.HideOverlay(new LevelOverlay.OverlayTransitionConfiguration
+            {
+                Instant = instant
+            });
             yield return new WaitUntil(() => !_levelOverlay.OverlayIsOn);
         }
     }

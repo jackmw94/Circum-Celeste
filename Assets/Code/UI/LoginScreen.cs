@@ -21,8 +21,6 @@ namespace Code.UI
                 {
                     return;
                 }
-                
-                
             });
         }
     }
