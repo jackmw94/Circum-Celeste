@@ -1,8 +1,11 @@
 ﻿using System;
 using Code.Core;
+using Code.Debugging;
 using PlayFab;
-using PlayFab.AdminModels;
 using UnityEngine;
+#if ENABLE_PLAYFABADMIN_API
+using PlayFab.AdminModels;
+#endif
 
 namespace Code.Level
 {
