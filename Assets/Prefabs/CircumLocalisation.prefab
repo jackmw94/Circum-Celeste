@@ -1,5 +1,139 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &170251477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170251478}
+  - component: {fileID: 170251479}
+  m_Layer: 0
+  m_Name: Challenge Info Subheader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &170251478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170251477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 85
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &170251479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170251477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: 'Can you complete this week''s challenge level? '
+    Object: {fileID: 0}
+  - Language: German
+    Text: "K\xF6nnen Sie das Herausforderungslevel dieser Woche abschlie\xDFen?"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Pouvez-vous terminer le niveau de d\xE9fi de cette semaine\_?"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Riuscirai a completare il livello di sfida di questa settimana?
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Voc\xEA consegue completar o n\xEDvel de desafio desta semana?"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0421\u043C\u043E\u0436\u0435\u0442\u0435 \u043B\u0438 \u0432\u044B \u043F\u0440\u043E\u0439\u0442\u0438
+      \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u0439
+      \u044D\u0442\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0438?"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xBFPuedes completar el nivel de desaf\xEDo de esta semana?"
+    Object: {fileID: 0}
+--- !u!1 &495871489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 495871490}
+  - component: {fileID: 495871491}
+  m_Layer: 0
+  m_Name: Challenge Attempts Remaining
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495871490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495871489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 88
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495871491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495871489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: '{0} attempts remaining'
+    Object: {fileID: 0}
+  - Language: German
+    Text: '{0} verbleibende Versuche'
+    Object: {fileID: 0}
+  - Language: French
+    Text: '{0} tentatives restantes'
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: '{0} tentativi rimanenti'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: '{0} tentativas restantes'
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041E\u0441\u0442\u0430\u043B\u043E\u0441\u044C {0}\_\u043F\u043E\u043F\u044B\u0442\u043E\u043A"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: '{0} intentos restantes'
+    Object: {fileID: 0}
 --- !u!1 &503372093
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +333,72 @@ MonoBehaviour:
   - Language: Spanish
     Text: GlobalRankings
     Object: {fileID: 0}
+--- !u!1 &1062602618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062602619}
+  - component: {fileID: 1062602620}
+  m_Layer: 0
+  m_Name: Challenge Levels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1062602619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062602618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 84
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1062602620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062602618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Challenge Levels
+    Object: {fileID: 0}
+  - Language: German
+    Text: Herausforderungsstufen
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Niveaux de d\xE9fi"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Livelli di sfida
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xEDveis de desafio"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0423\u0440\u043E\u0432\u043D\u0438 \u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u0439"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Niveles de desaf\xEDo"
+    Object: {fileID: 0}
 --- !u!1 &1141801044
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,6 +465,226 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Tabla de clasificaci\xF3n mundial"
+    Object: {fileID: 0}
+--- !u!1 &1507196758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1507196759}
+  - component: {fileID: 1507196760}
+  m_Layer: 0
+  m_Name: Challenge Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1507196759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507196758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 89
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1507196760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1507196758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: 'Current Score
+
+      {0}/{1}'
+    Object: {fileID: 0}
+  - Language: German
+    Text: 'Momentaner Punktestand
+
+      {0}/{1}'
+    Object: {fileID: 0}
+  - Language: French
+    Text: 'Score actuel
+
+      {0}/{1}'
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: 'Punteggio attuale
+
+      {0}/{1}'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Pontua\xE7\xE3o atual\r\n{0}/{1}"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0447\u0435\u0442\r\n{0}/{1}"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "Puntuaci\xF3n actual\r\n{0}/{1}"
+    Object: {fileID: 0}
+--- !u!1 &1547627700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1547627701}
+  - component: {fileID: 1547627702}
+  m_Layer: 0
+  m_Name: Challenge Time Remaining
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1547627701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547627700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 87
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547627702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547627700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: '{0} days remaining'
+    Object: {fileID: 0}
+  - Language: German
+    Text: '{0} Tage verbleiben'
+    Object: {fileID: 0}
+  - Language: French
+    Text: "{0}\_jours restants"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: '{0} giorni rimanenti'
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: '{0} dias restantes'
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041E\u0441\u0442\u0430\u043B\u043E\u0441\u044C {0} \u0434\u043D\u0435\u0439"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "{0} d\xEDas restantes"
+    Object: {fileID: 0}
+--- !u!1 &2015419551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015419552}
+  - component: {fileID: 2015419553}
+  m_Layer: 0
+  m_Name: Challenge Info Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2015419552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015419551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 86
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015419553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015419551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: "- 3 attempts a day to complete \n\n- Your highest score will contribute
+      to your leaderboard ranking for 12 weeks"
+    Object: {fileID: 0}
+  - Language: German
+    Text: "- 3 Versuche pro Tag abzuschlie\xDFen\r\n\r\n- Ihre h\xF6chste Punktzahl
+      tr\xE4gt 12 Wochen lang zu Ihrem Leaderboard-Ranking bei"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "- 3 tentatives par jour pour terminer\r\n\r\n- Votre score le plus \xE9lev\xE9
+      contribuera \xE0 votre classement dans le classement pendant 12 semaines"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: "- 3 tentativi al giorno per completare\r\n\r\n- Il tuo punteggio pi\xF9
+      alto contribuir\xE0 alla tua classifica in classifica per 12 settimane"
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "- 3 tentativas por dia para completar\r\n\r\n- Sua pontua\xE7\xE3o mais
+      alta contribuir\xE1 para sua classifica\xE7\xE3o na tabela de classifica\xE7\xE3o
+      por 12 semanas"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "- 3 \u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0432 \u0434\u0435\u043D\u044C
+      \u0434\u043B\u044F \u043F\u0440\u043E\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u044F\r\n\r\n-
+      \u0412\u0430\u0448 \u043B\u0443\u0447\u0448\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442
+      \u0431\u0443\u0434\u0435\u0442 \u0441\u043F\u043E\u0441\u043E\u0431\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C
+      \u0432\u0430\u0448\u0435\u043C\u0443 \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0443
+      \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
+      \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435 12 \u043D\u0435\u0434\u0435\u043B\u044C."
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "- 3 intentos al d\xEDa para completar\r\n\r\n- Su puntaje m\xE1s alto
+      contribuir\xE1 a su clasificaci\xF3n en la tabla de clasificaci\xF3n durante
+      12 semanas"
     Object: {fileID: 0}
 --- !u!1 &2053282117
 GameObject:
@@ -3954,6 +4374,12 @@ Transform:
   - {fileID: 503372094}
   - {fileID: 585149191}
   - {fileID: 1141801045}
+  - {fileID: 1062602619}
+  - {fileID: 170251478}
+  - {fileID: 2015419552}
+  - {fileID: 1547627701}
+  - {fileID: 495871490}
+  - {fileID: 1507196759}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
