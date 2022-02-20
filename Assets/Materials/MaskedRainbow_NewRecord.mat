@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FastTimeShine
-  m_Shader: {fileID: -6465566751694194690, guid: ae367b3a413c85a4390be164bcdc778f, type: 3}
+  m_Name: MaskedRainbow_NewRecord
+  m_Shader: {fileID: -6465566751694194690, guid: 4c13b76967a4c93418edb1cd836e65b1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,12 +19,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_3a58e9e937e94cf598dc09e567577ad6:
-        m_Texture: {fileID: 2800000, guid: ee6dab55afc2c014c8f65c6615d14944, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_77d57d8e50d44fef98f734565af02985:
-        m_Texture: {fileID: 2800000, guid: aab86be235640694589fafd70eaaaba2, type: 3}
+    - Texture2D_64bd6884c482453190519f7034d9f6ea:
+        m_Texture: {fileID: 2800000, guid: be938ab4e0d6c5c4694ebff17094cf61, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -84,15 +80,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - ShimmerPosition: 2.26
-    - Vector1_2faa617f2f02433ca0bc7592c5c611e6: 0.5
-    - Vector1_933467b7787648048f4e568b46e63bc7: 1.7
+    - Vector1_0a111cca85b744bab007b4353b00c871: 1
+    - Vector1_5e88e95788a8467997ad43ff367cfa57: 0.2
+    - _Alpha: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorMask: 15
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
@@ -111,27 +106,19 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_1f42b50a332d4845a92cf3bc710ac724: {r: 1, g: 0.69491327, b: 0, a: 1}
-    - Color_3fabc72050c947c0a1d22657c7fc1b8d: {r: 0, g: 110.49695, b: 113.18108, a: 1}
-    - Color_65f6165abced4cb986c6244544f3c5cc: {r: 1, g: 0, b: 0.6044555, a: 1}
-    - Color_9d92da585efe4621b683115dc43ff927: {r: 1, g: 1, b: 1, a: 0}
-    - Colour: {r: 1, g: 1, b: 1, a: 0}
-    - FakeMaskBounds: {r: -4, g: 4.5, b: 0, a: 0}
+    - Color_3ea8144ace5d45b2a13bf104469b9861: {r: 1, g: 1, b: 1, a: 1}
+    - Vector2_421fb57cbc044d02b06a5824152afdd8: {r: 1, g: 1.1, b: 0, a: 0}
+    - Vector2_60371c10d3a1457abcf5c28991effae4: {r: 0, g: 0.3, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &3158854276519007812
+--- !u!114 &4626436013422196616
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

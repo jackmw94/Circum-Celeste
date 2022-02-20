@@ -84,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - ShimmerPosition: -0.5
+    - ShimmerPosition: 2.06
     - Vector1_2faa617f2f02433ca0bc7592c5c611e6: 0.5
     - Vector1_933467b7787648048f4e568b46e63bc7: 1.7
     - _AlphaClip: 0
