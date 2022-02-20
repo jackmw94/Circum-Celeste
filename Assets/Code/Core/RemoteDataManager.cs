@@ -21,14 +21,16 @@ namespace Code.Core
         private const float PlatformFriendRefreshDelay = 45f;
         
         public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
+
+        private Coroutine _checkNewFriendRequest = null;
         
         public bool IsLoggedIn { get; private set; } = false;
         public string OurPlayFabId { get; private set; } = "";
         public string OurDisplayName { get; private set; } = "";
+        public Action LeaderboardUpdated { get; set; } = () => { };
 
         private float CheckFriendsRefreshDelay => Application.isEditor ? EditorFriendRefreshDelay : PlatformFriendRefreshDelay;
-        
-        private Coroutine _checkNewFriendRequest = null;
+
 
         private void Awake()
         {
@@ -57,7 +59,9 @@ namespace Code.Core
                 InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
                 {
                     GetUserAccountInfo = true,
-                    GetPlayerProfile = true
+                    GetPlayerProfile = true,
+                    GetUserData = true,
+                    UserDataKeys = new List<string> {PersistentDataKeys.PlayerHighscore}
                 }
                 
             }, result =>
@@ -68,6 +72,8 @@ namespace Code.Core
                 UserTitleInfo userTitleInfo = userAccountInfo.TitleInfo;
                 if (string.IsNullOrEmpty(userTitleInfo.DisplayName) || userTitleInfo.DisplayName.EqualsIgnoreCase(" "))
                 {
+                    // new user
+                    
                     string newUserName = Social.localUser.userName;
                     PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
                     {
@@ -89,17 +95,48 @@ namespace Code.Core
                 }
                 else
                 {
+                    // existing user
+                    
                     IsLoggedIn = true;
                     _checkNewFriendRequest = StartCoroutine(CheckNewFriendCoroutine());
                     OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                     CircumDebug.Log("Logged in with playfab");
                     onCompleteCallback(true);
+
+                    if (!result.InfoResultPayload.UserData.ContainsKey(PersistentDataKeys.PlayerHighscore))
+                    {
+                        PlayerScoreHelper.PlayerScore playerScore = PersistentDataManager.Instance.UpdateUserScore();
+                        CircumDebug.Log($"Player score : \n{JsonUtility.ToJson(playerScore)}");
+                        UpdateUserScore(playerScore);
+                    }
                 }
                 
             }, error =>
             {
                 CircumDebug.LogError(error.ToString());
                 onCompleteCallback(false);
+            });
+        }
+
+        public void UpdateUserScore(PlayerScoreHelper.PlayerScore playerScore)
+        {
+            PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
+            {
+                Statistics = new List<StatisticUpdate>
+                {
+                    new StatisticUpdate
+                    {
+                        StatisticName = PersistentDataKeys.TotalScoresStatistic,
+                        Value = playerScore.TotalScore
+                    }
+                }
+            }, result =>
+            {
+                CircumDebug.Log($"Updated player total score to {playerScore.TotalScore}");
+                LeaderboardUpdated();
+            }, error =>
+            {
+                CircumDebug.LogError(error.ErrorMessage);
             });
         }
         

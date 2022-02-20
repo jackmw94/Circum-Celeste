@@ -26,12 +26,13 @@ public class LevelLayoutEditor : Editor
     private SerializedProperty _introduceElement;
     private SerializedProperty _exampleRotatingOrbiterEnabled;
     private SerializedProperty _exampleMovingOrbiterEnabled;
-    private SerializedProperty _requiredForGameCompletion;
+    private SerializedProperty _contributesToScoring;
     private SerializedProperty _orbiterEnabled;
     private SerializedProperty _playerInvulnerable;
     private SerializedProperty _gridSize;
     private SerializedProperty _cells;
     private SerializedProperty _goldTime;
+    private SerializedProperty _fullMarksTime;
 
     private Texture _levelCellEmptyTexture;
     private Texture _levelCellWallTexture;
@@ -47,6 +48,7 @@ public class LevelLayoutEditor : Editor
         _gridSize = serializedObject.FindProperty(nameof(_gridSize));
         _cells = serializedObject.FindProperty(nameof(_cells));
         _goldTime = serializedObject.FindProperty(nameof(_goldTime));
+        _fullMarksTime = serializedObject.FindProperty(nameof(_fullMarksTime));
 
         _playerType = serializedObject.FindProperty(nameof(_playerType));
         _escapeCriteria = serializedObject.FindProperty(nameof(_escapeCriteria));
@@ -57,7 +59,7 @@ public class LevelLayoutEditor : Editor
         _introduceElement = serializedObject.FindProperty(nameof(_introduceElement));
         _exampleRotatingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleRotatingOrbiterEnabled));
         _exampleMovingOrbiterEnabled = serializedObject.FindProperty(nameof(_exampleMovingOrbiterEnabled));
-        _requiredForGameCompletion = serializedObject.FindProperty(nameof(_requiredForGameCompletion));
+        _contributesToScoring = serializedObject.FindProperty(nameof(_contributesToScoring));
         _playerInvulnerable = serializedObject.FindProperty(nameof(_playerInvulnerable));
         _orbiterEnabled = serializedObject.FindProperty(nameof(_orbiterEnabled));
 
@@ -88,9 +90,10 @@ public class LevelLayoutEditor : Editor
         EditorGUILayout.PropertyField(_playerType);
         EditorGUILayout.PropertyField(_orbiterEnabled);
         EditorGUILayout.PropertyField(_playerInvulnerable);
-        EditorGUILayout.PropertyField(_requiredForGameCompletion);
+        EditorGUILayout.PropertyField(_contributesToScoring);
         GUILayout.Space(15);
         EditorGUILayout.PropertyField(_goldTime);
+        EditorGUILayout.PropertyField(_fullMarksTime);
         HandleEscapeCriteriaProperty();
         GUILayout.Space(15);
         HandleGridSizeProperty();

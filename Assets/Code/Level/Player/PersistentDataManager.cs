@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Core;
-using Code.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityExtras.Code.Optional.Singletons;
@@ -12,6 +12,15 @@ namespace Code.Level.Player
     public class PersistentDataManager : SingletonMonoBehaviour<PersistentDataManager>
     {
         private const string NoLoadingSavingPlayerPrefsKey = "Circum_DoNotLoadData";
+
+        public class UpdatedStatisticsData
+        {
+            public BadgeData NewBadgeData;
+            public NewFastestTimeInfo NewFastestTimeInfo;
+            public bool FirstTimeCompletingLevel; 
+            public bool ReplacedPreviousLevelRecord;
+            public int AddedToScore;
+        }
 
 #if UNITY_EDITOR
         public bool ForceOldSaveMethod;
@@ -25,12 +34,16 @@ namespace Code.Level.Player
         private CircumOptions _circumOptions;
         private PlayerFirsts _playerFirsts;
         private PlayerStats _playerStats;
+        private ChallengeData _challengeData;
         private Dictionary<string, LevelStats> _levelStats = new Dictionary<string, LevelStats>();
+        private Dictionary<string, int> _cachedLevelScores = new Dictionary<string, int>();
+        private int _cachedTotalScore = 0;
 
         public bool DoNotLoadOrSave => _doNotLoadOrSave;
         public PlayerStats PlayerStats => _playerStats;
         public PlayerFirsts PlayerFirsts => _playerFirsts;
         public CircumOptions Options => _circumOptions;
+        public ChallengeData ChallengeData => _challengeData;
 
         private void Awake()
         {
@@ -64,6 +77,11 @@ namespace Code.Level.Player
             _updateLevelIndexCoroutine = StartCoroutine(UpdateCurrentLevelCoroutine());
         }
 
+        public int GetScoreFromLevelName(string levelName)
+        {
+            return _cachedLevelScores.TryGetValue(levelName, out int score) ? score : -1;
+        }
+        
         private IEnumerator UpdateCurrentLevelCoroutine()
         {
             yield return new WaitForSeconds(_levelIndexUpdateRate);
@@ -93,6 +111,21 @@ namespace Code.Level.Player
             _playerStats.RunTracker.IsPerfect = false;
             if (save) SaveStats();
         }
+        
+        public PlayerScoreHelper.PlayerScore UpdateUserScore()
+        {
+            Dictionary<string, LevelLayout> levelLayoutsByName = _levelProvider
+                .ActiveLevelProgression
+                .LevelLayout
+                .ToDictionary(layout => layout.name, layout => layout);
+
+            PlayerScoreHelper.PlayerScore playerScore = PlayerScoreHelper.GetPlayerScore(levelLayoutsByName, _levelStats, _challengeData, ChallengeScreen.CurrentWeekIndex);
+            
+            _cachedLevelScores = playerScore.LevelScores.ToDictionary(levelScore => levelScore.LevelName, levelScore => levelScore.Score);
+            _cachedTotalScore = playerScore.TotalScore;
+            
+            return playerScore;
+        }
 
         public void SetLevelIndex(int levelIndex, bool save = false)
         {
@@ -100,24 +133,22 @@ namespace Code.Level.Player
             if (save) SaveStats();
         }
 
-        public LevelStats GetStatsForLevelAtIndex(string levelName)
+        public LevelStats GetStatsForLevel(string levelName)
         {
             return !_levelStats.TryGetValue(levelName, out LevelStats levelStats) ? null : levelStats;
         }
 
-        public void UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording, out BadgeData newBadgeData, out NewFastestTimeInfo newFastestTimeInfo,
-            out bool firstTimeCompletingLevel, out bool replacedPreviousLevelRecord)
+        public UpdatedStatisticsData UpdateStatisticsAfterLevel(LevelLayout currentLevel, LevelRecording levelRecording)
         {
-            newBadgeData = new BadgeData();
-            newFastestTimeInfo = null;
-
+            UpdatedStatisticsData updatedStatisticsData = new UpdatedStatisticsData {NewBadgeData = new BadgeData(), NewFastestTimeInfo = null};
+            
             bool isPerfect = levelRecording.RecordingData.IsPerfect;
 
             RunTracker runTracker = _playerStats.RunTracker;
             runTracker.IsPerfect &= isPerfect && runTracker.Deaths == 0;
 
             int levelIndex = currentLevel.LevelContext.LevelIndex;
-            _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped, out firstTimeCompletingLevel);
+            _playerStats.UpdateHighestLevel(levelIndex, runTracker.Deaths == 0, runTracker.IsPerfect, runTracker.HasSkipped, out updatedStatisticsData.FirstTimeCompletingLevel);
 
             _playerStats.UpdateCompletedTutorials(currentLevel.LevelContext.IsFinalTutorial);
 
@@ -129,11 +160,11 @@ namespace Code.Level.Player
                     _levelStats.Add(currentLevel.name, levelStats);
                 }
 
-                levelStats.UpdateFastestRecording(levelRecording, currentLevel.GoldTime, out newBadgeData, out replacedPreviousLevelRecord);
+                levelStats.UpdateFastestRecording(levelRecording, currentLevel.GoldTime, out updatedStatisticsData.NewBadgeData, out updatedStatisticsData.ReplacedPreviousLevelRecord);
 
-                if (replacedPreviousLevelRecord)
+                if (updatedStatisticsData.ReplacedPreviousLevelRecord)
                 {
-                    newFastestTimeInfo = new NewFastestTimeInfo
+                    updatedStatisticsData.NewFastestTimeInfo = new NewFastestTimeInfo
                     {
                         Time = levelRecording.LevelTime,
                         IsPerfect = levelRecording.IsPerfect
@@ -142,10 +173,24 @@ namespace Code.Level.Player
             }
             else
             {
-                replacedPreviousLevelRecord = false;
+                updatedStatisticsData.ReplacedPreviousLevelRecord = false;
+            }
+
+            updatedStatisticsData.AddedToScore = 0;
+            if (updatedStatisticsData.ReplacedPreviousLevelRecord)
+            {
+                int previousTotalScore = _cachedTotalScore;
+                PlayerScoreHelper.PlayerScore updatedScore = UpdateUserScore();
+                if (previousTotalScore != updatedScore.TotalScore)
+                {
+                    updatedStatisticsData.AddedToScore = updatedScore.TotalScore - previousTotalScore;
+                    RemoteDataManager.Instance.UpdateUserScore(updatedScore);
+                }
             }
 
             SaveStats();
+
+            return updatedStatisticsData;
         }
 
         private void LoadPersistentData()
@@ -155,6 +200,7 @@ namespace Code.Level.Player
                 _playerStats = PlayerStats.CreateEmptyPlayerStats();
                 _circumOptions = CircumOptions.CreateCircumOptions();
                 _playerFirsts = new PlayerFirsts();
+                _challengeData = new ChallengeData();
                 return;
             }
 
@@ -167,6 +213,7 @@ namespace Code.Level.Player
                 }
             }
 
+            _challengeData = ChallengeData.Load();
             _playerFirsts = PlayerFirsts.Load();
             _circumOptions = CircumOptions.Load();
         }
@@ -189,6 +236,7 @@ namespace Code.Level.Player
 
             PlayerFirsts.Save(_playerFirsts);
             CircumOptions.Save(_circumOptions);
+            ChallengeData.Save(_challengeData);
         }
 
         public void ResetTutorials()
@@ -204,7 +252,7 @@ namespace Code.Level.Player
 
             foreach (LevelLayout level in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                LevelStats.ResetStats(level.name);
+                Level.Player.LevelStats.ResetStats(level.name);
             }
 
             _levelStats.Clear();
@@ -234,7 +282,7 @@ namespace Code.Level.Player
         {
             foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                if (!levelLayout.RequiredForGameCompletion)
+                if (!levelLayout.ContributesToScoring)
                 {
                     continue;
                 }

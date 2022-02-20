@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Code.Core;
-using Code.Debugging;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityExtras.Code.Core;
@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Code.Level
 {
-    [CreateAssetMenu(menuName = "Create LevelLayout", fileName = "LevelLayout", order = 0)]
+    [CreateAssetMenu(menuName = "Create LevelLayout", fileName = "LevelLayout", order = 0), Serializable]
     public class LevelLayout : ScriptableObject
     {
         [SerializeField] private long _levelId = 0;
@@ -20,13 +20,14 @@ namespace Code.Level
         [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
         [SerializeField] private bool _orbiterEnabled = true;
         [SerializeField] private bool _playerInvulnerable = false;
-        [SerializeField] private bool _requiredForGameCompletion = true;
+        [FormerlySerializedAs("_requiredForGameCompletion")] [SerializeField] private bool _contributesToScoring = true;
         [SerializeField] private TutorialDescription _tutorialDescription;
         [SerializeField] private IntroduceElement _introduceElement;
         [SerializeField] private bool _exampleRotatingOrbiterEnabled = false;
         [SerializeField] private bool _exampleMovingOrbiterEnabled = false;
         [SerializeField] private int _gridSize = 10;
         [SerializeField] private float _goldTime = 2f;
+        [SerializeField] private float _fullMarksTime = 2f;
         [SerializeField] private CellType[] _cells = new CellType[0];
 
         public long LevelId => _levelId;
@@ -37,12 +38,13 @@ namespace Code.Level
         public string TagLineLocalisationTerm => _tagLineLocalisationTerm;
         public bool OrbiterEnabled => _orbiterEnabled;
         public bool PlayerInvulnerable => _playerInvulnerable;
-        public bool RequiredForGameCompletion => _requiredForGameCompletion;
+        public bool ContributesToScoring => _contributesToScoring;
         public TutorialDescription TutorialDescription => _tutorialDescription;
         public IntroduceElement IntroduceElement => _introduceElement;
         public bool ExampleRotatingOrbiterEnabled => _exampleRotatingOrbiterEnabled;
         public bool ExampleMovingOrbiterEnabled => _exampleMovingOrbiterEnabled;
         public float GoldTime => _goldTime;
+        public float FullMarksTime => _fullMarksTime;
 
         // only runtime data, keeps level indices hidden away in level provider
         // todo: move this out of here, return an object containing LevelLayout and LevelContext instead of where we return LevelContext

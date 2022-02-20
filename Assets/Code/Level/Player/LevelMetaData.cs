@@ -19,5 +19,6 @@ namespace Code.Level.Player
             
         public bool HasCompletedLevel => _levelTime > 0f;
         public bool HasPerfectTime => _isPerfect;
+        public float LevelTime => _levelTime;
     }
 }

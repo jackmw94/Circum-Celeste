@@ -19,13 +19,17 @@ namespace Code.Level
             for (int i = 0; i < _tutorialLevels.Length; i++)
             {
                 // first tutorial is -1, second -2, etc.
-                _tutorialLevels[i].LevelContext.LevelIndex = -i - 1;
-                _tutorialLevels[i].LevelContext.IsFinalTutorial = i == _tutorialLevels.Length - 1;
+                LevelLayoutContext tutorialLevelContext = _tutorialLevels[i].LevelContext;
+                tutorialLevelContext.LevelIndex = -i - 1;
+                tutorialLevelContext.IsFinalTutorial = i == _tutorialLevels.Length - 1;
+                tutorialLevelContext.ContributesToScoring = false;
             }
 
             for (int i = 0; i < _levelLayout.Length; i++)
             {
-                _levelLayout[i].LevelContext.LevelIndex = i;
+                LevelLayoutContext levelContext = _levelLayout[i].LevelContext;
+                levelContext.LevelIndex = i;
+                levelContext.ContributesToScoring = _levelLayout[i].ContributesToScoring;
             }
         }
         

@@ -7,6 +7,7 @@ using Code.VFX;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityExtras.Code.Core;
+using UIPanel = UnityCommonFeatures.UIPanel;
 
 namespace Code.Flow
 {
@@ -24,6 +25,10 @@ namespace Code.Flow
         [SerializeField] private YourFastestTimesScreen _worldRecordsScreen;
         [SerializeField] private PlayerLevelRankingPanel _friendsLevelRankingScreen;
         [SerializeField] private PlayerLevelRankingPanel _globalLevelRankingScreen;
+        [Space(15)]
+        [SerializeField] private float _showEdgeButtonsDelay = 0.3f;
+        [SerializeField] private UIPanel _edgeButtons;
+        [SerializeField] private Leaderboard _leaderboard;
         [Space(15)]
         [SerializeField] private LevelProvider _levelProvider;
         [SerializeField] private LevelManager _levelManager;
@@ -79,9 +84,9 @@ namespace Code.Flow
             LevelLayout levelLayout = _levelProvider.GetCurrentLevel();
             string levelName = levelLayout.name;
             float goldTime = levelLayout.GoldTime;
-
+            
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            LevelStats levelStats = persistentDataManager.GetStatsForLevelAtIndex(levelName);
+            LevelStats levelStats = persistentDataManager.GetStatsForLevel(levelName);
             LevelRecording levelRecording = levelStats == null ? null : levelStats.HasRecording ? levelStats.LevelRecording : null;
             
             BadgeData currentBadgeData;
@@ -125,8 +130,8 @@ namespace Code.Flow
             _levelOverviewScreen.SetupLevelOverview(interLevelFlowSetupData, levelLayout, currentBadgeData, PlayLevel, NextLevelButtonListener);
             
             _scrollingItemPicker.SetToItemAtIndex(_scrollingItemPicker.NumberOfItems - 1);
-            _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial);
-
+            _scrollingItemPicker.SetScrollingEnabled(!levelLayout.LevelContext.IsTutorial && levelLayout.LevelContext.ContributesToScoring);
+            
             SetNextPreviousButtonsActive();
         }
 
@@ -144,16 +149,24 @@ namespace Code.Flow
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.interactable = false;
-            
+
+            if (!show)
+            {
+                _edgeButtons.ShowHide(false);
+            }
+
             float targetAlpha = show ? 1f : 0f;
             float duration = transition == InterLevelFlow.InterLevelTransition.Instant ? 0f : _showHideDuration;
-            yield return Utilities.LerpOverTime(_canvasGroup.alpha, targetAlpha, duration, f =>
-            {
-                _canvasGroup.alpha = f;
-            });
-            
+            yield return Utilities.LerpOverTime(_canvasGroup.alpha, targetAlpha, duration, f => { _canvasGroup.alpha = f; });
+
             _canvasGroup.blocksRaycasts = show;
             _canvasGroup.interactable = show;
+
+            if (show)
+            {
+                yield return new WaitForSeconds(_showEdgeButtonsDelay);
+                _edgeButtons.ShowHide(true);
+            }
         }
 
 #if UNITY_EDITOR
@@ -167,6 +180,11 @@ namespace Code.Flow
             if (Input.GetKeyDown(EditorKeyCodeBindings.NextLevel))
             {
                 NextLevelButtonListener();
+            }
+
+            if (Input.GetKeyDown(EditorKeyCodeBindings.UpdateLeaderboard))
+            {
+                _leaderboard.UpdateLeaderboard();
             }
         }
 #endif
