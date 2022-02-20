@@ -5,11 +5,14 @@ using Code.Core;
 using Code.Level;
 using Code.Level.Player;
 using PlayFab;
-using PlayFab.AdminModels;
 using PlayFab.ClientModels;
 using UnityEngine;
+
+#if ENABLE_PLAYFABADMIN_API
+using PlayFab.AdminModels;
 using GetUserDataRequest = PlayFab.AdminModels.GetUserDataRequest;
 using UserDataRecord = PlayFab.AdminModels.UserDataRecord;
+#endif
 
 namespace Code.Debugging
 {
@@ -20,6 +23,7 @@ namespace Code.Debugging
 
         [SerializeField] private LevelProgression _levelProgression;
 
+#if ENABLE_PLAYFABADMIN_API
         [ContextMenu(nameof(StartScoresUpdate))]
         private void StartScoresUpdate()
         {
@@ -96,5 +100,6 @@ namespace Code.Debugging
 
             yield return new WaitUntil(() => hasCompletedRequest);
         }
+#endif
     }
 }
