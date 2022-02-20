@@ -104,6 +104,12 @@ namespace Code.Debugging
         {
             PlayerStats.SetStarterPlayerStats();
         }
+
+        [MenuItem("Circum/Persistent data/Reset challenge attempts")]
+        public static void ResetChallengeAttempts()
+        {
+            PersistentDataManager.Instance.ChallengeData.ResetChallengeAttempts();
+        }
         
         [MenuItem("Circum/Persistent data/Set perfect player stats")]
         public static void SetPerfectPlayerStats()
