@@ -41,9 +41,9 @@ namespace Code.UI
 
         private IEnumerator UpdateLeaderboardCoroutine()
         {
-            yield return new WaitForSeconds(UpdateLeaderboardDelay);
-            
             _scrollRectContent.DestroyAllChildren();
+
+            yield return new WaitForSeconds(UpdateLeaderboardDelay);
             
             PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
             {
@@ -53,13 +53,13 @@ namespace Code.UI
             {
                 foreach (PlayerLeaderboardEntry entryData in result.Leaderboard)
                 {
-                    GameObject entryObject = Instantiate(_leaderboardEntryPrefab, _scrollRectContent);
-                    LeaderboardEntry leaderboardEntry = entryObject.GetComponent<LeaderboardEntry>();
-
                     if (entryData.StatValue == 0)
                     {
                         continue;
                     }
+                    
+                    GameObject entryObject = Instantiate(_leaderboardEntryPrefab, _scrollRectContent);
+                    LeaderboardEntry leaderboardEntry = entryObject.GetComponent<LeaderboardEntry>();
                     
                     leaderboardEntry.SetupLeaderboardEntry(entryData.Position + 1, entryData.DisplayName, entryData.StatValue);
                 }
