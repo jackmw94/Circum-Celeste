@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityExtras.Code.Optional.EasingFunctions;
 
 namespace Code.Behaviours

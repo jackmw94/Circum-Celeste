@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Code.Core;
 using Code.Debugging;
-using Code.Level.Player;
 using Lean.Localization;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
+using UnityExtras.Core;
 
 namespace Code.UI
 {

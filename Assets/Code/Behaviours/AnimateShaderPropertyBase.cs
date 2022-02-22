@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Behaviours
 {

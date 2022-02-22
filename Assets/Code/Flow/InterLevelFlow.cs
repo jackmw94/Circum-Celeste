@@ -5,7 +5,7 @@ using Code.Level;
 using Code.Level.Player;
 using Code.VFX;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Optional;
 
 namespace Code.Flow
 {

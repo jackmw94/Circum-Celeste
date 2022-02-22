@@ -1,7 +1,7 @@
 ﻿using Code.Debugging;
 using Code.Level.Player;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Level
 {

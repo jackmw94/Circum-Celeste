@@ -6,7 +6,7 @@ using Code.UI;
 using Code.VFX;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 using UIPanel = UnityCommonFeatures.UIPanel;
 
 namespace Code.Flow

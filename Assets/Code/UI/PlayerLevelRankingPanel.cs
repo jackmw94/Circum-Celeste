@@ -9,7 +9,7 @@ using Code.Level.Player;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.UI
 {

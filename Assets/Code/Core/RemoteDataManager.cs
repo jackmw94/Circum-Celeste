@@ -10,8 +10,8 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
+using UnityExtras.Core;
 
 namespace Code.Core
 {

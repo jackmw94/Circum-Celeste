@@ -6,7 +6,7 @@ using Code.Debugging;
 using Code.Juice;
 using Code.UI;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Level
 {

@@ -1,6 +1,6 @@
 ﻿using Code.Core;
 using Code.Debugging;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Level.Player
 {

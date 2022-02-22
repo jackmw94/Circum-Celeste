@@ -8,7 +8,7 @@ using Code.UI;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Flow
 {

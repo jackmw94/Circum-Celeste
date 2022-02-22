@@ -3,7 +3,7 @@ using Code.Core;
 using Code.Level;
 using UnityEditor;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 [CustomEditor(typeof(LevelLayout))]
 [CanEditMultipleObjects]

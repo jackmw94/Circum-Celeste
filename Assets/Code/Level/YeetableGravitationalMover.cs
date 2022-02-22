@@ -2,7 +2,7 @@
 using Code.Juice;
 using Code.VFX;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Level
 {

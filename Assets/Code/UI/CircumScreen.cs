@@ -2,7 +2,7 @@
 using Code.Behaviours;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.UI
 {

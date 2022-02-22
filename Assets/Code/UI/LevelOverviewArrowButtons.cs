@@ -1,5 +1,4 @@
-﻿using System;
-using Code.Level.Player;
+﻿using Code.Level.Player;
 using UnityEngine;
 using UnityEngine.UI;
 

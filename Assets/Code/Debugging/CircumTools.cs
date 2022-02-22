@@ -4,11 +4,9 @@ using Code.Level.Player;
 using Code.UI;
 using Lean.Localization;
 using UnityEditor;
-using UnityExtras.Code.Core;
-
+using UnityExtras.Core;
 #if UNITY_EDITOR
 using Code.Core;
-using Code.Flow;
 using UnityEngine;
 using Lean.Localization.Editor;
 #endif
@@ -38,7 +36,7 @@ namespace Code.Debugging
             cameraRoot.SetParent(child);
             cameraRoot.localPosition = Vector3.zero;
 
-            AspectRatioToScreenSize[] aspectRatioController = GameObject.FindObjectsOfType<AspectRatioToScreenSize>();
+            AspectRatioToScreenSize[] aspectRatioController = Object.FindObjectsOfType<AspectRatioToScreenSize>();
             aspectRatioController.ApplyFunction(p => p.enabled = false);
 
             GameObject.Find("GameUI").SetActive(false);

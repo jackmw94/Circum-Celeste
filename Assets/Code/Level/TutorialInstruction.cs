@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 using UnityExtras.Code.Optional.Singletons;
 
 public class TutorialInstruction : SingletonMonoBehaviour<TutorialInstruction>

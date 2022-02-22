@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Linq;
 using Code.Core;
 using Lean.Localization;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.UI
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using PlayFab;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

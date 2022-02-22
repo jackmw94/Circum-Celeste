@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Code.Core;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 

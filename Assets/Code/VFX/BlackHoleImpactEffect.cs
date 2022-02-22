@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.EasingFunctions;
+using UnityExtras.Core;
 
 namespace Code.VFX
 {

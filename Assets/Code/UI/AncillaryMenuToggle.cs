@@ -3,7 +3,7 @@ using System.Linq;
 using Code.Level;
 using UnityCommonFeatures;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.UI
 {
@@ -16,9 +16,9 @@ namespace Code.UI
         
         protected override void OnButtonClicked()
         {
-            UnityCommonFeatures.UIPanel.PanelState currentPanelState = _ancillaryMenu.CurrentPanelState;
-            bool shouldShow = currentPanelState == UnityCommonFeatures.UIPanel.PanelState.Hidden ||
-                              currentPanelState == UnityCommonFeatures.UIPanel.PanelState.ChangingToHide;
+            VisibleState currentPanelState = _ancillaryMenu.CurrentPanelState;
+            bool shouldShow = currentPanelState == VisibleState.Hidden ||
+                              currentPanelState == VisibleState.ChangingToHidden;
             ShowHideAncillaryMenu(shouldShow);
         }
 

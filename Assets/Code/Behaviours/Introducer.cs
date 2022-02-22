@@ -1,8 +1,7 @@
-﻿using System;
-using Code.Level;
+﻿using Code.Level;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Behaviours
 {

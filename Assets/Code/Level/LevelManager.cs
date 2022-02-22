@@ -8,7 +8,7 @@ using Code.UI;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.Level
 {

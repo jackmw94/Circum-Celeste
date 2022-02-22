@@ -11,8 +11,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
+using UnityExtras.Core;
 
 namespace Code.Flow
 {

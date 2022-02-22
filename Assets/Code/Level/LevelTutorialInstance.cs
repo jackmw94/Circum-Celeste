@@ -3,8 +3,8 @@ using System.Linq;
 using Code.Core;
 using Code.Debugging;
 using UnityEngine;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.EasingFunctions;
+using UnityExtras.Core;
 
 namespace Code.Level
 {

@@ -7,8 +7,8 @@ using Lean.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
+using UnityExtras.Core;
 
 namespace Code.UI
 {

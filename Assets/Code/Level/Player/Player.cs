@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using Code.Core;
-using Code.Debugging;
 using Code.VFX;
 using UnityEngine;
-using UnityExtras.Code.Core;
 
 namespace Code.Level.Player
 {

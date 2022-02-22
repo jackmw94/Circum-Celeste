@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Diagnostics;
 using Code.Debugging;
-using Code.VFX;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.VFX
 {

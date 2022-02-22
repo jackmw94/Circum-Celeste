@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Code.Behaviours;
 using UnityEngine;
-using UnityExtras.Code.Core;
 using UnityExtras.Code.Optional.Singletons;
+using UnityExtras.Core;
 
 namespace Code.VFX
 {

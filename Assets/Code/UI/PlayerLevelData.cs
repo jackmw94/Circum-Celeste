@@ -1,7 +1,7 @@
 ﻿using System;
 using Code.Core;
 using UnityEngine;
-using UnityExtras.Code.Core;
+using UnityExtras.Core;
 
 namespace Code.UI
 {
