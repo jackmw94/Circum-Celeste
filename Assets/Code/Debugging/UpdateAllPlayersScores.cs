@@ -55,7 +55,7 @@ namespace Code.Debugging
             {
                 Debug.Log($"Got {result.Data.Count} data items from player {playerId}");
                 int totalScore = 0;
-                
+
                 foreach (KeyValuePair<string, UserDataRecord> userData in result.Data)
                 {
                     if (!userData.Key.StartsWith(LevelStatsKeyStartsWith))
@@ -65,7 +65,7 @@ namespace Code.Debugging
 
                     string levelName = userData.Key.Replace(LevelStatsKeyStartsWith, "");
                     LevelLayout levelLayout = _levelProgression.LevelLayout.FirstOrDefault(p => p.name.Equals(levelName));
-                    
+
                     if (levelLayout == null)
                     {
                         Debug.LogError($"No level layout with name {levelName}");
@@ -75,7 +75,8 @@ namespace Code.Debugging
                     string serializedLevelMetaData = userData.Value.Value;
                     LevelMetaData levelMetaData = JsonUtility.FromJson<LevelMetaData>(serializedLevelMetaData);
 
-                    int levelScore = PlayerScoreHelper.GetScoreFromLevel(levelLayout.FullMarksTime, levelMetaData.LevelTime, levelMetaData.HasPerfectTime, PlayerScoreHelper.MaxScoreForLevel);
+                    int levelScore = PlayerScoreHelper.GetScoreFromLevel(levelLayout.FullMarksTime, levelMetaData.LevelTime, levelMetaData.HasPerfectTime,
+                        PlayerScoreHelper.MaxScoreForLevel);
                     totalScore += levelScore;
                 }
 

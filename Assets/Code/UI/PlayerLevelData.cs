@@ -19,5 +19,13 @@ namespace Code.UI
         public bool IsPerfect => _isPerfect;
 
         public bool IsOurRecord => PlayfabId.EqualsIgnoreCase(RemoteDataManager.Instance.OurPlayFabId);
+
+        public PlayerLevelData(string playfabId, string username, float levelTime, bool isPerfect)
+        {
+            _playfabId = playfabId;
+            _username = username;
+            _levelTime = levelTime;
+            _isPerfect = isPerfect;
+        }
     }
 }
