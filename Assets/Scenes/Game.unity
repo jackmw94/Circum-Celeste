@@ -15207,7 +15207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startingValue: 0
-  _duration: 0.4
+  _duration: 0.5
   _easingType: 1
   _easingDirection: 2
   _meshCollider: {fileID: 564062253}
