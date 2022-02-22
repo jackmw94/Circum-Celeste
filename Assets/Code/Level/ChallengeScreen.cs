@@ -96,7 +96,7 @@ namespace Code.Level
             string scoreTranslation = LeanLocalization.GetTranslationText(_challengeScoreTranslation);
             _scoreLabel.text = string.Format(scoreTranslation, score, _currentChallengeLevel.Points);
 
-            int daysRemaining = 6 - CurrentDayIndex;
+            int daysRemaining = 6 - CurrentDayIndex + CurrentWeekIndex * 7;
             string daysRemainingTranslation = LeanLocalization.GetTranslationText(_daysRemainingTranslation);
             _daysRemainingLabel.text = string.Format(daysRemainingTranslation, daysRemaining);
 
