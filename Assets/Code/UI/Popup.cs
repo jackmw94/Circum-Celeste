@@ -148,7 +148,7 @@ namespace Code.UI
         private IEnumerator ShowHideBackgroundOverlay(bool show)
         {
             bool backgroundOverlayTransitionComplete = false;
-            _backgroundOverlay.ActivateDeactivate(show, () =>
+            _backgroundOverlay.ActivateDeactivate(show, onComplete: () =>
             {
                 backgroundOverlayTransitionComplete = true;
             });

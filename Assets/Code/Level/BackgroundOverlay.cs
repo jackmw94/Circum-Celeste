@@ -1,4 +1,5 @@
 ﻿using Code.Behaviours;
+using UnityCommonFeatures;
 using UnityEngine;
 
 namespace Code.Level
@@ -26,12 +27,13 @@ namespace Code.Level
             _rotationParameterId = Shader.PropertyToID(_rotationParameterName);
         }
 
-        protected override void OnActivateDeactivate(bool activate)
+        protected override void OnActivateDeactivateStarted()
         {
-            base.OnActivateDeactivate(activate);
-            float rotation = activate ? _turnOnRotation : _turnOffRotation;
+            base.OnActivateDeactivateStarted();
+            bool isActivating = CurrentVisibleState == VisibleState.ChangingToVisible;
+            float rotation = isActivating ? _turnOnRotation : _turnOffRotation;
             _renderer.material.SetFloat(_rotationParameterId, rotation);
-            _meshCollider.enabled = activate;
+            _meshCollider.enabled = isActivating;
         }
 
         protected override void SetActivatedAmount(float amount)
