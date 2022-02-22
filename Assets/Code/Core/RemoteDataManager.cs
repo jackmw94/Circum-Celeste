@@ -120,6 +120,8 @@ namespace Code.Core
 
         public void UpdateUserScore(PlayerScoreHelper.PlayerScore playerScore)
         {
+            int totalScore = PersistentDataManager.Instance.Options.DisableLeaderboardUpdates ? 0 : playerScore.TotalScore;
+            
             PlayFabClientAPI.UpdatePlayerStatistics(new UpdatePlayerStatisticsRequest
             {
                 Statistics = new List<StatisticUpdate>
@@ -127,7 +129,7 @@ namespace Code.Core
                     new StatisticUpdate
                     {
                         StatisticName = PersistentDataKeys.TotalScoresStatistic,
-                        Value = playerScore.TotalScore
+                        Value = totalScore
                     }
                 }
             }, result =>

@@ -34,7 +34,7 @@ namespace Code.Level
                     }, error => { Debug.LogError(error.ErrorMessage); });
             }
 #else
-            CircumDebug.LogError("Add ENABLE_PLAYFABADMIN_API to project symbols!");
+            Debug.LogError("Add ENABLE_PLAYFABADMIN_API to project symbols!");
 #endif
         }
     }

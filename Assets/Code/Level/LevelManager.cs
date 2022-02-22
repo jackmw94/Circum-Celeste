@@ -211,6 +211,11 @@ namespace Code.Level
 
         private IEnumerator CheckIfBeatGlobalRecordAfterDelay(string levelName)
         {
+            if (PersistentDataManager.Instance.Options.DisableLeaderboardUpdates)
+            {
+                yield break;
+            }
+            
             yield return new WaitForSeconds(CheckGlobalLevelRankingDelay);
             
 #if UNITY_EDITOR

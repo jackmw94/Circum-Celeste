@@ -10,6 +10,8 @@ namespace Code.Level.Player
     {
         [field: SerializeField] public bool ShowLevelTimer { get; set; } = false;
         [field: SerializeField] public int GameBackgroundIndex { get; set; } = 0;
+        [field: SerializeField] public bool DisableLeaderboardUpdates { get; set; } = false;
+        
         [SerializeField] private CircumQuality.CircumQualitySetting _circumQualitySetting = CircumQuality.CircumQualitySetting.High;
         public CircumQuality.CircumQualitySetting QualitySetting
         {
