@@ -15,6 +15,7 @@ namespace Code.Level
 {
     public class ChallengeScreen : UIPanel
     {
+        private const float CheckForNextWeekIndexDelay = 120f;
         private const float UpdateScreenOnLevelStartDelay = 1.5f;
         private static readonly DateTime DayZero = new DateTime(2022, 2, 14, 0, 0, 0);
 
@@ -61,6 +62,11 @@ namespace Code.Level
         {
             base.InternalAwake();
             _playButton.onClick.AddListener(PlayLevel);
+        }
+
+        protected void OnEnable()
+        {
+            StartCoroutine(CheckForChallengeWeekIncremented());
         }
 
         protected override void InternalOnDestroy()
@@ -157,6 +163,20 @@ namespace Code.Level
             
             _levelManager.ExitLevel();
             SetupChallengeScreenInternal(_currentChallengeLevel, challengeData);
+        }
+
+        private IEnumerator CheckForChallengeWeekIncremented()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(CheckForNextWeekIndexDelay);
+                if (_cachedWeekIndex != WeekIndex)
+                {
+                    CircumDebug.Log($"Found the current week index is not the same as the challenge we loaded last. Refreshing. ({WeekIndex} != {_cachedWeekIndex})");
+                    SetupChallengeScreen();
+                }
+            }
+            // ReSharper disable once IteratorNeverReturns
         }
         
 #if CIRCUM_DEBUG
