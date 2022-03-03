@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104ff8bbd5b444ae937eeae7c30795d1, type: 3}
+  m_Name: Week3_StrangeSpiral
+  m_EditorClassIdentifier: 
+  _levelLayout: {fileID: 11400000, guid: 649a688f3ce18d74fa546eb98f09d7fb, type: 2}
+  _challengeConfiguration:
+    <DailyAttempts>k__BackingField: 3
+    <Points>k__BackingField: 100
+    <WeekIndex>k__BackingField: 3
+    <LevelName>k__BackingField: Strange Spiral

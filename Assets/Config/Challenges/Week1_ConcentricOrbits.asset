@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 104ff8bbd5b444ae937eeae7c30795d1, type: 3}
-  m_Name: ChallengeLevel
+  m_Name: Week1_ConcentricOrbits
   m_EditorClassIdentifier: 
   _levelLayout: {fileID: 11400000, guid: 7abc01230d00d4748a9a53d67ac70b46, type: 2}
   _challengeConfiguration:
+    <DailyAttempts>k__BackingField: 3
     <Points>k__BackingField: 150
-    <WeekIndex>k__BackingField: 0
-    <LevelName>k__BackingField: 
+    <WeekIndex>k__BackingField: 1
+    <LevelName>k__BackingField: Concentric Orbits
