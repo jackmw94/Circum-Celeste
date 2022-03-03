@@ -14,7 +14,7 @@ namespace Code.Level
     public class LevelLayout : ScriptableObject
     {
         [SerializeField] private long _levelId = 0;
-        [SerializeField] private EscapeCriteria _escapeCriteria;
+        [SerializeField] private EscapeCriteria _escapeCriteria = EscapeCriteria.PickedUpAll;
         [SerializeField] private PlayerProvider.PlayerType _playerType;
         [SerializeField] private float _escapeTimer = 25f;
         [FormerlySerializedAs("_tagLine")] [SerializeField] private string _tagLineLocalisationTerm = "";
