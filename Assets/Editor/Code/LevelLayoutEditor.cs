@@ -125,7 +125,7 @@ public class LevelLayoutEditor : Editor
     {
         EditorGUILayout.BeginVertical();
         int cellIndex = 0;
-        int gridCellDimension = Mathf.FloorToInt(0.9f * EditorGUIUtility.currentViewWidth / _gridSize.intValue);
+        int gridCellDimension = Mathf.FloorToInt(0.85f * EditorGUIUtility.currentViewWidth / _gridSize.intValue);
         
         for (int y = 0; y < _gridSize.intValue; y++)
         {
