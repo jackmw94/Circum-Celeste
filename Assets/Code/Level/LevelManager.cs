@@ -97,7 +97,8 @@ namespace Code.Level
             _interLevelFlow.ShowInterLevelUI(new InterLevelFlow.InterLevelFlowSetupData
             {
                 Transition = InterLevelFlow.InterLevelTransition.Fast,
-                OnShown = ClearCurrentLevel
+                OnShown = ClearCurrentLevel,
+                ShowingTutorial = _levelProvider.GetCurrentLevel().LevelContext.IsTutorial
             });
         }
 
@@ -205,7 +206,8 @@ namespace Code.Level
                 HasComeFromLevelCompletion = hasComeFromLevelCompletion,
                 FirstTimeCompletingLevel = updatedStatisticsData?.FirstTimeCompletingLevel ?? false,
                 LevelGotPerfect = completedPerfectLevel,
-                AddedScore = updatedStatisticsData?.AddedToScore ?? -1
+                AddedScore = updatedStatisticsData?.AddedToScore ?? -1,
+                ShowingTutorial = _levelProvider.GetCurrentLevel().LevelContext.IsTutorial
             });
         }
 

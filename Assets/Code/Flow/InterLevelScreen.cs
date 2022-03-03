@@ -145,7 +145,7 @@ namespace Code.Flow
             _levelManager.CreateCurrentLevel(levelRecording);
         }
 
-        public IEnumerator ShowHideScreen(bool show, InterLevelFlow.InterLevelTransition transition)
+        public IEnumerator ShowHideScreen(bool show, InterLevelFlow.InterLevelTransition transition, bool forceHideEdgeButtons)
         {
             _canvasGroup.blocksRaycasts = true;
             _canvasGroup.interactable = false;
@@ -164,8 +164,15 @@ namespace Code.Flow
 
             if (show)
             {
-                yield return new WaitForSeconds(_showEdgeButtonsDelay);
-                _edgeButtons.ShowHide(true);
+                if (forceHideEdgeButtons)
+                {
+                    _edgeButtons.ShowHide(false);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(_showEdgeButtonsDelay);
+                    _edgeButtons.ShowHide(true);
+                }
             }
         }
 

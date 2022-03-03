@@ -18,16 +18,21 @@ namespace Code.Flow
         [SerializeField] private TextMeshProUGUI _levelNumber;
         [SerializeField] private TextMeshProUGUI _levelName;
         [SerializeField] private TextMeshProUGUI _levelTag;
-        [Space(15)] [SerializeField] private BadgeIndicator _badgeIndicator;
-        [Space(15)] [SerializeField] private Color _regularNewFastestTimeLabelColour;
+        [Space(15)]
+        [SerializeField] private BadgeIndicator _badgeIndicator;
+        [Space(15)]
+        [SerializeField] private Color _regularNewFastestTimeLabelColour;
         [SerializeField] private Color _perfectNewFastestTimeLabelColour;
         [SerializeField] private GameObject _newFastestTimeRoot;
         [SerializeField] private TextMeshProUGUI _newFastestTimeLabel;
-        [Space(15)] [SerializeField] private Button[] _playButtons;
+        [Space(15)]
+        [SerializeField] private Button[] _playButtons;
         [SerializeField] private Button _advanceButton;
-        [Space(15)] [SerializeField] private GameObject _playButtonRoot;
+        [Space(15)] 
+        [SerializeField] private GameObject _playButtonRoot;
         [SerializeField] private GameObject _playAndAdvanceButtonRoot;
-        [Space(15)] [SerializeField] private TextMeshProUGUI _scoreLabel;
+        [Space(15)] 
+        [SerializeField] private TextMeshProUGUI _scoreLabel;
         [SerializeField] private TextMeshProUGUI _addedScoreLabel;
 
         private Action _playLevelCallback = null;

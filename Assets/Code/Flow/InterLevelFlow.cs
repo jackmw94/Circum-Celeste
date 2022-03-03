@@ -30,6 +30,7 @@ namespace Code.Flow
             public bool FirstTimeCompletingLevel = false;
             public bool LevelGotPerfect = false;
             public int AddedScore = 0;
+            public bool ShowingTutorial = false;
         }
 
         [SerializeField] private LevelProvider _levelProvider;
@@ -53,7 +54,8 @@ namespace Code.Flow
             yield return new WaitUntilWithTimeout(() => RemoteDataManager.Instance.IsLoggedIn, WaitForLoginTimeout);
             ShowInterLevelUI(new InterLevelFlowSetupData
             {
-                Transition = InterLevelTransition.Instant
+                Transition = InterLevelTransition.Instant,
+                ShowingTutorial = _levelProvider.GetCurrentLevel().LevelContext.IsTutorial
             });
         }
 
@@ -143,7 +145,7 @@ namespace Code.Flow
                 AppFeedbacks.Instance.TriggerComets();
             }
             
-            yield return _interLevelScreen.ShowHideScreen(true, interLevelFlowSetupData.Transition);
+            yield return _interLevelScreen.ShowHideScreen(true, interLevelFlowSetupData.Transition, interLevelFlowSetupData.ShowingTutorial);
 
             interLevelFlowSetupData.OnShown?.Invoke();
             _isTransitioning = false;
@@ -152,7 +154,7 @@ namespace Code.Flow
         private IEnumerator HideInterLevelUICoroutine(InterLevelTransition transition)
         {
             _isTransitioning = true;
-            yield return _interLevelScreen.ShowHideScreen(false, transition);
+            yield return _interLevelScreen.ShowHideScreen(false, transition, false);
             yield return HideOverlayCoroutine(false);
             _isTransitioning = false;
         }
