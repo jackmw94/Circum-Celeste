@@ -119,7 +119,7 @@ namespace Code.Level.Player
                 .LevelLayout
                 .ToDictionary(layout => layout.name, layout => layout);
 
-            PlayerScoreHelper.PlayerScore playerScore = PlayerScoreHelper.GetPlayerScore(levelLayoutsByName, _levelStats, _challengeData, ChallengeScreen.CurrentWeekIndex);
+            PlayerScoreHelper.PlayerScore playerScore = PlayerScoreHelper.GetPlayerScore(levelLayoutsByName, _levelStats, _challengeData, ChallengeScreen.WeekIndex);
             
             _cachedLevelScores = playerScore.LevelScores.ToDictionary(levelScore => levelScore.LevelName, levelScore => levelScore.Score);
             _cachedTotalScore = playerScore.TotalScore;

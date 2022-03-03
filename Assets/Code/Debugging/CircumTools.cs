@@ -137,9 +137,13 @@ namespace Code.Debugging
             }));
             
 #if CIRCUM_LOGGING
-            Debug.LogWarning("Circum logging is still enabled. Don't want this for a published build");
+            Debug.LogError("Circum logging is still enabled. Don't want this for a published build");
 #endif
             
+#if CIRCUM_DEBUG
+            Debug.LogError("Debug symbol is defined. This build should not be submitted to app stores");
+#endif
+
             Debug.Log("--- Validation complete ---");
         }
 

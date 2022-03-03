@@ -90,6 +90,7 @@ namespace Code.Level.Player
         public void ResetChallengeAttempts()
         {
             AttemptData.AttemptCount = 0;
+            ChallengeScores.Clear();
             Save(this);
         }
     }

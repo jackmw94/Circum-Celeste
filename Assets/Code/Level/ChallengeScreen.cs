@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using Code.Core;
+using Code.Debugging;
 using Code.Level.Player;
 using Code.UI;
 using Lean.Localization;
@@ -33,11 +34,28 @@ namespace Code.Level
         [SerializeField] private Color _playButtonDefaultTextColour;
         [SerializeField] private Color _playButtonNoAttemptsColour;
         [SerializeField] private PulseTextColour _pulseTextColour;
+        [Space(30)]
+        [SerializeField] private bool _useDebugWeekIndex = false;
+        [SerializeField] private int _debugWeekIndex = 2;
 
         private bool _anyAttemptsRemaining = false;
         private ChallengeLevel _currentChallengeLevel = null;
-        public static int CurrentDayIndex => (DateTime.Now - DayZero).Days;
-        public static int CurrentWeekIndex => CurrentDayIndex / 7;
+        private int _cachedWeekIndex;
+        
+        private static int CurrentDayIndex => (DateTime.Now - DayZero).Days;
+        public static int WeekIndex
+        {
+            get
+            {
+#if CIRCUM_DEBUG
+                ChallengeScreen challengeScreen = GetPanel<ChallengeScreen>();
+                return challengeScreen._useDebugWeekIndex ? challengeScreen._debugWeekIndex : CurrentWeekIndexInternal;
+#else
+                return CurrentWeekIndexInternal;
+#endif
+            }
+        }
+        private static int CurrentWeekIndexInternal => CurrentDayIndex / 7;
 
         protected override void InternalAwake()
         {
@@ -79,8 +97,9 @@ namespace Code.Level
             }
 
             _playButton.interactable = false;
+            _cachedWeekIndex = WeekIndex;
             
-            ChallengeLevel.RequestChallengeLevel(CurrentWeekIndex, challengeLevel => { SetupChallengeScreenInternal(challengeLevel, challengeData); });
+            ChallengeLevel.RequestChallengeLevel(WeekIndex, challengeLevel => { SetupChallengeScreenInternal(challengeLevel, challengeData); });
         }
 
         private void SetupChallengeScreenInternal(ChallengeLevel challengeLevel, ChallengeData challengeData)
@@ -92,11 +111,11 @@ namespace Code.Level
             string attemptsRemainingTranslation = LeanLocalization.GetTranslationText(_attemptsRemainingTranslation);
             _attemptsRemainingLabel.text = string.Format(attemptsRemainingTranslation, attemptsRemaining);
 
-            int score = challengeData.ChallengeScores.FirstOrDefault(p => p.WeekIndex == CurrentWeekIndex)?.Score ?? 0;
+            int score = challengeData.ChallengeScores.FirstOrDefault(p => p.WeekIndex == WeekIndex)?.Score ?? 0;
             string scoreTranslation = LeanLocalization.GetTranslationText(_challengeScoreTranslation);
             _scoreLabel.text = string.Format(scoreTranslation, score, _currentChallengeLevel.Points);
 
-            int daysRemaining = 6 - CurrentDayIndex + CurrentWeekIndex * 7;
+            int daysRemaining = 6 - CurrentDayIndex + WeekIndex * 7;
             string daysRemainingTranslation = LeanLocalization.GetTranslationText(_daysRemainingTranslation);
             _daysRemainingLabel.text = string.Format(daysRemainingTranslation, daysRemaining);
 
@@ -139,5 +158,20 @@ namespace Code.Level
             _levelManager.ExitLevel();
             SetupChallengeScreenInternal(_currentChallengeLevel, challengeData);
         }
+        
+#if CIRCUM_DEBUG
+        public void SetDebugChallengeWeek(bool useDebugWeekIndex, bool setDebugWeekIndexToCurrent, int weekIndexOffset = 0)
+        {
+            _useDebugWeekIndex = useDebugWeekIndex;
+            if (setDebugWeekIndexToCurrent)
+            {
+                _debugWeekIndex = CurrentWeekIndexInternal;
+            }
+            else
+            {
+                _debugWeekIndex += weekIndexOffset;
+            }
+        }
+#endif
     }
 }

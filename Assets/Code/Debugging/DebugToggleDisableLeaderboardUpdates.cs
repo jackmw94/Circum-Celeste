@@ -28,7 +28,6 @@ namespace Code.Debugging
 
         private void UpdateLabel()
         {
-            
             _buttonLabel.text = $"{(PersistentDataManager.Instance.Options.DisableLeaderboardUpdates ? "Enable" : "Disable")} leaderboards update";
         }
         
