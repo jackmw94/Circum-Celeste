@@ -157,7 +157,7 @@ namespace Code.Level
         protected void LevelCompleted()
         {
             CircumDebug.Assert(IsStarted, "Level has been completed before it's started? What's the deal with that..?");
-            CircumDebug.Log($"-*- LEVEL {name} COMPLETED! -*-");
+            CircumDebug.Log($"-*- LEVEL {name} COMPLETED! -*- (time: {_levelRecorder.LevelTime})");
             
             ApplyLevelElementFunction(p => p.LevelFinished());
             

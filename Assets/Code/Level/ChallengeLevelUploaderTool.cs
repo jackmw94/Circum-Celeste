@@ -30,7 +30,7 @@ namespace Code.Level
                     }, 
                     result =>
                     {
-                        Debug.Log($"Set title data for {challengeLevel.LevelName} at week {challengeLevel.WeekIndex}");
+                        Debug.Log($"Set title data for {challengeLevel.LevelName} at week {challengeLevel.WeekIndex}. {titleDataKey}");
                     }, error => { Debug.LogError(error.ErrorMessage); });
             }
 #else
