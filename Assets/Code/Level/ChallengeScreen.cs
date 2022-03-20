@@ -87,7 +87,8 @@ namespace Code.Level
 
         private IEnumerator SetupOnceLoggedIn()
         {
-            yield return new WaitUntilWithTimeout(() => RemoteDataManager.Instance.IsLoggedIn, 5f);
+            SetupChallengeScreenInternal(false, null, null);
+            yield return new WaitUntil(() => RemoteDataManager.Instance.IsLoggedIn);
             SetupChallengeScreen();
         }
 
