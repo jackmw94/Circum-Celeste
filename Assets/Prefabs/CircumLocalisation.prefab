@@ -49,7 +49,7 @@ MonoBehaviour:
     Text: 'Can you complete this week''s challenge level? '
     Object: {fileID: 0}
   - Language: German
-    Text: "K\xF6nnen Sie das Herausforderungslevel dieser Woche abschlie\xDFen?"
+    Text: "Kannst du das Herausforderungslevel dieser Woche abschlie\xDFen?"
     Object: {fileID: 0}
   - Language: French
     Text: "Pouvez-vous terminer le niveau de d\xE9fi de cette semaine\_?"
@@ -316,22 +316,23 @@ MonoBehaviour:
     Text: Global Level Leaderboard
     Object: {fileID: 0}
   - Language: German
-    Text: GlobalRankings
+    Text: Bestenliste auf globaler Ebene
     Object: {fileID: 0}
   - Language: French
-    Text: GlobalRankings
+    Text: Classement au niveau mondial
     Object: {fileID: 0}
   - Language: Italian
-    Text: GlobalRankings
+    Text: Classifica di livello globale
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: GlobalRankings
+    Text: "Tabela de classifica\xE7\xE3o de n\xEDvel global"
     Object: {fileID: 0}
   - Language: Russian
-    Text: GlobalRankings
+    Text: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
+      \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u0443\u0440\u043E\u0432\u043D\u044F"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: GlobalRankings
+    Text: "Tabla de clasificaci\xF3n de nivel global"
     Object: {fileID: 0}
 --- !u!1 &1062602618
 GameObject:
@@ -466,6 +467,151 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Tabla de clasificaci\xF3n mundial"
     Object: {fileID: 0}
+--- !u!1 &1397107694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1397107695}
+  - component: {fileID: 1397107696}
+  m_Layer: 0
+  m_Name: ErrorNoLeaderboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1397107695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397107694}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 92
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1397107696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397107694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Could not get leaderboard.\n\n\nCheck your internet connection!
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Rangliste konnte nicht abgerufen werden.\\n\\n\\n\xDCberpr\xFCfen Sie
+      Ihre Internetverbindung!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Impossible d'obtenir le classement.\\n\\n\\nV\xE9rifiez votre connexion
+      Internet\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Impossibile ottenere la classifica.\n\n\nControlla la tua connessione Internet!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o foi poss\xEDvel obter o placar.\\n\\n\\nVerifique sua conex\xE3o
+      com a Internet!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+      \u0442\u0430\u0431\u043B\u0438\u0446\u0443 \u043B\u0438\u0434\u0435\u0440\u043E\u0432.\\n\\n\\n\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435
+      \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043A \u0418\u043D\u0442\u0435\u0440\u043D\u0435\u0442\u0443!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "No se pudo obtener la clasificaci\xF3n.\\n\\n\\n\xA1Compruebe su conexi\xF3n
+      a Internet!"
+    Object: {fileID: 0}
+--- !u!1 &1398462225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398462226}
+  - component: {fileID: 1398462227}
+  m_Layer: 0
+  m_Name: ErrorChallengeLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1398462226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398462225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 91
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1398462227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398462225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Could not get challenge level.\n\n\nCheck your internet connection!
+    Object: {fileID: 0}
+  - Language: German
+    Text: "Herausforderungsstufe konnte nicht erreicht werden.\\n\\n\\n\xDCberpr\xFCfen
+      Sie Ihre Internetverbindung!"
+    Object: {fileID: 0}
+  - Language: French
+    Text: "Impossible d'obtenir le niveau de d\xE9fi.\\n\\n\\nV\xE9rifiez votre connexion
+      Internet\_!"
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Impossibile ottenere il livello di sfida.\n\n\nControlla la tua connessione
+      Internet!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "N\xE3o foi poss\xEDvel obter o n\xEDvel de desafio.\\n\\n\\nVerifique
+      sua conex\xE3o com a Internet!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C
+      \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u044F.\\n\\n\\n\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435
+      \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435 \u043A \u0418\u043D\u0442\u0435\u0440\u043D\u0435\u0442\u0443!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "No se pudo obtener el nivel de desaf\xEDo.\\n\\n\\n\xA1Compruebe su conexi\xF3n
+      a Internet!"
+    Object: {fileID: 0}
 --- !u!1 &1507196758
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,13 +678,80 @@ MonoBehaviour:
       {0}/{1}'
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Pontua\xE7\xE3o atual\r\n{0}/{1}"
+    Text: "Pontua\xE7\xE3o atual\n{0}/{1}"
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0447\u0435\u0442\r\n{0}/{1}"
+    Text: "\u0422\u0435\u043A\u0443\u0449\u0438\u0439 \u0441\u0447\u0435\u0442\n{0}/{1}"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Puntuaci\xF3n actual\r\n{0}/{1}"
+    Text: "Puntuaci\xF3n actual\n{0}/{1}"
+    Object: {fileID: 0}
+--- !u!1 &1510964098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510964099}
+  - component: {fileID: 1510964100}
+  m_Layer: 0
+  m_Name: Try again tomorrow!
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510964099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510964098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 90
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1510964100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510964098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 0
+  entries:
+  - Language: English
+    Text: Try again tomorrow!
+    Object: {fileID: 0}
+  - Language: German
+    Text: Versuchen Sie es morgen erneut!
+    Object: {fileID: 0}
+  - Language: French
+    Text: Essaye encore demain!
+    Object: {fileID: 0}
+  - Language: Italian
+    Text: Riprova domani!
+    Object: {fileID: 0}
+  - Language: Portuguese
+    Text: "Tente novamente amanh\xE3!"
+    Object: {fileID: 0}
+  - Language: Russian
+    Text: "\u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u0441\u043D\u043E\u0432\u0430
+      \u0437\u0430\u0432\u0442\u0440\u0430!"
+    Object: {fileID: 0}
+  - Language: Spanish
+    Text: "\xA1Trata de nuevo ma\xF1ana!"
     Object: {fileID: 0}
 --- !u!1 &1547627700
 GameObject:
@@ -805,22 +1018,31 @@ MonoBehaviour:
       taking damage. '
     Object: {fileID: 0}
   - Language: German
-    Text: 'Toll! '
+    Text: "Toll! Du erh\xE4ltst Troph\xE4en, wenn du Levels schnell abschlie\xDFt
+      oder ohne Schaden zu nehmen."
     Object: {fileID: 0}
   - Language: French
-    Text: 'Super! '
+    Text: "G\xE9nial! Vous recevrez des troph\xE9es si vous terminez les niveaux
+      rapidement ou sans subir de d\xE9g\xE2ts."
     Object: {fileID: 0}
   - Language: Italian
-    Text: 'Grande! '
+    Text: Grande! Ti verranno assegnati dei trofei se completi i livelli rapidamente
+      o senza subire danni.
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: 'Excelente! '
+    Text: "Excelente! Voc\xEA receber\xE1 trof\xE9us se completar os n\xEDveis rapidamente
+      ou sem sofrer danos."
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0417\u0434\u043E\u0440\u043E\u0432\u043E! "
+    Text: "\u0417\u0434\u043E\u0440\u043E\u0432\u043E! \u0412\u044B \u0431\u0443\u0434\u0435\u0442\u0435
+      \u043D\u0430\u0433\u0440\u0430\u0436\u0434\u0435\u043D\u044B \u0442\u0440\u043E\u0444\u0435\u044F\u043C\u0438,
+      \u0435\u0441\u043B\u0438 \u043F\u0440\u043E\u0439\u0434\u0435\u0442\u0435 \u0443\u0440\u043E\u0432\u043D\u0438
+      \u0431\u044B\u0441\u0442\u0440\u043E \u0438\u043B\u0438 \u0431\u0435\u0437
+      \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u0439."
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xA1Estupendo! "
+    Text: "\xA1Genial! Recibir\xE1s trofeos si completas los niveles r\xE1pidamente
+      o sin sufrir da\xF1os."
     Object: {fileID: 0}
 --- !u!1 &5243345529410765955
 GameObject:
@@ -1087,24 +1309,24 @@ MonoBehaviour:
     Text: Move in circles to keep the orbiter revolving or you will collide
     Object: {fileID: 0}
   - Language: German
-    Text: Bewegen Sie sich im Kreis, damit sich der Orbiter dreht oder Sie kollidieren
+    Text: Bewegen Sie sich im Kreis, um den Orbiter in Rotation zu halten, oder Sie
+      werden kollidieren
     Object: {fileID: 0}
   - Language: French
-    Text: "D\xE9placez-vous en rond pour que l'orbiteur continue de tourner ou vous
-      entrerez en collision"
+    Text: "D\xE9placez-vous en cercles pour maintenir la rotation de l'orbiteur ou
+      vous entrerez en collision"
     Object: {fileID: 0}
   - Language: Italian
-    Text: Muoviti in cerchio per mantenere la rotazione dell'orbiter o ti scontrerai
+    Text: Muoviti in cerchio per mantenere l'orbiter in rotazione o ti scontrerai
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Mova-se em c\xEDrculos para manter a \xF3rbita girando ou voc\xEA colidir\xE1"
+    Text: "Mova-se em c\xEDrculos para manter o orbitador girando ou voc\xEA colidir\xE1"
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0414\u0432\u0438\u0433\u0430\u0439\u0442\u0435\u0441\u044C \u043A\u0440\u0443\u0433\u0430\u043C\u0438,
-      \u0447\u0442\u043E\u0431\u044B \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439
-      \u0430\u043F\u043F\u0430\u0440\u0430\u0442 \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u043B
-      \u0432\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F, \u0438\u043D\u0430\u0447\u0435
-      \u0432\u044B \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C"
+    Text: "\u0414\u0432\u0438\u0433\u0430\u0439\u0442\u0435\u0441\u044C \u043F\u043E
+      \u043A\u0440\u0443\u0433\u0443, \u0447\u0442\u043E\u0431\u044B \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442 \u0432\u0440\u0430\u0449\u0430\u043B\u0441\u044F,
+      \u0438\u043D\u0430\u0447\u0435 \u0432\u044B \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C"
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Mu\xE9vete en c\xEDrculos para mantener el orbitador girando o chocar\xE1s"
@@ -1299,7 +1521,7 @@ MonoBehaviour:
     Text: Recommencer le niveau
     Object: {fileID: 0}
   - Language: Italian
-    Text: Riavvia livello
+    Text: Riavvia il livello
     Object: {fileID: 0}
   - Language: Korean
     Text: "\uC7AC\uC2DC\uC791 \uB808\uBCA8"
@@ -1579,10 +1801,10 @@ MonoBehaviour:
     Text: Masquer le temps de niveau
     Object: {fileID: 0}
   - Language: Italian
-    Text: Nascondi livello tempo
+    Text: Nascondi tempo di livello
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Ocultar N\xEDvel de Tempo"
+    Text: "Ocultar tempo do n\xEDvel"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0421\u043A\u0440\u044B\u0442\u044C \u0432\u0440\u0435\u043C\u044F \u0443\u0440\u043E\u0432\u043D\u044F"
@@ -1639,7 +1861,7 @@ MonoBehaviour:
     Text: Your stats have been reset
     Object: {fileID: 0}
   - Language: German
-    Text: "Deine Statistiken wurden zur\xFCckgesetzt"
+    Text: "Ihre Statistiken wurden zur\xFCckgesetzt"
     Object: {fileID: 0}
   - Language: French
     Text: "Vos statistiques ont \xE9t\xE9 r\xE9initialis\xE9es"
@@ -1655,7 +1877,7 @@ MonoBehaviour:
       \u0431\u044B\u043B\u0430 \u0441\u0431\u0440\u043E\u0448\u0435\u043D\u0430"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Tus estad\xEDsticas se han restablecido"
+    Text: "Se han restablecido tus estad\xEDsticas."
     Object: {fileID: 0}
 --- !u!1 &5243345529755441170
 GameObject:
@@ -1715,7 +1937,7 @@ MonoBehaviour:
     Text: Tieni premuto il pulsante di accensione
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Segure o bot\xE3o liga / desliga"
+    Text: "Segure o bot\xE3o de energia"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0423\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0439\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443
@@ -1773,22 +1995,23 @@ MonoBehaviour:
     Text: Friends Level Leaderboard
     Object: {fileID: 0}
   - Language: German
-    Text: Level-Rankings
+    Text: Freunde-Level-Bestenliste
     Object: {fileID: 0}
   - Language: French
-    Text: Classements de niveau
+    Text: Classement du niveau d'amis
     Object: {fileID: 0}
   - Language: Italian
-    Text: Classifiche di livello
+    Text: Classifica livello amici
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Classifica\xE7\xF5es de n\xEDvel"
+    Text: "Tabela de classifica\xE7\xE3o do n\xEDvel de amigos"
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0420\u0435\u0439\u0442\u0438\u043D\u0433 \u0443\u0440\u043E\u0432\u043D\u0435\u0439"
+    Text: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
+      \u0443\u0440\u043E\u0432\u043D\u044F \u0434\u0440\u0443\u0437\u0435\u0439"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: Clasificaciones de nivel
+    Text: "Tabla de clasificaci\xF3n de nivel de amigos"
     Object: {fileID: 0}
 --- !u!1 &5243345529765600333
 GameObject:
@@ -1854,7 +2077,7 @@ MonoBehaviour:
     Text: "\u041D\u0430\u0437\u0430\u0434"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "atr\xE1s"
+    Text: "Atr\xE1s"
     Object: {fileID: 0}
 --- !u!1 &5243345529819364706
 GameObject:
@@ -2037,7 +2260,7 @@ MonoBehaviour:
     Text: Ok
     Object: {fileID: 0}
   - Language: German
-    Text: In Ordnung
+    Text: OK
     Object: {fileID: 0}
   - Language: French
     Text: D'accord
@@ -2049,7 +2272,7 @@ MonoBehaviour:
     Text: OK
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0412 \u043F\u043E\u0440\u044F\u0434\u043A\u0435"
+    Text: Ok
     Object: {fileID: 0}
   - Language: Spanish
     Text: OK
@@ -2247,10 +2470,10 @@ MonoBehaviour:
     Text: Alto
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0412\u044B\u0441\u043E\u043A\u0438\u0439"
+    Text: "\u0412\u044B\u0441\u043E\u043A\u043E"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: Alto
+    Text: Elevado
     Object: {fileID: 0}
 --- !u!1 &5243345529909095941
 GameObject:
@@ -2436,26 +2659,34 @@ MonoBehaviour:
 
 
       Here''s
-      the download link: https://bit.ly/circum_ios'
+      the download link: https://appurl.io/8pLXCYDYhI'
     Object: {fileID: 0}
   - Language: German
-    Text: "F\xFCge mich als Freund bei Circum Celeste hinzu! "
+    Text: "F\xFCge mich als Freund bei Circum Celeste hinzu! Meine Freunde-ID ist:
+      {0}\r\n\r\nHier ist der Download-Link: https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
   - Language: French
-    Text: 'Ajoutez-moi comme ami sur Circum Celeste ! '
+    Text: "Ajoutez-moi comme ami sur Circum Celeste ! Mon identifiant d'ami est\_:
+      {0}\r\n\r\nVoici le lien de t\xE9l\xE9chargement : https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
   - Language: Italian
-    Text: 'Aggiungimi come amico su Circum Celeste! '
+    Text: "Aggiungimi come amico su Circum Celeste! Il mio ID amico \xE8: {0}\r\n\r\nEcco
+      il link per il download: https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: 'Adicione-me como amigo no Circum Celeste! '
+    Text: "Adicione-me como amigo no Circum Celeste! Meu ID de amigo \xE9: {0}\r\n\r\nAqui
+      est\xE1 o link para download: https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0414\u043E\u0431\u0430\u0432\u044C\u0442\u0435 \u043C\u0435\u043D\u044F
-      \u0432 \u0434\u0440\u0443\u0437\u044C\u044F \u043D\u0430 Circum Celeste! "
+      \u0432 \u0434\u0440\u0443\u0437\u044C\u044F \u043D\u0430 Circum Celeste! \u0418\u0434\u0435\u043D\u0442\u0438\u0444\u0438\u043A\u0430\u0442\u043E\u0440
+      \u043C\u043E\u0435\u0433\u043E \u0434\u0440\u0443\u0433\u0430: {0}\r\n\r\n\u0412\u043E\u0442
+      \u0441\u0441\u044B\u043B\u043A\u0430 \u0434\u043B\u044F \u0441\u043A\u0430\u0447\u0438\u0432\u0430\u043D\u0438\u044F:
+      https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xA1Agr\xE9game como amigo en Circum Celeste! "
+    Text: "\xA1Agr\xE9game como amigo en Circum Celeste! El ID de mi amigo es: {0}\r\n\r\nAqu\xED
+      est\xE1 el enlace de descarga: https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
 --- !u!1 &5243345529954017995
 GameObject:
@@ -2522,7 +2753,7 @@ MonoBehaviour:
   - Language: Russian
     Text: "\u0420\u0430\u0437\u0431\u0435\u0439\u0442\u0435 \u0437\u0432\u0435\u0437\u0434\u043D\u044B\u0435
       \u0441\u0443\u0449\u043D\u043E\u0441\u0442\u0438 \u0441\u0432\u043E\u0438\u043C
-      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u043C \u043A\u043E\u0440\u0430\u0431\u043B\u0435\u043C,
+      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u043C \u0430\u043F\u043F\u0430\u0440\u0430\u0442\u043E\u043C,
       \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u043F\u0443\u0442\u044C
       \u043A \u043F\u043E\u0431\u0435\u0433\u0443."
     Object: {fileID: 0}
@@ -2915,7 +3146,7 @@ MonoBehaviour:
     Text: Add
     Object: {fileID: 0}
   - Language: German
-    Text: "Hinzuf\xFCgen"
+    Text: Addieren
     Object: {fileID: 0}
   - Language: French
     Text: Ajouter
@@ -2981,7 +3212,7 @@ MonoBehaviour:
     Text: Turn Feedbacks Off
     Object: {fileID: 0}
   - Language: German
-    Text: Feedbacks ausschalten
+    Text: Schalten Sie Feedbacks aus
     Object: {fileID: 0}
   - Language: French
     Text: "D\xE9sactiver les commentaires"
@@ -2990,7 +3221,7 @@ MonoBehaviour:
     Text: Disattiva i feedback
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Desligue os Feedbacks
+    Text: Desativar feedbacks
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u041E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432\u044B"
@@ -3471,7 +3702,7 @@ MonoBehaviour:
     Text: "N\xE4chste"
     Object: {fileID: 0}
   - Language: French
-    Text: Prochain
+    Text: Suivant
     Object: {fileID: 0}
   - Language: Italian
     Text: Prossimo
@@ -3483,7 +3714,7 @@ MonoBehaviour:
     Text: "\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "pr\xF3ximo"
+    Text: "Pr\xF3ximo"
     Object: {fileID: 0}
 --- !u!1 &5243345530344230008
 GameObject:
@@ -3537,13 +3768,13 @@ MonoBehaviour:
     Text: "\u30EA\u30D7\u30EC\u30A4\u3092\u898B\u308B"
     Object: {fileID: 0}
   - Language: German
-    Text: Wiedergabe ansehen
+    Text: Wiederholung ansehen
     Object: {fileID: 0}
   - Language: French
     Text: Regarder la rediffusion
     Object: {fileID: 0}
   - Language: Italian
-    Text: Guarda il replay
+    Text: Guarda Riproduci
     Object: {fileID: 0}
   - Language: Korean
     Text: "\uB2E4\uC2DC\uBCF4\uAE30 \uBCF4\uAE30"
@@ -3552,10 +3783,10 @@ MonoBehaviour:
     Text: "\u89C2\u770B\u91CD\u64AD"
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Assistir ao Replay
+    Text: Assistir Replay
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u041F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043E\u0432\u0442\u043E\u0440"
+    Text: "\u0421\u043C\u043E\u0442\u0440\u0435\u0442\u044C \u043F\u043E\u0432\u0442\u043E\u0440"
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Ver repetici\xF3n"
@@ -3624,7 +3855,7 @@ MonoBehaviour:
     Text: Jouer
     Object: {fileID: 0}
   - Language: Italian
-    Text: Giocare a
+    Text: Giocare
     Object: {fileID: 0}
   - Language: Korean
     Text: "\uB180\uB2E4"
@@ -3633,7 +3864,7 @@ MonoBehaviour:
     Text: "\u73A9"
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Toque
+    Text: Jogar
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0418\u0433\u0440\u0430\u0442\u044C"
@@ -3705,7 +3936,7 @@ MonoBehaviour:
     Text: Raggiungi la fuga per finire il livello
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "V\xE1 para a fuga para terminar o n\xEDvel"
+    Text: "Chegue \xE0 fuga para terminar o n\xEDvel"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0414\u043E\u0431\u0435\u0440\u0438\u0442\u0435\u0441\u044C \u0434\u043E
@@ -3963,7 +4194,7 @@ MonoBehaviour:
     Text: Turn Feedbacks On
     Object: {fileID: 0}
   - Language: German
-    Text: Schalten Sie Feedbacks ein
+    Text: Feedbacks einschalten
     Object: {fileID: 0}
   - Language: French
     Text: Activer les commentaires
@@ -3972,14 +4203,13 @@ MonoBehaviour:
     Text: Attiva i feedback
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Ativar Feedbacks
+    Text: Ativar feedbacks
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u0435 \u043E\u0431\u0440\u0430\u0442\u043D\u0443\u044E
-      \u0441\u0432\u044F\u0437\u044C"
+    Text: "\u0412\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432\u044B"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: Activar los comentarios
+    Text: Activar comentarios
     Object: {fileID: 0}
 --- !u!1 &5243345530547125992
 GameObject:
@@ -4099,10 +4329,10 @@ MonoBehaviour:
     Text: Levelzeit anzeigen
     Object: {fileID: 0}
   - Language: French
-    Text: Afficher l'heure du niveau
+    Text: Afficher le temps de niveau
     Object: {fileID: 0}
   - Language: Italian
-    Text: Mostra livello tempo
+    Text: Mostra tempo di livello
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "Mostrar tempo de n\xEDvel"
@@ -4172,7 +4402,7 @@ MonoBehaviour:
     Text: Basculer les commentaires
     Object: {fileID: 0}
   - Language: Italian
-    Text: Attiva/disattiva feedback
+    Text: Attiva/disattiva i feedback
     Object: {fileID: 0}
   - Language: Korean
     Text: "\uD1A0\uAE00 \uD53C\uB4DC\uBC31"
@@ -4181,7 +4411,7 @@ MonoBehaviour:
     Text: "\u5207\u6362\u53CD\u9988"
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Alternar Feedbacks
+    Text: "Alternar coment\xE1rios"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u041F\u0435\u0440\u0435\u043A\u043B\u044E\u0447\u0438\u0442\u044C \u043E\u0442\u0437\u044B\u0432\u044B"
@@ -4380,6 +4610,9 @@ Transform:
   - {fileID: 1547627701}
   - {fileID: 495871490}
   - {fileID: 1507196759}
+  - {fileID: 1510964099}
+  - {fileID: 1398462226}
+  - {fileID: 1397107695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4543,24 +4776,47 @@ MonoBehaviour:
       Keep it orbiting.'
     Object: {fileID: 0}
   - Language: German
-    Text: Der rosa Stern ist dein Orbiter.\n\n
+    Text: 'Der rosa Stern ist dein Orbiter.
+
+      
+
+      Es wird Ihnen helfen,
+      am Leben zu bleiben, aber es wird Sie auch verletzen, wenn Sie damit kollidieren.
+
+      
+
+      Halten
+      Sie es in der Umlaufbahn.'
     Object: {fileID: 0}
   - Language: French
-    Text: "L'\xE9toile rose est votre orbiteur.\\n\\n"
+    Text: "L'\xE9toile rose est votre orbiteur.\r\n\r\nCela vous aidera \xE0 rester
+      en vie, mais cela vous blessera \xE9galement si vous le heurtez.\r\n\r\nGardez-le
+      en orbite."
     Object: {fileID: 0}
   - Language: Italian
-    Text: "La stella rosa \xE8 il tuo orbiter.\\n\\n"
+    Text: "La stella rosa \xE8 il tuo orbiter.\r\n\r\nTi aiuter\xE0 a mantenerti
+      in vita, ma ti far\xE0 anche del male se ti scontrerai.\r\n\r\nMantienilo in
+      orbita."
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "A estrela rosa \xE9 o seu orbitador.\\n\\n"
+    Text: "A estrela rosa \xE9 o seu orbitador.\r\n\r\nIsso ajudar\xE1 a mant\xEA-lo
+      vivo, mas tamb\xE9m o machucar\xE1 se voc\xEA colidir com ele.\r\n\r\nMantenha-o
+      em \xF3rbita."
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0420\u043E\u0437\u043E\u0432\u0430\u044F \u0437\u0432\u0435\u0437\u0434\u0430
       \u2014 \u0432\u0430\u0448 \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439
-      \u0430\u043F\u043F\u0430\u0440\u0430\u0442.\\n\\n"
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442.\r\n\r\n\u042D\u0442\u043E \u043F\u043E\u043C\u043E\u0436\u0435\u0442
+      \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C \u0432\u0430\u043C \u0436\u0438\u0437\u043D\u044C,
+      \u043D\u043E \u0442\u0430\u043A\u0436\u0435 \u043F\u0440\u0438\u0447\u0438\u043D\u0438\u0442
+      \u0432\u0430\u043C \u0432\u0440\u0435\u0434, \u0435\u0441\u043B\u0438 \u0432\u044B
+      \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C \u0441 \u043D\u0438\u043C.\r\n\r\n\u0414\u0435\u0440\u0436\u0438\u0442\u0435
+      \u0435\u0433\u043E \u043D\u0430 \u043E\u0440\u0431\u0438\u0442\u0435."
     Object: {fileID: 0}
   - Language: Spanish
-    Text: La estrella rosa es tu orbitador.\n\n
+    Text: "La estrella rosa es tu orbitador.\r\n\r\nTe ayudar\xE1 a mantenerte con
+      vida, pero tambi\xE9n te har\xE1 da\xF1o si chocas con \xE9l.\r\n\r\nMantenlo
+      en \xF3rbita."
     Object: {fileID: 0}
 --- !u!1 &5243345530843757518
 GameObject:
@@ -4899,30 +5155,46 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: German
     Text: "Du kontrollierst den gelben Stern, der rosa \u201EOrbiter\u201C-Stern
-      ist gravitativ an dich gebunden.\\n\\n"
+      ist gravitativ an dich gebunden.\r\n\r\nDer Orbiter wird Sie besch\xE4digen,
+      wenn Sie kollidieren.\r\n\r\nVerwenden Sie den Orbiter, um stellare Entit\xE4ten
+      zu sammeln und schwarze L\xF6cher zu \xFCberbr\xFCcken."
     Object: {fileID: 0}
   - Language: French
-    Text: "Vous contr\xF4lez l'\xE9toile jaune, l'\xE9toile rose \\\"orbiteur\\\"
-      est gravitationnellement li\xE9e \xE0 vous.\\n\\n"
+    Text: "Vous contr\xF4lez l'\xE9toile jaune, l'\xE9toile rose \"orbiteur\" est
+      gravitationnellement li\xE9e \xE0 vous.\r\n\r\nL'orbiteur vous endommagera
+      si vous entrez en collision.\r\n\r\nUtilisez l'orbiteur pour collecter des
+      entit\xE9s stellaires et d\xE9river des trous noirs."
     Object: {fileID: 0}
   - Language: Italian
-    Text: "Tu controlli la stella gialla, la stella rosa \\\"orbitante\\\" \xE8 legata
-      gravitazionalmente a te.\\n\\n"
+    Text: "Tu controlli la stella gialla, la stella rosa \"orbitante\" \xE8 legata
+      gravitazionalmente a te.\r\n\r\nL'orbiter ti dannegger\xE0 in caso di collisione.\r\n\r\nUsa
+      l'orbiter per raccogliere entit\xE0 stellari e deviare i buchi neri."
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "Voc\xEA controla a estrela amarela, a estrela 'orbitante' rosa est\xE1
-      gravitacionalmente ligada a voc\xEA.\\n\\n"
+      gravitacionalmente ligada a voc\xEA.\r\n\r\nO orbiter ir\xE1 danific\xE1-lo
+      se voc\xEA colidir.\r\n\r\nUse o orbitador para coletar entidades estelares
+      e desviar de buracos negros."
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0412\u044B \u0443\u043F\u0440\u0430\u0432\u043B\u044F\u0435\u0442\u0435
       \u0436\u0435\u043B\u0442\u043E\u0439 \u0437\u0432\u0435\u0437\u0434\u043E\u0439,
       \u0440\u043E\u0437\u043E\u0432\u0430\u044F \u0437\u0432\u0435\u0437\u0434\u0430
       \xAB\u043E\u0440\u0431\u0438\u0442\u0430\u043B\xBB \u0433\u0440\u0430\u0432\u0438\u0442\u0430\u0446\u0438\u043E\u043D\u043D\u043E
-      \u0441\u0432\u044F\u0437\u0430\u043D\u0430 \u0441 \u0432\u0430\u043C\u0438.\\n\\n"
+      \u0441\u0432\u044F\u0437\u0430\u043D\u0430 \u0441 \u0432\u0430\u043C\u0438.\r\n\r\n\u041E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439
+      \u0430\u043F\u043F\u0430\u0440\u0430\u0442 \u043F\u043E\u0432\u0440\u0435\u0434\u0438\u0442
+      \u0432\u0430\u043C, \u0435\u0441\u043B\u0438 \u0432\u044B \u0441\u0442\u043E\u043B\u043A\u043D\u0435\u0442\u0435\u0441\u044C.\r\n\r\n\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0439\u0442\u0435
+      \u043E\u0440\u0431\u0438\u0442\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043F\u043F\u0430\u0440\u0430\u0442,
+      \u0447\u0442\u043E\u0431\u044B \u0441\u043E\u0431\u0438\u0440\u0430\u0442\u044C
+      \u0437\u0432\u0435\u0437\u0434\u043D\u044B\u0435 \u0441\u0443\u0449\u043D\u043E\u0441\u0442\u0438
+      \u0438 \u0448\u0443\u043D\u0442\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u0447\u0435\u0440\u043D\u044B\u0435
+      \u0434\u044B\u0440\u044B."
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "T\xFA controlas la estrella amarilla, la estrella rosa \\\"orbitadora\\\"
-      est\xE1 unida gravitacionalmente a ti.\\n\\n"
+    Text: "T\xFA controlas la estrella amarilla, la estrella rosa \"orbitadora\"
+      est\xE1 unida gravitacionalmente a ti.\r\n\r\nEl orbitador te da\xF1ar\xE1
+      si chocas.\r\n\r\nUsa el orbitador para recolectar entidades estelares y desviar
+      agujeros negros."
     Object: {fileID: 0}
 --- !u!1 &5243345530992673509
 GameObject:
@@ -5045,7 +5317,7 @@ MonoBehaviour:
     Text: "Voulez-vous vraiment r\xE9initialiser vos statistiques\_?"
     Object: {fileID: 0}
   - Language: Italian
-    Text: Sei sicuro di voler ripristinare le tue statistiche?
+    Text: Sei sicuro di voler azzerare le tue statistiche?
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "Tem certeza de que deseja redefinir suas estat\xEDsticas?"
@@ -5056,7 +5328,7 @@ MonoBehaviour:
       \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0443?"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xBFEst\xE1s seguro de que deseas restablecer tus estad\xEDsticas?"
+    Text: "\xBFSeguro que quieres restablecer tus estad\xEDsticas?"
     Object: {fileID: 0}
 --- !u!1 &5243345531006974138
 GameObject:
@@ -5431,7 +5703,7 @@ MonoBehaviour:
     Text: "[le joueur n'est pas connect\xE9]"
     Object: {fileID: 0}
   - Language: Italian
-    Text: "[il giocatore non \xE8 loggato]"
+    Text: '[il giocatore non ha effettuato l''accesso]'
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "[jogador n\xE3o est\xE1 logado]"
@@ -5647,7 +5919,7 @@ MonoBehaviour:
     Text: "\u041D\u0430\u0437\u0430\u0434 \u043A \u043C\u0435\u043D\u044E"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Volver al men\xFA"
+    Text: "Volver al Men\xFA"
     Object: {fileID: 0}
   - Language: Hindi
     Text: "\u092E\u0948\u0928\u094D\u092F\u0942 \u092E\u0947\u0902 \u0935\u093E\u092A\u0938"
@@ -6196,10 +6468,10 @@ MonoBehaviour:
     Text: Conseils de jeu
     Object: {fileID: 0}
   - Language: Italian
-    Text: Suggerimenti di gioco
+    Text: Suggerimenti per il gioco
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: Dicas de jogos
+    Text: Dicas de jogo
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0421\u043E\u0432\u0435\u0442\u044B \u043F\u043E \u0438\u0433\u0440\u0435"
@@ -6259,20 +6531,20 @@ MonoBehaviour:
     Text: "Orbit f\xFCr {LevelDuration} Sekunden"
     Object: {fileID: 0}
   - Language: French
-    Text: Orbiter pendant {LevelDuration} secondes
+    Text: "Orbite pendant {LevelDuration}\_secondes"
     Object: {fileID: 0}
   - Language: Italian
     Text: Orbita per {LevelDuration} secondi
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "\xD3rbita por {LevelDuration} segundos"
+    Text: Orbitar por {LevelDuration} segundos
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u041E\u0440\u0431\u0438\u0442\u0430 \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435
-      {LevelDuration} \u0441\u0435\u043A\u0443\u043D\u0434"
+      {LevelDuration}\_\u0441\u0435\u043A."
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xD3rbita durante {LevelDuration} segundos"
+    Text: Orbitar durante {LevelDuration} segundos
     Object: {fileID: 0}
 --- !u!1 &5243345531499946791
 GameObject:
