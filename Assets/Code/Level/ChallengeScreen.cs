@@ -9,6 +9,7 @@ using Lean.Localization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityExtras.Optional;
 using UIPanel = UnityCommonFeatures.UIPanel;
 
 namespace Code.Level
@@ -20,6 +21,9 @@ namespace Code.Level
         private static readonly DateTime DayZero = new DateTime(2022, 2, 14, 0, 0, 0);
 
         [SerializeField] private LevelManager _levelManager;
+        [Space(15)]
+        [SerializeField] private GameObject _levelContentRoot;
+        [SerializeField] private GameObject _noLevelContentRoot;
         [Space(15)] 
         [SerializeField] private TextMeshProUGUI _levelNameLabel;
         [SerializeField] private TextMeshProUGUI _daysRemainingLabel;
@@ -83,7 +87,7 @@ namespace Code.Level
 
         private IEnumerator SetupOnceLoggedIn()
         {
-            yield return new WaitUntil(() => RemoteDataManager.Instance.IsLoggedIn);
+            yield return new WaitUntilWithTimeout(() => RemoteDataManager.Instance.IsLoggedIn, 5f);
             SetupChallengeScreen();
         }
 
@@ -92,7 +96,7 @@ namespace Code.Level
         {
             ChallengeData challengeData = PersistentDataManager.Instance.ChallengeData;
             bool attemptDataIsCurrent = challengeData.AttemptData.DayIndex == CurrentDayIndex;
-
+            
             if (!attemptDataIsCurrent)
             {
                 challengeData.AttemptData = new ChallengeData.ChallengeAttemptData
@@ -105,11 +109,21 @@ namespace Code.Level
             _playButton.interactable = false;
             _cachedWeekIndex = WeekIndex;
             
-            ChallengeLevel.RequestChallengeLevel(WeekIndex, challengeLevel => { SetupChallengeScreenInternal(challengeLevel, challengeData); });
+            ChallengeLevel.RequestChallengeLevel(WeekIndex, (success, challengeLevel) => { SetupChallengeScreenInternal(success, challengeLevel, challengeData); });
         }
 
-        private void SetupChallengeScreenInternal(ChallengeLevel challengeLevel, ChallengeData challengeData)
+        private void SetupChallengeScreenInternal(bool success, ChallengeLevel challengeLevel, ChallengeData challengeData)
         {
+            if (!success)
+            {
+                _noLevelContentRoot.SetActive(true);
+                _levelContentRoot.SetActive(false);
+                return;
+            }
+
+            _levelContentRoot.SetActive(true);
+            _noLevelContentRoot.SetActive(false);
+
             _currentChallengeLevel = challengeLevel;
             _levelNameLabel.text = challengeLevel.LevelName;
 
@@ -146,7 +160,7 @@ namespace Code.Level
         private IEnumerator UpdateScreenAfterDelay(float delay)
         {
             yield return new WaitForSeconds(delay);
-            SetupChallengeScreenInternal(_currentChallengeLevel, PersistentDataManager.Instance.ChallengeData);
+            SetupChallengeScreenInternal(true, _currentChallengeLevel, PersistentDataManager.Instance.ChallengeData);
         }
 
         private void OnChallengeCompleted(LevelResult levelResult)
@@ -162,7 +176,7 @@ namespace Code.Level
             }
             
             _levelManager.ExitLevel();
-            SetupChallengeScreenInternal(_currentChallengeLevel, challengeData);
+            SetupChallengeScreenInternal(true, _currentChallengeLevel, challengeData);
         }
 
         private IEnumerator CheckForChallengeWeekIncremented()

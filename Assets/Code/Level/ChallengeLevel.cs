@@ -40,8 +40,15 @@ namespace Code.Level
         public int WeekIndex => _challengeConfiguration.WeekIndex;
         public int AttemptsRemaining(int attemptsUsed) => _challengeConfiguration.DailyAttempts - attemptsUsed;
         
-        public static void RequestChallengeLevel(int weekIndex, Action<ChallengeLevel> challengeLevelCallback)
+        public static void RequestChallengeLevel(int weekIndex, Action<bool, ChallengeLevel> challengeLevelCallback)
         {
+            if (!RemoteDataManager.Instance.IsLoggedIn)
+            {
+                Debug.LogError("Not logged in so not updating challenge level");
+                challengeLevelCallback(false, null);
+                return;
+            }
+            
             string challengeKey = PersistentDataKeys.ChallengeName(weekIndex);
             PlayFabClientAPI.GetTitleData(new GetTitleDataRequest
             {
@@ -64,11 +71,11 @@ namespace Code.Level
                 challengeLevel._levelLayout = levelLayout;
                 challengeLevel._challengeConfiguration = configuration;
 
-                challengeLevelCallback(challengeLevel);
+                challengeLevelCallback(true, challengeLevel);
             }, error =>
             {
                 CircumDebug.LogError(error.ErrorMessage);
-                challengeLevelCallback(null);
+                challengeLevelCallback(false, null);
             });
         }
 

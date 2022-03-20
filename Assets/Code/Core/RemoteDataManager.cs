@@ -139,6 +139,7 @@ namespace Code.Core
             }, error =>
             {
                 CircumDebug.LogError(error.ErrorMessage);
+                LeaderboardUpdated();
             });
         }
         

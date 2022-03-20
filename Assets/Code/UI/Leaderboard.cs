@@ -17,6 +17,9 @@ namespace Code.UI
         [SerializeField] private Transform _scrollRectContent;
         [SerializeField] private GameObject _leaderboardEntryPrefab;
         [Space(15)]
+        [SerializeField] private GameObject _content;
+        [SerializeField] private GameObject _error;
+        [Space(15)]
         [SerializeField] private TextMeshProUGUI _yourPositionLabel;
         [SerializeField, LeanTranslationName] private string _yourPositionLocalisationTerm;
 
@@ -43,6 +46,14 @@ namespace Code.UI
         {
             _scrollRectContent.DestroyAllChildren();
 
+            UpdateYourPosition("-");
+
+            if (!RemoteDataManager.Instance.IsLoggedIn)
+            {
+                ShowContentOrError(contentOn: false);
+                yield break;
+            }
+
             yield return new WaitForSeconds(UpdateLeaderboardDelay);
             
             PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
@@ -63,7 +74,12 @@ namespace Code.UI
                     
                     leaderboardEntry.SetupLeaderboardEntry(entryData.Position + 1, entryData.DisplayName, entryData.StatValue);
                 }
-            }, Debug.LogError);
+                ShowContentOrError(contentOn: true);
+            }, error =>
+            {
+                Debug.LogError(error);
+                ShowContentOrError(contentOn: false);
+            });
             
             PlayFabClientAPI.GetLeaderboardAroundPlayer(new GetLeaderboardAroundPlayerRequest
             {
@@ -72,10 +88,22 @@ namespace Code.UI
                 MaxResultsCount = 1
             }, result =>
             {
-                string yourPositionMessage = LeanLocalization.GetTranslationText(_yourPositionLocalisationTerm);
-                yourPositionMessage = string.Format(yourPositionMessage, $"#{result.Leaderboard[0].Position + 1}");
-                _yourPositionLabel.text = yourPositionMessage;
+                int position = result.Leaderboard[0].Position + 1;
+                UpdateYourPosition($"#{position}");
             }, Debug.LogError);
+        }
+
+        private void ShowContentOrError(bool contentOn)
+        {
+            _content.SetActive(contentOn);
+            _error.SetActive(!contentOn);
+        }
+
+        private void UpdateYourPosition(string position)
+        {
+            string yourPositionMessage = LeanLocalization.GetTranslationText(_yourPositionLocalisationTerm);
+            yourPositionMessage = string.Format(yourPositionMessage, position);
+            _yourPositionLabel.text = yourPositionMessage;
         }
     }
 }
