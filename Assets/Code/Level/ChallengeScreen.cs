@@ -191,6 +191,8 @@ namespace Code.Level
             {
                 _debugWeekIndex += weekIndexOffset;
             }
+
+            SetupChallengeScreen();
         }
 #endif
     }
