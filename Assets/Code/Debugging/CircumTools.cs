@@ -1,14 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Code.Level.Player;
 using Code.UI;
 using Lean.Localization;
 using UnityEditor;
 using UnityExtras.Core;
+using Object = UnityEngine.Object;
 #if UNITY_EDITOR
+using System;
 using Code.Core;
 using UnityEngine;
 using Lean.Localization.Editor;
+using TMPro;
+
 #endif
 
 namespace Code.Debugging
@@ -16,6 +21,19 @@ namespace Code.Debugging
     public static class CircumTools
     {
 #if UNITY_EDITOR
+        [MenuItem("Circum/Print font assets")]
+        public static void PrintFontAssets()
+        {
+            Object selectedObject = Selection.activeObject;
+            if (!(selectedObject is TMP_FontAsset fontAsset))
+            {
+                Debug.LogError("Select a font asset to run this function");
+                return;
+            }
+
+            Debug.Log(fontAsset.characterTable.Select(p => Convert.ToChar(p.unicode)).JoinToString("\n"));
+        }
+
         [MenuItem("Circum/Setup recording view")]
         public static void SetupRecordingView()
         {
@@ -23,14 +41,14 @@ namespace Code.Debugging
             GameObject cameraPosRoot = new GameObject("CameraPositionRoot", typeof(PositionBetweenTransforms));
             PositionBetweenTransforms positionBetweenTransforms = cameraPosRoot.GetComponent<PositionBetweenTransforms>();
             positionBetweenTransforms.Setup(player.transform, player.OrbiterTransform);
-            
+
             Transform child = new GameObject("Offset").transform;
             child.SetParent(cameraPosRoot.transform);
             child.localPosition = Vector3.up * 3.5f;
-            
+
             Camera main = Camera.main;
             main.orthographicSize = 3;
-            
+
             Transform camera = main.transform;
             Transform cameraRoot = camera.root;
             cameraRoot.SetParent(child);
@@ -42,49 +60,55 @@ namespace Code.Debugging
             GameObject.Find("GameUI").SetActive(false);
             GameObject.Find("AppUI").SetActive(false);
         }
-        
+
         [MenuItem("Circum/Language/English")]
         public static void ChangeLanguageToEnglish()
         {
             LeanLocalization.SetCurrentLanguageAll("English");
         }
-        
+
         [MenuItem("Circum/Language/French")]
         public static void ChangeLanguageToFrench()
         {
             LeanLocalization.SetCurrentLanguageAll("French");
         }
-        
+
         [MenuItem("Circum/Language/German")]
         public static void ChangeLanguageToGerman()
         {
             LeanLocalization.SetCurrentLanguageAll("German");
         }
-        
+
         [MenuItem("Circum/Language/Portuguese")]
         public static void ChangeLanguageToPortuguese()
         {
             LeanLocalization.SetCurrentLanguageAll("Portuguese");
         }
-        
+
         [MenuItem("Circum/Language/Italian")]
         public static void ChangeLanguageToItalian()
         {
             LeanLocalization.SetCurrentLanguageAll("Italian");
         }
-        
+
         [MenuItem("Circum/Language/Spanish")]
         public static void ChangeLanguageToSpanish()
         {
             LeanLocalization.SetCurrentLanguageAll("Spanish");
         }
-        
+
         [MenuItem("Circum/Language/Russian")]
         public static void ChangeLanguageToRussian()
         {
             LeanLocalization.SetCurrentLanguageAll("Russian");
         }
 
+        [MenuItem("Circum/Language/Chinese")]
+        public static void ChangeLanguageToChinese()
+        {
+            LeanLocalization.SetCurrentLanguageAll("Chinese");
+        }
+        
         [MenuItem("Circum/Persistent data/Reset splash screen")]
         public static void ResetSplashScreen()
         {
@@ -108,7 +132,7 @@ namespace Code.Debugging
         {
             PersistentDataManager.Instance.ChallengeData.ResetChallengeAttempts();
         }
-        
+
         [MenuItem("Circum/Persistent data/Set perfect player stats")]
         public static void SetPerfectPlayerStats()
         {
@@ -120,7 +144,7 @@ namespace Code.Debugging
         {
             PlayerFirsts.ResetPlayerFirsts();
         }
-        
+
         [MenuItem("Circum/Build/Run validation")]
         public static void RunValidation()
         {
@@ -135,11 +159,11 @@ namespace Code.Debugging
                     Debug.LogWarning($"There is no entry in localisation {p.gameObject} for {q.Language}");
                 }
             }));
-            
+
 #if CIRCUM_LOGGING
             Debug.LogError("Circum logging is still enabled. Don't want this for a published build");
 #endif
-            
+
 #if CIRCUM_DEBUG
             Debug.LogError("Debug symbol is defined. This build should not be submitted to app stores");
 #endif
@@ -164,7 +188,7 @@ namespace Code.Debugging
         {
             GameObject[] selected = Selection.gameObjects;
             LeanPhrase[] phrases = selected.Select(p => p.GetComponent<LeanPhrase>()).Where(p => p).ToArray();
-            
+
             if (phrases.Length == 0)
             {
                 Debug.LogError("Could not find a phrase ");
@@ -192,7 +216,7 @@ namespace Code.Debugging
         private static void AutoTranslatePhrases(LeanPhrase[] phrases, LeanLanguage[] languages, bool force)
         {
             string englishLanguageName = "English";
-            
+
             foreach (LeanPhrase phrase in phrases)
             {
                 LeanPhrase.Entry english = phrase.Entries.FirstOrDefault(p => p.Language.EqualsIgnoreCase(englishLanguageName));
@@ -201,25 +225,26 @@ namespace Code.Debugging
                     CircumDebug.Log($"Cannot find entry for english for {phrase.gameObject}");
                     english = phrase.AddEntry(englishLanguageName, phrase.gameObject.name);
                 }
-
+                
                 if (string.IsNullOrEmpty(english.Text))
                 {
                     english.Text = phrase.name;
                 }
-
+                
                 string textOutput = default;
                 string languageCodeInput = "en";
                 
                 Undo.RecordObject(phrase, "Auto Translate");
-
+                
                 foreach (LeanLanguage leanLanguage in languages)
                 {
                     if (leanLanguage.name.EqualsIgnoreCase(englishLanguageName))
                     {
                         continue;
                     }
-                    
-                    LeanPhrase.Entry entry = phrase.Entries.FirstOrDefault(p => p.Language.EqualsIgnoreCase(leanLanguage.name)) ?? phrase.AddEntry(leanLanguage.name, phrase.name);
+
+                    LeanPhrase.Entry entry = phrase.Entries.FirstOrDefault(p => p.Language.EqualsIgnoreCase(leanLanguage.name)) ??
+                                             phrase.AddEntry(leanLanguage.name, phrase.name);
 
                     if (string.IsNullOrEmpty(entry.Text) && !force)
                     {
@@ -231,7 +256,7 @@ namespace Code.Debugging
                         entry.Text = textOutput;
                     }
                 }
-                
+
                 EditorUtility.SetDirty(phrase);
             }
         }

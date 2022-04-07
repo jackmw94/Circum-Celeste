@@ -46,27 +46,30 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: 'Can you complete this week''s challenge level? '
+    Text: 'Can you complete this month''s challenge level? '
     Object: {fileID: 0}
   - Language: German
-    Text: "Kannst du das Herausforderungslevel dieser Woche abschlie\xDFen?"
+    Text: "Kannst du das Herausforderungslevel dieses Monats abschlie\xDFen?"
     Object: {fileID: 0}
   - Language: French
-    Text: "Pouvez-vous terminer le niveau de d\xE9fi de cette semaine\_?"
+    Text: "Pouvez-vous terminer le niveau de d\xE9fi de ce mois-ci\_?"
     Object: {fileID: 0}
   - Language: Italian
-    Text: Riuscirai a completare il livello di sfida di questa settimana?
+    Text: Riuscirai a completare il livello di sfida di questo mese?
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Voc\xEA consegue completar o n\xEDvel de desafio desta semana?"
+    Text: "Voc\xEA consegue completar o n\xEDvel de desafio deste m\xEAs?"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0421\u043C\u043E\u0436\u0435\u0442\u0435 \u043B\u0438 \u0432\u044B \u043F\u0440\u043E\u0439\u0442\u0438
       \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u0439
-      \u044D\u0442\u043E\u0439 \u043D\u0435\u0434\u0435\u043B\u0438?"
+      \u044D\u0442\u043E\u0433\u043E \u043C\u0435\u0441\u044F\u0446\u0430?"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xBFPuedes completar el nivel de desaf\xEDo de esta semana?"
+    Text: "\xBFPuedes completar el nivel de desaf\xEDo de este mes?"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F60\u80FD\u5B8C\u6210\u8FD9\u4E2A\u6708\u7684\u6311\u6218\u5173\u5361\u5417\uFF1F"
     Object: {fileID: 0}
 --- !u!1 &495871489
 GameObject:
@@ -133,6 +136,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: '{0} intentos restantes'
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5269\u4F59 {0} \u6B21\u5C1D\u8BD5"
     Object: {fileID: 0}
 --- !u!1 &503372093
 GameObject:
@@ -201,6 +207,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1Nuevo r\xE9cord mundial!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u65B0\u7684\u5168\u7403\u7EAA\u5F55\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &585149190
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +276,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Est\xE1s clasificado {0}"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u7684\u6392\u540D\u4E3A {0}"
+    Object: {fileID: 0}
 --- !u!1 &837149641
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,14 +337,17 @@ MonoBehaviour:
     Text: Classifica di livello globale
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Tabela de classifica\xE7\xE3o de n\xEDvel global"
+    Text: "Ranking de N\xEDvel Global"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
       \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E\u0433\u043E \u0443\u0440\u043E\u0432\u043D\u044F"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Tabla de clasificaci\xF3n de nivel global"
+    Text: "Clasificaci\xF3n mundial de niveles"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5168\u7403\u6C34\u5E73\u6392\u884C\u699C"
     Object: {fileID: 0}
 --- !u!1 &1062602618
 GameObject:
@@ -399,6 +414,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Niveles de desaf\xEDo"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6311\u6218\u7B49\u7EA7"
     Object: {fileID: 0}
 --- !u!1 &1141801044
 GameObject:
@@ -467,6 +485,78 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Tabla de clasificaci\xF3n mundial"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5168\u7403\u6392\u884C\u699C"
+    Object: {fileID: 0}
+--- !u!1 &1296143549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296143550}
+  - component: {fileID: 1296143551}
+  m_Layer: 0
+  m_Name: CircumFont
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1296143550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296143549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5243345530659955790}
+  m_RootOrder: 93
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1296143551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296143549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb15fa0e7301ff849bf4d6dcede7c12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: 1
+  entries:
+  - Language: English
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: German
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: Chinese
+    Text: 
+    Object: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  - Language: Spanish
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: Russian
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: Portuguese
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: Italian
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  - Language: French
+    Text: 
+    Object: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &1397107694
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +628,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "No se pudo obtener la clasificaci\xF3n.\\n\\n\\n\xA1Compruebe su conexi\xF3n
       a Internet!"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u65E0\u6CD5\u83B7\u5F97\u6311\u6218\u7B49\u7EA7\u3002\\n\\n\\n\u68C0\u67E5\u60A8\u7684\u4E92\u8054\u7F51\u8FDE\u63A5\uFF01"
     Object: {fileID: 0}
 --- !u!1 &1398462225
 GameObject:
@@ -611,6 +704,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "No se pudo obtener el nivel de desaf\xEDo.\\n\\n\\n\xA1Compruebe su conexi\xF3n
       a Internet!"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u65E0\u6CD5\u83B7\u5F97\u6311\u6218\u7B49\u7EA7\u3002\\n\\n\\n\u68C0\u67E5\u60A8\u7684\u4E92\u8054\u7F51\u8FDE\u63A5\uFF01"
     Object: {fileID: 0}
 --- !u!1 &1507196758
 GameObject:
@@ -686,6 +782,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Puntuaci\xF3n actual\n{0}/{1}"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5F53\u524D\u5206\u6570\r\n{0}/{1}"
+    Object: {fileID: 0}
 --- !u!1 &1510964098
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +852,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1Trata de nuevo ma\xF1ana!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u660E\u5929\u518D\u8BD5\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &1547627700
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,6 +921,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "{0} d\xEDas restantes"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8FD8\u5269 {0} \u5929"
+    Object: {fileID: 0}
 --- !u!1 &2015419551
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,39 +970,51 @@ MonoBehaviour:
   data: 0
   entries:
   - Language: English
-    Text: "- 3 attempts a day to complete \n\n- Your highest score will contribute
-      to your leaderboard ranking for 12 weeks"
+    Text: '- Your highest score will contribute to your leaderboard ranking
+
+      -
+      You have a limited number of attempts to complete. Attempts are reset every
+      day.'
     Object: {fileID: 0}
   - Language: German
-    Text: "- 3 Versuche pro Tag abzuschlie\xDFen\r\n\r\n- Ihre h\xF6chste Punktzahl
-      tr\xE4gt 12 Wochen lang zu Ihrem Leaderboard-Ranking bei"
+    Text: "- Ihre h\xF6chste Punktzahl tr\xE4gt zu Ihrem Leaderboard-Ranking bei\r\n-
+      Sie haben eine begrenzte Anzahl von Versuchen zum Abschlie\xDFen. Die Versuche
+      werden jeden Tag zur\xFCckgesetzt."
     Object: {fileID: 0}
   - Language: French
-    Text: "- 3 tentatives par jour pour terminer\r\n\r\n- Votre score le plus \xE9lev\xE9
-      contribuera \xE0 votre classement dans le classement pendant 12 semaines"
+    Text: "- Votre score le plus \xE9lev\xE9 contribuera \xE0 votre classement dans
+      le classement\r\n- Vous avez un nombre limit\xE9 de tentatives pour terminer.
+      Les tentatives sont r\xE9initialis\xE9es chaque jour."
     Object: {fileID: 0}
   - Language: Italian
-    Text: "- 3 tentativi al giorno per completare\r\n\r\n- Il tuo punteggio pi\xF9
-      alto contribuir\xE0 alla tua classifica in classifica per 12 settimane"
+    Text: "- Il tuo punteggio pi\xF9 alto contribuir\xE0 alla tua classifica in classifica\r\n-
+      Hai un numero limitato di tentativi per completare. I tentativi vengono ripristinati
+      ogni giorno."
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "- 3 tentativas por dia para completar\r\n\r\n- Sua pontua\xE7\xE3o mais
-      alta contribuir\xE1 para sua classifica\xE7\xE3o na tabela de classifica\xE7\xE3o
-      por 12 semanas"
+    Text: "- Sua pontua\xE7\xE3o mais alta contribuir\xE1 para sua classifica\xE7\xE3o
+      na tabela de classifica\xE7\xE3o\r\n- Voc\xEA tem um n\xFAmero limitado de
+      tentativas para completar. As tentativas s\xE3o redefinidas todos os dias."
     Object: {fileID: 0}
   - Language: Russian
-    Text: "- 3 \u043F\u043E\u043F\u044B\u0442\u043A\u0438 \u0432 \u0434\u0435\u043D\u044C
-      \u0434\u043B\u044F \u043F\u0440\u043E\u0445\u043E\u0436\u0434\u0435\u043D\u0438\u044F\r\n\r\n-
-      \u0412\u0430\u0448 \u043B\u0443\u0447\u0448\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442
-      \u0431\u0443\u0434\u0435\u0442 \u0441\u043F\u043E\u0441\u043E\u0431\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C
+    Text: "- \u0412\u0430\u0448 \u0441\u0430\u043C\u044B\u0439 \u0432\u044B\u0441\u043E\u043A\u0438\u0439
+      \u0431\u0430\u043B\u043B \u0431\u0443\u0434\u0435\u0442 \u0441\u043F\u043E\u0441\u043E\u0431\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C
       \u0432\u0430\u0448\u0435\u043C\u0443 \u0440\u0435\u0439\u0442\u0438\u043D\u0433\u0443
-      \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
-      \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0435 12 \u043D\u0435\u0434\u0435\u043B\u044C."
+      \u0432 \u0442\u0430\u0431\u043B\u0438\u0446\u0435 \u043B\u0438\u0434\u0435\u0440\u043E\u0432\r\n-
+      \u0423 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043E\u0433\u0440\u0430\u043D\u0438\u0447\u0435\u043D\u043D\u043E\u0435
+      \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u043F\u043E\u043F\u044B\u0442\u043E\u043A
+      \u0434\u043B\u044F \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D\u0438\u044F.
+      \u041F\u043E\u043F\u044B\u0442\u043A\u0438 \u0441\u0431\u0440\u0430\u0441\u044B\u0432\u0430\u044E\u0442\u0441\u044F
+      \u043A\u0430\u0436\u0434\u044B\u0439 \u0434\u0435\u043D\u044C."
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "- 3 intentos al d\xEDa para completar\r\n\r\n- Su puntaje m\xE1s alto
-      contribuir\xE1 a su clasificaci\xF3n en la tabla de clasificaci\xF3n durante
-      12 semanas"
+    Text: "- Su puntaje m\xE1s alto contribuir\xE1 a su clasificaci\xF3n en la tabla
+      de clasificaci\xF3n\r\n- Tienes un n\xFAmero limitado de intentos para completar.
+      Los intentos se reinician todos los d\xEDas."
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "- \u4F60\u7684\u6700\u9AD8\u5206\u5C06\u6709\u52A9\u4E8E\u4F60\u7684\u6392\u884C\u699C\u6392\u540D\r\n-
+      \u60A8\u5B8C\u6210\u7684\u5C1D\u8BD5\u6B21\u6570\u6709\u9650\u3002\u6BCF\u5929\u90FD\u4F1A\u91CD\u7F6E\u5C1D\u8BD5\u3002"
     Object: {fileID: 0}
 --- !u!1 &2053282117
 GameObject:
@@ -968,6 +1085,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1Todav\xEDa no hay nadie en la clasificaci\xF3n para este nivel!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8FD9\u4E2A\u7EA7\u522B\u7684\u6392\u884C\u699C\u4E0A\u8FD8\u6CA1\u6709\u4EBA\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &5243345529403927617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,31 +1138,25 @@ MonoBehaviour:
       taking damage. '
     Object: {fileID: 0}
   - Language: German
-    Text: "Toll! Du erh\xE4ltst Troph\xE4en, wenn du Levels schnell abschlie\xDFt
-      oder ohne Schaden zu nehmen."
+    Text: 'Toll! '
     Object: {fileID: 0}
   - Language: French
-    Text: "G\xE9nial! Vous recevrez des troph\xE9es si vous terminez les niveaux
-      rapidement ou sans subir de d\xE9g\xE2ts."
+    Text: "G\xE9nial! "
     Object: {fileID: 0}
   - Language: Italian
-    Text: Grande! Ti verranno assegnati dei trofei se completi i livelli rapidamente
-      o senza subire danni.
+    Text: 'Grande! '
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Excelente! Voc\xEA receber\xE1 trof\xE9us se completar os n\xEDveis rapidamente
-      ou sem sofrer danos."
+    Text: 'Excelente! '
     Object: {fileID: 0}
   - Language: Russian
-    Text: "\u0417\u0434\u043E\u0440\u043E\u0432\u043E! \u0412\u044B \u0431\u0443\u0434\u0435\u0442\u0435
-      \u043D\u0430\u0433\u0440\u0430\u0436\u0434\u0435\u043D\u044B \u0442\u0440\u043E\u0444\u0435\u044F\u043C\u0438,
-      \u0435\u0441\u043B\u0438 \u043F\u0440\u043E\u0439\u0434\u0435\u0442\u0435 \u0443\u0440\u043E\u0432\u043D\u0438
-      \u0431\u044B\u0441\u0442\u0440\u043E \u0438\u043B\u0438 \u0431\u0435\u0437
-      \u043F\u043E\u0432\u0440\u0435\u0436\u0434\u0435\u043D\u0438\u0439."
+    Text: "\u0417\u0434\u043E\u0440\u043E\u0432\u043E! "
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "\xA1Genial! Recibir\xE1s trofeos si completas los niveles r\xE1pidamente
-      o sin sufrir da\xF1os."
+    Text: "\xA1Genial! "
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F1F\u5927\u7684\uFF01"
     Object: {fileID: 0}
 --- !u!1 &5243345529410765955
 GameObject:
@@ -1113,6 +1227,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Gu\xEDe su orbitador alrededor de los p\xFAlsares para evitar tocarlos."
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5F15\u5BFC\u4F60\u7684\u8F68\u9053\u5668\u56F4\u7ED5\u8109\u51B2\u661F\u907F\u514D\u63A5\u89E6\u5B83\u4EEC"
     Object: {fileID: 0}
 --- !u!1 &5243345529419012680
 GameObject:
@@ -1194,6 +1311,9 @@ MonoBehaviour:
     Text: "Use \xF3rbitas peque\xF1as y r\xE1pidas para navegar en espacios reducidos
       o grandes \xF3rbitas en picada para cubrir mucho terreno"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F7F\u7528\u5C0F\u578B\u5FEB\u901F\u8F68\u9053\u5BFC\u822A\u72ED\u7A84\u7A7A\u95F4\u6216\u5927\u578B\u4FEF\u51B2\u8F68\u9053\u8986\u76D6\u5927\u91CF\u5730\u9762"
+    Object: {fileID: 0}
 --- !u!1 &5243345529422812377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1379,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Mejor repetici\xF3n"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6700\u4F73\u91CD\u64AD"
     Object: {fileID: 0}
 --- !u!1 &5243345529469733599
 GameObject:
@@ -1331,6 +1454,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Mu\xE9vete en c\xEDrculos para mantener el orbitador girando o chocar\xE1s"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7ED5\u5708\u79FB\u52A8\u4EE5\u4FDD\u6301\u8F68\u9053\u5668\u65CB\u8F6C\uFF0C\u5426\u5219\u60A8\u5C06\u76F8\u649E"
+    Object: {fileID: 0}
 --- !u!1 &5243345529477584029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1522,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Nivel perfecto
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5B8C\u7F8E\u7B49\u7EA7"
     Object: {fileID: 0}
 --- !u!1 &5243345529494676346
 GameObject:
@@ -1463,6 +1592,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "C\xF3mo jugar"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u600E\u4E48\u73A9"
+    Object: {fileID: 0}
 --- !u!1 &5243345529517157602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,9 +1643,6 @@ MonoBehaviour:
   - Language: English
     Text: Restart Level
     Object: {fileID: 0}
-  - Language: Japanese
-    Text: "\u518D\u8D77\u52D5\u30EC\u30D9\u30EB"
-    Object: {fileID: 0}
   - Language: German
     Text: Level neustarten
     Object: {fileID: 0}
@@ -1523,11 +1652,8 @@ MonoBehaviour:
   - Language: Italian
     Text: Riavvia il livello
     Object: {fileID: 0}
-  - Language: Korean
-    Text: "\uC7AC\uC2DC\uC791 \uB808\uBCA8"
-    Object: {fileID: 0}
   - Language: Chinese
-    Text: "\u91CD\u542F\u5173\u5361"
+    Text: "\u91CD\u542F\u7EA7\u522B"
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "Recome\xE7ar n\xEDvel"
@@ -1538,13 +1664,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Volver a empersar el nivel
-    Object: {fileID: 0}
-  - Language: Hindi
-    Text: "\u0932\u0947\u0935\u0932 \u092B\u093F\u0930 \u0938\u0947 \u091A\u093E\u0932\u0941
-      \u0915\u0930\u0947\u0902"
-    Object: {fileID: 0}
-  - Language: Indonesian
-    Text: Mulai Ulang Tingkat
     Object: {fileID: 0}
 --- !u!1 &5243345529522330164
 GameObject:
@@ -1613,6 +1732,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: No se pudo agregar un amigo en este momento
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u76EE\u524D\u65E0\u6CD5\u6DFB\u52A0\u670B\u53CB"
+    Object: {fileID: 0}
 --- !u!1 &5243345529554828165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,6 +1800,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Volver a Configuraci\xF3n"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8FD4\u56DE\u8BBE\u7F6E"
     Object: {fileID: 0}
 --- !u!1 &5243345529584660915
 GameObject:
@@ -1746,6 +1871,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1No puedes agregarte como amigo!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u4E0D\u80FD\u5C06\u81EA\u5DF1\u6DFB\u52A0\u4E3A\u597D\u53CB\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &5243345529735863883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,6 +1939,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Ocultar tiempo de nivel
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u9690\u85CF\u5173\u5361\u65F6\u95F4"
     Object: {fileID: 0}
 --- !u!1 &5243345529747790751
 GameObject:
@@ -1879,6 +2010,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Se han restablecido tus estad\xEDsticas."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u7684\u7EDF\u8BA1\u4FE1\u606F\u5DF2\u91CD\u7F6E"
+    Object: {fileID: 0}
 --- !u!1 &5243345529755441170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +2080,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Mantenga presionado el bot\xF3n de encendido"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6309\u4F4F\u7535\u6E90\u6309\u94AE"
+    Object: {fileID: 0}
 --- !u!1 &5243345529755910183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2004,14 +2141,17 @@ MonoBehaviour:
     Text: Classifica livello amici
     Object: {fileID: 0}
   - Language: Portuguese
-    Text: "Tabela de classifica\xE7\xE3o do n\xEDvel de amigos"
+    Text: "Ranking de N\xEDvel de Amigos"
     Object: {fileID: 0}
   - Language: Russian
     Text: "\u0422\u0430\u0431\u043B\u0438\u0446\u0430 \u043B\u0438\u0434\u0435\u0440\u043E\u0432
       \u0443\u0440\u043E\u0432\u043D\u044F \u0434\u0440\u0443\u0437\u0435\u0439"
     Object: {fileID: 0}
   - Language: Spanish
-    Text: "Tabla de clasificaci\xF3n de nivel de amigos"
+    Text: "Clasificaci\xF3n del nivel de amigos"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u597D\u53CB\u7B49\u7EA7\u6392\u884C\u699C"
     Object: {fileID: 0}
 --- !u!1 &5243345529765600333
 GameObject:
@@ -2079,6 +2219,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Atr\xE1s"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u540E\u9000"
+    Object: {fileID: 0}
 --- !u!1 &5243345529819364706
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +2287,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: amigos actuales
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u73B0\u5728\u7684\u670B\u53CB"
     Object: {fileID: 0}
 --- !u!1 &5243345529831961037
 GameObject:
@@ -2211,6 +2357,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Restablecer estad\xEDsticas"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u91CD\u7F6E\u7EDF\u8BA1"
+    Object: {fileID: 0}
 --- !u!1 &5243345529864337215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,6 +2425,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: OK
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u597D\u7684"
     Object: {fileID: 0}
 --- !u!1 &5243345529866439097
 GameObject:
@@ -2343,6 +2495,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Opciones de juego
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6E38\u620F\u9009\u9879"
+    Object: {fileID: 0}
 --- !u!1 &5243345529874669298
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2564,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Cero Da\xF1o"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u96F6\u4F24\u5BB3"
+    Object: {fileID: 0}
 --- !u!1 &5243345529883294890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2632,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Elevado
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u9AD8\u7684"
     Object: {fileID: 0}
 --- !u!1 &5243345529909095941
 GameObject:
@@ -2543,6 +2704,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Echa un vistazo a la secci\xF3n de c\xF3mo jugar en la configuraci\xF3n"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u67E5\u770B\u8BBE\u7F6E\u4E2D\u7684\u5982\u4F55\u73A9\u90E8\u5206"
+    Object: {fileID: 0}
 --- !u!1 &5243345529935044512
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,6 +2772,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Medio
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4E2D\u7B49\u7684"
     Object: {fileID: 0}
 --- !u!1 &5243345529953879469
 GameObject:
@@ -2688,6 +2855,10 @@ MonoBehaviour:
     Text: "\xA1Agr\xE9game como amigo en Circum Celeste! El ID de mi amigo es: {0}\r\n\r\nAqu\xED
       est\xE1 el enlace de descarga: https://appurl.io/8pLXCYDYhI"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u52A0\u6211\u4E3A Circum Celeste \u7684\u670B\u53CB\uFF01\u6211\u7684\u670B\u53CB
+      ID \u662F\uFF1A{0}\r\n\r\n\u8FD9\u662F\u4E0B\u8F7D\u94FE\u63A5\uFF1Ahttps://appurl.io/8pLXCYDYhI"
+    Object: {fileID: 0}
 --- !u!1 &5243345529954017995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2761,6 +2932,9 @@ MonoBehaviour:
     Text: "Destroza las entidades estelares con tu orbitador para abrir la v\xEDa
       de escape"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7528\u4F60\u7684\u8F68\u9053\u5668\u7C89\u788E\u6052\u661F\u5B9E\u4F53\u4EE5\u6253\u5F00\u9003\u751F\u901A\u9053"
+    Object: {fileID: 0}
 --- !u!1 &5243345529954310750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,6 +3000,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: vencer al reloj
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6253\u8D25\u65F6\u949F"
     Object: {fileID: 0}
 --- !u!1 &5243345529975856065
 GameObject:
@@ -2895,6 +3072,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Arrastra para mover tu estrella
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u62D6\u52A8\u4EE5\u79FB\u52A8\u60A8\u7684\u661F\u661F"
+    Object: {fileID: 0}
 --- !u!1 &5243345529988825093
 GameObject:
   m_ObjectHideFlags: 0
@@ -2962,6 +3142,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Completa un nivel sin recibir da\xF1o."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5728\u4E0D\u53D7\u5230\u4F24\u5BB3\u7684\u60C5\u51B5\u4E0B\u5B8C\u6210\u4E00\u4E2A\u5173\u5361"
+    Object: {fileID: 0}
 --- !u!1 &5243345529993856441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3017,7 +3200,7 @@ MonoBehaviour:
     Text: "Ne subissez aucun d\xE9g\xE2t et battez l'horloge"
     Object: {fileID: 0}
   - Language: Italian
-    Text: Subisci zero danni e batti il \u200b\u200btempo
+    Text: "Subisci zero danni e batti il \u200B\u200Btempo"
     Object: {fileID: 0}
   - Language: Portuguese
     Text: "Tome dano zero e ven\xE7a o rel\xF3gio"
@@ -3029,6 +3212,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Recibe cero da\xF1os y vence al reloj"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u96F6\u4F24\u5BB3\uFF0C\u5206\u79D2\u5FC5\u4E89"
     Object: {fileID: 0}
 --- !u!1 &5243345530053879305
 GameObject:
@@ -3097,6 +3283,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Bienvenidos a Circum Celeste
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6B22\u8FCE\u6765\u5230 Circum Celeste"
+    Object: {fileID: 0}
 --- !u!1 &5243345530059545203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,6 +3352,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Agregar
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6DFB\u52A0"
+    Object: {fileID: 0}
 --- !u!1 &5243345530099829427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3228,6 +3420,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Desactivar comentarios
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5173\u95ED\u53CD\u9988"
     Object: {fileID: 0}
 --- !u!1 &5243345530142908109
 GameObject:
@@ -3299,6 +3494,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Deslice hacia abajo en la pantalla de nivel para ver el tiempo para vencer
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5728\u5173\u5361\u5C4F\u5E55\u4E0A\u5411\u4E0B\u6ED1\u52A8\u4EE5\u67E5\u770B\u51FB\u8D25\u65F6\u95F4"
     Object: {fileID: 0}
 --- !u!1 &5243345530244368256
 GameObject:
@@ -3377,6 +3575,9 @@ MonoBehaviour:
     Text: "Mu\xE9vete en c\xEDrculos para mantenerlo en \xF3rbita, practica golpeando
       a estas entidades estelares sin recibir da\xF1o."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7ED5\u5708\u79FB\u52A8\u4EE5\u4F7F\u5176\u4FDD\u6301\u5728\u8F68\u9053\u4E0A\uFF0C\u901A\u8FC7\u649E\u51FB\u8FD9\u4E9B\u6052\u661F\u5B9E\u4F53\u800C\u4E0D\u53D7\u5230\u4F24\u5BB3\u6765\u7EC3\u4E60\u3002"
+    Object: {fileID: 0}
 --- !u!1 &5243345530247203153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3450,6 +3651,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Use \xF3rbitas el\xEDpticas para colocar su orbitador en posiciones estrechas"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F7F\u7528\u692D\u5706\u8F68\u9053\u8BA9\u4F60\u7684\u8F68\u9053\u5668\u8FDB\u5165\u72ED\u7A84\u7684\u4F4D\u7F6E"
+    Object: {fileID: 0}
 --- !u!1 &5243345530258297855
 GameObject:
   m_ObjectHideFlags: 0
@@ -3516,6 +3720,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "A\xF1ade un amigo"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6DFB\u52A0\u597D\u53CB"
+    Object: {fileID: 0}
 --- !u!1 &5243345530279951857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,6 +3788,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Sobrevivir
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5B58\u6D3B"
     Object: {fileID: 0}
 --- !u!1 &5243345530301955545
 GameObject:
@@ -3650,6 +3860,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Toque la pantalla de nivel 3 veces para reiniciar r\xE1pidamente"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u70B9\u51FB\u5173\u5361\u5C4F\u5E553\u6B21\u5FEB\u901F\u91CD\u542F"
+    Object: {fileID: 0}
 --- !u!1 &5243345530320006340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,6 +3929,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Pr\xF3ximo"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4E0B\u4E00\u4E2A"
+    Object: {fileID: 0}
 --- !u!1 &5243345530344230008
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,20 +3980,14 @@ MonoBehaviour:
   - Language: English
     Text: Watch Replay
     Object: {fileID: 0}
-  - Language: Japanese
-    Text: "\u30EA\u30D7\u30EC\u30A4\u3092\u898B\u308B"
-    Object: {fileID: 0}
   - Language: German
     Text: Wiederholung ansehen
     Object: {fileID: 0}
   - Language: French
-    Text: Regarder la rediffusion
+    Text: Regarder la replay
     Object: {fileID: 0}
   - Language: Italian
     Text: Guarda Riproduci
-    Object: {fileID: 0}
-  - Language: Korean
-    Text: "\uB2E4\uC2DC\uBCF4\uAE30 \uBCF4\uAE30"
     Object: {fileID: 0}
   - Language: Chinese
     Text: "\u89C2\u770B\u91CD\u64AD"
@@ -3790,12 +4000,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Ver repetici\xF3n"
-    Object: {fileID: 0}
-  - Language: Hindi
-    Text: "\u0930\u0940\u092A\u094D\u0932\u0947 \u0926\u0947\u0916\u0947\u0902"
-    Object: {fileID: 0}
-  - Language: Indonesian
-    Text: Tonton Putar Ulang
     Object: {fileID: 0}
 --- !u!1 &5243345530364144206
 GameObject:
@@ -3845,9 +4049,6 @@ MonoBehaviour:
   - Language: English
     Text: Play
     Object: {fileID: 0}
-  - Language: Japanese
-    Text: "\u6F14\u594F\u3059\u308B"
-    Object: {fileID: 0}
   - Language: German
     Text: Spiel
     Object: {fileID: 0}
@@ -3856,9 +4057,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Italian
     Text: Giocare
-    Object: {fileID: 0}
-  - Language: Korean
-    Text: "\uB180\uB2E4"
     Object: {fileID: 0}
   - Language: Chinese
     Text: "\u73A9"
@@ -3871,12 +4069,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Jugar
-    Object: {fileID: 0}
-  - Language: Hindi
-    Text: "\u0916\u0947\u0932"
-    Object: {fileID: 0}
-  - Language: Indonesian
-    Text: Bermain
     Object: {fileID: 0}
 --- !u!1 &5243345530372575737
 GameObject:
@@ -3946,6 +4138,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Llega al escape para terminar el nivel.
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5230\u8FBE\u9003\u751F\u5904\u4EE5\u5B8C\u6210\u5173\u5361"
+    Object: {fileID: 0}
 --- !u!1 &5243345530390541813
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,6 +4207,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Cambiar calidad
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6539\u53D8\u8D28\u91CF"
+    Object: {fileID: 0}
 --- !u!1 &5243345530461434669
 GameObject:
   m_ObjectHideFlags: 0
@@ -4077,6 +4275,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "A\xF1ade amigos"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6DFB\u52A0\u670B\u53CB"
     Object: {fileID: 0}
 --- !u!1 &5243345530500529387
 GameObject:
@@ -4145,6 +4346,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1La configuraci\xF3n del juego no se pudo actualizar!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6E38\u620F\u914D\u7F6E\u65E0\u6CD5\u66F4\u65B0\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &5243345530512446318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4211,6 +4415,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Activar comentarios
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6253\u5F00\u53CD\u9988"
+    Object: {fileID: 0}
 --- !u!1 &5243345530547125992
 GameObject:
   m_ObjectHideFlags: 0
@@ -4276,6 +4483,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: trofeos
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u5956\u676F"
     Object: {fileID: 0}
 --- !u!1 &5243345530564670849
 GameObject:
@@ -4344,6 +4554,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Mostrar tiempo de nivel
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u663E\u793A\u7EA7\u522B\u65F6\u95F4"
+    Object: {fileID: 0}
 --- !u!1 &5243345530606684951
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,9 +4605,6 @@ MonoBehaviour:
   - Language: English
     Text: Toggle Feedbacks
     Object: {fileID: 0}
-  - Language: Japanese
-    Text: "\u30D5\u30A3\u30FC\u30C9\u30D0\u30C3\u30AF\u306E\u5207\u308A\u66FF\u3048"
-    Object: {fileID: 0}
   - Language: German
     Text: Feedback umschalten
     Object: {fileID: 0}
@@ -4403,9 +4613,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Italian
     Text: Attiva/disattiva i feedback
-    Object: {fileID: 0}
-  - Language: Korean
-    Text: "\uD1A0\uAE00 \uD53C\uB4DC\uBC31"
     Object: {fileID: 0}
   - Language: Chinese
     Text: "\u5207\u6362\u53CD\u9988"
@@ -4418,12 +4625,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Alternar comentarios
-    Object: {fileID: 0}
-  - Language: Hindi
-    Text: "\u092B\u0940\u0921\u092C\u0948\u0915 \u091F\u0949\u0917\u0932 \u0915\u0930\u0947\u0902"
-    Object: {fileID: 0}
-  - Language: Indonesian
-    Text: Alihkan Umpan Balik
     Object: {fileID: 0}
 --- !u!1 &5243345530616035364
 GameObject:
@@ -4491,6 +4692,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "\xA1Amigo a\xF1adido con \xE9xito!"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u52A0\u597D\u53CB\u6210\u529F\uFF01"
     Object: {fileID: 0}
 --- !u!1 &5243345530659955791
 GameObject:
@@ -4613,6 +4817,7 @@ Transform:
   - {fileID: 1510964099}
   - {fileID: 1398462226}
   - {fileID: 1397107695}
+  - {fileID: 1296143550}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4628,7 +4833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: English
+  currentLanguage: French
   detectLanguage: 1
   defaultLanguage: English
   saveLoad: 1
@@ -4654,6 +4859,9 @@ MonoBehaviour:
   - Root: {fileID: 765358623864573794, guid: d723c6557bd6de145a2fad37a6fe8229, type: 3}
     sources:
     - {fileID: -4933353152916006438, guid: d723c6557bd6de145a2fad37a6fe8229, type: 3}
+  - Root: {fileID: 765358623864573794, guid: 0b402d229c8451245b63baec8f5eee3a, type: 3}
+    sources:
+    - {fileID: -4933353152916006438, guid: 0b402d229c8451245b63baec8f5eee3a, type: 3}
 --- !u!1 &5243345530752815121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,6 +4928,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Nombre
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u59D3\u540D"
+    Object: {fileID: 0}
 --- !u!1 &5243345530811562791
 GameObject:
   m_ObjectHideFlags: 0
@@ -4778,12 +4989,12 @@ MonoBehaviour:
   - Language: German
     Text: 'Der rosa Stern ist dein Orbiter.
 
-      
 
-      Es wird Ihnen helfen,
-      am Leben zu bleiben, aber es wird Sie auch verletzen, wenn Sie damit kollidieren.
 
-      
+      Es wird Ihnen helfen, am Leben
+      zu bleiben, aber es wird Sie auch verletzen, wenn Sie damit kollidieren.
+
+
 
       Halten
       Sie es in der Umlaufbahn.'
@@ -4817,6 +5028,9 @@ MonoBehaviour:
     Text: "La estrella rosa es tu orbitador.\r\n\r\nTe ayudar\xE1 a mantenerte con
       vida, pero tambi\xE9n te har\xE1 da\xF1o si chocas con \xE9l.\r\n\r\nMantenlo
       en \xF3rbita."
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7C89\u7EA2\u8272\u7684\u661F\u661F\u662F\u4F60\u7684\u8F68\u9053\u5668\u3002\r\n\r\n\u5B83\u4F1A\u5E2E\u52A9\u4F60\u4FDD\u6301\u751F\u547D\uFF0C\u4F46\u5982\u679C\u4F60\u4E0E\u5B83\u53D1\u751F\u78B0\u649E\uFF0C\u5B83\u4E5F\u4F1A\u4F24\u5BB3\u4F60\u3002\r\n\r\n\u4FDD\u6301\u8F68\u9053\u8FD0\u884C\u3002"
     Object: {fileID: 0}
 --- !u!1 &5243345530843757518
 GameObject:
@@ -4886,6 +5100,10 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Tienes insignias perfectas en cada nivel. \xA1Felicitaciones!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u5728\u6BCF\u4E2A\u7EA7\u522B\u90FD\u83B7\u5F97\u4E86\u5B8C\u7F8E\u7684\u5FBD\u7AE0
+      - \u606D\u559C\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &5243345530845866070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,6 +5169,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Amigos
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u670B\u53CB\u4EEC"
     Object: {fileID: 0}
 --- !u!1 &5243345530878816240
 GameObject:
@@ -5031,6 +5252,9 @@ MonoBehaviour:
     Text: "Tu orbitador te proteger\xE1 en tu viaje a trav\xE9s del vac\xEDo c\xF3smico,
       pero tambi\xE9n puede da\xF1arte si chocas con \xE9l."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u7684\u8F68\u9053\u5668\u5C06\u5728\u60A8\u7A7F\u8D8A\u5B87\u5B99\u865A\u7A7A\u7684\u65C5\u7A0B\u4E2D\u4FDD\u62A4\u60A8\uFF0C\u4F46\u5982\u679C\u60A8\u4E0E\u5B83\u53D1\u751F\u78B0\u649E\uFF0C\u4E5F\u4F1A\u5BF9\u60A8\u9020\u6210\u4F24\u5BB3\u3002"
+    Object: {fileID: 0}
 --- !u!1 &5243345530900751982
 GameObject:
   m_ObjectHideFlags: 0
@@ -5096,6 +5320,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Hora
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u65F6\u95F4"
     Object: {fileID: 0}
 --- !u!1 &5243345530984894068
 GameObject:
@@ -5196,6 +5423,9 @@ MonoBehaviour:
       si chocas.\r\n\r\nUsa el orbitador para recolectar entidades estelares y desviar
       agujeros negros."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4F60\u63A7\u5236\u9EC4\u8272\u7684\u6052\u661F\uFF0C\u7C89\u7EA2\u8272\u7684\u201C\u8F68\u9053\u5668\u201D\u6052\u661F\u88AB\u5F15\u529B\u675F\u7F1A\u5728\u4F60\u8EAB\u4E0A\u3002\r\n\r\n\u5982\u679C\u4F60\u78B0\u649E\uFF0C\u8F68\u9053\u98DE\u884C\u5668\u4F1A\u5BF9\u4F60\u9020\u6210\u4F24\u5BB3\u3002\r\n\r\n\u4F7F\u7528\u8F68\u9053\u5668\u6536\u96C6\u6052\u661F\u5B9E\u4F53\u5E76\u5206\u6D41\u9ED1\u6D1E\u3002"
+    Object: {fileID: 0}
 --- !u!1 &5243345530992673509
 GameObject:
   m_ObjectHideFlags: 0
@@ -5261,6 +5491,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: German
     Text: '[keiner]'
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "[\u6CA1\u6709]"
     Object: {fileID: 0}
 --- !u!1 &5243345531004013249
 GameObject:
@@ -5330,6 +5563,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xBFSeguro que quieres restablecer tus estad\xEDsticas?"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u786E\u5B9A\u8981\u91CD\u7F6E\u7EDF\u8BA1\u4FE1\u606F\u5417\uFF1F"
+    Object: {fileID: 0}
 --- !u!1 &5243345531006974138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5396,6 +5632,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "No se pudo encontrar un jugador con este c\xF3digo"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u627E\u4E0D\u5230\u4F7F\u7528\u6B64\u4EE3\u7801\u7684\u64AD\u653E\u5668"
     Object: {fileID: 0}
 --- !u!1 &5243345531007595704
 GameObject:
@@ -5464,6 +5703,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Tu c\xF3digo de amigo \xFAnico es:"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u7684\u552F\u4E00\u597D\u53CB\u4EE3\u7801\u662F\uFF1A"
+    Object: {fileID: 0}
 --- !u!1 &5243345531013862013
 GameObject:
   m_ObjectHideFlags: 0
@@ -5530,6 +5772,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Mover al v\xF3rtice para completar el nivel."
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u79FB\u52A8\u5230\u6F29\u6DA1\u4EE5\u5B8C\u6210\u5173\u5361\u3002"
     Object: {fileID: 0}
 --- !u!1 &5243345531055083562
 GameObject:
@@ -5648,6 +5893,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Golpea los agujeros negros con tu orbitador para evitar que te golpeen
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7528\u4F60\u7684\u8F68\u9053\u5668\u649E\u51FB\u9ED1\u6D1E\uFF0C\u4EE5\u9632\u6B62\u5B83\u4EEC\u51FB\u4E2D\u4F60"
+    Object: {fileID: 0}
 --- !u!1 &5243345531075967027
 GameObject:
   m_ObjectHideFlags: 0
@@ -5713,6 +5961,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "[el jugador no ha iniciado sesi\xF3n]"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "[\u73A9\u5BB6\u672A\u767B\u5F55]"
     Object: {fileID: 0}
 --- !u!1 &5243345531186752373
 GameObject:
@@ -5780,6 +6031,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: '[No tienes amigos]'
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "[\u4F60\u6CA1\u6709\u670B\u53CB]"
+    Object: {fileID: 0}
 --- !u!1 &5243345531192155230
 GameObject:
   m_ObjectHideFlags: 0
@@ -5846,6 +6100,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: '[Sin trofeos]'
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "[\u6CA1\u6709\u5956\u676F]"
+    Object: {fileID: 0}
 --- !u!1 &5243345531247891368
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,9 +6151,6 @@ MonoBehaviour:
   - Language: English
     Text: Back to Menu
     Object: {fileID: 0}
-  - Language: Japanese
-    Text: "\u30E1\u30CB\u30E5\u30FC\u306B\u623B\u308B"
-    Object: {fileID: 0}
   - Language: German
     Text: "Zur\xFCck zum Men\xFC"
     Object: {fileID: 0}
@@ -5905,9 +6159,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Italian
     Text: Torna al menu
-    Object: {fileID: 0}
-  - Language: Korean
-    Text: "\uBA54\uB274\uB85C \uB3CC\uC544\uAC00\uAE30"
     Object: {fileID: 0}
   - Language: Chinese
     Text: "\u8FD4\u56DE\u83DC\u5355"
@@ -5920,12 +6171,6 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Volver al Men\xFA"
-    Object: {fileID: 0}
-  - Language: Hindi
-    Text: "\u092E\u0948\u0928\u094D\u092F\u0942 \u092E\u0947\u0902 \u0935\u093E\u092A\u0938"
-    Object: {fileID: 0}
-  - Language: Indonesian
-    Text: Kembali ke menu
     Object: {fileID: 0}
 --- !u!1 &5243345531282304650
 GameObject:
@@ -5993,6 +6238,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "Mostrar c\xF3mo jugar"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u663E\u793A\u5982\u4F55\u73A9"
+    Object: {fileID: 0}
 --- !u!1 &5243345531312004572
 GameObject:
   m_ObjectHideFlags: 0
@@ -6058,6 +6306,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Mostrar recomendaciones
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u663E\u793A\u63D0\u793A"
     Object: {fileID: 0}
 --- !u!1 &5243345531321839838
 GameObject:
@@ -6136,6 +6387,9 @@ MonoBehaviour:
     Text: "Elija una direcci\xF3n para la \xF3rbita, si cambia de direcci\xF3n chocar\xE1
       con su orbitador"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4E3A\u8F68\u9053\u9009\u62E9\u4E00\u4E2A\u65B9\u5411\uFF0C\u5982\u679C\u4F60\u6539\u53D8\u65B9\u5411\uFF0C\u4F60\u5C06\u4E0E\u4F60\u7684\u8F68\u9053\u5668\u76F8\u649E"
+    Object: {fileID: 0}
 --- !u!1 &5243345531369703507
 GameObject:
   m_ObjectHideFlags: 0
@@ -6212,6 +6466,9 @@ MonoBehaviour:
     Text: "La estrella rosa est\xE1 encerrada en tu abrazo gravitacional: este es
       tu orbitador."
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u7C89\u7EA2\u8272\u7684\u661F\u661F\u9501\u5B9A\u5728\u4F60\u7684\u5F15\u529B\u6000\u62B1\u4E2D\u2014\u2014\u8FD9\u5C31\u662F\u4F60\u7684\u8F68\u9053\u5668\u3002"
+    Object: {fileID: 0}
 --- !u!1 &5243345531389985647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6278,6 +6535,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "\xA1Alguien te ha agregado como amigo!"
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6709\u4EBA\u52A0\u4F60\u4E3A\u597D\u53CB\uFF01"
     Object: {fileID: 0}
 --- !u!1 &5243345531403684387
 GameObject:
@@ -6346,6 +6606,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Ya eres amigo de este jugador.
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u60A8\u5DF2\u7ECF\u662F\u8BE5\u73A9\u5BB6\u7684\u597D\u53CB"
+    Object: {fileID: 0}
 --- !u!1 &5243345531413504802
 GameObject:
   m_ObjectHideFlags: 0
@@ -6413,6 +6676,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: "\xA1Agrega amigos desde el men\xFA de configuraci\xF3n!"
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u4ECE\u8BBE\u7F6E\u83DC\u5355\u6DFB\u52A0\u670B\u53CB\uFF01"
+    Object: {fileID: 0}
 --- !u!1 &5243345531415044326
 GameObject:
   m_ObjectHideFlags: 0
@@ -6468,7 +6734,7 @@ MonoBehaviour:
     Text: Conseils de jeu
     Object: {fileID: 0}
   - Language: Italian
-    Text: Suggerimenti per il gioco
+    Text: Suggerimenti di gioco
     Object: {fileID: 0}
   - Language: Portuguese
     Text: Dicas de jogo
@@ -6478,6 +6744,9 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: Consejos de juego
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u6E38\u620F\u63D0\u793A"
     Object: {fileID: 0}
 --- !u!1 &5243345531482884287
 GameObject:
@@ -6546,6 +6815,9 @@ MonoBehaviour:
   - Language: Spanish
     Text: Orbitar durante {LevelDuration} segundos
     Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u73AF\u7ED5 {LevelDuration} \u79D2"
+    Object: {fileID: 0}
 --- !u!1 &5243345531499946791
 GameObject:
   m_ObjectHideFlags: 0
@@ -6611,4 +6883,7 @@ MonoBehaviour:
     Object: {fileID: 0}
   - Language: Spanish
     Text: "Introduce el c\xF3digo de amigo..."
+    Object: {fileID: 0}
+  - Language: Chinese
+    Text: "\u8F93\u5165\u597D\u53CB\u4EE3\u7801..."
     Object: {fileID: 0}

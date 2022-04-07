@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 577478926}
   - component: {fileID: 577478925}
   - component: {fileID: 577478927}
+  - component: {fileID: 3312677938103818130}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -203,10 +204,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[No trophies]'
+  m_text: "[\u6CA1\u6709\u5956\u676F]"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -286,6 +287,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: '[No trophies]'
   FallbackText: '[No trophies]'
+--- !u!114 &3312677938103818130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577478923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &2028528599
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +418,7 @@ GameObject:
   - component: {fileID: 355197206280437776}
   - component: {fileID: 355197206280437790}
   - component: {fileID: 355197206280437791}
+  - component: {fileID: 4675547974550017803}
   m_Layer: 5
   m_Name: TimeLabel
   m_TagString: Untagged
@@ -459,8 +475,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 88.20s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -526,6 +542,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4675547974550017803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355197206280437777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &355197206376437398
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +642,7 @@ GameObject:
   - component: {fileID: 355197206381055741}
   - component: {fileID: 355197206381055739}
   - component: {fileID: 355197206381055740}
+  - component: {fileID: 6148619778827434649}
   m_Layer: 5
   m_Name: GoldTime
   m_TagString: Untagged
@@ -668,8 +699,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00s
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -735,6 +766,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6148619778827434649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355197206381055742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &355197206535036158
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +792,7 @@ GameObject:
   - component: {fileID: 355197206535036155}
   - component: {fileID: 355197206535036156}
   - component: {fileID: 355197206535036154}
+  - component: {fileID: 7868901646839459588}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -801,10 +847,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Best Replay
+  m_text: "\u6700\u4F73\u91CD\u64AD"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -884,6 +930,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: Best Replay
   FallbackText: Best Replay
+--- !u!114 &7868901646839459588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355197206535036158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &355197206587599928
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +956,7 @@ GameObject:
   - component: {fileID: 355197206587599909}
   - component: {fileID: 355197206587599910}
   - component: {fileID: 355197206587599908}
+  - component: {fileID: 2796461344075377819}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -952,8 +1013,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Watch Replay
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1033,6 +1094,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: Watch Replay
   FallbackText: Watch Replay
+--- !u!114 &2796461344075377819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355197206587599928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &355197206668159743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1120,7 @@ GameObject:
   - component: {fileID: 355197206668159740}
   - component: {fileID: 355197206668159741}
   - component: {fileID: 355197206668159739}
+  - component: {fileID: 8299131271431407915}
   m_Layer: 5
   m_Name: TimeHeader
   m_TagString: Untagged
@@ -1099,10 +1175,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time
+  m_text: "\u65F6\u95F4"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1182,6 +1258,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: Time
   FallbackText: Time
+--- !u!114 &8299131271431407915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355197206668159743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1 &355197206724426586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,6 +1567,7 @@ GameObject:
   - component: {fileID: 3313454739335449366}
   - component: {fileID: 5648465396929279400}
   - component: {fileID: 8433618223197792923}
+  - component: {fileID: 5267726110693189861}
   m_Layer: 5
   m_Name: BadgesHeader
   m_TagString: Untagged
@@ -1531,10 +1622,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Trophies
+  m_text: "\u5956\u676F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
-  m_sharedMaterial: {fileID: -1562797908681313291, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
+  m_sharedMaterial: {fileID: 8292511461348708585, guid: 06031b85ec8653f41a17574e69010a30, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1614,6 +1705,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: Trophies
   FallbackText: Trophies
+--- !u!114 &5267726110693189861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079306297397274742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d52b33a5902e643bced0385fa6840b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: CircumFont
+  FallbackFont: {fileID: 11400000, guid: 64c70ded3590f3544b8aea97f606ce46, type: 2}
 --- !u!1001 &2904176330706940656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1791,11 +1896,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31119a826a8d75645976cb1e8e7176d0, type: 3}
---- !u!224 &134533969398655162 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2994965301740214858, guid: 31119a826a8d75645976cb1e8e7176d0, type: 3}
-  m_PrefabInstance: {fileID: 2904176330706940656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4486257159879165129 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1589726561249326649, guid: 31119a826a8d75645976cb1e8e7176d0, type: 3}
@@ -1807,3 +1907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949cb64dabeb4bd68105f139539835eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &134533969398655162 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2994965301740214858, guid: 31119a826a8d75645976cb1e8e7176d0, type: 3}
+  m_PrefabInstance: {fileID: 2904176330706940656}
+  m_PrefabAsset: {fileID: 0}
