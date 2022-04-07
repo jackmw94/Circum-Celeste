@@ -32,7 +32,7 @@ namespace Code.UI
         {
             if (Screen.width == 0)
             {
-                Debug.LogError("Not updating screen size while screen width is zero");
+                Debug.Log("Not updating screen size while screen width is zero");
                 return;
             }
             

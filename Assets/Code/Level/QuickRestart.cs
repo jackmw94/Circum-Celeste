@@ -19,15 +19,17 @@ namespace Code.Level
             {
                 return;
             }
-            
+
             UpdateClickTimesOnClick();
 
-            if (HasBeenTriplePressed())
+            if (!HasBeenTriplePressed())
             {
-                _lastTriggeredTime = Time.time;
-                _clickTimes.Clear();
-                _levelManager.CreateCurrentLevel(transition: InterLevelFlow.InterLevelTransition.Fast);
+                return;
             }
+            
+            _lastTriggeredTime = Time.time;
+            _clickTimes.Clear();
+            _levelManager.CreateCurrentLevel(transition: InterLevelFlow.InterLevelTransition.Fast);
         }
 
         private void UpdateClickTimesOnClick()
@@ -50,7 +52,8 @@ namespace Code.Level
             float firstPressTime = _clickTimes.Peek();
             float currentTime = Time.time;
             float timeDifference = currentTime - firstPressTime;
-            return timeDifference < _tripleClickTimeThreshold;
+            bool hasBeenTriplePressed = timeDifference < _tripleClickTimeThreshold;
+            return hasBeenTriplePressed;
         }
     }
 }
