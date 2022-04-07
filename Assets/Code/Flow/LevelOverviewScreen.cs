@@ -95,13 +95,21 @@ namespace Code.Flow
         private void CheckGameComplete()
         {
             PersistentDataManager persistentDataManager = PersistentDataManager.Instance;
-            if (!persistentDataManager.PlayerFirsts.CompletedGame && persistentDataManager.HasCompletedGame())
+            if (!persistentDataManager.PlayerFirsts.CompletedGame && persistentDataManager.HasCompletedGame(true))
             {
                 Popup.Instance.EnqueueMessage(Popup.LocalisedPopupType.CompletedGame);
                 persistentDataManager.PlayerFirsts.CompletedGame = true;
+                persistentDataManager.PlayerFirsts.CompletedGameNonPerfect = true;
                 PlayerFirsts.Save(persistentDataManager.PlayerFirsts);
 
                 AppFeedbacks.Instance.TriggerComets();
+            }
+            else if (!persistentDataManager.PlayerFirsts.CompletedGameNonPerfect && persistentDataManager.HasCompletedGame(false))
+            {
+                persistentDataManager.PlayerFirsts.CompletedGameNonPerfect = true;
+                PlayerFirsts.Save(persistentDataManager.PlayerFirsts);
+                
+                AppFeedbacks.Instance.TriggerHueShift();
             }
         }
 

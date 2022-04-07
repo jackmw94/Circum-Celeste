@@ -14,6 +14,7 @@ namespace Code.Level.Player
         [field: SerializeField] public bool SuggestedHowToPlay { get; set; } = false;
         [field: SerializeField] public bool SeenReplaysScreen { get; set; } = false;
         [field: SerializeField] public bool CompletedGame { get; set; } = false;
+        [field: SerializeField] public bool CompletedGameNonPerfect { get; set; } = false;
         [field: SerializeField] public bool SeenNewFriendPopUp { get; set; } = false;
         [field: SerializeField] public bool UsedLevelOverviewArrows { get; set; } = false;
 

@@ -31,6 +31,7 @@ namespace Code.VFX
             CircumDebug.Assert(volumeComponentFound, $"Could not find a {typeof(T)} volume component on post processing ({gameObject})");
         }
         
+        [ContextMenu(nameof(TriggerAnimation))]
         public void TriggerAnimation()
         {
             if (_triggerAnimationCoroutine != null)
