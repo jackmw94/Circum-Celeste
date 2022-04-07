@@ -119,7 +119,7 @@ namespace Code.Level.Player
                 .LevelLayout
                 .ToDictionary(layout => layout.name, layout => layout);
 
-            PlayerScoreHelper.PlayerScore playerScore = PlayerScoreHelper.GetPlayerScore(levelLayoutsByName, _levelStats, _challengeData, ChallengeScreen.WeekIndex);
+            PlayerScoreHelper.PlayerScore playerScore = PlayerScoreHelper.GetPlayerScore(levelLayoutsByName, _levelStats, _challengeData);
             
             _cachedLevelScores = playerScore.LevelScores.ToDictionary(levelScore => levelScore.LevelName, levelScore => levelScore.Score);
             _cachedTotalScore = playerScore.TotalScore;
@@ -252,7 +252,7 @@ namespace Code.Level.Player
 
             foreach (LevelLayout level in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
-                Level.Player.LevelStats.ResetStats(level.name);
+                LevelStats.ResetStats(level.name);
             }
 
             _levelStats.Clear();
@@ -264,6 +264,9 @@ namespace Code.Level.Player
             _playerFirsts = new PlayerFirsts();
 
             PersistentDataHelper.DeleteKey(PersistentDataKeys.SplashScreenLastRunTime, true);
+
+            _challengeData = new ChallengeData();
+            ChallengeData.Save(_challengeData);
         }
 
         public void SetDoNotLoadOrSave(bool doNotLoadOrSave)
@@ -278,7 +281,7 @@ namespace Code.Level.Player
             return PersistentDataHelper.HasKey(NoLoadingSavingPlayerPrefsKey) && PersistentDataHelper.GetInt(NoLoadingSavingPlayerPrefsKey) == 1;
         }
 
-        public bool HasCompletedGame()
+        public bool HasCompletedGame(bool requirePerfect)
         {
             foreach (LevelLayout levelLayout in _levelProvider.ActiveLevelProgression.LevelLayout)
             {
@@ -297,7 +300,9 @@ namespace Code.Level.Player
                                            levelStats.LevelRecording.RecordingData.IsPerfect &&
                                            levelStats.LevelRecording.HasBeatenGoldTime(levelLayout.GoldTime);
 
-                if (!hasPerfectRecording)
+                bool levelNotComplete = !requirePerfect || hasPerfectRecording;
+                
+                if (levelNotComplete)
                 {
                     return false;
                 }

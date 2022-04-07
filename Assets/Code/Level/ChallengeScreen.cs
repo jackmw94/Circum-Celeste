@@ -40,27 +40,29 @@ namespace Code.Level
         [SerializeField] private Color _playButtonNoAttemptsColour;
         [SerializeField] private PulseTextColour _pulseTextColour;
         [Space(30)]
-        [SerializeField] private bool _useDebugWeekIndex = false;
-        [SerializeField] private int _debugWeekIndex = 2;
+        [SerializeField] private bool _useDebugMonthIndex = false;
+        [SerializeField] private int _debugMonthIndex = 2;
 
         private bool _anyAttemptsRemaining = false;
         private ChallengeLevel _currentChallengeLevel = null;
-        private int _cachedWeekIndex;
+        private int _cachedMonthIndex;
         
-        private static int CurrentDayIndex => (DateTime.Now - DayZero).Days;
-        public static int WeekIndex
+        public static int MonthIndex
         {
             get
             {
 #if CIRCUM_DEBUG
                 ChallengeScreen challengeScreen = GetPanel<ChallengeScreen>();
-                return challengeScreen._useDebugWeekIndex ? challengeScreen._debugWeekIndex : CurrentWeekIndexInternal;
+                return challengeScreen._useDebugMonthIndex ? challengeScreen._debugMonthIndex : CurrentMonthIndexInternal;
 #else
-                return CurrentWeekIndexInternal;
+                return CurrentMonthIndexInternal;
 #endif
             }
         }
-        private static int CurrentWeekIndexInternal => CurrentDayIndex / 7;
+        
+        private static int CurrentMonthIndexInternal => (DateTime.Now.Year - DayZero.Year) * 12 + (DateTime.Now.Month - DayZero.Month);
+        private static int CurrentDayIndex => (DateTime.Now - DayZero).Days;
+        private static int DaysRemaining => DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - DateTime.Now.Day;
 
         protected override void InternalAwake()
         {
@@ -108,9 +110,9 @@ namespace Code.Level
             }
 
             _playButton.interactable = false;
-            _cachedWeekIndex = WeekIndex;
+            _cachedMonthIndex = MonthIndex;
             
-            ChallengeLevel.RequestChallengeLevel(WeekIndex, (success, challengeLevel) => { SetupChallengeScreenInternal(success, challengeLevel, challengeData); });
+            ChallengeLevel.RequestChallengeLevel(MonthIndex, (success, challengeLevel) => { SetupChallengeScreenInternal(success, challengeLevel, challengeData); });
         }
 
         private void SetupChallengeScreenInternal(bool success, ChallengeLevel challengeLevel, ChallengeData challengeData)
@@ -132,13 +134,12 @@ namespace Code.Level
             string attemptsRemainingTranslation = LeanLocalization.GetTranslationText(_attemptsRemainingTranslation);
             _attemptsRemainingLabel.text = string.Format(attemptsRemainingTranslation, attemptsRemaining);
 
-            int score = challengeData.ChallengeScores.FirstOrDefault(p => p.WeekIndex == WeekIndex)?.Score ?? 0;
+            int score = challengeData.ChallengeScores.FirstOrDefault(p => p.MonthIndex == MonthIndex)?.Score ?? 0;
             string scoreTranslation = LeanLocalization.GetTranslationText(_challengeScoreTranslation);
             _scoreLabel.text = string.Format(scoreTranslation, score, _currentChallengeLevel.Points);
-
-            int daysRemaining = 6 - CurrentDayIndex + WeekIndex * 7;
+            
             string daysRemainingTranslation = LeanLocalization.GetTranslationText(_daysRemainingTranslation);
-            _daysRemainingLabel.text = string.Format(daysRemainingTranslation, daysRemaining);
+            _daysRemainingLabel.text = string.Format(daysRemainingTranslation, DaysRemaining);
 
             _anyAttemptsRemaining = attemptsRemaining > 0;
             _playButton.interactable = true;
@@ -173,7 +174,7 @@ namespace Code.Level
                 float recordingTime = levelResult.LevelRecordingData.LevelTime;
                 bool isPerfect = levelResult.LevelRecordingData.IsPerfect;
                 int levelScore = PlayerScoreHelper.GetScoreFromLevel(fullMarksTime, recordingTime, isPerfect, _currentChallengeLevel.Points);
-                challengeData.ChallengeScored(_currentChallengeLevel.WeekIndex, levelScore);
+                challengeData.ChallengeScored(_currentChallengeLevel.MonthIndex, levelScore);
             }
             
             _levelManager.ExitLevel();
@@ -185,9 +186,9 @@ namespace Code.Level
             while (true)
             {
                 yield return new WaitForSeconds(CheckForNextWeekIndexDelay);
-                if (_cachedWeekIndex != WeekIndex)
+                if (_cachedMonthIndex != MonthIndex)
                 {
-                    CircumDebug.Log($"Found the current week index is not the same as the challenge we loaded last. Refreshing. ({WeekIndex} != {_cachedWeekIndex})");
+                    CircumDebug.Log($"Found the current week index is not the same as the challenge we loaded last. Refreshing. ({MonthIndex} != {_cachedMonthIndex})");
                     SetupChallengeScreen();
                 }
             }
@@ -195,16 +196,16 @@ namespace Code.Level
         }
         
 #if CIRCUM_DEBUG
-        public void SetDebugChallengeWeek(bool useDebugWeekIndex, bool setDebugWeekIndexToCurrent, int weekIndexOffset = 0)
+        public void SetDebugChallengeMonth(bool useDebugMonthIndex, bool setDebugMonthIndexToCurrent, int weekIndexOffset = 0)
         {
-            _useDebugWeekIndex = useDebugWeekIndex;
-            if (setDebugWeekIndexToCurrent)
+            _useDebugMonthIndex = useDebugMonthIndex;
+            if (setDebugMonthIndexToCurrent)
             {
-                _debugWeekIndex = CurrentWeekIndexInternal;
+                _debugMonthIndex = CurrentMonthIndexInternal;
             }
             else
             {
-                _debugWeekIndex += weekIndexOffset;
+                _debugMonthIndex += weekIndexOffset;
             }
 
             SetupChallengeScreen();

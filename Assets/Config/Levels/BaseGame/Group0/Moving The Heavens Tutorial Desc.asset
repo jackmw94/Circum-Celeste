@@ -62,26 +62,26 @@ MonoBehaviour:
     _instruction: TutorialOrbiterDesc2
     IntroduceElement: 0
     CompleteCommandCriteria: 0
-    Duration: 10
+    Duration: 7
   - OrbiterEnabled: 1
     OrbiterDamageEnabled: 1
-    PickupsEnabled: 1
+    PickupsEnabled: 0
     HazardsEnabled: 0
     BlackHolesEnabled: 0
     EscapeEnabled: 0
     _instruction: TutorialOrbiterDesc3
     IntroduceElement: 0
-    CompleteCommandCriteria: 2
-    Duration: 0
+    CompleteCommandCriteria: 0
+    Duration: 7
   - OrbiterEnabled: 1
     OrbiterDamageEnabled: 1
     PickupsEnabled: 1
     HazardsEnabled: 0
     BlackHolesEnabled: 0
     EscapeEnabled: 0
-    _instruction: 
+    _instruction: TutorialOrbiterDesc4
     IntroduceElement: 0
-    CompleteCommandCriteria: 0
+    CompleteCommandCriteria: 2
     Duration: 2
   - OrbiterEnabled: 1
     OrbiterDamageEnabled: 1

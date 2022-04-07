@@ -10,10 +10,13 @@ namespace Code.Level.Player
     [Serializable]
     public class ChallengeData
     {
+        private const int ChallengeDataVersion = 1;
+        
         [Serializable]
         public class ChallengeScore
         {
-            [field: SerializeField] public int WeekIndex { get; set; } = -1;
+            [field: SerializeField] public int DataVersion { get; set; } = 0;
+            [field: SerializeField] public int MonthIndex { get; set; } = -1;
             [field: SerializeField] public int Score { get; set; } = 0;
         }
 
@@ -35,13 +38,14 @@ namespace Code.Level.Player
 
         public void ChallengeScored(int weekIndex, int score)
         {
-            ChallengeScore challengeScore = ChallengeScores.FirstOrDefault(p => p.WeekIndex == weekIndex);
+            ChallengeScore challengeScore = ChallengeScores.FirstOrDefault(p => p.MonthIndex == weekIndex && p.DataVersion == ChallengeDataVersion);
             bool requiresSave = false;
             if (challengeScore == null)
             {
                 challengeScore = new ChallengeScore
                 {
-                    WeekIndex = weekIndex,
+                    DataVersion = ChallengeDataVersion,
+                    MonthIndex = weekIndex,
                     Score = score
                 };
                 ChallengeScores.Add(challengeScore);

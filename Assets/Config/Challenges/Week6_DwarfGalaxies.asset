@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 104ff8bbd5b444ae937eeae7c30795d1, type: 3}
-  m_Name: Week3_StrangeSpiral
+  m_Name: Week6_DwarfGalaxies
   m_EditorClassIdentifier: 
-  _levelLayout: {fileID: 11400000, guid: 649a688f3ce18d74fa546eb98f09d7fb, type: 2}
+  _levelLayout: {fileID: 11400000, guid: 854d0528802774c429c70515d513d6f7, type: 2}
   _challengeConfiguration:
     <DailyAttempts>k__BackingField: 3
-    <Points>k__BackingField: 100
-    <WeekIndex>k__BackingField: 3
-    <LevelName>k__BackingField: Strange Spiral
+    <Points>k__BackingField: 75
+    <MonthIndex>k__BackingField: 6
+    <LevelName>k__BackingField: Dwarf Galaxies

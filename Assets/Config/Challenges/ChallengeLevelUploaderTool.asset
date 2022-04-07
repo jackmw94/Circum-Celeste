@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ChallengeLevelUploaderTool
   m_EditorClassIdentifier: 
   _challengeLevel:
-  - {fileID: 11400000, guid: b5023b68a1e93504ea53960350f1f24e, type: 2}
+  - {fileID: 11400000, guid: 2327032ca0707794f8c74cc7e0d39b60, type: 2}
+  - {fileID: 11400000, guid: f2f61c8f744957d47aff99c484385110, type: 2}

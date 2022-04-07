@@ -228,13 +228,18 @@ namespace Code.Core
                 FunctionName = "resetAllUserData"
             }, result =>
             {
+                UpdateUserScore(new PlayerScoreHelper.PlayerScore
+                {
+                    LevelScores = new List<PlayerScoreHelper.PlayerScore.LevelScore>(),
+                    TotalScore = 0
+                });
                 CircumDebug.Log($"Reset all remote user data\n{result.Logs.Select(p => p.Message).JoinToString("\n")}");
             }, error =>
             {
                 CircumDebug.LogError($"Could not reset remote user data {error.GenerateErrorReport()}");
             });
         }
-
+        
         private IEnumerator CheckNewFriendCoroutine()
         {
             yield return new WaitForSeconds(5f);

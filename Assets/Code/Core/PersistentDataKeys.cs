@@ -30,7 +30,7 @@ namespace Code.Core
         [Obsolete] public static string ImperfectLevelRecording(string levelName) => $"Circum_LevelRecording_{levelName}";
         public static string LevelMetaStats(string levelName) => $"Circum_LevelStats_{levelName}";
         public static string LevelRecording(string levelName) => $"Circum_LevelRecording_{levelName}";
-        public static string ChallengeName(int weekIndex) => $"Challenge_Week{weekIndex}";
+        public static string ChallengeName(int weekIndex) => $"Challenge_Month{weekIndex}";
 #endif
     }
 }

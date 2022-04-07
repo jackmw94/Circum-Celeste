@@ -27,7 +27,7 @@ namespace Code.Level
         {
             [field: SerializeField] public int DailyAttempts { get; set; } = 3;
             [field: SerializeField] public int Points { get; set; }
-            [field: SerializeField] public int WeekIndex { get; set; }
+            [field: SerializeField] public int MonthIndex { get; set; }
             [field: SerializeField, HideInInspector] public string LevelName { get; set; }
         }
         
@@ -37,10 +37,11 @@ namespace Code.Level
         public LevelLayout LevelLayout => _levelLayout;
         public int Points => _challengeConfiguration.Points;
         public string LevelName => _challengeConfiguration.LevelName;
-        public int WeekIndex => _challengeConfiguration.WeekIndex;
+        public int MonthIndex => _challengeConfiguration.MonthIndex;
+        
         public int AttemptsRemaining(int attemptsUsed) => _challengeConfiguration.DailyAttempts - attemptsUsed;
         
-        public static void RequestChallengeLevel(int weekIndex, Action<bool, ChallengeLevel> challengeLevelCallback)
+        public static void RequestChallengeLevel(int monthIndex, Action<bool, ChallengeLevel> challengeLevelCallback)
         {
             if (!RemoteDataManager.Instance.IsLoggedIn)
             {
@@ -49,7 +50,7 @@ namespace Code.Level
                 return;
             }
             
-            string challengeKey = PersistentDataKeys.ChallengeName(weekIndex);
+            string challengeKey = PersistentDataKeys.ChallengeName(monthIndex);
             PlayFabClientAPI.GetTitleData(new GetTitleDataRequest
             {
                 Keys = new List<string>

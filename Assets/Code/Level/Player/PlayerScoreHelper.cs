@@ -52,7 +52,7 @@ namespace Code.Level.Player
             }
         }
 
-        public static PlayerScore GetPlayerScore(Dictionary<string,LevelLayout> levelLayouts, Dictionary<string, LevelStats> levelStats, ChallengeData challengeData, int currentWeekIndex)
+        public static PlayerScore GetPlayerScore(Dictionary<string,LevelLayout> levelLayouts, Dictionary<string, LevelStats> levelStats, ChallengeData challengeData)
         {
             PlayerScore playerScores = new PlayerScore();
             
@@ -82,11 +82,7 @@ namespace Code.Level.Player
 
             foreach (ChallengeData.ChallengeScore challengeScore in challengeData.ChallengeScores)
             {
-                int weeksSince = currentWeekIndex - challengeScore.WeekIndex;
-                if (weeksSince < 12)
-                {
-                    playerScores.TotalScore += challengeScore.Score;
-                }
+                playerScores.TotalScore += challengeScore.Score;
             }
 
             return playerScores;

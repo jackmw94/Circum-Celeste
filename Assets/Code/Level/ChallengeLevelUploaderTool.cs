@@ -18,7 +18,7 @@ namespace Code.Level
 #if ENABLE_PLAYFABADMIN_API
             foreach (ChallengeLevel challengeLevel in _challengeLevel)
             {
-                string titleDataKey = PersistentDataKeys.ChallengeName(challengeLevel.WeekIndex);
+                string titleDataKey = PersistentDataKeys.ChallengeName(challengeLevel.MonthIndex);
 
                 ChallengeLevel.ChallengeLevelProxy challengeLevelProxy = challengeLevel.GetChallengeLevelProxy();
                 string serializedChallengeLevelProxy = JsonUtility.ToJson(challengeLevelProxy);
@@ -30,7 +30,7 @@ namespace Code.Level
                     }, 
                     result =>
                     {
-                        Debug.Log($"Set title data for {challengeLevel.LevelName} at week {challengeLevel.WeekIndex}. {titleDataKey}");
+                        Debug.Log($"Set title data for {challengeLevel.LevelName} at month index: {challengeLevel.MonthIndex}. {titleDataKey}");
                     }, error => { Debug.LogError(error.ErrorMessage); });
             }
 #else
