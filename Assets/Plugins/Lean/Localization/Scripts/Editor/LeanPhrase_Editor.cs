@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Lean.Common;
-using Object = UnityEngine.Object;
+using CW.Common;
 
 #if UNITY_EDITOR
 namespace Lean.Localization.Editor
@@ -10,8 +9,9 @@ namespace Lean.Localization.Editor
 	using UnityEditor;
 	using TARGET = LeanPhrase;
 
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanPhrase_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanPhrase_Editor : CwEditor
 	{
 		private static List<string> languageNames = new List<string>();
 
@@ -168,7 +168,7 @@ namespace Lean.Localization.Editor
 		[MenuItem("Assets/Create/Lean/Localization/Lean Phrase")]
 		private static void CreatePhrase()
 		{
-			LeanHelper.CreateAsset("New Phrase").AddComponent<LeanPhrase>();
+			CwHelper.CreatePrefabAsset("New Phrase").AddComponent<LeanPhrase>();
 		}
 
 		public static bool TryAutoTranslate(string languageCodeInput, string languageCodeOutput, string wordInput, ref string wordOutput)
@@ -183,9 +183,8 @@ namespace Lean.Localization.Editor
 
 				return true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Debug.LogException(e);
 				return false;
 			}
 		}

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using CW.Common;
 
 namespace Lean.Common
 {
@@ -54,13 +55,17 @@ namespace Lean.Common
 
 		private static List<KeyValuePair<GameObject, int>> tempLayers = new List<KeyValuePair<GameObject, int>>();
 
-		public LeanScreenQuery(MethodType newMethod)
+		public LeanScreenQuery(MethodType newMethod) : this(newMethod, Physics.DefaultRaycastLayers)
+		{
+		}
+
+		public LeanScreenQuery(MethodType newMethod, LayerMask layers)
 		{
 			Method      = newMethod;
 			Search      = SearchType.GetComponentInParent;
 			RequiredTag = null;
 			Camera      = null;
-			Layers      = Physics.DefaultRaycastLayers;
+			Layers      = layers;
 			Distance    = 50.0f;
 		}
 
@@ -113,7 +118,7 @@ namespace Lean.Common
 
 		public bool TryQuery<T>(GameObject gameObject, Vector2 screenPosition, ref T result, ref Component root, ref Vector3 worldPosition)
 		{
-			var camera       = LeanHelper.GetCamera(Camera, gameObject);
+			var camera       = CwHelper.GetCamera(Camera, gameObject);
 			var bestHit      = default(Component);
 			var bestDistance = float.PositiveInfinity;
 			var bestPosition = default(Vector3);
@@ -361,9 +366,9 @@ namespace Lean.Common.Editor
 						//LeanEditor.BeginError(property.FindPropertyRelative("Distance").floatValue == 0.0f);
 						//	DrawProperty(ref rect, property, label, "Distance", "Distance", "The world space distance from the camera the point will be placed. This should be greater than 0.");
 						//LeanEditor.EndError();
-						LeanEditor.BeginError(property.FindPropertyRelative("Layers").intValue == 0.0f);
+						CwEditor.BeginError(property.FindPropertyRelative("Layers").intValue == 0.0f);
 							DrawProperty(ref rect, property, label, "Layers", "Layers", "The scene will be queried (e.g. Raycast) against these layers.");
-						LeanEditor.EndError();
+						CwEditor.EndError();
 						DrawProperty(ref rect, property, label, "Search", "Search", "When the query hits a GameObject, how should the desired component be searched for relative to it?");
 						DrawProperty(ref rect, property, label, "RequiredTag", "RequiredTag", "The component found from the search must have this tag.");
 					}
@@ -379,11 +384,11 @@ namespace Lean.Common.Editor
 			var propertyObject = property.FindPropertyRelative("Object");
 			var oldValue       = propertyObject.objectReferenceValue as T;
 
-			LeanEditor.BeginError(oldValue == null);
+			CwEditor.BeginError(oldValue == null);
 				var mixed = EditorGUI.showMixedValue; EditorGUI.showMixedValue = propertyObject.hasMultipleDifferentValues;
 					var newValue = EditorGUI.ObjectField(rect, new GUIContent(title, tooltip), oldValue, typeof(T), true);
 				EditorGUI.showMixedValue = mixed;
-			LeanEditor.EndError();
+			CwEditor.EndError();
 
 			if (oldValue != newValue)
 			{

@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component allows you make the current GameObject selectable.</summary>
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanSelectable")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanSelectable")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Selectable")]
 	public class LeanSelectable : MonoBehaviour
 	{
 		[System.Serializable] public class LeanSelectEvent : UnityEvent<LeanSelect> {}
@@ -16,12 +17,14 @@ namespace Lean.Common
 		public bool SelfSelected { set { if (selfSelected != value) { selfSelected = value; if (value == true) InvokeOnSelected(null); else InvokeOnDeslected(null); } } get { return selfSelected; } } [SerializeField] private bool selfSelected;
 
 		/// <summary>This is invoked every time this object is selected.
+		/// LeanSelect = The component that caused the selection (null = self selection).
 		/// NOTE: This may occur multiple times.</summary>
-		public UnityEvent OnSelected { get { if (onSelected == null) onSelected = new UnityEvent(); return onSelected; } } [SerializeField] private UnityEvent onSelected;
+		public LeanSelectEvent OnSelected { get { if (onSelected == null) onSelected = new LeanSelectEvent(); return onSelected; } } [SerializeField] private LeanSelectEvent onSelected;
 
 		/// <summary>This is invoked every time this object is deselected.
+		/// LeanSelect = The component that caused the deselection (null = self deselection).
 		/// NOTE: This may occur multiple times.</summary>
-		public UnityEvent OnDeselected { get { if (onDeselected == null) onDeselected = new UnityEvent(); return onDeselected; } } [FSA("OnDeselect")] [SerializeField] private UnityEvent onDeselected;
+		public LeanSelectEvent OnDeselected { get { if (onDeselected == null) onDeselected = new LeanSelectEvent(); return onDeselected; } } [SerializeField] private LeanSelectEvent onDeselected;
 
 		public static event System.Action<LeanSelectable> OnAnyEnabled;
 
@@ -126,7 +129,7 @@ namespace Lean.Common
 		{
 			if (onSelected != null)
 			{
-				onSelected.Invoke();
+				onSelected.Invoke(select);
 			}
 
 			if (OnAnySelected != null)
@@ -139,7 +142,7 @@ namespace Lean.Common
 		{
 			if (onDeselected != null)
 			{
-				onDeselected.Invoke();
+				onDeselected.Invoke(select);
 			}
 
 			if (OnAnyDeselected != null)
@@ -178,11 +181,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelectable;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanSelectable_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanSelectable_Editor : CwEditor
 	{
 		[System.NonSerialized] TARGET tgt; [System.NonSerialized] TARGET[] tgts;
 
@@ -202,7 +206,7 @@ namespace Lean.Common.Editor
 		private void DrawSelected()
 		{
 			BeginDisabled();
-				UnityEditor.EditorGUILayout.Toggle(new GUIContent("Is Selected", "This will tell you if this object is self selected, or selected by any LeanSelect components in the scene."), tgt.IsSelected);
+				EditorGUILayout.Toggle(new GUIContent("Is Selected", "This will tell you if this object is self selected, or selected by any LeanSelect components in the scene."), tgt.IsSelected);
 			EndDisabled();
 			BeginIndent();
 				if (Draw("selfSelected") == true)
@@ -214,7 +218,7 @@ namespace Lean.Common.Editor
 					{
 						if (IsSelectedByAnyTgt(select) == true)
 						{
-							UnityEditor.EditorGUILayout.ObjectField(new GUIContent("selectedBy"), select, typeof(LeanSelect), true);
+							EditorGUILayout.ObjectField(new GUIContent("selectedBy"), select, typeof(LeanSelect), true);
 						}
 					}
 				EndDisabled();

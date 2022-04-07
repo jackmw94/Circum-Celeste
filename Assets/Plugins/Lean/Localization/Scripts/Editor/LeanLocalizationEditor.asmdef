@@ -2,7 +2,8 @@
     "name": "LeanLocalizationEditor",
     "references": [
         "LeanCommon",
-        "LeanLocalization"
+        "LeanLocalization",
+        "CW.Common"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

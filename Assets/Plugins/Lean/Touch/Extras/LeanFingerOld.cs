@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -15,13 +15,13 @@ namespace Lean.Touch
 		[System.Serializable] public class Vector2Event : UnityEvent<Vector2> {}
 
 		/// <summary>Ignore fingers with StartedOverGui?</summary>
-		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [FSA("IgnoreStartedOverGui")] [SerializeField] private bool ignoreStartedOverGui = true;
+		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [SerializeField] private bool ignoreStartedOverGui = true;
 
 		/// <summary>Ignore fingers with OverGui?</summary>
-		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [FSA("IgnoreIsOverGui")] [SerializeField] private bool ignoreIsOverGui;
+		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [SerializeField] private bool ignoreIsOverGui;
 
 		/// <summary>If the specified object is set and isn't selected, then this component will do nothing.</summary>
-		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [FSA("RequiredSelectable")] [SerializeField] private LeanSelectable requiredSelectable;
+		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [SerializeField] private LeanSelectable requiredSelectable;
 
 		/// <summary>This event will be called if the above conditions are met when your finger becomes old.</summary>
 		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [SerializeField] private LeanFingerEvent onFinger;
@@ -31,7 +31,7 @@ namespace Lean.Touch
 
 		/// <summary>This event will be called if the above conditions are met when your finger becomes old.
 		/// Vector3 = Finger position in world space.</summary>
-		public Vector3Event OnWorld { get { if (onWorld == null) onWorld = new Vector3Event(); return onWorld; } } [SerializeField] [FSA("onPosition")] private Vector3Event onWorld;
+		public Vector3Event OnWorld { get { if (onWorld == null) onWorld = new Vector3Event(); return onWorld; } } [SerializeField] private Vector3Event onWorld;
 
 		/// <summary>This event will be called if the above conditions are met when your finger becomes old.
 		/// Vector2 = Finger position in screen space.</summary>
@@ -103,11 +103,12 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanFingerOld;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanFingerOld_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanFingerOld_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

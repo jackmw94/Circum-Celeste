@@ -81,12 +81,12 @@ namespace Lean.Common
 		}
 
 		/// <summary>Called when selection begins.</summary>
-		protected virtual void OnSelected()
+		protected virtual void OnSelected(LeanSelect select)
 		{
 		}
 
 		/// <summary>Called when this is deselected.</summary>
-		protected virtual void OnDeselected()
+		protected virtual void OnDeselected(LeanSelect select)
 		{
 		}
 	}

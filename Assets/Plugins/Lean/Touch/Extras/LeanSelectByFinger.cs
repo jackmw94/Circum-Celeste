@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
 
 namespace Lean.Touch
 {
@@ -50,26 +49,30 @@ namespace Lean.Touch
 		/// <summary>This method allows you to manually select an object with the specified finger using this component's selection settings.</summary>
 		public void Select(LeanSelectable selectable, LeanFinger finger)
 		{
+			var pair = new LeanSelectableByFinger.SelectedPair() { Finger = finger, Select = this };
+
 			if (TrySelect(selectable) == true)
 			{
 				var selectableByFinger = selectable as LeanSelectableByFinger;
 
 				if (selectableByFinger != null)
 				{
-					if (selectableByFinger.SelectingFingers.Contains(finger) == false)
+					if (selectableByFinger.SelectingPairs.Contains(pair) == false)
 					{
-						selectableByFinger.SelectingFingers.Add(finger);
+						selectableByFinger.SelectingPairs.Add(pair);
 					}
-
+					
 					selectableByFinger.OnSelectedFinger.Invoke(finger);
+					selectableByFinger.OnSelectedSelectFinger.Invoke(this, finger);
 
 					LeanSelectableByFinger.InvokeAnySelectedFinger(this, selectableByFinger, finger);
 
 					if (finger.Up == true)
 					{
 						selectableByFinger.OnSelectedFingerUp.Invoke(finger);
+						selectableByFinger.OnSelectedSelectFingerUp.Invoke(this, finger);
 
-						selectableByFinger.SelectingFingers.Remove(finger);
+						selectableByFinger.SelectingPairs.Remove(pair);
 					}
 				}
 
@@ -85,9 +88,9 @@ namespace Lean.Touch
 
 					if (selectableByFinger != null)
 					{
-						if (selectableByFinger.SelectingFingers.Contains(finger) == false)
+						if (selectableByFinger.SelectingPairs.Contains(pair) == false)
 						{
-							selectableByFinger.SelectingFingers.Add(finger);
+							selectableByFinger.SelectingPairs.Add(pair);
 						}
 					}
 				}
@@ -116,9 +119,9 @@ namespace Lean.Touch
 
 			if (selectableByFinger != null)
 			{
-				foreach (var finger in selectableByFinger.SelectingFingers)
+				foreach (var pair in selectableByFinger.SelectingPairs)
 				{
-					if (finger.Up == false)
+					if (pair.Finger.Up == false)
 					{
 						return false;
 					}
@@ -176,10 +179,11 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelectByFinger;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
 	public class LeanSelectByFinger_Editor : Common.Editor.LeanSelect_Editor
 	{
 		[System.NonSerialized] TARGET tgt; [System.NonSerialized] TARGET[] tgts;

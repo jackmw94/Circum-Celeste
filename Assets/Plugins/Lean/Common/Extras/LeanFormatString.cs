@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component allows you to convert values like ints and floats into formatted text that can be shown in the UI. To use this component, simply call one of the <b>SetString</b> methods, and it will output the formatted string to the <b>OnString</b> event, which can be connected to UI text, etc.</b></summary>
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanFormatString")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Format String")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanFormatString")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Format String")]
 	public class LeanFormatString : MonoBehaviour
 	{
 		[System.Serializable] public class StringEvent : UnityEvent<string> {}
@@ -122,11 +123,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanFormatString;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanFormatString_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanFormatString_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Localization
 {
@@ -27,7 +27,7 @@ namespace Lean.Localization
 			WhenChangedAlt
 		}
 
-		public const string HelpUrlPrefix = LeanHelper.HelpUrlPrefix + "LeanLocalization#";
+		public const string HelpUrlPrefix = LeanCommon.HelpUrlPrefix + "LeanLocalization#";
 
 		public const string ComponentPathPrefix = "Lean/Localization/Lean ";
 
@@ -49,17 +49,17 @@ namespace Lean.Localization
 		private string currentLanguage;
 
 		/// <summary>How should the cultures be used to detect the user's device language?</summary>
-		public DetectType DetectLanguage { set { detectLanguage = value; } get { return detectLanguage; } } [FSA("DetectLanguage")] [SerializeField] private DetectType detectLanguage = DetectType.SystemLanguage;
+		public DetectType DetectLanguage { set { detectLanguage = value; } get { return detectLanguage; } } [SerializeField] private DetectType detectLanguage = DetectType.SystemLanguage;
 
 		/// <summary>If the application is started and no language has been loaded or auto detected, this language will be used.</summary>
-		public string DefaultLanguage { set { defaultLanguage = value; } get { return defaultLanguage; } } [FSA("DefaultLanguage")] [SerializeField] [LeanLanguageName] private string defaultLanguage;
+		public string DefaultLanguage { set { defaultLanguage = value; } get { return defaultLanguage; } } [SerializeField] [LeanLanguageName] private string defaultLanguage;
 
 		/// <summary>This allows you to control if/how this component's <b>CurrentLanguage</b> setting should save/load.
 		/// None = Only the <b>DetectLanguage</b> and <b>DefaultLanguage</b> settings will be used.
 		/// WhenChanged = If the <b>CurrentLanguage</b> gets manually changed, automatically save/load it to PlayerPrefs?
 		/// 
 		/// NOTE: This save data can be cleared with <b>ClearSave</b> context menu option.</summary>
-		public SaveLoadType SaveLoad { set { saveLoad = value; } get { return saveLoad; } } [FSA("saveLanguage")] [FSA("SaveLanguage")] [SerializeField] private SaveLoadType saveLoad = SaveLoadType.WhenChanged;
+		public SaveLoadType SaveLoad { set { saveLoad = value; } get { return saveLoad; } } [SerializeField] private SaveLoadType saveLoad = SaveLoadType.WhenChanged;
 
 		/// <summary>This stores all prefabs and folders managed by this LeanLocalization instance.</summary>
 		public List<LeanPrefab> Prefabs { get { if (prefabs == null) prefabs = new List<LeanPrefab>(); return prefabs; } } [SerializeField] private List<LeanPrefab> prefabs;
@@ -559,8 +559,9 @@ namespace Lean.Localization.Editor
 	using UnityEditor;
 	using TARGET = LeanLocalization;
 
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanLocalization_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanLocalization_Editor : CwEditor
 	{
 		class PresetLanguage
 		{

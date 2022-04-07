@@ -5,8 +5,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
-using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -22,9 +21,9 @@ namespace Lean.Touch
 	{
 		public const string ComponentPathPrefix = "Lean/Touch/Lean ";
 
-		public const string HelpUrlPrefix = "https://carloswilkes.github.io/Documentation/LeanTouch#";
+		public const string HelpUrlPrefix = "https://carloswilkes.com/Documentation/LeanTouch#";
 
-		public const string PlusHelpUrlPrefix = "https://carloswilkes.github.io/Documentation/LeanTouchPlus#";
+		public const string PlusHelpUrlPrefix = "https://carloswilkes.com/Documentation/LeanTouchPlus#";
 
 		public const int MOUSE_FINGER_INDEX = -1;
 
@@ -81,7 +80,7 @@ namespace Lean.Touch
 		public event System.Action OnSimulateFingers;
 
 		/// <summary>This allows you to set how many seconds are required between a finger down/up for a tap to be registered.</summary>
-		public float TapThreshold { set { tapThreshold = value; } get { return tapThreshold; } } [FSA("TapThreshold")] [SerializeField] private float tapThreshold = DEFAULT_TAP_THRESHOLD;
+		public float TapThreshold { set { tapThreshold = value; } get { return tapThreshold; } } [SerializeField] private float tapThreshold = DEFAULT_TAP_THRESHOLD;
 
 		public static float CurrentTapThreshold
 		{
@@ -92,7 +91,7 @@ namespace Lean.Touch
 		}
 
 		/// <summary>This allows you to set how many pixels of movement (relative to the ReferenceDpi) are required within the TapThreshold for a swipe to be triggered.</summary>
-		public float SwipeThreshold { set { swipeThreshold = value; } get { return swipeThreshold; } } [FSA("SwipeThreshold")] [SerializeField] private float swipeThreshold = DEFAULT_SWIPE_THRESHOLD;
+		public float SwipeThreshold { set { swipeThreshold = value; } get { return swipeThreshold; } } [SerializeField] private float swipeThreshold = DEFAULT_SWIPE_THRESHOLD;
 
 
 		public static float CurrentSwipeThreshold
@@ -105,22 +104,21 @@ namespace Lean.Touch
 
 #if LEAN_ALLOW_RECLAIM
 		/// <summary>This allows you to set how many pixels (relative to the ReferenceDpi) away from a previous finger the new touching finger must be for it to be reclaimed. This is useful on platforms that give incorrect finger ID data.</summary>
-		[Tooltip("This allows you to set how many pixels (relative to the ReferenceDpi) away from a previous finger the new touching finger must be for it to be reclaimed. This is useful on platforms that give incorrect finger ID data.")]
-		public float ReclaimThreshold = DefaultReclaimThreshold;
+		public float ReclaimThreshold { set { reclaimThreshold = value; } get { return reclaimThreshold; } } [SerializeField] private float reclaimThreshold = DEFAULT_RECLAIM_THRESHOLD;
 
-		public const float DefaultReclaimThreshold = 10.0f;
+		public const float DEFAULT_RECLAIM_THRESHOLD = 10.0f;
 
 		public static float CurrentReclaimThreshold
 		{
 			get
 			{
-				return Instances.Count > 0 ? Instances[0].ReclaimThreshold : DefaultReclaimThreshold;
+				return Instances.Count > 0 ? Instances[0].reclaimThreshold : DEFAULT_RECLAIM_THRESHOLD;
 			}
 		}
 #endif
 
-		/// <summary>This allows you to set the default DPI you want the input scaling to be based on.</summary>
-		public int ReferenceDpi { set { referenceDpi = value; } get { return referenceDpi; } } [FSA("ReferenceDpi")] [SerializeField] private int referenceDpi = DEFAULT_REFERENCE_DPI;
+		/// <summary>This allows you to set the default DPI you want the input scaling to be based on. For example, if you set this to 200 and your display has a DPI of 400, then the <b>ScaledDelta</b> finger value will be half the distance of the pixel space <b>ScreenDelta</b> value.</summary>
+		public int ReferenceDpi { set { referenceDpi = value; } get { return referenceDpi; } } [SerializeField] private int referenceDpi = DEFAULT_REFERENCE_DPI;
 
 		public static int CurrentReferenceDpi
 		{
@@ -131,7 +129,7 @@ namespace Lean.Touch
 		}
 
 		/// <summary>This allows you to set which layers your GUI is on, so it can be ignored by each finger.</summary>
-		public LayerMask GuiLayers { set { guiLayers = value; } get { return guiLayers; } } [FSA("GuiLayers")] [SerializeField] private LayerMask guiLayers = (LayerMask)DEFAULT_GUI_LAYERS;
+		public LayerMask GuiLayers { set { guiLayers = value; } get { return guiLayers; } } [SerializeField] private LayerMask guiLayers = (LayerMask)DEFAULT_GUI_LAYERS;
 
 		public static LayerMask CurrentGuiLayers
 		{
@@ -155,14 +153,17 @@ namespace Lean.Touch
 		/// <summary>Should components hooked into the <b>OnSimulateFingers</b> event be used? (e.g. LeanTouchSimulator)</summary>
 		public bool UseSimulator { set { useSimulator = value; } get { return useSimulator; } } [SerializeField] private bool useSimulator = true;
 
+		/// <summary>When using the old/legacy input system, by default it will convert touch data into mouse data, even if there is no mouse. Enabling this setting will disable this behavior.</summary>
+		public bool DisableMouseEmulation { set { disableMouseEmulation = value; UpdateMouseEmulation(); } get { return disableMouseEmulation; } } [SerializeField] private bool disableMouseEmulation = true;
+
 		/// <summary>Should each finger record snapshots of their screen positions?</summary>
-		public bool RecordFingers { set { recordFingers = value; } get { return recordFingers; } } [FSA("RecordFingers")] [SerializeField] private bool recordFingers = true;
+		public bool RecordFingers { set { recordFingers = value; } get { return recordFingers; } } [SerializeField] private bool recordFingers = true;
 
 		/// <summary>This allows you to set the amount of pixels a finger must move for another snapshot to be stored.</summary>
-		public float RecordThreshold { set { recordThreshold = value; } get { return recordThreshold; } } [FSA("RecordThreshold")] [SerializeField] private float recordThreshold = 5.0f;
+		public float RecordThreshold { set { recordThreshold = value; } get { return recordThreshold; } } [SerializeField] private float recordThreshold = 5.0f;
 
 		/// <summary>This allows you to set the maximum amount of seconds that can be recorded, 0 = unlimited.</summary>
-		public float RecordLimit { set { recordLimit = value; } get { return recordLimit; } } [FSA("RecordLimit")] [SerializeField] private float recordLimit = DEFAULT_RECORD_LIMIT;
+		public float RecordLimit { set { recordLimit = value; } get { return recordLimit; } } [SerializeField] private float recordLimit = DEFAULT_RECORD_LIMIT;
 
 		// Used to find if the GUI is in use
 		private static List<RaycastResult> tempRaycastResults = new List<RaycastResult>(10);
@@ -247,6 +248,33 @@ namespace Lean.Touch
 			}
 		}
 
+		public static bool ElementOverlapped(GameObject element, Vector2 screenPosition)
+		{
+			var results = RaycastGui(screenPosition, -1);
+
+			if (results != null && results.Count > 0)
+			{
+				if (results[0].gameObject == element)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public static EventSystem GetEventSystem()
+		{
+			var currentEventSystem = EventSystem.current;
+
+			if (currentEventSystem == null)
+			{
+				currentEventSystem = FindObjectOfType<EventSystem>();
+			}
+
+			return currentEventSystem;
+		}
+
 		/// <summary>This will return true if the specified screen point is over any GUI elements.</summary>
 		public static bool PointOverGui(Vector2 screenPosition)
 		{
@@ -266,12 +294,7 @@ namespace Lean.Touch
 		{
 			tempRaycastResults.Clear();
 
-			var currentEventSystem = EventSystem.current;
-
-			if (currentEventSystem == null)
-			{
-				currentEventSystem = FindObjectOfType<EventSystem>();
-			}
+			var currentEventSystem = GetEventSystem();
 
 			if (currentEventSystem != null)
 			{
@@ -397,9 +420,24 @@ namespace Lean.Touch
 			UpdateFingers(1.0f, false);
 		}
 
+		/// <summary>This will update Unity based on the current <b>DisableMouseEmulation</b> setting.</summary>
+		public void UpdateMouseEmulation()
+		{
+			if (disableMouseEmulation == true)
+			{
+				Input.simulateMouseWithTouches = false;
+			}
+			else
+			{
+				Input.simulateMouseWithTouches = true;
+			}
+		}
+
 		protected virtual void OnEnable()
 		{
 			Instances.Add(this);
+
+			UpdateMouseEmulation();
 		}
 
 		protected virtual void OnDisable()
@@ -564,22 +602,22 @@ namespace Lean.Touch
 		private void PollFingers()
 		{
 			// Submit real fingers?
-			if (useTouch == true && LeanInput.GetTouchCount() > 0)
+			if (useTouch == true && CwInput.GetTouchCount() > 0)
 			{
-				for (var i = 0; i < LeanInput.GetTouchCount(); i++)
+				for (var i = 0; i < CwInput.GetTouchCount(); i++)
 				{
 					int id; Vector2 position; float pressure; bool set;
 
-					LeanInput.GetTouch(i, out id, out position, out pressure, out set);
+					CwInput.GetTouch(i, out id, out position, out pressure, out set);
 
 					AddFinger(id, position, pressure, set);
 				}
 			}
 
 			// Submit mouse hover as finger?
-			if (useHover == true && LeanInput.GetMouseExists() == true)
+			if (useHover == true && CwInput.GetMouseExists() == true)
 			{
-				var mousePosition = LeanInput.GetMousePosition();
+				var mousePosition = CwInput.GetMousePosition();
 				var hoverFinger   = AddFinger(HOVER_FINGER_INDEX, mousePosition, 0.0f, true);
 
 				hoverFinger.StartedOverGui = false;
@@ -587,20 +625,20 @@ namespace Lean.Touch
 			}
 
 			// Submit mouse buttons as finger?
-			if (useMouse == true && LeanInput.GetMouseExists() == true)
+			if (useMouse == true && CwInput.GetMouseExists() == true)
 			{
 				var mouseSet = false;
 				var mouseUp  = false;
 
 				for (var i = 0; i < 5; i++)
 				{
-					mouseSet |= LeanInput.GetMousePressed(i);
-					mouseUp  |= LeanInput.GetMouseUp(i);
+					mouseSet |= CwInput.GetMouseIsHeld(i);
+					mouseUp  |= CwInput.GetMouseWentUp(i);
 				}
 
 				if (mouseSet == true || mouseUp == true)
 				{
-					var mousePosition = LeanInput.GetMousePosition();
+					var mousePosition = CwInput.GetMousePosition();
 
 					// Is the mouse within the screen?
 					//if (new Rect(0, 0, Screen.width, Screen.height).Contains(mousePosition) == true)
@@ -776,7 +814,7 @@ namespace Lean.Touch
 			{
 				var finger = InactiveFingers[i];
 
-				if (finger.Expired == false && Vector2.Distance(finger.ScreenPosition, screenPosition) * ScalingFactor < ReclaimThreshold)
+				if (finger.Expired == false && Vector2.Distance(finger.ScreenPosition, screenPosition) * ScalingFactor < reclaimThreshold)
 				{
 					finger.Index = index;
 
@@ -814,8 +852,8 @@ namespace Lean.Touch.Editor
 	using UnityEditor;
 	using TARGET = LeanTouch;
 
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanTouch_Editor : LeanEditor
+	[CustomEditor(typeof(TARGET))]
+	public class LeanTouch_Editor : CwEditor
 	{
 		private static List<LeanFinger> allFingers = new List<LeanFinger>();
 
@@ -873,13 +911,15 @@ namespace Lean.Touch.Editor
 
 		private void DrawSettings(LeanTouch touch)
 		{
-			Draw("tapThreshold");
-			Draw("swipeThreshold");
+			var updateMouseEmulation = false;
+
+			Draw("tapThreshold", "This allows you to set how many seconds are required between a finger down/up for a tap to be registered.");
+			Draw("swipeThreshold", "This allows you to set how many pixels of movement (relative to the ReferenceDpi) are required within the TapThreshold for a swipe to be triggered.");
 #if LEAN_ALLOW_RECLAIM
-			DrawDefault("ReclaimThreshold");
+			Draw("reclaimThreshold", "This allows you to set how many pixels (relative to the ReferenceDpi) away from a previous finger the new touching finger must be for it to be reclaimed. This is useful on platforms that give incorrect finger ID data.");
 #endif
-			Draw("referenceDpi");
-			Draw("guiLayers");
+			Draw("referenceDpi", "This allows you to set the default DPI you want the input scaling to be based on. For example, if you set this to 200 and your display has a DPI of 400, then the <b>ScaledDelta</b> finger value will be half the distance of the pixel space <b>ScreenDelta</b> value.");
+			Draw("guiLayers", "This allows you to set which layers your GUI is on, so it can be ignored by each finger.");
 
 			Separator();
 
@@ -890,14 +930,20 @@ namespace Lean.Touch.Editor
 
 			Separator();
 
-			Draw("recordFingers");
-			
+			Draw("disableMouseEmulation", ref updateMouseEmulation, "When using the old/legacy input system, by default it will convert touch data into mouse data, even if there is no mouse. Enabling this setting will disable this behavior.");
+			Draw("recordFingers", "Should each finger record snapshots of their screen positions?");
+
 			if (touch.RecordFingers == true)
 			{
 				BeginIndent();
-					Draw("recordThreshold");
-					Draw("recordLimit");
+					Draw("recordThreshold", "This allows you to set the amount of pixels a finger must move for another snapshot to be stored.");
+					Draw("recordLimit", "This allows you to set the maximum amount of seconds that can be recorded, 0 = unlimited.");
 				EndIndent();
+			}
+
+			if (updateMouseEmulation == true)
+			{
+				Each(tgts, t => t.UpdateMouseEmulation(), true);
 			}
 		}
 

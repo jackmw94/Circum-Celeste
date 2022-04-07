@@ -1,8 +1,15 @@
-﻿{
-	"name": "LeanCommon",
+{
+    "name": "LeanCommon",
     "references": [
-        "Unity.InputSystem"
+        "CW.Common"
     ],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

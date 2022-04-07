@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
 using Lean.Common;
 
 namespace Lean.Touch
@@ -24,23 +23,36 @@ namespace Lean.Touch
 			IgnoreSelectingFingers
 		}
 
+		public struct SelectedPair
+		{
+			public LeanSelectByFinger Select;
+			public LeanFinger         Finger;
+		}
+
 		[System.Serializable] public class LeanFingerEvent : UnityEvent<LeanFinger> {}
+		[System.Serializable] public class LeanSelectFingerEvent : UnityEvent<LeanSelectByFinger, LeanFinger> {}
 
 		/// <summary>This allows you to control which fingers will be used by components that require this selectable.</summary>
 		public UseType Use { set { use = value; } get { return use; } } [SerializeField] private UseType use;
 
 		/// <summary>This event is called when selection begins (finger = the finger that selected this).</summary>
-		public LeanFingerEvent OnSelectedFinger { get { if (onSelectedFinger == null) onSelectedFinger = new LeanFingerEvent(); return onSelectedFinger; } } [FSA("onSelect")] [SerializeField] private LeanFingerEvent onSelectedFinger;
+		public LeanFingerEvent OnSelectedFinger { get { if (onSelectedFinger == null) onSelectedFinger = new LeanFingerEvent(); return onSelectedFinger; } } [SerializeField] private LeanFingerEvent onSelectedFinger;
+
+		/// <summary>This event is called when selection begins (selectByFinger = component that selected this, finger = the finger that selected this).</summary>
+		public LeanFingerEvent OnSelectedFingerUp { get { if (onSelectedFingerUp == null) onSelectedFingerUp = new LeanFingerEvent(); return onSelectedFingerUp; } } [SerializeField] private LeanFingerEvent onSelectedFingerUp;
+
+		/// <summary>This event is called when selection begins (selectByFinger = component that selected this, finger = the finger that selected this).</summary>
+		public LeanSelectFingerEvent OnSelectedSelectFinger { get { if (onSelectedSelectFinger == null) onSelectedSelectFinger = new LeanSelectFingerEvent(); return onSelectedSelectFinger; } } [SerializeField] private LeanSelectFingerEvent onSelectedSelectFinger;
 
 		/// <summary>This event is called when selection begins (finger = the finger that selected this).</summary>
-		public LeanFingerEvent OnSelectedFingerUp { get { if (onSelectedFingerUp == null) onSelectedFingerUp = new LeanFingerEvent(); return onSelectedFingerUp; } } [FSA("onSelectUp")] [SerializeField] private LeanFingerEvent onSelectedFingerUp;
+		public LeanSelectFingerEvent OnSelectedSelectFingerUp { get { if (onSelectedSelectFingerUp == null) onSelectedSelectFingerUp = new LeanSelectFingerEvent(); return onSelectedSelectFingerUp; } } [SerializeField] private LeanSelectFingerEvent onSelectedSelectFingerUp;
 
 		public static event System.Action<LeanSelectByFinger, LeanSelectableByFinger, LeanFinger> OnAnySelectedFinger;
 
 		// The fingers that were used to select this GameObject
 		// If a finger goes up then it will be removed from this list
 		[System.NonSerialized]
-		private List<LeanFinger> selectingFingers = new List<LeanFinger>();
+		private List<SelectedPair> selectingPairs = new List<SelectedPair>();
 
 		/// <summary>This tells you the first or earliest still active finger that initiated selection of this object.
 		/// NOTE: If the selecting finger went up then this may return null.</summary>
@@ -48,9 +60,9 @@ namespace Lean.Touch
 		{
 			get
 			{
-				if (selectingFingers.Count > 0)
+				if (selectingPairs.Count > 0)
 				{
-					return selectingFingers[0];
+					return selectingPairs[0].Finger;
 				}
 
 				return null;
@@ -58,11 +70,11 @@ namespace Lean.Touch
 		}
 
 		/// <summary>This tells you every currently active finger that selected this object.</summary>
-		public List<LeanFinger> SelectingFingers
+		public List<SelectedPair> SelectingPairs
 		{
 			get
 			{
-				return selectingFingers;
+				return selectingPairs;
 			}
 		}
 
@@ -74,7 +86,7 @@ namespace Lean.Touch
 
 				if (finger.Up == false)
 				{
-					selectingFingers.Add(finger);
+					selectingPairs.Add(new SelectedPair() { Finger = finger, Select = null });
 				}
 
 				if (onSelectedFinger != null)
@@ -82,9 +94,19 @@ namespace Lean.Touch
 					onSelectedFinger.Invoke(finger);
 				}
 
-				if (finger.Up == false && onSelectedFingerUp != null)
+				if (finger.Up == true && onSelectedFingerUp != null)
 				{
 					onSelectedFingerUp.Invoke(finger);
+				}
+
+				if (onSelectedSelectFinger != null)
+				{
+					onSelectedSelectFinger.Invoke(null, finger);
+				}
+
+				if (finger.Up == true && onSelectedSelectFingerUp != null)
+				{
+					onSelectedSelectFingerUp.Invoke(null, finger);
 				}
 			}
 		}
@@ -113,15 +135,18 @@ namespace Lean.Touch
 							{
 								fingers.Clear();
 
-								fingers.AddRange(requiredSelectableByFinger.selectingFingers);
+								foreach (var pair in requiredSelectableByFinger.selectingPairs)
+								{
+									fingers.Add(pair.Finger);
+								}
 							}
 							break;
 
 							case UseType.IgnoreSelectingFingers:
 							{
-								foreach (var selectingFinger in requiredSelectableByFinger.selectingFingers)
+								foreach (var selectingFinger in requiredSelectableByFinger.selectingPairs)
 								{
-									fingers.Remove(selectingFinger);
+									fingers.Remove(selectingFinger.Finger);
 								}
 							}
 							break;
@@ -161,9 +186,9 @@ namespace Lean.Touch
 		/// <summary>This tells you if the current selectable was selected by the specified finger.</summary>
 		public bool IsSelectedBy(LeanFinger finger)
 		{
-			for (var i = selectingFingers.Count - 1; i >= 0; i--)
+			for (var i = selectingPairs.Count - 1; i >= 0; i--)
 			{
-				if (selectingFingers[i] == finger)
+				if (selectingPairs[i].Finger == finger)
 				{
 					return true;
 				}
@@ -198,9 +223,9 @@ namespace Lean.Touch
 		{
 			get
 			{
-				for (var i = selectingFingers.Count - 1; i >= 0; i--)
+				for (var i = selectingPairs.Count - 1; i >= 0; i--)
 				{
-					if (selectingFingers[i].Set == true)
+					if (selectingPairs[i].Finger.Set == true)
 					{
 						return true;
 					}
@@ -212,11 +237,23 @@ namespace Lean.Touch
 
 		private void HandleFingerUp(LeanFinger finger)
 		{
-			if (selectingFingers.Remove(finger) == true)
+			for (var i = 0; i < selectingPairs.Count; i++)
 			{
-				if (onSelectedFingerUp != null)
+				var pair = selectingPairs[i];
+
+				if (pair.Finger == finger)
 				{
-					onSelectedFingerUp.Invoke(finger);
+					selectingPairs.RemoveAt(i);
+
+					if (onSelectedFingerUp != null)
+					{
+						onSelectedFingerUp.Invoke(finger);
+					}
+
+					if (onSelectedSelectFingerUp != null)
+					{
+						onSelectedSelectFingerUp.Invoke(pair.Select, finger);
+					}
 				}
 			}
 		}
@@ -226,10 +263,11 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelectableByFinger;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
 	public class LeanSelectableByFinger_Editor : Common.Editor.LeanSelectable_Editor
 	{
 		[System.NonSerialized] TARGET tgt; [System.NonSerialized] TARGET[] tgts;
@@ -255,6 +293,16 @@ namespace Lean.Touch.Editor
 			if (showUnusedEvents == true || Any(tgts, t => t.OnSelectedFingerUp.GetPersistentEventCount() > 0))
 			{
 				Draw("onSelectedFingerUp");
+			}
+
+			if (showUnusedEvents == true || Any(tgts, t => t.OnSelectedSelectFinger.GetPersistentEventCount() > 0))
+			{
+				Draw("onSelectedSelectFinger");
+			}
+
+			if (showUnusedEvents == true || Any(tgts, t => t.OnSelectedSelectFingerUp.GetPersistentEventCount() > 0))
+			{
+				Draw("onSelectedSelectFingerUp");
 			}
 		}
 	}

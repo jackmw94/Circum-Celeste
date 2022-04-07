@@ -1,4 +1,5 @@
 using UnityEngine;
+using Lean.Common;
 
 namespace Lean.Touch
 {
@@ -44,8 +45,8 @@ namespace Lean.Touch
 					selectable = newSelectable;
 
 					selectable.OnSelected.AddListener(OnSelected);
-					selectable.OnSelectedFinger.AddListener(OnSelectedFinger);
-					selectable.OnSelectedFingerUp.AddListener(OnSelectedFingerUp);
+					selectable.OnSelectedSelectFinger.AddListener(OnSelectedSelectFinger);
+					selectable.OnSelectedSelectFingerUp.AddListener(OnSelectedSelectFingerUp);
 					selectable.OnDeselected.AddListener(OnDeselected);
 				}
 			}
@@ -58,8 +59,8 @@ namespace Lean.Touch
 			if (selectable != null)
 			{
 				selectable.OnSelected.RemoveListener(OnSelected);
-				selectable.OnSelectedFinger.RemoveListener(OnSelectedFinger);
-				selectable.OnSelectedFingerUp.RemoveListener(OnSelectedFingerUp);
+				selectable.OnSelectedSelectFinger.RemoveListener(OnSelectedSelectFinger);
+				selectable.OnSelectedSelectFingerUp.RemoveListener(OnSelectedSelectFingerUp);
 				selectable.OnDeselected.RemoveListener(OnDeselected);
 
 				selectable = null;
@@ -85,22 +86,22 @@ namespace Lean.Touch
 		}
 
 		/// <summary>Called when selection begins.</summary>
-		protected virtual void OnSelected()
+		protected virtual void OnSelected(LeanSelect select)
 		{
 		}
 
 		/// <summary>Called when selection begins (finger = the finger that selected this).</summary>
-		protected virtual void OnSelectedFinger(LeanFinger finger)
+		protected virtual void OnSelectedSelectFinger(LeanSelectByFinger select, LeanFinger finger)
 		{
 		}
 
 		/// <summary>Called when the selecting finger goes up (finger = the finger that selected this).</summary>
-		protected virtual void OnSelectedFingerUp(LeanFinger finger)
+		protected virtual void OnSelectedSelectFingerUp(LeanSelectByFinger select, LeanFinger finger)
 		{
 		}
 
 		/// <summary>Called when this is deselected, if OnSelectUp hasn't been called yet, it will get called first.</summary>
-		protected virtual void OnDeselected()
+		protected virtual void OnDeselected(LeanSelect select)
 		{
 		}
 	}

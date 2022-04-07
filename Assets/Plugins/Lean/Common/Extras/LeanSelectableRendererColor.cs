@@ -1,20 +1,20 @@
 using UnityEngine;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component allows you to change the color of the Renderer (e.g. MeshRenderer) attached to the current GameObject when selected.</summary>
 	[ExecuteInEditMode]
 	[RequireComponent(typeof(Renderer))]
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanSelectableRendererColor")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Selectable Renderer Color")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanSelectableRendererColor")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Selectable Renderer Color")]
 	public class LeanSelectableRendererColor : LeanSelectableBehaviour
 	{
 		/// <summary>The default color given to the SpriteRenderer.</summary>
-		public Color DefaultColor { set { defaultColor = value; UpdateColor(); } get { return defaultColor; } } [FSA("DefaultColor")] [SerializeField] private Color defaultColor = Color.white;
+		public Color DefaultColor { set { defaultColor = value; UpdateColor(); } get { return defaultColor; } } [SerializeField] private Color defaultColor = Color.white;
 
 		/// <summary>The color given to the SpriteRenderer when selected.</summary>
-		public Color SelectedColor { set { selectedColor = value; UpdateColor(); } get { return selectedColor; } } [FSA("SelectedColor")] [SerializeField] private Color selectedColor = Color.green;
+		public Color SelectedColor { set { selectedColor = value; UpdateColor(); } get { return selectedColor; } } [SerializeField] private Color selectedColor = Color.green;
 
 		[System.NonSerialized]
 		private Renderer cachedRenderer;
@@ -22,12 +22,12 @@ namespace Lean.Common
 		[System.NonSerialized]
 		private MaterialPropertyBlock properties;
 
-		protected override void OnSelected()
+		protected override void OnSelected(LeanSelect select)
 		{
 			UpdateColor();
 		}
 
-		protected override void OnDeselected()
+		protected override void OnDeselected(LeanSelect select)
 		{
 			UpdateColor();
 		}
@@ -62,11 +62,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelectableRendererColor;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanSelectableRendererColor_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanSelectableRendererColor_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

@@ -1,10 +1,11 @@
 using UnityEngine;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component stores information about a 3D plane. By default this plane lays on the XY axis, or faces the Z axis.</summary>
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanPlane")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Plane")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanPlane")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Plane")]
 	public class LeanPlane : MonoBehaviour
 	{
 		/// <summary>Should the plane be clamped on the x axis?</summary>
@@ -156,11 +157,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanPlane;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanPlane_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanPlane_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

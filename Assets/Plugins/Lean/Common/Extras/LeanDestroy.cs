@@ -1,11 +1,11 @@
 using UnityEngine;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component allows you to destroy a GameObject.</summary>
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanDestroy")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Destroy")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanDestroy")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Destroy")]
 	public class LeanDestroy : MonoBehaviour
 	{
 		public enum ExecuteType
@@ -25,10 +25,10 @@ namespace Lean.Common
 
 		/// <summary>The GameObject that will be destroyed.
 		/// None/null = This GameObject.</summary>
-		public GameObject Target { set { target = value; } get { return target; } } [FSA("Target")] [SerializeField] private GameObject target;
+		public GameObject Target { set { target = value; } get { return target; } } [SerializeField] private GameObject target;
 
 		/// <summary>The amount of seconds remaining until the GameObject is destroyed.</summary>
-		public float Seconds { set { seconds = value; } get { return seconds; } } [FSA("Seconds")] [SerializeField] private float seconds = -1.0f;
+		public float Seconds { set { seconds = value; } get { return seconds; } } [SerializeField] private float seconds = -1.0f;
 
 		protected virtual void Update()
 		{
@@ -77,11 +77,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanDestroy;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanDestroy_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanDestroy_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

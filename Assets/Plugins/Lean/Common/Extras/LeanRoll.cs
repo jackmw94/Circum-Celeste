@@ -1,32 +1,32 @@
 using UnityEngine;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component rotates the current GameObject based on the current Angle value.
 	/// NOTE: This component overrides and takes over the rotation of this GameObject, so you can no longer externally influence it.</summary>
 	[ExecuteInEditMode]
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanRoll")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Roll")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanRoll")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Roll")]
 	public class LeanRoll : MonoBehaviour
 	{
 		/// <summary>The current angle in degrees.</summary>
-		public float Angle { set { angle = value; } get { return angle; } } [FSA("Angle")] [SerializeField] private float angle;
+		public float Angle { set { angle = value; } get { return angle; } } [SerializeField] private float angle;
 
 		/// <summary>Should the <b>Angle</b> value be clamped?</summary>
-		public bool Clamp { set { clamp = value; } get { return clamp; } } [FSA("Clamp")] [SerializeField] private bool clamp;
+		public bool Clamp { set { clamp = value; } get { return clamp; } } [SerializeField] private bool clamp;
 
 		/// <summary>The minimum <b>Angle</b> value.</summary>
-		public float ClampMin { set { clampMin = value; } get { return clampMin; } } [FSA("ClampMin")] [SerializeField] private float clampMin;
+		public float ClampMin { set { clampMin = value; } get { return clampMin; } } [SerializeField] private float clampMin;
 
 		/// <summary>The maximum <b>Angle</b> value.</summary>
-		public float ClampMax { set { clampMax = value; } get { return clampMax; } } [FSA("ClampMax")] [SerializeField] private float clampMax;
+		public float ClampMax { set { clampMax = value; } get { return clampMax; } } [SerializeField] private float clampMax;
 
 		/// <summary>If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.
 		/// -1 = Instantly change.
 		/// 1 = Slowly change.
 		/// 10 = Quickly change.</summary>
-		public float Damping { set { damping = value; } get { return damping; } } [FSA("Damping")] [FSA("Dampening")] [SerializeField] private float damping = -1.0f;
+		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
 
 		[SerializeField]
 		private float currentAngle;
@@ -67,7 +67,7 @@ namespace Lean.Common
 		protected virtual void Update()
 		{
 			// Get t value
-			var factor = LeanHelper.GetDampenFactor(damping, Time.deltaTime);
+			var factor = CwHelper.DampenFactor(damping, Time.deltaTime);
 
 			if (clamp == true)
 			{
@@ -86,11 +86,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanRoll;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanRoll_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanRoll_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

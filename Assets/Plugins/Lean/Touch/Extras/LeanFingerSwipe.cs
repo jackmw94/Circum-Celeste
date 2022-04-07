@@ -1,6 +1,5 @@
 using UnityEngine;
 using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
 
 namespace Lean.Touch
 {
@@ -11,13 +10,13 @@ namespace Lean.Touch
 	public class LeanFingerSwipe : LeanSwipeBase
 	{
 		/// <summary>Ignore fingers with StartedOverGui?</summary>
-		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [FSA("IgnoreStartedOverGui")] [SerializeField] private bool ignoreStartedOverGui = true;
+		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [SerializeField] private bool ignoreStartedOverGui = true;
 
 		/// <summary>Ignore fingers with OverGui?</summary>
-		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [FSA("IgnoreIsOverGui")] [SerializeField] private bool ignoreIsOverGui;
+		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [SerializeField] private bool ignoreIsOverGui;
 
 		/// <summary>If the specified object is set and isn't selected, then this component will do nothing.</summary>
-		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [FSA("RequiredSelectable")] [SerializeField] private LeanSelectable requiredSelectable;
+		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [SerializeField] private LeanSelectable requiredSelectable;
 
 #if UNITY_EDITOR
 		protected virtual void Reset()
@@ -69,10 +68,11 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanFingerSwipe;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
 	public class LeanFingerSwipe_Editor : LeanSwipeBase_Editor
 	{
 		protected override void OnInspector()

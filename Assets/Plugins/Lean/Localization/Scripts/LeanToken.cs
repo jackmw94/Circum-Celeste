@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Localization
 {
@@ -118,11 +119,12 @@ namespace Lean.Localization
 #if UNITY_EDITOR
 namespace Lean.Localization.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanToken;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanToken_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanToken_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{
@@ -137,7 +139,7 @@ namespace Lean.Localization.Editor
 		[UnityEditor.MenuItem("Assets/Create/Lean/Localization/Lean Token")]
 		private static void CreateToken()
 		{
-			LeanHelper.CreateAsset("New Token").AddComponent<LeanToken>();
+			CwHelper.CreatePrefabAsset("New Token").AddComponent<LeanToken>();
 		}
 	}
 }

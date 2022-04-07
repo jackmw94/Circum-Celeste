@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -16,24 +16,24 @@ namespace Lean.Touch
 		[System.Serializable] public class IntEvent : UnityEvent<int> {}
 
 		/// <summary>Ignore fingers with StartedOverGui?</summary>
-		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [FSA("IgnoreStartedOverGui")] [SerializeField] private bool ignoreStartedOverGui = true;
+		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [SerializeField] private bool ignoreStartedOverGui = true;
 
 		/// <summary>Ignore fingers with OverGui?</summary>
-		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [FSA("IgnoreIsOverGui")] [SerializeField] private bool ignoreIsOverGui;
+		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [SerializeField] private bool ignoreIsOverGui;
 
 		/// <summary>If the specified object is set and isn't selected, then this component will do nothing.</summary>
-		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [FSA("RequiredSelectable")] [SerializeField] private LeanSelectable requiredSelectable;
+		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [SerializeField] private LeanSelectable requiredSelectable;
 
 		/// <summary>How many times must this finger tap before OnTap gets called?
 		/// 0 = Every time (keep in mind OnTap will only be called once if you use this).</summary>
-		public int RequiredTapCount { set { requiredTapCount = value; } get { return requiredTapCount; } } [FSA("RequiredTapCount")] [SerializeField] private int requiredTapCount;
+		public int RequiredTapCount { set { requiredTapCount = value; } get { return requiredTapCount; } } [SerializeField] private int requiredTapCount;
 
 		/// <summary>How many times repeating must this finger tap before OnTap gets called?
 		/// 0 = Every time (e.g. a setting of 2 means OnTap will get called when you tap 2 times, 4 times, 6, 8, 10, etc).</summary>
-		public int RequiredTapInterval { set { requiredTapInterval = value; } get { return requiredTapInterval; } } [FSA("RequiredTapInterval")] [SerializeField] private int requiredTapInterval;
+		public int RequiredTapInterval { set { requiredTapInterval = value; } get { return requiredTapInterval; } } [SerializeField] private int requiredTapInterval;
 
 		/// <summary>This event will be called if the above conditions are met when you tap the screen.</summary>
-		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [FSA("onTap")] [FSA("OnTap")] [SerializeField] private LeanFingerEvent onFinger;
+		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [SerializeField] private LeanFingerEvent onFinger;
 
 		/// <summary>This event will be called if the above conditions are met when you tap the screen.
 		/// Int = The finger tap count.</summary>
@@ -44,7 +44,7 @@ namespace Lean.Touch
 
 		/// <summary>This event will be called if the above conditions are met when you tap the screen.
 		/// Vector3 = Finger position in world space.</summary>
-		public Vector3Event OnWorld { get { if (onWorld == null) onWorld = new Vector3Event(); return onWorld; } } [FSA("onPosition")] [SerializeField] private Vector3Event onWorld;
+		public Vector3Event OnWorld { get { if (onWorld == null) onWorld = new Vector3Event(); return onWorld; } } [SerializeField] private Vector3Event onWorld;
 
 		/// <summary>This event will be called if the above conditions are met when you tap the screen.
 		/// Vector2 = Finger position in screen space.</summary>
@@ -131,11 +131,12 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanFingerTap;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanFingerTap_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanFingerTap_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

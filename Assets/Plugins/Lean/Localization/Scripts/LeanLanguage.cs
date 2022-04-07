@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Localization
 {
@@ -50,11 +51,12 @@ namespace Lean.Localization
 #if UNITY_EDITOR
 namespace Lean.Localization.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanLanguage;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanLanguage_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanLanguage_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{
@@ -67,10 +69,10 @@ namespace Lean.Localization.Editor
 			Draw("cultures", "This culture names for this language (e.g. en-GB, en-US).");
 		}
 
-		[UnityEditor.MenuItem("Assets/Create/Lean/Localization/Lean Language")]
+		[MenuItem("Assets/Create/Lean/Localization/Lean Language")]
 		private static void CreateLanguage()
 		{
-			LeanHelper.CreateAsset("New Language").AddComponent<LeanLanguage>();
+			CwHelper.CreatePrefabAsset("New Language").AddComponent<LeanLanguage>();
 		}
 	}
 }

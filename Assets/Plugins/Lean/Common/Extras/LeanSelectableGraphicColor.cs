@@ -1,31 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This component allows you to change the color of the Graphic (e.g. Image) attached to the current GameObject when selected.</summary>
 	[ExecuteInEditMode]
 	[RequireComponent(typeof(Graphic))]
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanSelectableGraphicColor")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Selectable Graphic Color")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanSelectableGraphicColor")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Selectable Graphic Color")]
 	public class LeanSelectableGraphicColor : LeanSelectableBehaviour
 	{
 		/// <summary>The default color given to the SpriteRenderer.</summary>
-		public Color DefaultColor { set { defaultColor = value; UpdateColor(); } get { return defaultColor; } } [FSA("DefaultColor")] [SerializeField] private Color defaultColor = Color.white;
+		public Color DefaultColor { set { defaultColor = value; UpdateColor(); } get { return defaultColor; } } [SerializeField] private Color defaultColor = Color.white;
 
 		/// <summary>The color given to the SpriteRenderer when selected.</summary>
-		public Color SelectedColor { set { selectedColor = value; UpdateColor(); } get { return selectedColor; } } [FSA("SelectedColor")] [SerializeField] private Color selectedColor = Color.green;
+		public Color SelectedColor { set { selectedColor = value; UpdateColor(); } get { return selectedColor; } } [SerializeField] private Color selectedColor = Color.green;
 
 		[System.NonSerialized]
 		private Graphic cachedGraphic;
 
-		protected override void OnSelected()
+		protected override void OnSelected(LeanSelect select)
 		{
 			UpdateColor();
 		}
 
-		protected override void OnDeselected()
+		protected override void OnDeselected(LeanSelect select)
 		{
 			UpdateColor();
 		}
@@ -44,11 +44,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelectableGraphicColor;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanSelectableGraphicColor_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanSelectableGraphicColor_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

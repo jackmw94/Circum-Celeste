@@ -1,6 +1,5 @@
 using UnityEngine;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
-using Lean.Common;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -14,21 +13,21 @@ namespace Lean.Touch
 
 		/// <summary>The camera the translation will be calculated using.
 		/// None/null = MainCamera.</summary>
-		public Camera Camera { set { _camera = value; } get { return _camera; } } [FSA("Camera")] [SerializeField] private Camera _camera;
+		public Camera Camera { set { _camera = value; } get { return _camera; } } [SerializeField] private Camera _camera;
 
 		/// <summary>The movement speed will be multiplied by this.
 		/// -1 = Inverted Controls.</summary>
-		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } } [FSA("Sensitivity")] [SerializeField] private float sensitivity = 1.0f;
+		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } } [SerializeField] private float sensitivity = 1.0f;
 
 		/// <summary>If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.
 		/// -1 = Instantly change.
 		/// 1 = Slowly change.
 		/// 10 = Quickly change.</summary>
-		public float Damping { set { damping = value; } get { return damping; } } [FSA("Damping")] [FSA("Dampening")] [SerializeField] private float damping = -1.0f;
+		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
 
 		/// <summary>This allows you to control how much momentum is retained when the dragging fingers are all released.
 		/// NOTE: This requires <b>Dampening</b> to be above 0.</summary>
-		public float Inertia { set { inertia = value; } get { return inertia; } } [FSA("Inertia")] [SerializeField] [Range(0.0f, 1.0f)] private float inertia;
+		public float Inertia { set { inertia = value; } get { return inertia; } } [SerializeField] [Range(0.0f, 1.0f)] private float inertia;
 
 		[SerializeField]
 		private Vector3 remainingTranslation;
@@ -91,7 +90,7 @@ namespace Lean.Touch
 			remainingTranslation += transform.localPosition - oldPosition;
 
 			// Get t value
-			var factor = LeanHelper.GetDampenFactor(Damping, Time.deltaTime);
+			var factor = CwHelper.DampenFactor(Damping, Time.deltaTime);
 
 			// Dampen remainingDelta
 			var newRemainingTranslation = Vector3.Lerp(remainingTranslation, Vector3.zero, factor);
@@ -140,7 +139,7 @@ namespace Lean.Touch
 		private void Translate(Vector2 screenDelta)
 		{
 			// Make sure the camera exists
-			var camera = LeanHelper.GetCamera(this._camera, gameObject);
+			var camera = CwHelper.GetCamera(this._camera, gameObject);
 
 			if (camera != null)
 			{
@@ -164,11 +163,12 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanDragTranslate;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET), true)]
-	public class LeanDragTranslate_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET), true)]
+	public class LeanDragTranslate_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

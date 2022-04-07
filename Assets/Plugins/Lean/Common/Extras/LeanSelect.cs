@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Common
 {
 	/// <summary>This is the base class for all object selectors.</summary>
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanSelect")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanSelect")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Select")]
 	public class LeanSelect : MonoBehaviour
 	{
 		[System.Serializable] public class LeanSelectableEvent : UnityEvent<LeanSelectable> {}
@@ -29,7 +30,7 @@ namespace Lean.Common
 		public static LinkedList<LeanSelect> Instances = new LinkedList<LeanSelect>(); [System.NonSerialized] private LinkedListNode<LeanSelect> instancesNode;
 
 		/// <summary>If you attempt to select a point that has no objects underneath, should all currently selected objects be deselected?</summary>
-		public bool DeselectWithNothing { set { deselectWithNothing = value; } get { return deselectWithNothing; } } [FSA("AutoDeselect")] [SerializeField] private bool deselectWithNothing;
+		public bool DeselectWithNothing { set { deselectWithNothing = value; } get { return deselectWithNothing; } } [SerializeField] private bool deselectWithNothing;
 
 		/// <summary>If you have selected the maximum number of objects, what should happen?
 		/// Unlimited = Always allow selection.
@@ -39,10 +40,10 @@ namespace Lean.Common
 
 		/// <summary>The maximum number of selectables that can be selected at the same time.
 		/// 0 = Unlimited.</summary>
-		public int MaxSelectables { set { maxSelectables = value; } get { return maxSelectables; } } [FSA("MaxSelectables")] [SerializeField] private int maxSelectables = 5;
+		public int MaxSelectables { set { maxSelectables = value; } get { return maxSelectables; } } [SerializeField] private int maxSelectables = 5;
 
 		/// <summary>If you select an already selected selectable, what should happen?</summary>
-		public ReselectType Reselect { set { reselect = value; } get { return reselect; } } [FSA("Reselect")] [SerializeField] private ReselectType reselect = ReselectType.SelectAgain;
+		public ReselectType Reselect { set { reselect = value; } get { return reselect; } } [SerializeField] private ReselectType reselect = ReselectType.SelectAgain;
 
 		/// <summary>This stores all objects selected by this component.</summary>
 		public List<LeanSelectable> Selectables { get { if (selectables == null) selectables = new List<LeanSelectable>(); return selectables; } } [SerializeField] protected List<LeanSelectable> selectables;
@@ -82,7 +83,7 @@ namespace Lean.Common
 
 		protected bool TrySelect(LeanSelectable selectable)
 		{
-			if (selectable != null && selectable.isActiveAndEnabled == true)
+			if (CwHelper.Enabled(selectable) == true)
 			{
 				if (TryReselect(selectable) == true) 
 				{
@@ -290,11 +291,12 @@ namespace Lean.Common
 #if UNITY_EDITOR
 namespace Lean.Common.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanSelect;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanSelect_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanSelect_Editor : CwEditor
 	{
 		[System.NonSerialized] TARGET tgt; [System.NonSerialized] TARGET[] tgts;
 

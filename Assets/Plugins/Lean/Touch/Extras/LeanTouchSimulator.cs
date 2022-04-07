@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -96,34 +97,34 @@ namespace Lean.Touch
 		private void HandleSimulateFingers()
 		{
 			// Simulate pinch & twist?
-			if (LeanInput.GetMouseExists() == true && LeanInput.GetKeyboardExists() == true)
+			if (CwInput.GetMouseExists() == true && CwInput.GetKeyboardExists() == true)
 			{
-				var mousePosition = LeanInput.GetMousePosition();
+				var mousePosition = CwInput.GetMousePosition();
 				var mouseSet      = false;
 				var mouseUp       = false;
 
 				for (var i = 0; i < 5; i++)
 				{
-					mouseSet |= LeanInput.GetMousePressed(i);
-					mouseUp  |= LeanInput.GetMouseUp(i);
+					mouseSet |= CwInput.GetMouseIsHeld(i);
+					mouseUp  |= CwInput.GetMouseWentUp(i);
 				}
 
 				if (mouseSet == true || mouseUp == true)
 				{
-					if (LeanInput.GetPressed(MovePivotKey) == true)
+					if (CwInput.GetKeyIsHeld(MovePivotKey) == true)
 					{
 						pivot.x = mousePosition.x / Screen.width;
 						pivot.y = mousePosition.y / Screen.height;
 					}
 
-					if (LeanInput.GetPressed(PinchTwistKey) == true)
+					if (CwInput.GetKeyIsHeld(PinchTwistKey) == true)
 					{
 						var center = new Vector2(Screen.width * pivot.x, Screen.height * pivot.y);
 
 						cachedTouch.AddFinger(-2, center - (mousePosition - center), 1.0f, mouseSet);
 					}
 					// Simulate multi drag?
-					else if (LeanInput.GetPressed(MultiDragKey) == true)
+					else if (CwInput.GetKeyIsHeld(MultiDragKey) == true)
 					{
 						cachedTouch.AddFinger(-2, mousePosition, 1.0f, mouseSet);
 					}
@@ -136,13 +137,14 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanTouchSimulator;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanTouchSimulator_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanTouchSimulator_Editor : CwEditor
 	{
-		[UnityEditor.InitializeOnLoadMethod]
+		[InitializeOnLoadMethod]
 		static void Hook()
 		{
 			LeanTouch_Editor.OnExtendInspector += HandleExtendInspector;
@@ -164,7 +166,7 @@ namespace Lean.Touch.Editor
 			{
 				if (GUILayout.Button("Add Simulator") == true)
 				{
-					UnityEditor.Undo.AddComponent<LeanTouchSimulator>(touch.gameObject);
+					Undo.AddComponent<LeanTouchSimulator>(touch.gameObject);
 				}
 			}
 		}

@@ -5,8 +5,8 @@ namespace Lean.Common
 {
 	/// <summary>This component stores a list of points that form a path.</summary>
 	[ExecuteInEditMode]
-	[HelpURL(LeanHelper.HelpUrlPrefix + "LeanPath")]
-	[AddComponentMenu(LeanHelper.ComponentPathPrefix + "Path")]
+	[HelpURL(LeanCommon.HelpUrlPrefix + "LeanPath")]
+	[AddComponentMenu(LeanCommon.ComponentPathPrefix + "Path")]
 	public class LeanPath : MonoBehaviour
 	{
 		/// <summary>The points along the path.</summary>

@@ -1,6 +1,5 @@
 using UnityEngine;
-using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -14,21 +13,21 @@ namespace Lean.Touch
 
 		/// <summary>The camera that will be used to calculate the zoom.
 		/// None/null = MainCamera.</summary>
-		public Camera Camera { set { _camera = value; } get { return _camera; } } [FSA("Camera")] [SerializeField] private Camera _camera;
+		public Camera Camera { set { _camera = value; } get { return _camera; } } [SerializeField] private Camera _camera;
 
 		/// <summary>Should the scaling be performed relative to the finger center?</summary>
-		public bool Relative { set { relative = value; } get { return relative; } } [FSA("Relative")] [SerializeField] private bool relative;
+		public bool Relative { set { relative = value; } get { return relative; } } [SerializeField] private bool relative;
 		
 		/// <summary>The sensitivity of the scaling.
 		/// 1 = Default.
 		/// 2 = Double.</summary>
-		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } } [FSA("Sensitivity")] [SerializeField] private float sensitivity = 1.0f;
+		public float Sensitivity { set { sensitivity = value; } get { return sensitivity; } } [SerializeField] private float sensitivity = 1.0f;
 
 		/// <summary>If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.
 		/// -1 = Instantly change.
 		/// 1 = Slowly change.
 		/// 10 = Quickly change.</summary>
-		public float Damping { set { damping = value; } get { return damping; } } [FSA("Damping")] [FSA("Dampening")] [SerializeField] private float damping = -1.0f;
+		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
 
 		[SerializeField]
 		private Vector3 remainingScale;
@@ -99,7 +98,7 @@ namespace Lean.Touch
 			}
 
 			// Get t value
-			var factor = LeanHelper.GetDampenFactor(damping, Time.deltaTime);
+			var factor = CwHelper.DampenFactor(damping, Time.deltaTime);
 
 			// Dampen remainingDelta
 			var newRemainingScale = Vector3.Lerp(remainingScale, Vector3.zero, factor);
@@ -144,7 +143,7 @@ namespace Lean.Touch
 		protected virtual void Translate(float pinchScale, Vector2 screenCenter)
 		{
 			// Make sure the camera exists
-			var camera = LeanHelper.GetCamera(_camera, gameObject);
+			var camera = CwHelper.GetCamera(_camera, gameObject);
 
 			if (camera != null)
 			{
@@ -169,11 +168,12 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanPinchScale;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET), true)]
-	public class LeanPinchScale_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET), true)]
+	public class LeanPinchScale_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

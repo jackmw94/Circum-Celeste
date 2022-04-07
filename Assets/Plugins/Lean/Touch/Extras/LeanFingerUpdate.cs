@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -24,38 +24,38 @@ namespace Lean.Touch
 		[System.Serializable] public class Vector3Vector3Event : UnityEvent<Vector3, Vector3> {}
 
 		/// <summary>Ignore fingers with StartedOverGui?</summary>
-		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [FSA("IgnoreStartedOverGui")] [SerializeField] private bool ignoreStartedOverGui = true;
+		public bool IgnoreStartedOverGui { set { ignoreStartedOverGui = value; } get { return ignoreStartedOverGui; } } [SerializeField] private bool ignoreStartedOverGui = true;
 
 		/// <summary>Ignore fingers with OverGui?</summary>
-		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [FSA("IgnoreIsOverGui")] [SerializeField] private bool ignoreIsOverGui;
+		public bool IgnoreIsOverGui { set { ignoreIsOverGui = value; } get { return ignoreIsOverGui; } } [SerializeField] private bool ignoreIsOverGui;
 
 		/// <summary>If the finger didn't move, ignore it?</summary>
-		public bool IgnoreIfStatic { set { ignoreIfStatic = value; } get { return ignoreIfStatic; } } [FSA("IgnoreIfStatic")] [SerializeField] private bool ignoreIfStatic;
+		public bool IgnoreIfStatic { set { ignoreIfStatic = value; } get { return ignoreIfStatic; } } [SerializeField] private bool ignoreIfStatic;
 
 		/// <summary>If the finger just began touching the screen, ignore it?</summary>
-		public bool IgnoreIfDown { set { ignoreIfDown = value; } get { return ignoreIfDown; } } [FSA("IgnoreIfDown")] [SerializeField] private bool ignoreIfDown;
+		public bool IgnoreIfDown { set { ignoreIfDown = value; } get { return ignoreIfDown; } } [SerializeField] private bool ignoreIfDown;
 
 		/// <summary>If the finger just stopped touching the screen, ignore it?</summary>
-		public bool IgnoreIfUp { set { ignoreIfUp = value; } get { return ignoreIfUp; } } [FSA("IgnoreIfUp")] [SerializeField] private bool ignoreIfUp;
+		public bool IgnoreIfUp { set { ignoreIfUp = value; } get { return ignoreIfUp; } } [SerializeField] private bool ignoreIfUp;
 
 		/// <summary>If the finger is the mouse hover, ignore it?</summary>
 		public bool IgnoreIfHover { set { ignoreIfHover = value; } get { return ignoreIfHover; } } [SerializeField] private bool ignoreIfHover = true;
 
 		/// <summary>If the specified object is set and isn't selected, then this component will do nothing.</summary>
-		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [FSA("RequiredSelectable")] [SerializeField] private LeanSelectable requiredSelectable;
+		public LeanSelectable RequiredSelectable { set { requiredSelectable = value; } get { return requiredSelectable; } } [SerializeField] private LeanSelectable requiredSelectable;
 
 		/// <summary>Called on every frame the conditions are met.</summary>
-		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [FSA("onDrag")] [SerializeField] private LeanFingerEvent onFinger;
+		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [SerializeField] private LeanFingerEvent onFinger;
 
 		/// <summary>The coordinate space of the OnDelta values.</summary>
-		public CoordinateType Coordinate { set { coordinate = value; } get { return coordinate; } } [FSA("Coordinate")] [SerializeField] private CoordinateType coordinate;
+		public CoordinateType Coordinate { set { coordinate = value; } get { return coordinate; } } [SerializeField] private CoordinateType coordinate;
 
 		/// <summary>The delta values will be multiplied by this when output.</summary>
-		public float Multiplier { set { multiplier = value; } get { return multiplier; } } [FSA("Multiplier")] [SerializeField] private float multiplier = 1.0f;
+		public float Multiplier { set { multiplier = value; } get { return multiplier; } } [SerializeField] private float multiplier = 1.0f;
 
 		/// <summary>This event is invoked when the requirements are met.
 		/// Vector2 = Position Delta based on your Coordinates setting.</summary>
-		public Vector2Event OnDelta { get { if (onDelta == null) onDelta = new Vector2Event(); return onDelta; } } [FSA("onDragDelta")] [SerializeField] private Vector2Event onDelta;
+		public Vector2Event OnDelta { get { if (onDelta == null) onDelta = new Vector2Event(); return onDelta; } } [SerializeField] private Vector2Event onDelta;
 
 		/// <summary>Called on the first frame the conditions are met.
 		/// Float = The distance/magnitude/length of the swipe delta vector.</summary>
@@ -197,11 +197,12 @@ namespace Lean.Touch
 #if UNITY_EDITOR
 namespace Lean.Touch.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanFingerUpdate;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(TARGET))]
-	public class LeanFingerUpdate_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(TARGET))]
+	public class LeanFingerUpdate_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

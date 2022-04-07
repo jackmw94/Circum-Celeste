@@ -1,8 +1,16 @@
 {
     "name": "LeanLocalization",
     "references": [
-        "LeanCommon"
+        "LeanCommon",
+        "CW.Common"
     ],
     "includePlatforms": [],
-    "excludePlatforms": []
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

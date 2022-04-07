@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Lean.Common;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -75,7 +76,7 @@ namespace Lean.Touch
 		/// <summary>If you've set Filter to ManuallyAddedFingers, then you can call this method to manually add a finger.</summary>
 		public void AddFinger(LeanFinger finger)
 		{
-			if (Filter == FilterType.ManuallyAddedFingers && finger != null)
+			if (finger != null)
 			{
 				if (fingers == null)
 				{
@@ -143,7 +144,10 @@ namespace Lean.Touch
 			else if (fingers != null)
 			{
 				filteredFingers.AddRange(fingers);
+			}
 
+			if (fingers != null)
+			{
 				for (var i = fingers.Count - 1; i >= 0; i--)
 				{
 					if (fingers[i].Up == true)
@@ -170,7 +174,7 @@ namespace Lean.Touch
 				{
 					var mask = 1 << i;
 
-					if ((RequiredMouseButtons & mask) != 0 && LeanInput.GetMousePressed(i) == false)
+					if ((RequiredMouseButtons & mask) != 0 && CwInput.GetMouseIsHeld(i) == false && CwInput.GetMouseWentUp(i) == false)
 					{
 						filteredFingers.Clear();
 					}

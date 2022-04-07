@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
-using Lean.Common;
-using FSA = UnityEngine.Serialization.FormerlySerializedAsAttribute;
+using CW.Common;
 
 namespace Lean.Touch
 {
@@ -33,31 +32,31 @@ namespace Lean.Touch
 		/// 90 = Right.
 		/// 180 = Down.
 		/// 270 = Left.</summary>
-		public float RequiredAngle { set { requiredAngle = value; } get { return requiredAngle; } } [FSA("RequiredAngle")] [SerializeField] private float requiredAngle;
+		public float RequiredAngle { set { requiredAngle = value; } get { return requiredAngle; } } [SerializeField] private float requiredAngle;
 
 		/// <summary>The angle of the arc in degrees that the swipe must be inside.
 		/// -1 = No requirement.
 		/// 90 = Quarter circle (+- 45 degrees).
 		/// 180 = Semicircle (+- 90 degrees).</summary>
-		public float RequiredArc { set { requiredArc = value; } get { return requiredArc; } } [FSA("AngleThreshold")] [FSA("RequiredArc")] [SerializeField] private float requiredArc = -1.0f;
+		public float RequiredArc { set { requiredArc = value; } get { return requiredArc; } } [SerializeField] private float requiredArc = -1.0f;
 
 		/// <summary>Called on the first frame the conditions are met.</summary>
-		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [FSA("onSwipe")] [FSA("OnSwipe")] [SerializeField] public LeanFingerEvent onFinger;
+		public LeanFingerEvent OnFinger { get { if (onFinger == null) onFinger = new LeanFingerEvent(); return onFinger; } } [SerializeField] public LeanFingerEvent onFinger;
 
 		/// <summary>Should the swipe delta be modified before use?
 		/// Normalize = The swipe delta magnitude/length will be set to 1.
 		/// Normalize4 = The swipe delta will be + or - 1 on either the x or y axis.</summary>
-		public ModifyType Modify { set { modify = value; } get { return modify; } } [FSA("Clamp")] [FSA("Modify")] [SerializeField] private ModifyType modify;
+		public ModifyType Modify { set { modify = value; } get { return modify; } } [SerializeField] private ModifyType modify;
 
 		/// <summary>The coordinate space of the OnDelta values.</summary>
-		public CoordinateType Coordinate { set { coordinate = value; } get { return coordinate; } } [FSA("Coordinate")] [SerializeField] private CoordinateType coordinate;
+		public CoordinateType Coordinate { set { coordinate = value; } get { return coordinate; } } [SerializeField] private CoordinateType coordinate;
 
 		/// <summary>The swipe delta will be multiplied by this value.</summary>
-		public float Multiplier { set { multiplier = value; } get { return multiplier; } } [FSA("Multiplier")] [SerializeField] private float multiplier = 1.0f;
+		public float Multiplier { set { multiplier = value; } get { return multiplier; } } [SerializeField] private float multiplier = 1.0f;
 
 		/// <summary>Called on the first frame the conditions are met.
 		/// Vector2 = The scaled swipe delta.</summary>
-		public Vector2Event OnDelta { get { if (onDelta == null) onDelta = new Vector2Event(); return onDelta; } } [FSA("onSwipeDelta")] [FSA("OnSwipeDelta")] [SerializeField] public Vector2Event onDelta;
+		public Vector2Event OnDelta { get { if (onDelta == null) onDelta = new Vector2Event(); return onDelta; } } [SerializeField] public Vector2Event onDelta;
 
 		/// <summary>Called on the first frame the conditions are met.
 		/// Float = The distance/magnitude/length of the swipe delta vector.</summary>
@@ -81,7 +80,7 @@ namespace Lean.Touch
 		/// <summary>Called on the first frame the conditions are met.
 		/// Vector3 = Start point in world space.
 		/// Vector3 = End point in world space.</summary>
-		public Vector3Vector3Event OnWorldFromTo { get { if (onWorldFromTo == null) onWorldFromTo = new Vector3Vector3Event(); return onWorldFromTo; } } [FSA("onSwipeFromTo")] [SerializeField] public Vector3Vector3Event onWorldFromTo;
+		public Vector3Vector3Event OnWorldFromTo { get { if (onWorldFromTo == null) onWorldFromTo = new Vector3Vector3Event(); return onWorldFromTo; } } [SerializeField] public Vector3Vector3Event onWorldFromTo;
 
 		protected bool AngleIsValid(Vector2 vector)
 		{
@@ -178,7 +177,7 @@ namespace Lean.Touch.Editor
 {
 	using TARGET = LeanSwipeBase;
 
-	public abstract class LeanSwipeBase_Editor : LeanEditor
+	public abstract class LeanSwipeBase_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

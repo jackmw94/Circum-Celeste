@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Lean.Common;
+using CW.Common;
 
 namespace Lean.Localization
 {
@@ -412,11 +412,12 @@ namespace Lean.Localization
 #if UNITY_EDITOR
 namespace Lean.Localization.Editor
 {
+	using UnityEditor;
 	using TARGET = LeanLanguageCSV;
 
-	[UnityEditor.CanEditMultipleObjects]
-	[UnityEditor.CustomEditor(typeof(LeanLanguageCSV), true)]
-	public class LeanLanguageCSV_Editor : LeanEditor
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(LeanLanguageCSV), true)]
+	public class LeanLanguageCSV_Editor : CwEditor
 	{
 		protected override void OnInspector()
 		{

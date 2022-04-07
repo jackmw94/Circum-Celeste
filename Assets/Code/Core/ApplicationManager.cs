@@ -15,6 +15,8 @@ namespace Code.Core
         
         private void Awake()
         {
+            Input.simulateMouseWithTouches = true;
+            
             Application.targetFrameRate = _targetFrameRate;
             QualitySettings.vSyncCount = _vsyncOn ? 1 : 0;
 
