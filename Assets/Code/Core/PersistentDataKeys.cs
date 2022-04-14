@@ -23,6 +23,7 @@ namespace Code.Core
         public const string PlayerStats = "Circum_PlayerStatistics";
         public const string ChallengeData = "Circum_ChallengeData";
         public const string PlayerHighscore = "Circum_PlayerHighscore";
+        public const string AltEarlyBird = "Circum_PlayerAltEarlybird";
         public const string TotalScoresStatistic = "TotalScore";
         
         [Obsolete] public static string LevelStats_Old(string levelName) => $"Circum_PlayerStats_{levelName}";

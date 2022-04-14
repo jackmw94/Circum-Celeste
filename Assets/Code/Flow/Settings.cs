@@ -90,8 +90,9 @@ namespace Code.Flow
             yield return Utilities.LerpOverTime(0f, 1f, 0.5f, f => _buttonCanvasGroup.alpha = f);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             _toggleSettingsButton.onClick.RemoveListener(SettingsButtonClicked);
             _backButton.onClick.RemoveListener(BackButtonListener);
             _restartLevelButton.onClick.RemoveListener(RestartLevel);

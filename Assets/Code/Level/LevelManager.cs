@@ -28,6 +28,7 @@ namespace Code.Level
         private Coroutine _startLevelOnceMovedCoroutine = null;
         
         public LevelInstanceBase CurrentLevelInstance { get; private set; }
+        public Action<bool> LevelAboutToStart { get; set; } = (isTutorial) => { };
 
         public void CreateChallengeLevel(ChallengeLevel challengeLevel, Action<LevelResult> onChallengeCompleted)
         {
@@ -126,6 +127,8 @@ namespace Code.Level
             }
             
             PersistentDataManager.Instance.SetLevelIndex(levelLayout.LevelContext.LevelIndex, true);
+
+            LevelAboutToStart(levelLayout.LevelContext.IsTutorial);
 
             if (_startLevelOnceMovedCoroutine != null)
             {

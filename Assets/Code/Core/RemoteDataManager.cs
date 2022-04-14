@@ -19,7 +19,8 @@ namespace Code.Core
     {
         private const float EditorFriendRefreshDelay = 10f;
         private const float PlatformFriendRefreshDelay = 45f;
-        
+        private static readonly DateTime EarlyBirdAccountCreationDateThreshold = new DateTime(2022, 4, 18);
+
         public readonly HashSet<string> FriendDisplayNames = new HashSet<string>();
 
         private Coroutine _checkNewFriendRequest = null;
@@ -28,6 +29,7 @@ namespace Code.Core
         public string OurPlayFabId { get; private set; } = "";
         public string OurDisplayName { get; private set; } = "";
         public Action LeaderboardUpdated { get; set; } = () => { };
+        public bool IsEarlyBird { get; private set; } = false;
 
         private float CheckFriendsRefreshDelay => Application.isEditor ? EditorFriendRefreshDelay : PlatformFriendRefreshDelay;
 
@@ -61,7 +63,7 @@ namespace Code.Core
                     GetUserAccountInfo = true,
                     GetPlayerProfile = true,
                     GetUserData = true,
-                    UserDataKeys = new List<string> {PersistentDataKeys.PlayerHighscore}
+                    UserDataKeys = new List<string> {PersistentDataKeys.PlayerHighscore, PersistentDataKeys.AltEarlyBird}
                 }
                 
             }, result =>
@@ -102,6 +104,10 @@ namespace Code.Core
                     OurDisplayName = result.InfoResultPayload.AccountInfo.TitleInfo.DisplayName;
                     CircumDebug.Log("Logged in with playfab");
                     onCompleteCallback(true);
+
+                    bool earlyBirdViaAccountTime = result.InfoResultPayload.AccountInfo.Created < EarlyBirdAccountCreationDateThreshold;
+                    IsEarlyBird = earlyBirdViaAccountTime || result.InfoResultPayload.UserData.ContainsKey(PersistentDataKeys.AltEarlyBird);
+                    CircumDebug.Log($"Is early bird : {IsEarlyBird}");
 
                     if (!result.InfoResultPayload.UserData.ContainsKey(PersistentDataKeys.PlayerHighscore))
                     {
