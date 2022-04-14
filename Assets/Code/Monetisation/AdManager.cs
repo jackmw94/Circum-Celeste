@@ -92,6 +92,11 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
             return;
         }
         
+        if (RemoteDataManager.Instance.IsEarlyBird && !ForceAds)
+        {
+            return;
+        }
+        
         _levelsCount++;
         
         if (_levelsCount <= _noAdsForNLevels)
