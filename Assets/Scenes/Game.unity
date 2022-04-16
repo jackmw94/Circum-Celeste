@@ -33433,6 +33433,7 @@ MonoBehaviour:
   _levelManager: {fileID: 2143567224}
   _noAdsForNLevels: 3
   _runAdEveryNLevels: 3
+  _minimumTime: 45
   _showBannerStartDelay: 1
   _bannerPosition: 4
 --- !u!1 &1149078493
@@ -34446,6 +34447,9 @@ MonoBehaviour:
   _changeQualityLevelLabel: {fileID: 1027028284}
   _settingsNotifications: {fileID: 3723646611268045265}
   _friendsButtonNotifications: {fileID: 779716972}
+  _disabledTextColour: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+  _backButtonText: {fileID: 1387634048}
+  _restartButtonText: {fileID: 480573342}
   _showLevelTimeLocalisationTerm: Show Level Time
   _hideLevelTimeLocalisationTerm: Hide Level Time
   _turnFeedbacksOnLocalisationTerm: Turn Feedbacks On

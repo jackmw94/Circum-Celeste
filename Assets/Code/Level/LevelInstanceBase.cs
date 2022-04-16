@@ -16,6 +16,7 @@ namespace Code.Level
         protected bool IsStarted { get; private set; }
         private bool _hasFinished = false;
 
+        public static Action<bool> LevelCreated = (isChallenge) => { };
         public static Action LevelStarted = () => { };
         public static Action LevelStopped = () => { };
         
@@ -24,12 +25,11 @@ namespace Code.Level
         protected virtual void Awake()
         {
             _feedbacks = Feedbacks.Instance;
-
+            
             _levelTimeUI = GameContainer.Instance.LevelTimeUI;
             _levelTimeUI.SettingsShowHideTime(PlayerOptions.ShowLevelTimer);
-            
         }
-
+        
         protected virtual void OnDestroy()
         {
             if (!_hasFinished)

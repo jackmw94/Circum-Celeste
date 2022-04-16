@@ -48,6 +48,10 @@ namespace Code.Flow
         [SerializeField] private NotificationUI _settingsNotifications;
         [SerializeField] private NotificationUI _friendsButtonNotifications;
         [Space(15)]
+        [SerializeField] private Color _disabledTextColour;
+        [SerializeField] private TextMeshProUGUI _backButtonText;
+        [SerializeField] private TextMeshProUGUI _restartButtonText;
+        [Space(15)]
         [SerializeField, LeanTranslationName] private string _showLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _hideLevelTimeLocalisationTerm;
         [SerializeField, LeanTranslationName] private string _turnFeedbacksOnLocalisationTerm;
@@ -76,7 +80,11 @@ namespace Code.Flow
             _changeQualityLevelButton.onClick.AddListener(ChangeQualityLevel);
             _addFriendsButton.onClick.AddListener(ShowAddFriends);
 
+            LevelInstanceBase.LevelCreated += LevelCreatedListener;
+            LevelInstanceBase.LevelStopped += LevelStoppedListener;
+
             TurnOffInstant();
+            LevelStoppedListener();
         }
 
         private IEnumerator Start()
@@ -104,6 +112,27 @@ namespace Code.Flow
             _gameOptionsButton.onClick.RemoveListener(ShowGameOptions);
             _changeQualityLevelButton.onClick.RemoveListener(ChangeQualityLevel);
             _addFriendsButton.onClick.RemoveListener(ShowAddFriends);
+            
+            LevelInstanceBase.LevelCreated -= LevelCreatedListener;
+            LevelInstanceBase.LevelStopped -= LevelStoppedListener;
+        }
+
+        private void LevelCreatedListener(bool isChallenge)
+        {
+            _backButton.interactable = true;
+            _backButtonText.color = Color.white;
+
+            _restartLevelButton.interactable = !isChallenge;
+            _restartButtonText.color = !isChallenge ? Color.white : _disabledTextColour;
+        }
+
+        private void LevelStoppedListener()
+        {
+            _backButton.interactable = false;
+            _backButtonText.color = _disabledTextColour;
+            
+            _restartLevelButton.interactable = false;
+            _restartButtonText.color = _disabledTextColour;
         }
 
         private void ChangeQualityLevel()

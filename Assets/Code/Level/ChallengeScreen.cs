@@ -128,6 +128,7 @@ namespace Code.Level
             _noLevelContentRoot.SetActive(false);
 
             _currentChallengeLevel = challengeLevel;
+            _currentChallengeLevel.LevelLayout.LevelContext.IsChallenge = true;
             _levelNameLabel.text = challengeLevel.LevelName;
 
             int attemptsRemaining = challengeLevel.AttemptsRemaining(challengeData.AttemptData.AttemptCount);

@@ -52,6 +52,8 @@ namespace Code.Level
             _escapes = escapes;
             _hazards = hazards;
             _beamHazards = beamHazards;
+            
+            LevelCreated(levelLayout.LevelContext.IsChallenge);
 
             CircumDebug.Log($"Grid size = {gridSize}");
             _players.ApplyFunction(p => p.SetupForGridSize(gridSize));

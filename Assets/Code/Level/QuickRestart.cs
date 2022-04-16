@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.Flow;
 using UnityEngine;
 
@@ -10,11 +11,39 @@ namespace Code.Level
         [SerializeField] private float _tripleClickTimeThreshold = 0.5f;
         [SerializeField] private float _coolOff = 2f;
 
+        private bool _enabled = false;
         private float _lastTriggeredTime = float.MinValue;
         private readonly Queue<float> _clickTimes = new Queue<float>();
-        
+
+        private void Awake()
+        {
+            LevelInstanceBase.LevelCreated += LevelCreatedListener;
+            LevelInstanceBase.LevelStopped += LevelStoppedListener;
+        }
+
+        private void OnDestroy()
+        {
+            LevelInstanceBase.LevelCreated -= LevelCreatedListener;
+            LevelInstanceBase.LevelStopped -= LevelStoppedListener;
+        }
+
+        private void LevelCreatedListener(bool isChallenge)
+        {
+            _enabled = !isChallenge;
+        }
+
+        private void LevelStoppedListener()
+        {
+            _enabled = false;
+        }
+
         private void OnMouseDown()
         {
+            if (!_enabled)
+            {
+                return;
+            }
+            
             if (Time.time - _lastTriggeredTime < _coolOff)
             {
                 return;

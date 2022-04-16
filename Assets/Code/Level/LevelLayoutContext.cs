@@ -13,6 +13,8 @@
         public bool IsFinalTutorial { get; set; } = false;
 
         public bool ContributesToScoring { get; set; } = false;
+
+        public bool IsChallenge { get; set; } = false;
         
         /// <summary>
         /// Level number for showing to user
