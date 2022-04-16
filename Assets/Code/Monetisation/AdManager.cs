@@ -12,11 +12,13 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
     [Space(15)]
     [SerializeField] private int _noAdsForNLevels = 3;
     [SerializeField] private int _runAdEveryNLevels = 3;
+    [SerializeField] private float _minimumTime = 45f;
     [Space(15)]
     [SerializeField] private float _showBannerStartDelay = 1.5f;
     [SerializeField] BannerPosition _bannerPosition = BannerPosition.BOTTOM_CENTER;
 
     private int _levelsCount;
+    private float _lastAdTime = -1000f;
     
     private bool ForceAds
     {
@@ -111,6 +113,14 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
             return;
         }
 
+        float timeSinceLastAd = Time.time - _lastAdTime;
+        if (timeSinceLastAd < _minimumTime)
+        {
+            CircumDebug.Log($"No ad because minimum time hasn't elapsed ({timeSinceLastAd} < {_minimumTime})");
+            return;
+        }
+
+        _lastAdTime = Time.time;
         _levelsCount = 0;
         CircumDebug.Log("Showing interstitial ad");
         Advertisement.Show(InterstitialAdUnitId, this);
