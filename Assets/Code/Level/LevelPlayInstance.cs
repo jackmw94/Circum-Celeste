@@ -26,7 +26,7 @@ namespace Code.Level
         private float _startTime;
 
         private LevelRecorder _levelRecorder;
-
+        
         private bool _escapeShown;
         private float LevelTime => Time.time - _startTime;
         public override bool PlayerStartedPlaying => _players.Any(p => p.IsMoving);
@@ -53,7 +53,7 @@ namespace Code.Level
             _hazards = hazards;
             _beamHazards = beamHazards;
             
-            LevelCreated(levelLayout.LevelContext.IsChallenge);
+            _isRestartableLevel = !levelLayout.LevelContext.IsChallenge && !levelLayout.LevelContext.IsTutorial;
 
             CircumDebug.Log($"Grid size = {gridSize}");
             _players.ApplyFunction(p => p.SetupForGridSize(gridSize));

@@ -81,6 +81,7 @@ namespace Code.Flow
             _addFriendsButton.onClick.AddListener(ShowAddFriends);
 
             LevelInstanceBase.LevelCreated += LevelCreatedListener;
+            LevelInstanceBase.LevelStarted += LevelStartedListener;
             LevelInstanceBase.LevelStopped += LevelStoppedListener;
 
             TurnOffInstant();
@@ -114,16 +115,20 @@ namespace Code.Flow
             _addFriendsButton.onClick.RemoveListener(ShowAddFriends);
             
             LevelInstanceBase.LevelCreated -= LevelCreatedListener;
+            LevelInstanceBase.LevelStarted -= LevelStartedListener;
             LevelInstanceBase.LevelStopped -= LevelStoppedListener;
         }
 
-        private void LevelCreatedListener(bool isChallenge)
+        private void LevelCreatedListener()
         {
             _backButton.interactable = true;
             _backButtonText.color = Color.white;
+        }
 
-            _restartLevelButton.interactable = !isChallenge;
-            _restartButtonText.color = !isChallenge ? Color.white : _disabledTextColour;
+        private void LevelStartedListener(bool isRegularLevel)
+        {
+            _restartLevelButton.interactable = isRegularLevel;
+            _restartButtonText.color = isRegularLevel ? Color.white : _disabledTextColour;
         }
 
         private void LevelStoppedListener()

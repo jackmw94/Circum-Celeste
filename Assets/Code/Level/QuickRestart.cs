@@ -17,19 +17,19 @@ namespace Code.Level
 
         private void Awake()
         {
-            LevelInstanceBase.LevelCreated += LevelCreatedListener;
+            LevelInstanceBase.LevelStarted += LevelCreatedListener;
             LevelInstanceBase.LevelStopped += LevelStoppedListener;
         }
 
         private void OnDestroy()
         {
-            LevelInstanceBase.LevelCreated -= LevelCreatedListener;
+            LevelInstanceBase.LevelStarted -= LevelCreatedListener;
             LevelInstanceBase.LevelStopped -= LevelStoppedListener;
         }
 
-        private void LevelCreatedListener(bool isChallenge)
+        private void LevelCreatedListener(bool isRegularLevel)
         {
-            _enabled = !isChallenge;
+            _enabled = isRegularLevel;
         }
 
         private void LevelStoppedListener()

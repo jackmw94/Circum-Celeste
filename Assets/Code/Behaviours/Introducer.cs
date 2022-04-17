@@ -39,7 +39,7 @@ namespace Code.Behaviours
             _introductionBehaviour.ApplyFunction(p => p.SetEnabled(isIntroducing));
         }
 
-        private void OnLevelStarted()
+        private void OnLevelStarted(bool _)
         {
             if (!_stopOnLevelStart)
             {

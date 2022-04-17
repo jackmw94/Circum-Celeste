@@ -32,6 +32,8 @@ namespace Code.Level
             
             _levelElements = GetComponentsInChildren<LevelElement>();
             _recordables = GetRecordables(levelRecordingData);
+            
+            _isRestartableLevel = false;
 
             _escapes = _levelElements.Where(p => p is Escape).Cast<Escape>().ToArray();
 

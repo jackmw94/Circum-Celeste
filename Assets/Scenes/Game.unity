@@ -39767,7 +39767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelManager: {fileID: 2143567224}
-  _tripleClickTimeThreshold: 0.5
+  _tripleClickTimeThreshold: 0.6
   _coolOff: 2
 --- !u!65 &1494268238
 BoxCollider:
