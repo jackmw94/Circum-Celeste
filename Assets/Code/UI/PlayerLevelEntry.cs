@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Core;
 using Code.Level.Player;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace Code.UI
 {
     public class PlayerLevelEntry : MonoBehaviour
     {
+        [SerializeField] private TMP_FontAsset _latinFont;
+        [SerializeField] private TMP_FontAsset _chineseFont;
+        [Space(15)]
         [SerializeField] private TextMeshProUGUI _friendsUsernameLabel;
         [SerializeField] private TextMeshProUGUI _levelTimeLabel;
         [SerializeField] private GameObject _firstPlaceIcon;
@@ -27,6 +31,7 @@ namespace Code.UI
             if (playerLevelData != null)
             {
                 _friendsUsernameLabel.text = displayName;
+                _friendsUsernameLabel.font = displayName.HasChineseCharacters() ? _chineseFont : _latinFont;
                 _friendsUsernameLabel.color = playerLevelData.IsOurRecord ? _ourRecordTextColor : _otherUserRecordTextColor;
 
                 _perfectIcon.gameObject.SetActiveSafe(badgeData.IsPerfect && !badgeData.HasPerfectGoldTime);

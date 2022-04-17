@@ -81,7 +81,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Expansion: 0
-    - TwirlStrength: 0
+    - TwirlStrength: 6
     - Vector1_3d915ed00a61479995bdd8d712e442af: 6
     - Vector1_44dd9a1990004966b18f98ca0b8bfc2e: 0.75
     - _AlphaClip: 0
