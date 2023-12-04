@@ -37,9 +37,10 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
         {
 #if UNITY_IOS
             return "Interstitial_iOS";
-#else
+#elif UNITY_ANDROID
             return "Interstitial_Android";
 #endif
+            return string.Empty;
         }
     }
     
@@ -52,6 +53,7 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
 #elif UNITY_ANDROID
             return "Banner_Android";
 #endif
+            return string.Empty;
         }
     }
 
@@ -64,6 +66,7 @@ public class AdManager : MonoBehaviour, IUnityAdsShowListener
 #elif UNITY_ANDROID
             return "4708127";
 #endif
+            return string.Empty;
         }
     }
     
