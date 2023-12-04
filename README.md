@@ -14,7 +14,7 @@ To keep the player on their toes, I also made it so that the orbiter damages the
 Regardless, I am happy with the set of features this small-scope game has, the ability to watch replays of yours and the highscorers levels is pretty cool. I am also happy with a lot of the visual effects, interactions and "juice". It's fulfilled its purpose regardless of the fact that it was never a commercial success (which would have been surprising since I stripped the monetisation!).
 
 ### HOW
-Supported by Unity version 2020.3.18f1. Use the "Play from Boot" button to start the game in the editor.
+Supported by Unity version 2020.3.18f1. Use the "Play from Boot" button to start the game in the editor. Use WASD keys to play in editor, you can change this to use the UI in the PlayerContainer but I wouldn't advise it. 
 
 To create a level, create a "level layout" in the project.
 The elements that a cell can be are as follows (in order of clicking):
